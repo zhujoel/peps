@@ -7,8 +7,8 @@ set(LIBS ${LIBS} ${PNL_LIBRARIES})
 include_directories(${PNL_INCLUDE_DIRS})
 
 # sources and headers
-set(SOURCES src/MonteCarloPricer.cpp src/main.cpp)
-set(HEADERS include/MonteCarloPricer.h)
+set(SOURCES src/MonteCarloPricer.cpp src/BarrierOption.cpp src/main.cpp)
+set(HEADERS include/MonteCarloPricer.h include/BarrierOption.h)
 
 include_directories(include)
 add_executable(main src/main.cpp ${SOURCES} ${HEADERS})

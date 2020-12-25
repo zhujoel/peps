@@ -1,5 +1,6 @@
 #include <iostream>
 #include "MonteCarloPricer.h"
+#include "BarrierOption.h"
 #include "pnl/pnl_vector.h"
 
 int main(){
@@ -7,4 +8,6 @@ int main(){
     pnl_vect_print(v);
     MonteCarloPricer* mc = new MonteCarloPricer();
     std::cout << mc->price() << std::endl;
+
+    BarrierOption* b = new BarrierOption();
 }

@@ -1,5 +1,4 @@
-#ifndef MONTECARLOPRICER_H
-#define MONTECARLOPRICER_H
+#pragma once
 
 #include "IPricer.h"
 
@@ -10,5 +9,3 @@ class MonteCarloPricer : public IPricer{
         ~MonteCarloPricer();
         double price();
 };
-
-#endif
