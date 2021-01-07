@@ -5,7 +5,6 @@
 #include "pnl/pnl_random.h"
 
 class IPricer{
-
     public:
         IModel *model_; // pointeur vers le modèle utilisé
         Derivative *derivative_; // pointeur sur le produit dérivé qu'on calcule
@@ -16,8 +15,6 @@ class IPricer{
 
         IPricer(IModel *model, Derivative *derivative, PnlRng *rng, double fdStep, int nbSamples);
         ~IPricer();
-
-
         /**
          * Calcule le prix d'un produit à la date 0.
          * @param prix[out] Prix estimé par le IPricer.
