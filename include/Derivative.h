@@ -7,8 +7,9 @@ class Derivative {
   public:
       double T_;        // maturité finale du produit
       int nbTimeSteps_; // nb de pas de temps de discrétisation
+      int size_; // nombre de colonnes dans le path
 
-      Derivative(double T, int nbTimeSteps);
+      Derivative(double T, int nbTimeSteps, int size);
       virtual ~Derivative();
       /**
       * Calcule la valeur du payoff sur la trajectoire

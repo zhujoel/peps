@@ -1,7 +1,8 @@
 #include "QuantoOption.h"
 #include "pnl/pnl_mathtools.h"
+#include <iostream>
 
-QuantoOption::QuantoOption(double T, int nbTimeSteps, double rf, double K) : Derivative(T, nbTimeSteps){
+QuantoOption::QuantoOption(double T, int nbTimeSteps, int size, double rf, double K) : Derivative(T, nbTimeSteps, size){
     this->rf_ = rf;
     this->K_ = K;
 }
@@ -11,10 +12,11 @@ QuantoOption::~QuantoOption(){
 }
 
 double QuantoOption::payoff(const PnlMat *path) const{
-    double B_T = MGET(path, 0, this->nbTimeSteps_); // valeur finale de l'actif sans risque converti 
-    double S_T = MGET(path, 1, this->nbTimeSteps_); // valeur finale de l'actif risqué converti
+    double B_T = MGET(path, this->nbTimeSteps_, 0); // valeur finale de l'actif sans risque converti 
+    double S_T = MGET(path, this->nbTimeSteps_, 1); // valeur finale de l'actif risqué converti
 
-    return MAX(S_T/B_T*exp(this->rf_*this->T_) - this->K_, 0);
+    return MAX(S_T - this->K_, 0);
+    
 }
 
 // TODO: ajouter classe taux d'intéret ?

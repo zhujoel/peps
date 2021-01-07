@@ -13,7 +13,8 @@ class BlackScholesModel : public IModel{
         PnlVect *G_; /// Vecteur Gaussien
         PnlVect *B_; // Brownien (produit matriciel L * G);
 
-        BlackScholesModel::BlackScholesModel(int size, double rd, double rho, PnlVect *spot, PnlVect *sigma);
+        // TODO: modifier le rho en matrice
+        BlackScholesModel(int size, double rd, double rho, PnlVect *spot, PnlVect *sigma);
         ~BlackScholesModel();
         /**
         * Sets the trend attribute
