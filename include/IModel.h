@@ -7,7 +7,7 @@ class IModel{
     public:
         int size_; /// nombre d'actifs du modèle
         double rd_; /// taux d'intérêt domestique (domestic rate) // TODO: à changer si on a besoin qu'il ne soit pas constant 
-        PnlMat *sigma_; /// Matrice de covariance
+        PnlMat *sigma_; /// Matrice de volatilité
         PnlVect *spot_; /// valeurs initiales des sous-jacents
 
         IModel(int size, double rd, PnlMat *sigma, PnlVect *spot);

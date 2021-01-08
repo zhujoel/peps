@@ -22,11 +22,16 @@ int main(){
     double nbSimul = 10000;
     double spot_taux_change_initial = 1.2;
     double rho = 0.2;
+
+    // calcul du sigma
     PnlMat* sigma = pnl_mat_create(nbProduits, nbProduits); // previously rho
     MLET(sigma, 0, 0) = sigma_tx_change * sigma_tx_change;
     MLET(sigma, 1, 1) = sigma_actif * sigma_actif;
     MLET(sigma, 0, 1) = sigma_tx_change * sigma_actif * rho;
     MLET(sigma, 1, 0) = sigma_tx_change * sigma_actif * rho;
+    pnl_mat_chol(sigma);
+    MLET(sigma, 1, 0) += MGET(sigma, 0, 0); // ce calcul dépend de où ce trouve dans la matrice les actifs risqués et non risqués
+    MLET(sigma, 1, 1) += MGET(sigma, 0, 1);
 
     QuantoOption *quanto = new QuantoOption(T, nbTimeSteps, nbProduits, rf, K) ;
 

@@ -1,12 +1,9 @@
 #include "BlackScholesModel.h"
+#include <iostream>
 
 BlackScholesModel::BlackScholesModel(int size, double rd, PnlMat *sigma, PnlVect *spot) :
 IModel(size, rd, sigma, spot)
 {
-    this->sigma_ = sigma;
-    pnl_mat_chol(this->sigma_);
-    MLET(this->sigma_, 1, 0) += MGET(this->sigma_, 0, 0);
-    MLET(this->sigma_, 1, 1) += MGET(this->sigma_, 0, 1);
     this->G_ = pnl_vect_create(this->size_); 
     this->B_ = pnl_vect_create(this->size_);
 }
