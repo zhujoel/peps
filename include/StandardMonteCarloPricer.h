@@ -7,7 +7,7 @@
  */
 class StandardMonteCarloPricer : public IPricer{
     public:
-        StandardMonteCarloPricer(IModel *model, Derivative *derivative, PnlRng *rng, double fdStep, int nbSamples);
+        StandardMonteCarloPricer(IModel *model, IDerivative *derivative, PnlRng *rng, double fdStep, int nbSamples);
         ~StandardMonteCarloPricer();
         void price(double &prix, double &std_dev);
 };

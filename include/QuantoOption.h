@@ -1,10 +1,10 @@
 #pragma once
 
-#include "Derivative.h"
+#include "IDerivative.h"
 
 // Option quanto sur un actif étranger avec un strike en devise domestique --
 // utilisé pour testé préalablement sur un modèle simple
-class QuantoOption : public Derivative {
+class QuantoOption : public IDerivative {
 
   public:
     double K_; // strike en devise domestique de l'option Quanto

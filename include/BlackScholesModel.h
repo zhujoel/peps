@@ -14,7 +14,8 @@ class BlackScholesModel : public IModel{
         PnlVect *B_; // Brownien (produit matriciel L * G);
 
         // TODO: modifier le rho en matrice
-        BlackScholesModel(int size, double rd, double rho, PnlVect *spot, PnlVect *sigma);
+        // BlackScholesModel(int size, double rd, double rho, PnlVect *spot, PnlVect *sigma);
+        BlackScholesModel(int size, double rd, PnlMat *cov, PnlVect *spot, PnlVect *sigma);
         ~BlackScholesModel();
         /**
         * Sets the trend attribute

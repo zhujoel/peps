@@ -1,7 +1,7 @@
 #include "StandardMonteCarloPricer.h"
 #include <iostream>
 
-StandardMonteCarloPricer::StandardMonteCarloPricer(IModel *model, Derivative *derivative, PnlRng *rng, double fdStep, int nbSamples)
+StandardMonteCarloPricer::StandardMonteCarloPricer(IModel *model, IDerivative *derivative, PnlRng *rng, double fdStep, int nbSamples)
 : IPricer(model, derivative, rng, fdStep, nbSamples){
 
 }

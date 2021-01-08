@@ -7,10 +7,12 @@ class IModel{
     public:
         int size_; /// nombre d'actifs du modèle
         double rd_; /// taux d'intérêt domestique (domestic rate) // TODO: à changer si on a besoin qu'il ne soit pas constant 
-        double rho_; /// paramètre de corrélation // TODO: modifier en matrice
+        // double rho_; /// paramètre de corrélation // TODO: modifier en matrice
+        PnlMat *cov_; /// Matrice de covariance
         PnlVect *spot_; /// valeurs initiales des sous-jacents
 
-        IModel(int size, double rd, double rho, PnlVect *spot);
+        // IModel(int size, double rd, double rho, PnlVect *spot);
+        IModel(int size, double rd, PnlMat *cov, PnlVect *spot);
         ~IModel();
         /**
         * Génère une trajectoire du modèle et la stocke dans path
