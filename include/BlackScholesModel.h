@@ -5,17 +5,14 @@
 
 class BlackScholesModel : public IModel{
     public:
-        PnlVect *sigma_; /// vecteur de volatilités
         PnlVect *trend_; /// mu
+        PnlMat *sigma_; /// L Decomposition Cholesky de la matrice de Covariance
 
-        // TODO: à enlever si pas nécessaire
-        PnlMat *L_; /// L Decomposition Cholesky de la matrice de Covariance
+        // on l'avait pour l'espace mémoire -- TODO: à enlever si pas nécessaire
         PnlVect *G_; /// Vecteur Gaussien
         PnlVect *B_; // Brownien (produit matriciel L * G);
 
-        // TODO: modifier le rho en matrice
-        // BlackScholesModel(int size, double rd, double rho, PnlVect *spot, PnlVect *sigma);
-        BlackScholesModel(int size, double rd, PnlMat *cov, PnlVect *spot, PnlVect *sigma);
+        BlackScholesModel(int size, double rd, PnlMat *cov, PnlVect *spot);
         ~BlackScholesModel();
         /**
         * Sets the trend attribute

@@ -22,11 +22,11 @@ int main(){
     double nbSimul = 10000;
     double spot_taux_change_initial = 1.2;
     double rho = 0.2;
-    PnlMat* cov = pnl_mat_create(nbProduits, nbProduits); // previously rho
-    MLET(cov, 0, 0) = sigma_tx_change * sigma_tx_change;
-    MLET(cov, 1, 1) = sigma_actif * sigma_actif;
-    MLET(cov, 0, 1) = sigma_tx_change * sigma_actif * rho;
-    MLET(cov, 1, 0) = sigma_tx_change * sigma_actif * rho;
+    PnlMat* sigma = pnl_mat_create(nbProduits, nbProduits); // previously rho
+    MLET(sigma, 0, 0) = sigma_tx_change * sigma_tx_change;
+    MLET(sigma, 1, 1) = sigma_actif * sigma_actif;
+    MLET(sigma, 0, 1) = sigma_tx_change * sigma_actif * rho;
+    MLET(sigma, 1, 0) = sigma_tx_change * sigma_actif * rho;
 
     QuantoOption *quanto = new QuantoOption(T, nbTimeSteps, nbProduits, rf, K) ;
 
@@ -34,11 +34,7 @@ int main(){
     LET(spot, 0) = spot_actif_sans_risque*spot_taux_change_initial;
     LET(spot, 1) = spot_actif_risque*spot_taux_change_initial;
 
-    PnlVect *sigma = pnl_vect_create(2);
-    LET(sigma, 0) = sigma_tx_change;
-    LET(sigma, 1) = sigma_actif;
-
-    BlackScholesModel *model = new BlackScholesModel(nbProduits, rd, cov, spot, sigma);
+    BlackScholesModel *model = new BlackScholesModel(nbProduits, rd, sigma, spot);
 
     PnlRng *rng = pnl_rng_create(PNL_RNG_MERSENNE);
     pnl_rng_sseed(rng, std::time(NULL));
