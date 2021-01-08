@@ -10,4 +10,6 @@ class StandardMonteCarloPricer : public IPricer{
         StandardMonteCarloPricer(IModel *model, IDerivative *derivative, PnlRng *rng, double fdStep, int nbSamples);
         ~StandardMonteCarloPricer();
         void price(double &prix, double &std_dev);
+        void delta(PnlVect *delta, PnlVect *std_dev);
+
 };

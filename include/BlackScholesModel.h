@@ -20,13 +20,7 @@ class BlackScholesModel : public IModel{
         */
         void setTrend(PnlVect *trend);
         
-        /**
-        * Génère une trajectoire du modèle et la stocke dans path
-        *
-        * @param[out] path contient une trajectoire du modèle.
-        * C'est une matrice de taille (nbTimeSteps+1) x d
-        * @param[in] T  maturité
-        * @param[in] nbTimeSteps nombre de dates de constatation
-        */
         void asset(PnlMat *path, double T, int nbTimeSteps, PnlRng *rng);
+        void shiftAsset(PnlMat *shift_path, const PnlMat *path, int d, double h, double t, double timestep);
+
 };

@@ -22,4 +22,20 @@ class IModel{
         * @param[in] rng Moteur de rng -- TODO: à changer
         */
         virtual void asset(PnlMat *path, double T, int nbTimeSteps, PnlRng *rng) = 0;
+
+        /**
+        * Shift d'une trajectoire du sous-jacent
+        *
+        * @param[in]  path contient en input la trajectoire
+        * du sous-jacent
+        * @param[out] shift_path contient la trajectoire path
+        * dont la composante d a été shiftée par (1+h)
+        * à partir de la date t.
+        * @param[in] t date à partir de laquelle on shift
+        * @param[in] h pas de différences finies
+        * @param[in] d indice du sous-jacent à shifter
+        * @param[in] timestep pas de constatation du sous-jacent
+        */
+        virtual void shiftAsset(PnlMat *shift_path, const PnlMat *path, int d, double h, double t, double timestep) = 0;
+
 };

@@ -7,8 +7,11 @@ IPricer::IPricer(IModel *model, IDerivative *derivative, PnlRng *rng, double fdS
     this->fdStep_ = fdStep;
     this->nbSamples_ = nbSamples;
     this->path_ = pnl_mat_create(derivative->nbTimeSteps_+1, derivative->size_);
+    this->shift_path_ = pnl_mat_create(derivative->nbTimeSteps_+1, derivative->size_);
 }
 
 IPricer::~IPricer(){
-    
+    // TODO: faire les fuites mémoires
+    pnl_mat_free(&this->shift_path_);
+
 }

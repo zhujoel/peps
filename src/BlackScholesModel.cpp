@@ -38,3 +38,26 @@ void BlackScholesModel::asset(PnlMat *path, double T, int nbTimeSteps, PnlRng *r
         }
     }
 }
+
+void BlackScholesModel::shiftAsset(PnlMat *shift_path, const PnlMat *path, int d, double h, double t, double timestep)
+{
+    int i = t/timestep;
+    // if (abs( (i+1)*timestep - t)<1E-5)
+    // {
+    //     i+=1;
+    // }
+    if (h>0)
+    {
+        pnl_mat_clone(shift_path, path);
+        for (int k = i+1; k < path->m; ++k)
+        {  
+            MLET(shift_path, k, d) = MGET(shift_path, k, d) * (1+h);
+        }
+    } else {
+        for (int k = i+1; k < path->m; ++k)
+        {  
+            MLET(shift_path, k, d) = (MGET(shift_path, k, d) / (1-h)) * (1+h);
+        }
+    }
+    
+}

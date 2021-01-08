@@ -11,7 +11,8 @@ class IPricer{
         PnlRng *rng_; // pointeur sur le rng -- TODO: modifier par un RNGEngine
         double fdStep_; // pas de constatation des produits -- TODO: gérer les dates plus précisément pour Océlia
         int nbSamples_; // nombre de tirages de Monte-Carlo
-        PnlMat *path_; // trajectoires des sous-jacents du modele 
+        PnlMat *path_; // trajectoires des sous-jacents du modele
+        PnlMat *shift_path_; /*! espace mémoire d'une trajectoire shiftée par (1+h) */
 
         IPricer(IModel *model, IDerivative *derivative, PnlRng *rng, double fdStep, int nbSamples);
         ~IPricer();
@@ -22,8 +23,13 @@ class IPricer{
          *
          */
         virtual void price(double &prix, double &std_dev) = 0;
-        
-        // TODO: implémenter le delta pour hedger
-        // void delta(PnlVect *delta, PnlVect *std_dev);
+
+        /**
+        * Calcule le delta de l'option à la date 0
+        *
+        * @param[out] delta contient le vecteur de delta
+        * @param[out] std_dev contient l'écart type de l'estimateur
+        */
+        virtual void delta(PnlVect *delta, PnlVect *std_dev) = 0;
 
 };
