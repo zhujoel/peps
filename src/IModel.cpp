@@ -8,5 +8,4 @@ IModel::IModel(int size, double rd, PnlMat *sigma, PnlVect *spot){
 }
 
 IModel::~IModel(){
-
 }

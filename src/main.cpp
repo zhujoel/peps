@@ -74,4 +74,13 @@ int main(){
     std::cout << "delta sous-jacent théorique : " << std::endl;
     double delta_zc_sans_risque = spot_actif_risque*delta2 * exp(-rf*0);
     std::cout << delta_zc_sans_risque << std::endl;
+
+    pnl_mat_free(&sigma);
+    delete(quanto);
+    pnl_vect_free(&spot);
+    delete(model);
+    pnl_rng_free(&rng);
+    delete(pricer);
+    pnl_vect_free(&delta);
+    pnl_vect_free(&delta_std_dev);
 }

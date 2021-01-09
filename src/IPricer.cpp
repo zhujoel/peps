@@ -11,7 +11,6 @@ IPricer::IPricer(IModel *model, IDerivative *derivative, PnlRng *rng, double fdS
 }
 
 IPricer::~IPricer(){
-    // TODO: faire les fuites mémoires
+    pnl_mat_free(&this->path_);
     pnl_mat_free(&this->shift_path_);
-
 }
