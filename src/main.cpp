@@ -46,26 +46,25 @@ int main(){
     pnl_rng_sseed(rng, std::time(NULL));
 
     StandardMonteCarloPricer *pricer = new StandardMonteCarloPricer(model, quanto, rng, h, nbSimul);
-
-    // outputs
-    // price
-    double prix = 0.0;
-    double prix_std_dev = 0.0;
-    pricer->price(prix, prix_std_dev);
-    std::cout << "p1 : " << prix << " std dev : " << prix_std_dev << std::endl;
-
+    
+    // prix théorique avec pnl
     double prix2 = 0.0;
     double delta2 = 0.0;
     double sigma_actif_converti = sqrt(sigma_tx_change*sigma_tx_change+sigma_actif*sigma_actif+2*rho*sigma_tx_change*sigma_actif);
     pnl_cf_call_bs(spot_taux_change_initial*spot_actif_risque, K, T, rd, 0, sigma_actif_converti, &prix2, &delta2);
     std::cout << "p2 : " << prix2 << " delta: " << delta2<< std::endl;
 
+    // outputs
+    double prix = 0.0;
+    double prix_std_dev = 0.0;
+    PnlVect* delta = pnl_vect_create(quanto->size_);
+    PnlVect* delta_std_dev = pnl_vect_create(quanto->size_);
+    pricer->simulate(prix, prix_std_dev, delta, delta_std_dev);
+    std::cout << "p1 : " << prix << " std dev : " << prix_std_dev << std::endl;
+
     std::cout << "price est dedans : " << (abs(prix2 - prix) <= 1.96*prix_std_dev) << std::endl;
 
     // delta
-    PnlVect* delta = pnl_vect_create(quanto->size_);
-    PnlVect* delta_std_dev = pnl_vect_create(quanto->size_);
-    pricer->delta(delta, delta_std_dev);
     std::cout << "delta 1: " << std::endl;
     pnl_vect_print(delta);
     pnl_vect_print(delta_std_dev);

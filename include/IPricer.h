@@ -16,6 +16,13 @@ class IPricer{
 
         IPricer(IModel *model, IDerivative *derivative, PnlRng *rng, double fdStep, int nbSamples);
         ~IPricer();
+
+        /**
+         *
+         *
+         */
+        virtual void simulate(double &prix, double &std_dev, PnlVect *delta, PnlVect *delta_std_dev) = 0;
+
         /**
          * Calcule le prix d'un produit à la date 0.
          * @param prix[out] Prix estimé par le IPricer.

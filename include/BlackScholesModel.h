@@ -13,6 +13,7 @@ class BlackScholesModel : public IModel{
 
         BlackScholesModel(int size, double rd, PnlMat *sigma, PnlVect *spot);
         ~BlackScholesModel();
+        
         /**
         * Sets the trend attribute
         * 
