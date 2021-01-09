@@ -18,10 +18,10 @@ class IPricer{
         ~IPricer();
 
         /**
-         *
+         * Simulate the Monte-Carlo and computes the price, a standard deviation for the price, the delta, and the standard-deviation for the delta at time 0.
          *
          */
-        virtual void simulate(double &prix, double &std_dev, PnlVect *delta, PnlVect *delta_std_dev) = 0;
+        virtual void simulate(double &prix, double &price_std_dev, PnlVect *delta, PnlVect *delta_std_dev) = 0;
 
         /**
          * Calcule le prix d'un produit à la date 0.
@@ -39,6 +39,13 @@ class IPricer{
         */
         virtual void delta(PnlVect *delta, PnlVect *std_dev) = 0;
 
+        /**
+         * @brief Computes the discount price and discount standard deviation.
+         * 
+         * @param t 
+         * @param prix 
+         * @param std_dev 
+         */
         virtual void discount_price(double t, double &prix, double &std_dev) = 0;
         virtual void discount_delta(double t, PnlVect *delta, PnlVect *std_dev) = 0;
 
