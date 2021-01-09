@@ -20,3 +20,4 @@ double QuantoOption::payoff(const PnlMat *path) const{
 }
 
 // TODO: ajouter classe taux d'intéret ?
+// TODO: ajouter des classes pour séparer les zc et les actifs risqué dans un pf ?

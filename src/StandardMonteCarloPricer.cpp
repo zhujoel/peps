@@ -10,12 +10,8 @@ StandardMonteCarloPricer::~StandardMonteCarloPricer(){
     
 }
 
-void StandardMonteCarloPricer::simulate(double &prix, double &std_dev, PnlVect *delta, PnlVect *delta_std_dev){
-
-    // TODO: est-ce vraiment nécessaire ?
-    pnl_vect_set_zero(delta);
-    pnl_vect_set_zero(delta_std_dev);
-
+void StandardMonteCarloPricer::simulate(double &prix, double &std_dev, PnlVect *delta, PnlVect *delta_std_dev)
+{
     for(int j = 0; j < this->nbSamples_; ++j){
         this->model_->asset(this->path_, this->derivative_->T_, this->derivative_->nbTimeSteps_, this->rng_);
         this->price(prix, std_dev);
@@ -65,7 +61,6 @@ void StandardMonteCarloPricer::discount_delta(double t, PnlVect *delta, PnlVect 
     double r = this->model_->rd_;
     double T = this->derivative_->T_;
     double M = this->nbSamples_;
-
     for (int d = 0; d < this->derivative_->size_; ++d)
     {   
         double s0 = GET(this->model_->spot_, d);

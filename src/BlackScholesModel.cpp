@@ -31,7 +31,7 @@ void BlackScholesModel::asset(PnlMat *path, double T, int nbTimeSteps, PnlRng *r
         pnl_mat_mult_vect_inplace(this->B_, this->sigma_, this->G_);
         for (int d = 0; d < this->size_; ++d)
         {
-            PnlVect *row = pnl_vect_create(2);
+            PnlVect *row = pnl_vect_create(this->size_);
             pnl_mat_get_row(row, this->sigma_, d);
             double sigma_d = pnl_vect_norm_two(row);
             MLET(path, k, d) = MGET(path, k-1, d) * exp( (this->rd_ - (sigma_d*sigma_d)/2 ) * timestep + sqrt(timestep) * GET(this->B_, d));
