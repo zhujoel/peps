@@ -39,4 +39,7 @@ class IPricer{
         */
         virtual void delta(PnlVect *delta, PnlVect *std_dev) = 0;
 
+        virtual void discount_price(double t, double &prix, double &std_dev) = 0;
+        virtual void discount_delta(double t, PnlVect *delta, PnlVect *std_dev) = 0;
+
 };

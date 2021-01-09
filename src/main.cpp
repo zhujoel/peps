@@ -19,7 +19,7 @@ int main(){
     double sigma_actif = 0.1;
     double spot_actif_sans_risque = 1;
     double spot_actif_risque = 100;
-    double nbSimul = 3;
+    double nbSimul = 1000;
     double spot_taux_change_initial = 1.2;
     double rho = 0.2; // corrélation entre zc et actif risqué étranger
     double h = 0.01;
