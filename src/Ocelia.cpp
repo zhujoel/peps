@@ -123,7 +123,17 @@ double Ocelia::compute_perf_moyenne_panier(const PnlMat *path)
 {
     double perf_moy_panier = 0.0; // performance moyenne du panier (1.4 pdf)
 
-    return perf_moy_panier;
+    // for(int t = 0; t < 16; ++t){
+    //     double somme = 0.0;
+    //     for(int i = 0; i < this->valeurs_initiales_->size-1; ++i){
+    //         double B_T = MGET(path, i, GET(this->indices_dates_valeurs_n_ans_, t));
+    //         double S_T = MGET(path, i+3, GET(this->indices_dates_valeurs_n_ans_, t));
+    //         somme += (S_T/B_T)*this->valeurs_initiales_
+    //     }
+    //     perf_moy_panier += MAX(somme/4, 0);
+    // }
+
+    return perf_moy_panier/16;
 }
 
 double Ocelia::payoff(const PnlMat *path) const
