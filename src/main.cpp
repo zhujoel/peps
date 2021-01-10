@@ -7,6 +7,7 @@
 #include "StandardMonteCarloPricer.h"
 #include "pnl/pnl_finance.h"
 
+// TODO: voir comment générer les .dll 
 // TODO: Gestion des données
 // TODO: Gestion des dates
 // TODO: ajouter classe taux d'intéret ?
