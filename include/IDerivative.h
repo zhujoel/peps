@@ -7,7 +7,7 @@ class IDerivative {
   public:
       double T_;        // maturité finale du produit
       int nbTimeSteps_; // nb de pas de temps de discrétisation
-      int size_; // nombre de colonnes dans le path
+      int size_; // nombre de sous-jacents dans le payoff du produit
 
       IDerivative(double T, int nbTimeSteps, int size);
       virtual ~IDerivative();
@@ -16,7 +16,7 @@ class IDerivative {
       * Calcule la valeur du payoff sur la trajectoire
       *
       * @param[in] path est une matrice de taille (N+1) x d
-      * contenant une trajectoire du modèle utelle que créée
+      * contenant une trajectoire du modèle telle que créée
       * par la fonction asset.
       * @return le payoff du produit
       */

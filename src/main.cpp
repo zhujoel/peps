@@ -6,6 +6,7 @@
 #include "pnl/pnl_random.h"
 #include "StandardMonteCarloPricer.h"
 #include "pnl/pnl_finance.h"
+#include "Ocelia.h"
 
 // TODO: voir comment générer les .dll 
 // TODO: Gestion des données
@@ -21,8 +22,14 @@
 
 /** CONVENTION QUANTO POUR L'INSTANT : zc en ligne 0 et risqué en ligne 1 */
 
-int main(){
-    // TEST DE PRICE UNE OPTION QUANTO
+void ocelia_test(){
+    Ocelia *ocelia = new Ocelia(0, 0, 0.0, 0.0, 0.0, 0.0, 0.0);
+
+    ocelia->payoff(NULL);
+}
+
+void quanto_test(){
+// TEST DE PRICE UNE OPTION QUANTO
 
     /** DATA **/
     double T = 1;
@@ -93,4 +100,9 @@ int main(){
     delete(pricer);
     pnl_vect_free(&delta);
     pnl_vect_free(&delta_std_dev);
+}
+
+int main(){
+     quanto_test();
+    // ocelia_test();
 }
