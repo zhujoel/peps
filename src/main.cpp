@@ -10,7 +10,7 @@
 #include "DateTime.h"
 
 // TODO: voir comment générer les .dll 
-// TODO: TEST UNITAIRES
+// TODO: TEST UNITAIRES en googletest
 // TODO: Gestion des données
 // TODO: Gestion des dates
 // TODO: ajouter classe taux d'intéret ?
@@ -18,6 +18,7 @@
 // TODO: calcul du sigma pour généraliser avec des dimensions > 2
 // TODO: on a implémenté pour un quanto avec 2 sous jacents (zc et risqué) -> vérifier que le programme reste cohérent pour un instrment avec 3, 4, etc sous-jacents
 // TODO: pricing en t
+// TODO: mettre des const dans les fonctions au bons endroits
 // TODO: abstraire pour des taux intérets non constants
 // TODO: implémenter des MC + opti ?
 // TODO: bcp + tard: feeder des données ?
