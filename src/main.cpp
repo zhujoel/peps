@@ -8,6 +8,10 @@
 #include "pnl/pnl_finance.h"
 #include "Ocelia.h"
 #include "DateTime.h"
+#include "IUnderlying.h"
+#include "DomesticUnderlying.h"
+#include "ForeignUnderlying.h"
+#include "Market.h"
 
 // TODO: voir comment générer les .dll 
 // TODO: TEST UNITAIRES en googletest
@@ -126,6 +130,6 @@ void quanto_test(){
 }
 
 int main(){
-    // quanto_test();
-    ocelia_test();
+    quanto_test();
+    // ocelia_test();
 }

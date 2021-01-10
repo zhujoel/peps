@@ -128,7 +128,7 @@ double Ocelia::compute_perf_moyenne_panier(const PnlMat *path)
     //     for(int i = 0; i < this->valeurs_initiales_->size-1; ++i){
     //         double B_T = MGET(path, i, GET(this->indices_dates_valeurs_n_ans_, t));
     //         double S_T = MGET(path, i+3, GET(this->indices_dates_valeurs_n_ans_, t));
-    //         somme += (S_T/B_T)*this->valeurs_initiales_
+    //         somme += (S_T/B_T)*GET(this->valeurs_initiales_, i) /GET(this->compute_valeurs_initiales_, i);
     //     }
     //     perf_moy_panier += MAX(somme/4, 0);
     // }
