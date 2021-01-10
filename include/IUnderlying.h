@@ -12,10 +12,12 @@ class IUnderlying {
      * @brief Price trajectory of the underlying.
      */
     PnlVect *price_;
+    
     /**
      * @brief Initial price of the underlying.
      */
     double spot_;
+
 
     IUnderlying(double spot);
     ~IUnderlying();
