@@ -18,8 +18,8 @@ class IModel{
         * @param[in] nbTimeSteps nombre de dates de constatation
         * @param[in] rng Moteur de rng -- TODO: à changer
         */
-        virtual void asset(PnlVect *path, double T, int nbTimeSteps, PnlRng *rng, PnlMat *sigma, double spot, double r, int size, int ind) = 0;
-
+        virtual void asset(PnlVect *path, double T, int nbTimeSteps, PnlRng *rng, PnlMat *sigma, double r, int ind) = 0;
+        
         /**
         * Shift d'une trajectoire du sous-jacent
         *

@@ -18,6 +18,6 @@ class ForeignUnderlying : public IUnderlying {
     ForeignUnderlying(double und_spot, double zc_spot);
     ~ForeignUnderlying();
     
-    void simulate_price(IModel *model, double T, int nbTimeSteps, PnlRng *rng);
+    void simulate_price(IModel *model, double T, int nbTimeSteps, PnlRng *rng, PnlMat *sigma, double r, int ind);
 
 };

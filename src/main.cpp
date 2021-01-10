@@ -131,7 +131,7 @@ void format_test(){
 
     IUnderlying *foreign_stock = new ForeignUnderlying(spot, zc_spot);
     IModel *model = new BlackScholesModel();
-    // foreign_stock->simulate_price();
+    foreign_stock->simulate_price(model, T, nbTimeSteps, rng, sigma, rd, 1);
 
     // IDerivative *quanto = new QuantoOption();
 
