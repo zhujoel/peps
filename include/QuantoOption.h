@@ -10,7 +10,7 @@ class QuantoOption : public IDerivative {
     double K_; // strike en devise domestique de l'option Quanto
     double rf_; // taux d'intéret étranger (foreign rate) -- on considère que c'est un taux constant (TODO: à changer si nécessaire)
 
-     QuantoOption(double T, int nbTimeSteps, int size, double rf, double K);
+     QuantoOption(double T, int nbTimeSteps, int size, double rf, double K, IUnderlying **und);
     ~QuantoOption();
     
     /**

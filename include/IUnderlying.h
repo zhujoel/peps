@@ -22,5 +22,4 @@ class IUnderlying {
     IUnderlying(double spot);
     ~IUnderlying();
     
-    virtual void simulate_price(IModel *model, double T, int nbTimeSteps, PnlRng *rng, PnlMat *sigma, double r, int ind) = 0;
 };

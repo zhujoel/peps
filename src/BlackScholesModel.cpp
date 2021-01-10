@@ -11,6 +11,8 @@ BlackScholesModel::~BlackScholesModel()
 
 void BlackScholesModel::asset(PnlVect *path, double T, int nbTimeSteps, PnlRng *rng, PnlMat *sigma, double r, int ind)
 {
+    // TODO: enlever le ind et mettre sigma en vecteur à la place
+    // TODO: mettre taux r en attribut ?
     double timestep = T/nbTimeSteps;
 
     double size = sigma->n;

@@ -129,11 +129,26 @@ void format_test(){
     double zc_spot = spot_actif_sans_risque*spot_taux_change_initial;
     double spot = spot_actif_risque*spot_taux_change_initial;
 
-    IUnderlying *foreign_stock = new ForeignUnderlying(spot, zc_spot);
-    IModel *model = new BlackScholesModel();
-    foreign_stock->simulate_price(model, T, nbTimeSteps, rng, sigma, rd, 1);
+    ForeignUnderlying *foreign_stock = new ForeignUnderlying(spot, zc_spot);
+    IUnderlying **underlyings = new IUnderlying*[1];
+    underlyings[0] = foreign_stock;
+    IDerivative *quanto = new QuantoOption(T, nbTimeSteps, 1, rf, K, underlyings);
 
-    // IDerivative *quanto = new QuantoOption();
+    IModel *model = new BlackScholesModel();
+
+    PnlVect *und_path = pnl_vect_create(nbTimeSteps+1);
+    LET(und_path, 0) = spot;
+    PnlVect *zc_path = pnl_vect_create(nbTimeSteps+1);
+    LET(zc_path, 0) = zc_spot;
+
+    model->asset(und_path, T, nbTimeSteps, rng, sigma, rd, 1);
+    model->asset(zc_path, T, nbTimeSteps, rng, sigma, rd, 0);
+    foreign_stock->setZCpath(zc_path);
+    foreign_stock->price_ = und_path;
+
+    // std::cout << quanto->underlyings_[0] << std::endl;
+    pnl_vect_print(quanto->underlyings_[0]->price_);
+    pnl_vect_print(zc_path);
 
     // IPricer *pricer = new StandardMonteCarloPricer();
     // pricer->simulate();
