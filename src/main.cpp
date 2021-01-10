@@ -129,7 +129,7 @@ void format_test(){
     double zc_spot = spot_actif_sans_risque*spot_taux_change_initial;
     double spot = spot_actif_risque*spot_taux_change_initial;
 
-    // IUnderlying *foreign_stock = new ForeignUnderlying(spot, zc_spot);
+    IUnderlying *foreign_stock = new ForeignUnderlying(spot, zc_spot);
     IModel *model = new BlackScholesModel();
     // foreign_stock->simulate_price();
 

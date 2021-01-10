@@ -1,5 +1,7 @@
 #pragma once
 
+#include "pnl/pnl_vector.h"
+
 /**
  * @brief Represents the financial data from the market of a specific currency.
  */
@@ -21,4 +23,7 @@ class Market {
      * 
      */
     PnlVect *r_;
+
+    Market(double spot);
+    ~Market();
 };
