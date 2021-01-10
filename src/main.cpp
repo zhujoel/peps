@@ -7,6 +7,19 @@
 #include "StandardMonteCarloPricer.h"
 #include "pnl/pnl_finance.h"
 
+// TODO: Gestion des données
+// TODO: Gestion des dates
+// TODO: ajouter classe taux d'intéret ?
+// TODO: ajouter des classes pour séparer les zc et les actifs risqué dans un pf ?
+// TODO: calcul du sigma pour généraliser avec des dimensions > 2
+// TODO: on a implémenté pour un quanto avec 2 sous jacents (zc et risqué) -> vérifier que le programme reste cohérent pour un instrment avec 3, 4, etc sous-jacents
+// TODO: pricing en t
+// TODO: abstraire pour des taux intérets non constants
+// TODO: implémenter des MC + opti ?
+// TODO: bcp + tard: feeder des données ?
+
+/** CONVENTION QUANTO POUR L'INSTANT : zc en ligne 0 et risqué en ligne 1 */
+
 int main(){
     // TEST DE PRICE UNE OPTION QUANTO
 
@@ -16,7 +29,7 @@ int main(){
     double rf = 0.05;
     double K = 90.0;
     double nbProduits = 2;
-    double rd = 0.03;
+    double rd = 0.03; // taux constants pour l'instant
     double sigma_tx_change = 0.05;
     double sigma_actif = 0.1;
     double spot_actif_sans_risque = 1;
@@ -29,7 +42,7 @@ int main(){
     pnl_rng_sseed(rng, std::time(NULL));
 
     // TODO : ce calcul du sigma ne fonctionnera (enfin il dépend de la taille et du contenu de la matrice du pf de couverture)
-    PnlMat* sigma = pnl_mat_create(nbProduits, nbProduits); // previously rho
+    PnlMat* sigma = pnl_mat_create(nbProduits, nbProduits); // c'est une matrice de covariance
     MLET(sigma, 0, 0) = sigma_tx_change * sigma_tx_change;
     MLET(sigma, 1, 1) = sigma_actif * sigma_actif;
     MLET(sigma, 0, 1) = sigma_tx_change * sigma_actif * rho;
