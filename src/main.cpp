@@ -1,5 +1,8 @@
 #include <iostream>
 #include "pnl/pnl_vector.h"
+#include "IUnderlying.h"
+#include "DomesticUnderlying.h"
+#include "ForeignUnderlying.h"
 #include "QuantoOption.h"
 #include "BlackScholesModel.h"
 #include <ctime>
@@ -8,10 +11,6 @@
 #include "pnl/pnl_finance.h"
 #include "Ocelia.h"
 #include "DateTime.h"
-#include "IUnderlying.h"
-#include "DomesticUnderlying.h"
-#include "ForeignUnderlying.h"
-#include "Market.h"
 
 // TODO: voir comment générer les .dll 
 // TODO: TEST UNITAIRES en googletest
@@ -55,47 +54,6 @@
 
 // }
 
-// void quanto_test(){
-// // TEST DE PRICE UNE OPTION QUANTO
-
-//     /** DATA **/
-//     double T = 1;
-//     double nbTimeSteps = 365;
-//     double rf = 0.05;
-//     double K = 90.0;
-//     double nbProduits = 2;
-//     double rd = 0.03; // taux constants pour l'instant
-//     double sigma_tx_change = 0.05;
-//     double sigma_actif = 0.1;
-//     double spot_actif_sans_risque = 1;
-//     double spot_actif_risque = 100;
-//     double nbSimul = 1000;
-//     double spot_taux_change_initial = 1.2;
-//     double rho = 0.2; // corrélation entre zc et actif risqué étranger
-//     double h = 0.01;
-//     PnlRng *rng = pnl_rng_create(PNL_RNG_MERSENNE);
-//     pnl_rng_sseed(rng, std::time(NULL));
-
-//     // TODO : ce calcul du sigma ne fonctionnera (enfin il dépend de la taille et du contenu de la matrice du pf de couverture)
-//     PnlMat* sigma = pnl_mat_create(nbProduits, nbProduits); // c'est une matrice de covariance
-//     MLET(sigma, 0, 0) = sigma_tx_change * sigma_tx_change;
-//     MLET(sigma, 1, 1) = sigma_actif * sigma_actif;
-//     MLET(sigma, 0, 1) = sigma_tx_change * sigma_actif * rho;
-//     MLET(sigma, 1, 0) = sigma_tx_change * sigma_actif * rho;
-//     pnl_mat_chol(sigma);
-//     MLET(sigma, 1, 0) += MGET(sigma, 0, 0); // ce calcul dépend de où ce trouve dans la matrice les actifs risqués et non risqués
-//     MLET(sigma, 1, 1) += MGET(sigma, 0, 1);
-
-//     PnlVect *spot = pnl_vect_create(2);
-//     LET(spot, 0) = spot_actif_sans_risque*spot_taux_change_initial;
-//     LET(spot, 1) = spot_actif_risque*spot_taux_change_initial;
-
-//     QuantoOption *quanto = new QuantoOption(T, nbTimeSteps, nbProduits, rf, K) ;
-//     BlackScholesModel *model = new BlackScholesModel(nbProduits, rd, sigma, spot);
-//     StandardMonteCarloPricer *pricer = new StandardMonteCarloPricer(model, quanto, rng, h, nbSimul);
-//     pricer->simulate(prix, prix_std_dev, delta, delta_std_dev);
-//   }
-
 void format_test(){
 
     /** DATA **/
@@ -104,7 +62,7 @@ void format_test(){
     double rf = 0.05;
     double K = 90.0;
     double nbProduits = 2;
-    double rd = 0.03; // taux constants pour l'instant
+    PnlVect *rd = pnl_vect_create_from_scalar(nbTimeSteps+1, 0.03); // taux constants pour l'instant
     double sigma_tx_change = 0.05;
     double sigma_actif = 0.1;
     double spot_actif_sans_risque = 1;
@@ -134,21 +92,8 @@ void format_test(){
     underlyings[0] = foreign_stock;
     IDerivative *quanto = new QuantoOption(T, nbTimeSteps, 1, rf, K, underlyings);
 
-    IModel *model = new BlackScholesModel();
-
-    PnlVect *und_path = pnl_vect_create(nbTimeSteps+1);
-    LET(und_path, 0) = spot;
-    PnlVect *zc_path = pnl_vect_create(nbTimeSteps+1);
-    LET(zc_path, 0) = zc_spot;
-
-    model->asset(und_path, T, nbTimeSteps, rng, sigma, rd, 1);
-    model->asset(zc_path, T, nbTimeSteps, rng, sigma, rd, 0);
-    foreign_stock->setZCpath(zc_path);
-    foreign_stock->price_ = und_path;
-
-    // std::cout << quanto->underlyings_[0] << std::endl;
-    pnl_vect_print(quanto->underlyings_[0]->price_);
-    pnl_vect_print(zc_path);
+    IModel *model = new BlackScholesModel(quanto, rd, sigma, nbTimeSteps, rng);
+    model->price_all();
 
     // IPricer *pricer = new StandardMonteCarloPricer();
     // pricer->simulate();

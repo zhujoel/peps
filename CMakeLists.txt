@@ -7,14 +7,12 @@ set(LIBS ${LIBS} ${PNL_LIBRARIES})
 include_directories(${PNL_INCLUDE_DIRS})
 
 # sources and headers
-set(SOURCES src/IModel.cpp src/IUnderlying.cpp src/DateTime.cpp src/BlackScholesModel.cpp 
-src/IPricer.cpp src/StandardMonteCarloPricer.cpp src/IDerivative.cpp src/QuantoOption.cpp 
-src/Ocelia.cpp src/ForeignUnderlying src/Market.cpp
- src/main.cpp)
+set(SOURCES src/IUnderlying.cpp src/ForeignUnderlying src/IDerivative.cpp src/IModel.cpp src/DateTime.cpp src/BlackScholesModel.cpp 
+src/IPricer.cpp src/StandardMonteCarloPricer.cpp src/QuantoOption.cpp src/Ocelia.cpp src/main.cpp)
 
-set(HEADERS include/IModel.h include/IUnderlying.h include/DomesticUnderlying.h 
-include/ForeignUnderlying.h include/Market.h include/DateTime.h include/BlackScholesModel.h 
-include/IPricer.h include/StandardMonteCarloPricer.h include/IDerivative.h include/Ocelia.h 
+set(HEADERS include/IUnderlying.h include/DomesticUnderlying.h include/IDerivative.h include/IModel.h 
+include/ForeignUnderlying.h include/DateTime.h include/BlackScholesModel.h 
+include/IPricer.h include/StandardMonteCarloPricer.h include/Ocelia.h 
 include/QuantoOption.h)
 
 include_directories(include)

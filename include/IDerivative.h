@@ -9,10 +9,6 @@ class IDerivative {
       double T_;        // maturité finale du produit
       int nbTimeSteps_; // nb de pas de temps de discrétisation
       int size_; // nombre de sous-jacents dans le payoff du produit
-
-      /**
-       * @brief Underlying products of the derivative.
-       */
       IUnderlying **underlyings_;
 
       IDerivative(double T, int nbTimeSteps, int size, IUnderlying** und);

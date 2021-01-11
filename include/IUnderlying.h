@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IModel.h"
+#include "pnl/pnl_vector.h"
 
 /**
  * @brief Underlying of a derivative.
@@ -8,18 +8,13 @@
 class IUnderlying {
 
   public:
-    /**
-     * @brief Price trajectory of the underlying.
-     */
     PnlVect *price_;
-    
-    /**
-     * @brief Initial price of the underlying.
-     */
     double spot_;
+    PnlVect *zc_;
+    double zc_spot_;
+    PnlVect *ex_rate_;
+    PnlVect *rf_;
 
-
-    IUnderlying(double spot);
+    IUnderlying(double spot, double zc_spot);
     ~IUnderlying();
-    
 };

@@ -5,8 +5,9 @@
 
 class BlackScholesModel : public IModel{
     public:
-        BlackScholesModel();
+        BlackScholesModel(IDerivative *derivative, PnlVect *rd, PnlMat *sigma, double nbTimeSteps, PnlRng *rng);
         ~BlackScholesModel();
         
-        void asset(PnlVect *path, double T, int nbTimeSteps, PnlRng *rng, PnlMat *sigma, double r, int ind);
+        void asset(PnlVect *path, int ind);
+        void price_all();
 };

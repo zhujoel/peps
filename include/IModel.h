@@ -2,12 +2,17 @@
 
 #include "pnl/pnl_matrix.h"
 #include "pnl/pnl_random.h"
+#include "IDerivative.h"
 
 class IModel{
     public:
-        // double rd_; /// taux d'intérêt domestique (domestic rate) // TODO: à changer si on a besoin qu'il ne soit pas constant 
+        IDerivative *derivative_; // derivative to simulate
+        PnlVect *rd_; /// taux d'intérêt domestique
+        PnlMat *sigma_; // matrice de covariance
+        double nbTimeSteps_;
+        PnlRng *rng_;
 
-        IModel();
+        IModel(IDerivative *derivative, PnlVect *rd, PnlMat *sigma, double nbTimeSteps, PnlRng *rng);
         ~IModel();
         /**
         * Génère une trajectoire du modèle et la stocke dans path
@@ -18,7 +23,9 @@ class IModel{
         * @param[in] nbTimeSteps nombre de dates de constatation
         * @param[in] rng Moteur de rng -- TODO: à changer
         */
-        virtual void asset(PnlVect *path, double T, int nbTimeSteps, PnlRng *rng, PnlMat *sigma, double r, int ind) = 0;
+        virtual void asset(PnlVect *path, int ind) = 0;
+
+        virtual void price_all() = 0;
         
         /**
         * Shift d'une trajectoire du sous-jacent
