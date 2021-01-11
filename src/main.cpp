@@ -1,8 +1,5 @@
 #include <iostream>
 #include "pnl/pnl_vector.h"
-#include "IUnderlying.h"
-#include "DomesticUnderlying.h"
-#include "ForeignUnderlying.h"
 #include "QuantoOption.h"
 #include "BlackScholesModel.h"
 #include <ctime>
@@ -11,6 +8,8 @@
 #include "pnl/pnl_finance.h"
 #include "Ocelia.h"
 #include "DateTime.h"
+#include "IUnderlying.h"
+#include "ForeignUnderlying.h"
 
 // TODO: voir comment générer les .dll 
 // TODO: TEST UNITAIRES en googletest
@@ -29,32 +28,33 @@
 /** CONVENTION QUANTO POUR L'INSTANT : zc en ligne 0 et risqué en ligne 1 */
 
 // TODO: tests unitaires à mettre dans des googletest
-// void datetime_tests(){
-//     DateTime *dt1 = new DateTime(1, 1, 1995);
-//     DateTime *dt2 = new DateTime(2, 2, 1995);
-//     DateTime *dt3 = new DateTime(1, 1, 1995);
+void datetime_tests(){
+    DateTime *dt1 = new DateTime(1, 1, 1995);
+    DateTime *dt2 = new DateTime(2, 2, 1995);
+    DateTime *dt3 = new DateTime(1, 1, 1995);
 
-//     // compare
-//     std::cout << "dt1 compare dt2 ? (-1 attendu) : " << dt1->compare(dt2) << std::endl;
-//     std::cout << "dt2 compare dt1 ? (1 attendu) : " << dt2->compare(dt1) << std::endl;
-//     std::cout << "dt1 compare dt3 ? (0 attendu) : " << dt1->compare(dt3) << std::endl;
-//     std::cout << "dt3 compare dt1 ? (0 attendu) : " << dt3->compare(dt1) << std::endl;
+    // compare
+    std::cout << "dt1 compare dt2 ? (-1 attendu) : " << dt1->compare(dt2) << std::endl;
+    std::cout << "dt2 compare dt1 ? (1 attendu) : " << dt2->compare(dt1) << std::endl;
+    std::cout << "dt1 compare dt3 ? (0 attendu) : " << dt1->compare(dt3) << std::endl;
+    std::cout << "dt3 compare dt1 ? (0 attendu) : " << dt3->compare(dt1) << std::endl;
 
-//     // std cout
-//     std::cout << "(1/1/1995 attendu) : " << dt1 << std::endl;
-// }
+    // std cout
+    std::cout << "(1/1/1995 attendu) : " << dt1 << std::endl;
+}
 
-// void ocelia_test(){
-//     Ocelia *ocelia = new Ocelia(0, 0, 0.0, 0.0, 0.0, 0.0, 0.0);
-//     ocelia->fill_dates_perf();
-//     ocelia->fill_dates_valeurs();
+void ocelia_test(){
+    // Ocelia *ocelia = new Ocelia(0, 0, 0.0, 0.0, 0.0, 0.0, 0.0);
+    // ocelia->fill_dates_perf();
+    // ocelia->fill_dates_valeurs();
 
-//     ocelia->payoff(NULL);
-//     // datetime_tests();
+    // ocelia->payoff(NULL);
+    // datetime_tests();
 
-// }
+}
 
-void format_test(){
+void quanto_test(){
+// TEST DE PRICE UNE OPTION QUANTO
 
     /** DATA **/
     double T = 1;
@@ -62,7 +62,7 @@ void format_test(){
     double rf = 0.05;
     double K = 90.0;
     double nbProduits = 2;
-    PnlVect *rd = pnl_vect_create_from_scalar(nbTimeSteps+1, 0.03); // taux constants pour l'instant
+    double rd = 0.03; // taux constants pour l'instant
     double sigma_tx_change = 0.05;
     double sigma_actif = 0.1;
     double spot_actif_sans_risque = 1;
@@ -84,35 +84,57 @@ void format_test(){
     MLET(sigma, 1, 0) += MGET(sigma, 0, 0); // ce calcul dépend de où ce trouve dans la matrice les actifs risqués et non risqués
     MLET(sigma, 1, 1) += MGET(sigma, 0, 1);
 
-    double zc_spot = spot_actif_sans_risque*spot_taux_change_initial;
-    double spot = spot_actif_risque*spot_taux_change_initial;
+    PnlVect *spot = pnl_vect_create(2);
+    LET(spot, 0) = spot_actif_sans_risque*spot_taux_change_initial;
+    LET(spot, 1) = spot_actif_risque*spot_taux_change_initial;
+
+    IUnderlying *und = new ForeignUnderlying(GET(spot, 1), GET(spot, 0));
+    std::cout << "----- " << und->spot_ << std::endl;
+    IUnderlying **unds = new IUnderlying*[1];
+    unds[0] = und;
+    // QuantoOption *quanto = new QuantoOption(T, nbTimeSteps, nbProduits, rf, K) ;
+    
+    QuantoOption *quanto2 = new QuantoOption(T, nbTimeSteps, nbProduits, rf, K, unds) ;
+    BlackScholesModel *model = new BlackScholesModel(nbProduits, rd, sigma, spot);
+    // StandardMonteCarloPricer *pricer = new StandardMonteCarloPricer(model, quanto, rng, h, nbSimul);
+    StandardMonteCarloPricer *pricer2 = new StandardMonteCarloPricer(model, quanto2, rng, h, nbSimul);
 
     // prix théorique avec pnl
     double prix2 = 0.0;
     double delta2 = 0.0;
     double sigma_actif_converti = sqrt(sigma_tx_change*sigma_tx_change+sigma_actif*sigma_actif+2*rho*sigma_tx_change*sigma_actif);
-    pnl_cf_call_bs(spot_taux_change_initial*spot_actif_risque, K, T, 0.03, 0, sigma_actif_converti, &prix2, &delta2);
+    pnl_cf_call_bs(spot_taux_change_initial*spot_actif_risque, K, T, rd, 0, sigma_actif_converti, &prix2, &delta2);
     std::cout << "prix théorique : " << prix2 << " delta théorique : " << delta2<< std::endl;
 
+    // simulation
+    double prix = 0.0;
+    double prix_std_dev = 0.0;
+    PnlVect* delta = pnl_vect_create(quanto2->size_);
+    PnlVect* delta_std_dev = pnl_vect_create(quanto2->size_);
+    pricer2->simulate(quanto2, prix, prix_std_dev, delta, delta_std_dev);
+    std::cout << "prix simulé : " << prix << " std dev : " << prix_std_dev << std::endl;
+    std::cout << "price est dedans : " << (abs(prix2 - prix) <= 1.96*prix_std_dev) << std::endl;
 
-    ForeignUnderlying *foreign_stock = new ForeignUnderlying(spot, zc_spot);
-    IUnderlying **underlyings = new IUnderlying*[1];
-    underlyings[0] = foreign_stock;
-    IDerivative *quanto = new QuantoOption(T, nbTimeSteps, 1, rf, K, underlyings);
+    std::cout << "delta simulé : " << std::endl;
+    pnl_vect_print(delta);
+    pnl_vect_print(delta_std_dev);
+    std::cout << "delta est dedans : " << (abs(GET(delta, 1) - delta2) <= 1.96*GET(delta_std_dev, 1)) << std::endl;
 
-    IModel *model = new BlackScholesModel(quanto, rd, sigma, nbTimeSteps, rng);
-    model->price_all();
+    double delta_zc_sans_risque = spot_actif_risque*delta2 * exp(-rf*0);
+    std::cout << "delta sous-jacent théorique : " << delta_zc_sans_risque << std::endl;
 
-    IPricer *pricer = new StandardMonteCarloPricer(model, quanto, rng, h, nbSimul);
-    
-    double prix, std_dev = 0.0;
-    pricer->simulate(prix, std_dev, NULL, NULL);
-
-    std::cout << prix << std::endl;
+    // free
+    pnl_mat_free(&sigma);
+    delete(quanto2);
+    pnl_vect_free(&spot);
+    delete(model);
+    pnl_rng_free(&rng);
+    delete(pricer2);
+    pnl_vect_free(&delta);
+    pnl_vect_free(&delta_std_dev);
 }
 
 int main(){
-    format_test();
-    // quanto_test();
+    quanto_test();
     // ocelia_test();
 }

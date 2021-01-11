@@ -1,46 +1,83 @@
 #include "BlackScholesModel.h"
 #include <iostream>
 
-BlackScholesModel::BlackScholesModel(IDerivative *derivative, PnlVect *rd, PnlMat *sigma, double nbTimeSteps, PnlRng *rng) 
-    : IModel(derivative, rd, sigma, nbTimeSteps, rng)
+BlackScholesModel::BlackScholesModel(int size, double rd, PnlMat *sigma, PnlVect *spot) :
+IModel(size, rd, sigma, spot)
 {
+    this->G_ = pnl_vect_create(this->size_); 
+    this->B_ = pnl_vect_create(this->size_);
 }
 
 BlackScholesModel::~BlackScholesModel()
 {
+    pnl_vect_free(&this->G_);
+    pnl_vect_free(&this->B_);
 }
 
-void BlackScholesModel::asset(PnlVect *path, int ind)
+void BlackScholesModel::asset(PnlMat *path, double T, int nbTimeSteps, PnlRng *rng)
 {
-    // TODO: enlever le ind et mettre sigma en vecteur à la place
-    // TODO: mettre taux r en attribut ?
-    double timestep = this->derivative_->T_/this->nbTimeSteps_;
-
-    double size = 2;
-    PnlVect *G = pnl_vect_create(size); 
-    PnlVect *B = pnl_vect_create(size);    
-    PnlVect *row = pnl_vect_create(size);
-
-    for (int k = 1; k <= this->nbTimeSteps_; ++k)
+    double timestep = T/nbTimeSteps;
+    pnl_mat_set_row(path, this->spot_, 0);
+    PnlVect *row = pnl_vect_create(this->size_);
+    for (int k = 1; k <= nbTimeSteps; ++k)
     {
-        pnl_vect_rng_normal(G, size, this->rng_);
-        pnl_mat_mult_vect_inplace(B, this->sigma_, G);
-        pnl_mat_get_row(row, this->sigma_, ind);
-        double sigma_d = pnl_vect_norm_two(row);
+        pnl_vect_rng_normal(this->G_, this->size_, rng); // G Vecteur gaussien
+        pnl_mat_mult_vect_inplace(this->B_, this->sigma_, this->G_);
 
-        LET(path, k) = GET(path, k-1) * exp( (GET(this->rd_, k) - (sigma_d*sigma_d)/2 ) * timestep + sqrt(timestep) * GET(B, ind));
+        for (int d = 0; d < this->size_; ++d)
+        {
+            pnl_mat_get_row(row, this->sigma_, d);
+            double sigma_d = pnl_vect_norm_two(row);
+            MLET(path, k, d) = MGET(path, k-1, d) * exp( (this->rd_ - (sigma_d*sigma_d)/2 ) * timestep + sqrt(timestep) * GET(this->B_, d));
+        }
     }
+    pnl_vect_free(&row);
 }
 
-void BlackScholesModel::price_all(){
+void BlackScholesModel::asset2(QuantoOption *derivative, double T, int nbTimeSteps, PnlRng *rng)
+{
+    double timestep = T/nbTimeSteps;
+    derivative->underlyings_[0]->zc_ = pnl_vect_create(nbTimeSteps+1);
+    derivative->underlyings_[0]->price_ = pnl_vect_create(nbTimeSteps+1);
+    LET(derivative->underlyings_[0]->zc_, 0) = derivative->underlyings_[0]->zc_spot_;
+    LET(derivative->underlyings_[0]->price_, 0) = derivative->underlyings_[0]->spot_;
+    PnlVect *row = pnl_vect_create(this->size_);
+    for (int k = 1; k <= nbTimeSteps; ++k)
+    {
+        pnl_vect_rng_normal(this->G_, this->size_, rng); // G Vecteur gaussien
+        pnl_mat_mult_vect_inplace(this->B_, this->sigma_, this->G_);
 
-    for(int i  = 0; i < this->derivative_->size_; ++i){
-        this->derivative_->underlyings_[i]->price_ = pnl_vect_create(this->nbTimeSteps_+1);
-        LET(this->derivative_->underlyings_[i]->price_, 0) = this->derivative_->underlyings_[i]->spot_;
-        asset(this->derivative_->underlyings_[i]->price_, (i*2));
-        this->derivative_->underlyings_[i]->zc_ = pnl_vect_create(this->nbTimeSteps_+1);
-        LET(this->derivative_->underlyings_[i]->zc_, 0) = this->derivative_->underlyings_[i]->zc_spot_;
-        asset(this->derivative_->underlyings_[i]->zc_, (i*2)+1);
+        pnl_mat_get_row(row, this->sigma_, 0);
+        double sigma_d = pnl_vect_norm_two(row);
+        LET(derivative->underlyings_[0]->zc_, k) = GET(derivative->underlyings_[0]->zc_, k-1) * exp( (this->rd_ - (sigma_d*sigma_d)/2 ) * timestep + sqrt(timestep) * GET(this->B_, 0));
+
+        pnl_mat_get_row(row, this->sigma_, 1);
+        sigma_d = pnl_vect_norm_two(row);
+        LET(derivative->underlyings_[0]->price_, k) = GET(derivative->underlyings_[0]->price_, k-1) * exp( (this->rd_ - (sigma_d*sigma_d)/2 ) * timestep + sqrt(timestep) * GET(this->B_, 1));
     }
+    
+    pnl_vect_free(&row);
+}
 
+void BlackScholesModel::shiftAsset(PnlMat *shift_path, const PnlMat *path, int d, double h, double t, double timestep)
+{
+    int i = t/timestep;
+    // if (abs( (i+1)*timestep - t)<1E-5)
+    // {
+    //     i+=1;
+    // }
+    if (h>0)
+    {
+        pnl_mat_clone(shift_path, path);
+        for (int k = i+1; k < path->m; ++k)
+        {  
+            MLET(shift_path, k, d) = MGET(shift_path, k, d) * (1+h);
+        }
+    } else {
+        for (int k = i+1; k < path->m; ++k)
+        {  
+            MLET(shift_path, k, d) = (MGET(shift_path, k, d) / (1-h)) * (1+h);
+        }
+    }
+    
 }

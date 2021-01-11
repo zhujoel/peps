@@ -2,17 +2,16 @@
 
 #include "pnl/pnl_matrix.h"
 #include "pnl/pnl_random.h"
-#include "IDerivative.h"
+#include "QuantoOption.h"
 
 class IModel{
     public:
-        IDerivative *derivative_; // derivative to simulate
-        PnlVect *rd_; /// taux d'intérêt domestique
-        PnlMat *sigma_; // matrice de covariance
-        double nbTimeSteps_;
-        PnlRng *rng_;
+        int size_; /// nombre d'actifs du modèle
+        double rd_; /// taux d'intérêt domestique (domestic rate) // TODO: à changer si on a besoin qu'il ne soit pas constant 
+        PnlMat *sigma_; /// Matrice de volatilité
+        PnlVect *spot_; /// valeurs initiales des sous-jacents
 
-        IModel(IDerivative *derivative, PnlVect *rd, PnlMat *sigma, double nbTimeSteps, PnlRng *rng);
+        IModel(int size, double rd, PnlMat *sigma, PnlVect *spot);
         ~IModel();
         /**
         * Génère une trajectoire du modèle et la stocke dans path
@@ -23,10 +22,9 @@ class IModel{
         * @param[in] nbTimeSteps nombre de dates de constatation
         * @param[in] rng Moteur de rng -- TODO: à changer
         */
-        virtual void asset(PnlVect *path, int ind) = 0;
+        virtual void asset(PnlMat *path, double T, int nbTimeSteps, PnlRng *rng) = 0;
+        virtual void asset2(QuantoOption *derivative, double T, int nbTimeSteps, PnlRng *rng) = 0;
 
-        virtual void price_all() = 0;
-        
         /**
         * Shift d'une trajectoire du sous-jacent
         *
@@ -40,6 +38,6 @@ class IModel{
         * @param[in] d indice du sous-jacent à shifter
         * @param[in] timestep pas de constatation du sous-jacent
         */
-        // virtual void shiftAsset(PnlMat *shift_path, const PnlMat *path, int d, double h, double t, double timestep) = 0;
+        virtual void shiftAsset(PnlMat *shift_path, const PnlMat *path, int d, double h, double t, double timestep) = 0;
 
 };

@@ -2,9 +2,6 @@
 
 #include "pnl/pnl_vector.h"
 
-/**
- * @brief Underlying of a derivative.
- */
 class IUnderlying {
 
   public:

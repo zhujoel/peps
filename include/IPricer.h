@@ -11,6 +11,8 @@ class IPricer{
         PnlRng *rng_; // pointeur sur le rng -- TODO: modifier par un RNGEngine
         double fdStep_; // pas de constatation des produits -- TODO: gérer les dates plus précisément pour Océlia
         int nbSamples_; // nombre de tirages de Monte-Carlo
+        PnlMat *path_; // trajectoires des sous-jacents du modele
+        PnlMat *shift_path_; /*! espace mémoire d'une trajectoire shiftée par (1+h) */
 
         IPricer(IModel *model, IDerivative *derivative, PnlRng *rng, double fdStep, int nbSamples);
         ~IPricer();
