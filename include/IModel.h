@@ -37,5 +37,6 @@ class IModel{
         */
         virtual void shiftAsset(double h, double t, double timestep) = 0;
 
-        virtual double getSpot(int d) = 0;
+        double getUnderlyingSpot(int d);
+        // virtual int getNbTimeSteps() = 0;
 };

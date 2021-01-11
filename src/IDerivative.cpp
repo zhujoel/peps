@@ -10,5 +10,4 @@ IDerivative::IDerivative(double T, int nbTimeSteps, int size, double rd, IUnderl
 }
 
 IDerivative::~IDerivative(){
-    
 }

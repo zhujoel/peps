@@ -29,18 +29,18 @@
 
 // TODO: tests unitaires à mettre dans des googletest
 void datetime_tests(){
-    DateTime *dt1 = new DateTime(1, 1, 1995);
-    DateTime *dt2 = new DateTime(2, 2, 1995);
-    DateTime *dt3 = new DateTime(1, 1, 1995);
+    // DateTime *dt1 = new DateTime(1, 1, 1995);
+    // DateTime *dt2 = new DateTime(2, 2, 1995);
+    // DateTime *dt3 = new DateTime(1, 1, 1995);
 
-    // compare
-    std::cout << "dt1 compare dt2 ? (-1 attendu) : " << dt1->compare(dt2) << std::endl;
-    std::cout << "dt2 compare dt1 ? (1 attendu) : " << dt2->compare(dt1) << std::endl;
-    std::cout << "dt1 compare dt3 ? (0 attendu) : " << dt1->compare(dt3) << std::endl;
-    std::cout << "dt3 compare dt1 ? (0 attendu) : " << dt3->compare(dt1) << std::endl;
+    // // compare
+    // std::cout << "dt1 compare dt2 ? (-1 attendu) : " << dt1->compare(dt2) << std::endl;
+    // std::cout << "dt2 compare dt1 ? (1 attendu) : " << dt2->compare(dt1) << std::endl;
+    // std::cout << "dt1 compare dt3 ? (0 attendu) : " << dt1->compare(dt3) << std::endl;
+    // std::cout << "dt3 compare dt1 ? (0 attendu) : " << dt3->compare(dt1) << std::endl;
 
-    // std cout
-    std::cout << "(1/1/1995 attendu) : " << dt1 << std::endl;
+    // // std cout
+    // std::cout << "(1/1/1995 attendu) : " << dt1 << std::endl;
 }
 
 void ocelia_test(){
@@ -67,7 +67,7 @@ void quanto_test(){
     double sigma_actif = 0.1;
     double spot_actif_sans_risque = 1;
     double spot_actif_risque = 100;
-    double nbSimul = 1000;
+    double nbSimul = 100;
     double spot_taux_change_initial = 1.2;
     double rho = 0.2; // corrélation entre zc et actif risqué étranger
     double h = 0.01;
@@ -96,13 +96,13 @@ void quanto_test(){
     std::cout << "prix théorique : " << prix2 << " delta théorique : " << delta2<< std::endl;
 
     // simulation
-    IUnderlying *und = new ForeignUnderlying(GET(spot, 1), GET(spot, 0));
+    IUnderlying *und = new ForeignUnderlying(GET(spot, 1), GET(spot, 0), nbTimeSteps);
     IUnderlying **unds = new IUnderlying*[1];
     unds[0] = und;
     
-    QuantoOption *quanto = new QuantoOption(T, nbTimeSteps, nbProduits, rd, rf, K, unds) ;
+    IDerivative *quanto = new QuantoOption(T, nbTimeSteps, nbProduits, rd, rf, K, unds) ;
     BlackScholesModel *model = new BlackScholesModel(quanto, sigma);
-    StandardMonteCarloPricer *pricer = new StandardMonteCarloPricer(model, rng, h, nbSimul);
+    IPricer *pricer = new StandardMonteCarloPricer(model, rng, h, nbSimul);
 
     double prix = 0.0;
     double prix_std_dev = 0.0;
@@ -121,12 +121,14 @@ void quanto_test(){
     std::cout << "delta sous-jacent théorique : " << delta_zc_sans_risque << std::endl;
 
     // free
-    pnl_mat_free(&sigma);
+    delete(unds);
+    delete(und);
     delete(quanto);
-    pnl_vect_free(&spot);
     delete(model);
-    pnl_rng_free(&rng);
     delete(pricer);
+    pnl_mat_free(&sigma);
+    pnl_rng_free(&rng);
+    pnl_vect_free(&spot);
     pnl_vect_free(&delta);
     pnl_vect_free(&delta_std_dev);
 }

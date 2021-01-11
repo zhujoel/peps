@@ -38,17 +38,13 @@ void StandardMonteCarloPricer::price(double &prix, double &std_dev)
 void StandardMonteCarloPricer::delta(PnlVect *delta, PnlVect *std_dev)
 {
     double timeStep = this->model_->derivative_->T_/this->model_->derivative_->nbTimeSteps_;
-    // for (int d = 0; d < this->model_->derivative_->size_; ++d)
-    // {
-        this->model_->shiftAsset(this->fdStep_, 0, timeStep);
-        
-        double payoff_1 = this->model_->derivative_->shifted_payoff();
-        this->model_->shiftAsset(-this->fdStep_, 0, timeStep);
-        double payoff_2 = this->model_->derivative_->shifted_payoff();
-        double diff = payoff_1 - payoff_2;
-        LET(delta, 1) += diff;
-        LET(std_dev, 1) += diff * diff;
-    // }
+    this->model_->shiftAsset(this->fdStep_, 0, timeStep);
+    double payoff_1 = this->model_->derivative_->shifted_payoff();
+    this->model_->shiftAsset(-this->fdStep_, 0, timeStep);
+    double payoff_2 = this->model_->derivative_->shifted_payoff();
+    double diff = payoff_1 - payoff_2;
+    LET(delta, 1) += diff;
+    LET(std_dev, 1) += diff * diff;
 }
 
 
@@ -68,7 +64,7 @@ void StandardMonteCarloPricer::discount_delta(double t, PnlVect *delta, PnlVect 
     double M = this->nbSamples_;
     for (int d = 0; d < this->model_->derivative_->size_; ++d)
     {   
-        double s0 = this->model_->getSpot(d);
+        double s0 = this->model_->getUnderlyingSpot(d);
         double acc = GET(delta, d) / (2*this->fdStep_*s0);
         LET(std_dev, d) = sqrt(exp(-2*r*(T-t))*(GET(std_dev, d) - acc * acc)/(2*M*this->fdStep_*s0));
         LET(delta, d) = exp(-r*(T-t))*acc;
