@@ -10,7 +10,7 @@ StandardMonteCarloPricer::~StandardMonteCarloPricer(){
     
 }
 
-void StandardMonteCarloPricer::simulate(QuantoOption *option, double &prix, double &price_std_dev, PnlVect *delta, PnlVect *delta_std_dev)
+void StandardMonteCarloPricer::simulate(IDerivative *option, double &prix, double &price_std_dev, PnlVect *delta, PnlVect *delta_std_dev)
 {
     for(int j = 0; j < this->nbSamples_; ++j){
         this->model_->asset(option, this->derivative_->T_, this->derivative_->nbTimeSteps_, this->rng_);
@@ -30,12 +30,12 @@ void StandardMonteCarloPricer::simulate(QuantoOption *option, double &prix, doub
 
 void StandardMonteCarloPricer::price(double &prix, double &std_dev)
 {
-    double price = this->derivative_->payoff(this->path_);
+    double price = this->derivative_->payoff();
     prix += price;
     std_dev += price * price;
 }
 
-void StandardMonteCarloPricer::delta(QuantoOption *option, PnlVect *delta, PnlVect *std_dev)
+void StandardMonteCarloPricer::delta(IDerivative *option, PnlVect *delta, PnlVect *std_dev)
 {
     double timeStep = this->derivative_->T_/this->derivative_->nbTimeSteps_;
     // for (int d = 0; d < this->derivative_->size_; ++d)

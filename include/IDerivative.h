@@ -11,7 +11,6 @@ class IDerivative {
       int size_; // nombre de sous-jacents dans le payoff du produit
       IUnderlying **underlyings_;
 
-      IDerivative(double T, int nbTimeSteps, int size);
       IDerivative(double T, int nbTimeSteps, int size, IUnderlying** underlying);
       virtual ~IDerivative();
       
@@ -23,6 +22,6 @@ class IDerivative {
       * par la fonction asset.
       * @return le payoff du produit
       */
-      virtual double payoff(const PnlMat *path) const = 0;
+      virtual double payoff() const = 0;
       virtual double shifted_payoff(const PnlVect *path) const = 0;
 };

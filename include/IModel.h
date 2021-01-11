@@ -2,7 +2,7 @@
 
 #include "pnl/pnl_matrix.h"
 #include "pnl/pnl_random.h"
-#include "QuantoOption.h"
+#include "IDerivative.h"
 
 class IModel{
     public:
@@ -10,6 +10,7 @@ class IModel{
         double rd_; /// taux d'intérêt domestique (domestic rate) // TODO: à changer si on a besoin qu'il ne soit pas constant 
         PnlMat *sigma_; /// Matrice de volatilité
         PnlVect *spot_; /// valeurs initiales des sous-jacents
+
 
         IModel(int size, double rd, PnlMat *sigma, PnlVect *spot);
         ~IModel();
@@ -22,7 +23,7 @@ class IModel{
         * @param[in] nbTimeSteps nombre de dates de constatation
         * @param[in] rng Moteur de rng -- TODO: à changer
         */
-        virtual void asset(QuantoOption *derivative, double T, int nbTimeSteps, PnlRng *rng) = 0;
+        virtual void asset(IDerivative *derivative, double T, int nbTimeSteps, PnlRng *rng) = 0;
 
         /**
         * Shift d'une trajectoire du sous-jacent
@@ -37,5 +38,5 @@ class IModel{
         * @param[in] d indice du sous-jacent à shifter
         * @param[in] timestep pas de constatation du sous-jacent
         */
-        virtual void shiftAsset(QuantoOption *derivative, int d, double h, double t, double timestep) = 0;
+        virtual void shiftAsset(IDerivative *derivative, int d, double h, double t, double timestep) = 0;
 };

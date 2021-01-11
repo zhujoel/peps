@@ -12,8 +12,8 @@ class BlackScholesModel : public IModel{
         BlackScholesModel(int size, double rd, PnlMat *sigma, PnlVect *spot);
         ~BlackScholesModel();
         
-        void asset(QuantoOption *derivative, double T, int nbTimeSteps, PnlRng *rng);
+        void asset(IDerivative *derivative, double T, int nbTimeSteps, PnlRng *rng);
 
-        void shiftAsset(QuantoOption *derivative, int d, double h, double t, double timestep);
+        void shiftAsset(IDerivative *derivative, int d, double h, double t, double timestep);
 
 };
