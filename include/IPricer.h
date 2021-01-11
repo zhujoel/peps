@@ -37,7 +37,7 @@ class IPricer{
         * @param[out] delta contient le vecteur de delta
         * @param[out] std_dev contient l'écart type de l'estimateur
         */
-        virtual void delta2(QuantoOption *option, PnlVect *delta, PnlVect *std_dev) = 0;
+        virtual void delta(QuantoOption *option, PnlVect *delta, PnlVect *std_dev) = 0;
 
         /**
          * @brief Computes the discount price and discount standard deviation.

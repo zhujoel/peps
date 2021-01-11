@@ -17,7 +17,7 @@ QuantoOption::~QuantoOption(){
 
 }
 
-double QuantoOption::payoff2(const PnlMat *path) const{
+double QuantoOption::payoff(const PnlMat *path) const{
     double B_T = GET(this->underlyings_[0]->zc_, this->nbTimeSteps_); // valeur finale de l'actif sans risque converti 
     double S_T = GET(this->underlyings_[0]->price_, this->nbTimeSteps_); // valeur finale de l'actif sans risque converti 
 

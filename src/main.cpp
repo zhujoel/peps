@@ -88,17 +88,6 @@ void quanto_test(){
     LET(spot, 0) = spot_actif_sans_risque*spot_taux_change_initial;
     LET(spot, 1) = spot_actif_risque*spot_taux_change_initial;
 
-    IUnderlying *und = new ForeignUnderlying(GET(spot, 1), GET(spot, 0));
-    std::cout << "----- " << und->spot_ << std::endl;
-    IUnderlying **unds = new IUnderlying*[1];
-    unds[0] = und;
-    // QuantoOption *quanto = new QuantoOption(T, nbTimeSteps, nbProduits, rf, K) ;
-    
-    QuantoOption *quanto2 = new QuantoOption(T, nbTimeSteps, nbProduits, rf, K, unds) ;
-    BlackScholesModel *model = new BlackScholesModel(nbProduits, rd, sigma, spot);
-    // StandardMonteCarloPricer *pricer = new StandardMonteCarloPricer(model, quanto, rng, h, nbSimul);
-    StandardMonteCarloPricer *pricer2 = new StandardMonteCarloPricer(model, quanto2, rng, h, nbSimul);
-
     // prix théorique avec pnl
     double prix2 = 0.0;
     double delta2 = 0.0;
@@ -107,11 +96,20 @@ void quanto_test(){
     std::cout << "prix théorique : " << prix2 << " delta théorique : " << delta2<< std::endl;
 
     // simulation
+    IUnderlying *und = new ForeignUnderlying(GET(spot, 1), GET(spot, 0));
+    std::cout << "----- " << und->spot_ << std::endl;
+    IUnderlying **unds = new IUnderlying*[1];
+    unds[0] = und;
+    
+    QuantoOption *quanto = new QuantoOption(T, nbTimeSteps, nbProduits, rf, K, unds) ;
+    BlackScholesModel *model = new BlackScholesModel(nbProduits, rd, sigma, spot);
+    StandardMonteCarloPricer *pricer = new StandardMonteCarloPricer(model, quanto, rng, h, nbSimul);
+
     double prix = 0.0;
     double prix_std_dev = 0.0;
-    PnlVect* delta = pnl_vect_create(quanto2->size_);
-    PnlVect* delta_std_dev = pnl_vect_create(quanto2->size_);
-    pricer2->simulate(quanto2, prix, prix_std_dev, delta, delta_std_dev);
+    PnlVect* delta = pnl_vect_create(quanto->size_);
+    PnlVect* delta_std_dev = pnl_vect_create(quanto->size_);
+    pricer->simulate(quanto, prix, prix_std_dev, delta, delta_std_dev);
     std::cout << "prix simulé : " << prix << " std dev : " << prix_std_dev << std::endl;
     std::cout << "price est dedans : " << (abs(prix2 - prix) <= 1.96*prix_std_dev) << std::endl;
 
@@ -125,11 +123,11 @@ void quanto_test(){
 
     // free
     pnl_mat_free(&sigma);
-    delete(quanto2);
+    delete(quanto);
     pnl_vect_free(&spot);
     delete(model);
     pnl_rng_free(&rng);
-    delete(pricer2);
+    delete(pricer);
     pnl_vect_free(&delta);
     pnl_vect_free(&delta_std_dev);
 }

@@ -13,9 +13,9 @@ StandardMonteCarloPricer::~StandardMonteCarloPricer(){
 void StandardMonteCarloPricer::simulate(QuantoOption *option, double &prix, double &price_std_dev, PnlVect *delta, PnlVect *delta_std_dev)
 {
     for(int j = 0; j < this->nbSamples_; ++j){
-        this->model_->asset2(option, this->derivative_->T_, this->derivative_->nbTimeSteps_, this->rng_);
+        this->model_->asset(option, this->derivative_->T_, this->derivative_->nbTimeSteps_, this->rng_);
         this->price(prix, price_std_dev);
-        this->delta2(option, delta, delta_std_dev);
+        this->delta(option, delta, delta_std_dev);
     }
 
     prix /= this->nbSamples_;
@@ -30,20 +30,20 @@ void StandardMonteCarloPricer::simulate(QuantoOption *option, double &prix, doub
 
 void StandardMonteCarloPricer::price(double &prix, double &std_dev)
 {
-    double price = this->derivative_->payoff2(this->path_);
+    double price = this->derivative_->payoff(this->path_);
     prix += price;
     std_dev += price * price;
 }
 
-void StandardMonteCarloPricer::delta2(QuantoOption *option, PnlVect *delta, PnlVect *std_dev)
+void StandardMonteCarloPricer::delta(QuantoOption *option, PnlVect *delta, PnlVect *std_dev)
 {
     double timeStep = this->derivative_->T_/this->derivative_->nbTimeSteps_;
     // for (int d = 0; d < this->derivative_->size_; ++d)
     // {
-        this->model_->shiftAsset2(option, 0, this->fdStep_, 0, timeStep);
+        this->model_->shiftAsset(option, 0, this->fdStep_, 0, timeStep);
         
         double payoff_1 = this->derivative_->shifted_payoff(option->underlyings_[0]->shifted_price_);
-        this->model_->shiftAsset2(option, 0, -this->fdStep_, 0, timeStep);
+        this->model_->shiftAsset(option, 0, -this->fdStep_, 0, timeStep);
         double payoff_2 = this->derivative_->shifted_payoff(option->underlyings_[0]->shifted_price_);
         double diff = payoff_1 - payoff_2;
         LET(delta, 1) += diff;

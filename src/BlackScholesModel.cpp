@@ -14,7 +14,7 @@ BlackScholesModel::~BlackScholesModel()
     pnl_vect_free(&this->B_);
 }
 
-void BlackScholesModel::asset2(QuantoOption *derivative, double T, int nbTimeSteps, PnlRng *rng)
+void BlackScholesModel::asset(QuantoOption *derivative, double T, int nbTimeSteps, PnlRng *rng)
 {
     double timestep = T/nbTimeSteps;
     derivative->underlyings_[0]->zc_ = pnl_vect_create(nbTimeSteps+1);
@@ -39,7 +39,7 @@ void BlackScholesModel::asset2(QuantoOption *derivative, double T, int nbTimeSte
     pnl_vect_free(&row);
 }
 
-void BlackScholesModel::shiftAsset2(QuantoOption* derivative, int d, double h, double t, double timestep)
+void BlackScholesModel::shiftAsset(QuantoOption* derivative, int d, double h, double t, double timestep)
 {
     int i = t/timestep;
     // if (abs( (i+1)*timestep - t)<1E-5)

@@ -22,7 +22,7 @@ class IModel{
         * @param[in] nbTimeSteps nombre de dates de constatation
         * @param[in] rng Moteur de rng -- TODO: à changer
         */
-        virtual void asset2(QuantoOption *derivative, double T, int nbTimeSteps, PnlRng *rng) = 0;
+        virtual void asset(QuantoOption *derivative, double T, int nbTimeSteps, PnlRng *rng) = 0;
 
         /**
         * Shift d'une trajectoire du sous-jacent
@@ -37,5 +37,5 @@ class IModel{
         * @param[in] d indice du sous-jacent à shifter
         * @param[in] timestep pas de constatation du sous-jacent
         */
-        virtual void shiftAsset2(QuantoOption *derivative, int d, double h, double t, double timestep) = 0;
+        virtual void shiftAsset(QuantoOption *derivative, int d, double h, double t, double timestep) = 0;
 };
