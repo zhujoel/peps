@@ -30,3 +30,8 @@ double QuantoOption::payoff2(const PnlMat *path) const{
 
     return MAX(S_T - this->K_, 0);   
 }
+
+double QuantoOption::shifted_payoff(const PnlVect *path) const{
+    double S_T = GET(path, this->nbTimeSteps_); // valeur finale de l'actif sans risque converti 
+    return MAX(S_T - this->K_, 0);
+}

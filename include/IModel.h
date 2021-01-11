@@ -39,5 +39,5 @@ class IModel{
         * @param[in] timestep pas de constatation du sous-jacent
         */
         virtual void shiftAsset(PnlMat *shift_path, const PnlMat *path, int d, double h, double t, double timestep) = 0;
-
+        virtual void shiftAsset2(QuantoOption *derivative, int d, double h, double t, double timestep) = 0;
 };

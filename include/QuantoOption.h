@@ -25,5 +25,7 @@ class QuantoOption : public IDerivative {
     */
     double payoff(const PnlMat *path) const;
     double payoff2(const PnlMat *path) const;
+    double shifted_payoff(const PnlVect *path) const;
+
 
 };

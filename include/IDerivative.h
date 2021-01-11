@@ -25,4 +25,5 @@ class IDerivative {
       */
       virtual double payoff(const PnlMat *path) const = 0;
       virtual double payoff2(const PnlMat *path) const = 0;
+      virtual double shifted_payoff(const PnlVect *path) const = 0;
 };

@@ -6,6 +6,7 @@ class IUnderlying {
 
   public:
     PnlVect *price_;
+    PnlVect *shifted_price_;
     double spot_;
     PnlVect *zc_;
     double zc_spot_;

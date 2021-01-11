@@ -81,3 +81,27 @@ void BlackScholesModel::shiftAsset(PnlMat *shift_path, const PnlMat *path, int d
     }
     
 }
+
+void BlackScholesModel::shiftAsset2(QuantoOption* derivative, int d, double h, double t, double timestep)
+{
+    int i = t/timestep;
+    // if (abs( (i+1)*timestep - t)<1E-5)
+    // {
+    //     i+=1;
+    // }
+    if (h>0)
+    {
+        pnl_vect_clone(derivative->underlyings_[0]->shifted_price_, derivative->underlyings_[0]->price_);
+        for (int k = i+1; k <= derivative->nbTimeSteps_; ++k)
+        {  
+            LET(derivative->underlyings_[0]->shifted_price_, k) = GET(derivative->underlyings_[0]->shifted_price_, k) * (1+h);
+        }
+
+    } else {
+        for (int k = i+1; k <= derivative->nbTimeSteps_; ++k)
+        {  
+            LET(derivative->underlyings_[0]->shifted_price_, k) = (GET(derivative->underlyings_[0]->shifted_price_, k) / (1-h)) * (1+h);
+        }
+    }
+    
+}

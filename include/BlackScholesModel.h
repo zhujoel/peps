@@ -16,5 +16,6 @@ class BlackScholesModel : public IModel{
         void asset2(QuantoOption *derivative, double T, int nbTimeSteps, PnlRng *rng);
 
         void shiftAsset(PnlMat *shift_path, const PnlMat *path, int d, double h, double t, double timestep);
+        void shiftAsset2(QuantoOption *derivative, int d, double h, double t, double timestep);
 
 };
