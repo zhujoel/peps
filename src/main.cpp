@@ -102,14 +102,14 @@ void quanto_test(){
     unds[0] = und;
     
     QuantoOption *quanto = new QuantoOption(T, nbTimeSteps, nbProduits, rf, K, unds) ;
-    BlackScholesModel *model = new BlackScholesModel(nbProduits, rd, sigma, spot);
-    StandardMonteCarloPricer *pricer = new StandardMonteCarloPricer(model, quanto, rng, h, nbSimul);
+    BlackScholesModel *model = new BlackScholesModel(quanto, nbProduits, rd, sigma, spot);
+    StandardMonteCarloPricer *pricer = new StandardMonteCarloPricer(model, rng, h, nbSimul);
 
     double prix = 0.0;
     double prix_std_dev = 0.0;
     PnlVect* delta = pnl_vect_create(quanto->size_);
     PnlVect* delta_std_dev = pnl_vect_create(quanto->size_);
-    pricer->simulate(quanto, prix, prix_std_dev, delta, delta_std_dev);
+    pricer->simulate(prix, prix_std_dev, delta, delta_std_dev);
     std::cout << "prix simulé : " << prix << " std dev : " << prix_std_dev << std::endl;
     std::cout << "price est dedans : " << (abs(prix2 - prix) <= 1.96*prix_std_dev) << std::endl;
 

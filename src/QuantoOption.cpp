@@ -18,7 +18,7 @@ double QuantoOption::payoff() const{
     return MAX(S_T - this->K_, 0);   
 }
 
-double QuantoOption::shifted_payoff(const PnlVect *path) const{
-    double S_T = GET(path, this->nbTimeSteps_); // valeur finale de l'actif sans risque converti 
+double QuantoOption::shifted_payoff() const{
+    double S_T = GET(this->underlyings_[0]->shifted_price_, this->nbTimeSteps_); // valeur finale de l'actif sans risque converti 
     return MAX(S_T - this->K_, 0);
 }

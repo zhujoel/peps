@@ -22,7 +22,7 @@ class QuantoOption : public IDerivative {
     * 2ème colonne : actif risqué étranger en devise domestique
     */
     double payoff() const;
-    double shifted_payoff(const PnlVect *path) const;
+    double shifted_payoff() const;
 
 
 };

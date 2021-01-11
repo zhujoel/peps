@@ -7,19 +7,18 @@
 class IPricer{
     public:
         IModel *model_; // pointeur vers le modèle utilisé
-        IDerivative *derivative_; // pointeur sur le produit dérivé qu'on calcule
         PnlRng *rng_; // pointeur sur le rng -- TODO: modifier par un RNGEngine
         double fdStep_; // pas de constatation des produits -- TODO: gérer les dates plus précisément pour Océlia
         int nbSamples_; // nombre de tirages de Monte-Carlo
 
-        IPricer(IModel *model, IDerivative *derivative, PnlRng *rng, double fdStep, int nbSamples);
+        IPricer(IModel *model, PnlRng *rng, double fdStep, int nbSamples);
         ~IPricer();
 
         /**
          * Simulate the Monte-Carlo and computes the price, a standard deviation for the price, the delta, and the standard-deviation for the delta at time 0.
          *
          */
-        virtual void simulate(IDerivative *option, double &prix, double &price_std_dev, PnlVect *delta, PnlVect *delta_std_dev) = 0;
+        virtual void simulate(double &prix, double &price_std_dev, PnlVect *delta, PnlVect *delta_std_dev) = 0;
 
         /**
          * Calcule le prix d'un produit à la date 0.
@@ -35,7 +34,7 @@ class IPricer{
         * @param[out] delta contient le vecteur de delta
         * @param[out] std_dev contient l'écart type de l'estimateur
         */
-        virtual void delta(IDerivative *option, PnlVect *delta, PnlVect *std_dev) = 0;
+        virtual void delta(PnlVect *delta, PnlVect *std_dev) = 0;
 
         /**
          * @brief Computes the discount price and discount standard deviation.

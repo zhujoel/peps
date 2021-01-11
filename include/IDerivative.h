@@ -23,5 +23,5 @@ class IDerivative {
       * @return le payoff du produit
       */
       virtual double payoff() const = 0;
-      virtual double shifted_payoff(const PnlVect *path) const = 0;
+      virtual double shifted_payoff() const = 0;
 };
