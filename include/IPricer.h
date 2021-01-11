@@ -21,7 +21,7 @@ class IPricer{
          * Simulate the Monte-Carlo and computes the price, a standard deviation for the price, the delta, and the standard-deviation for the delta at time 0.
          *
          */
-        virtual void simulate(double &prix, double &price_std_dev, PnlVect *delta, PnlVect *delta_std_dev) = 0;
+        virtual void simulate(QuantoOption *option, double &prix, double &price_std_dev, PnlVect *delta, PnlVect *delta_std_dev) = 0;
 
         /**
          * Calcule le prix d'un produit à la date 0.
@@ -37,7 +37,6 @@ class IPricer{
         * @param[out] delta contient le vecteur de delta
         * @param[out] std_dev contient l'écart type de l'estimateur
         */
-        virtual void delta(PnlVect *delta, PnlVect *std_dev) = 0;
         virtual void delta2(QuantoOption *option, PnlVect *delta, PnlVect *std_dev) = 0;
 
         /**

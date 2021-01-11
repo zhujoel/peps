@@ -11,11 +11,9 @@ class StandardMonteCarloPricer : public IPricer{
         
         ~StandardMonteCarloPricer();
 
-        void simulate(double &prix, double &price_std_dev, PnlVect *delta, PnlVect *delta_std_dev);
         void simulate(QuantoOption *option, double &prix, double &price_std_dev, PnlVect *delta, PnlVect *delta_std_dev);
 
         void price(double &prix, double &std_dev);
-        void delta(PnlVect *delta, PnlVect *std_dev);
         void delta2(QuantoOption *option, PnlVect *delta, PnlVect *std_dev);
 
         void discount_price(double t, double &prix, double &std_dev);
