@@ -9,9 +9,10 @@ class IDerivative {
       double T_;        // maturité finale du produit
       int nbTimeSteps_; // nb de pas de temps de discrétisation
       int size_; // nombre de sous-jacents dans le payoff du produit
+      double rd_; // taux d'intéret domestique // TODO: faire en sorte que ça soit pas constant
       IUnderlying **underlyings_;
 
-      IDerivative(double T, int nbTimeSteps, int size, IUnderlying** underlying);
+      IDerivative(double T, int nbTimeSteps, int size, double rd, IUnderlying** underlying);
       virtual ~IDerivative();
       
       /**

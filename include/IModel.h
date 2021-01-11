@@ -7,13 +7,10 @@
 class IModel{
     public:
         IDerivative *derivative_; // pointeur sur le produit dérivé qu'on calcule
-        int size_; /// nombre d'actifs du modèle
-        double rd_; /// taux d'intérêt domestique (domestic rate) // TODO: à changer si on a besoin qu'il ne soit pas constant 
         PnlMat *sigma_; /// Matrice de volatilité
-        PnlVect *spot_; /// valeurs initiales des sous-jacents
 
 
-        IModel(IDerivative *derivative, int size, double rd, PnlMat *sigma, PnlVect *spot);
+        IModel(IDerivative *derivative, PnlMat *sigma);
         ~IModel();
         /**
         * Génère une trajectoire du modèle et la stocke dans path
@@ -24,7 +21,7 @@ class IModel{
         * @param[in] nbTimeSteps nombre de dates de constatation
         * @param[in] rng Moteur de rng -- TODO: à changer
         */
-        virtual void asset(double T, int nbTimeSteps, PnlRng *rng) = 0;
+        virtual void asset(PnlRng *rng) = 0;
 
         /**
         * Shift d'une trajectoire du sous-jacent
@@ -36,8 +33,9 @@ class IModel{
         * à partir de la date t.
         * @param[in] t date à partir de laquelle on shift
         * @param[in] h pas de différences finies
-        * @param[in] d indice du sous-jacent à shifter
         * @param[in] timestep pas de constatation du sous-jacent
         */
-        virtual void shiftAsset(int d, double h, double t, double timestep) = 0;
+        virtual void shiftAsset(double h, double t, double timestep) = 0;
+
+        virtual double getSpot(int d) = 0;
 };

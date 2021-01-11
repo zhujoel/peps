@@ -97,12 +97,11 @@ void quanto_test(){
 
     // simulation
     IUnderlying *und = new ForeignUnderlying(GET(spot, 1), GET(spot, 0));
-    std::cout << "----- " << und->spot_ << std::endl;
     IUnderlying **unds = new IUnderlying*[1];
     unds[0] = und;
     
-    QuantoOption *quanto = new QuantoOption(T, nbTimeSteps, nbProduits, rf, K, unds) ;
-    BlackScholesModel *model = new BlackScholesModel(quanto, nbProduits, rd, sigma, spot);
+    QuantoOption *quanto = new QuantoOption(T, nbTimeSteps, nbProduits, rd, rf, K, unds) ;
+    BlackScholesModel *model = new BlackScholesModel(quanto, sigma);
     StandardMonteCarloPricer *pricer = new StandardMonteCarloPricer(model, rng, h, nbSimul);
 
     double prix = 0.0;

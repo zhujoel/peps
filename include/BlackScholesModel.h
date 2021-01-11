@@ -9,11 +9,13 @@ class BlackScholesModel : public IModel{
         PnlVect *G_; /// Vecteur Gaussien
         PnlVect *B_; // Brownien (produit matriciel L * G);
 
-        BlackScholesModel(IDerivative *derivative, int size, double rd, PnlMat *sigma, PnlVect *spot);
+        BlackScholesModel(IDerivative *derivative, PnlMat *sigma);
         ~BlackScholesModel();
         
-        void asset(double T, int nbTimeSteps, PnlRng *rng);
+        void asset(PnlRng *rng);
 
-        void shiftAsset(int d, double h, double t, double timestep);
+        void shiftAsset(double h, double t, double timestep);
+
+        double getSpot(int d);
 
 };

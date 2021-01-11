@@ -2,7 +2,7 @@
 #include "pnl/pnl_mathtools.h"
 #include <iostream>
 
-QuantoOption::QuantoOption(double T, int nbTimeSteps, int size, double rf, double K, IUnderlying **underlyings) : IDerivative(T, nbTimeSteps, size, underlyings){
+QuantoOption::QuantoOption(double T, int nbTimeSteps, int size, double rd, double rf, double K, IUnderlying **underlyings) : IDerivative(T, nbTimeSteps, size, rd, underlyings){
     this->rf_ = rf;
     this->K_ = K;
 }
