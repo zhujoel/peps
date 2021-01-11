@@ -12,15 +12,15 @@ StandardMonteCarloPricer::~StandardMonteCarloPricer(){
 
 void StandardMonteCarloPricer::simulate(double &prix, double &price_std_dev, PnlVect *delta, PnlVect *delta_std_dev)
 {
-    // for(int j = 0; j < this->nbSamples_; ++j){
-    //     // this->model_->asset(this->path_, this->derivative_->T_, this->derivative_->nbTimeSteps_, this->rng_);
-    //     this->price(prix, price_std_dev);
-    //     this->delta(delta, delta_std_dev);
-    // }
+    for(int j = 0; j < this->nbSamples_; ++j){
+        this->model_->price_all();
+        this->price(prix, price_std_dev);
+        // this->delta(delta, delta_std_dev);
+    }
 
-    // prix /= this->nbSamples_;
+    prix /= this->nbSamples_;
     // price_std_dev /= this->nbSamples_;
-    // discount_price(0, prix, price_std_dev);
+    discount_price(0, prix, price_std_dev);
     // for(int d = 0 ; d < this->derivative_->size_; ++d){
     //     LET(delta, d) = GET(delta, d) / this->nbSamples_;
     //     LET(delta_std_dev, d) = GET(delta_std_dev, d) / this->nbSamples_;
@@ -30,9 +30,9 @@ void StandardMonteCarloPricer::simulate(double &prix, double &price_std_dev, Pnl
 
 void StandardMonteCarloPricer::price(double &prix, double &std_dev)
 {
-//     double price = this->derivative_->payoff(this->path_);
-//     prix += price;
-//     std_dev += price * price;
+    double price = this->derivative_->payoff();
+    prix += price;
+    std_dev += price * price;
 }
 
 void StandardMonteCarloPricer::delta(PnlVect *delta, PnlVect *std_dev)

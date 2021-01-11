@@ -87,6 +87,14 @@ void format_test(){
     double zc_spot = spot_actif_sans_risque*spot_taux_change_initial;
     double spot = spot_actif_risque*spot_taux_change_initial;
 
+    // prix théorique avec pnl
+    double prix2 = 0.0;
+    double delta2 = 0.0;
+    double sigma_actif_converti = sqrt(sigma_tx_change*sigma_tx_change+sigma_actif*sigma_actif+2*rho*sigma_tx_change*sigma_actif);
+    pnl_cf_call_bs(spot_taux_change_initial*spot_actif_risque, K, T, 0.03, 0, sigma_actif_converti, &prix2, &delta2);
+    std::cout << "prix théorique : " << prix2 << " delta théorique : " << delta2<< std::endl;
+
+
     ForeignUnderlying *foreign_stock = new ForeignUnderlying(spot, zc_spot);
     IUnderlying **underlyings = new IUnderlying*[1];
     underlyings[0] = foreign_stock;
@@ -95,8 +103,12 @@ void format_test(){
     IModel *model = new BlackScholesModel(quanto, rd, sigma, nbTimeSteps, rng);
     model->price_all();
 
-    // IPricer *pricer = new StandardMonteCarloPricer();
-    // pricer->simulate();
+    IPricer *pricer = new StandardMonteCarloPricer(model, quanto, rng, h, nbSimul);
+    
+    double prix, std_dev = 0.0;
+    pricer->simulate(prix, std_dev, NULL, NULL);
+
+    std::cout << prix << std::endl;
 }
 
 int main(){

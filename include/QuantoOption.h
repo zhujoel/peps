@@ -20,5 +20,5 @@ class QuantoOption : public IDerivative {
     * 1ère colonne : actif sans risque étranger en devise domestique
     * 2ème colonne : actif risqué étranger en devise domestique
     */
-    double payoff(const PnlMat *path) const;
+    double payoff() const;
 };

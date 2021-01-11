@@ -22,5 +22,5 @@ class IDerivative {
       * par la fonction asset.
       * @return le payoff du produit
       */
-      virtual double payoff(const PnlMat *path) const = 0;
+      virtual double payoff() const = 0;
 };
