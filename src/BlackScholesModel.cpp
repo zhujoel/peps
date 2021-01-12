@@ -1,6 +1,7 @@
 #include "BlackScholesModel.h"
 #include <iostream>
 
+
 BlackScholesModel::BlackScholesModel(IDerivative *derivative, PnlMat *sigma) : IModel(derivative, sigma)
 {
     this->G_ = pnl_vect_create(this->derivative_->size_); 
@@ -20,6 +21,7 @@ void BlackScholesModel::asset(PnlRng *rng)
     PnlVect *row = pnl_vect_create(this->derivative_->size_);
     for (int k = 1; k <= this->derivative_->nbTimeSteps_; ++k)
     {
+        // for(int d ; 0 < this->derivative->size )
         pnl_vect_rng_normal(this->G_, this->derivative_->size_, rng); // G Vecteur gaussien
         pnl_mat_mult_vect_inplace(this->B_, this->sigma_, this->G_);
 
