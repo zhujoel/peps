@@ -1,6 +1,11 @@
 #include "Ocelia.h"
 #include "pnl/pnl_mathtools.h"
 #include <iostream>
+#include <fstream>
+#include <string>
+#include <sstream>
+
+using  namespace std;
 
 // TODO: paramètres peut etre pas tous nécessaires ?
 Ocelia::Ocelia(double T, int nbTimeSteps, int size, double r_gbp, double r_chf, double r_jpy, double r_eur, IUnderlying **underlyings) : IDerivative(T, nbTimeSteps, size, r_eur, underlyings)
@@ -20,6 +25,19 @@ Ocelia::~Ocelia(){
 }
 
 void Ocelia::fill_dates_perf(){
+    ifstream inputFileStream("dates.txt");
+    string jour, mois, annee;
+    string line;
+    for (int i = 0; i < 16; i++)
+    {
+        getline(inputFileStream, line);
+        istringstream lineStream(line);
+        getline(lineStream, jour, ',');
+        getline(lineStream, mois, ',');
+        getline(lineStream, annee, ',');
+        this->dates_constatation_perf_[i] = new DateTime(stoi(jour), stoi(mois), stoi(annee));
+    }
+    /*
     // TODO: opti ça?
     this->dates_constatation_perf_[0] = new DateTime(14, 11, 2008);
     this->dates_constatation_perf_[1] = new DateTime(15, 5, 2009);
@@ -37,9 +55,23 @@ void Ocelia::fill_dates_perf(){
     this->dates_constatation_perf_[13] = new DateTime(15, 5, 2015);
     this->dates_constatation_perf_[14] = new DateTime(13, 11, 2015);
     this->dates_constatation_perf_[15] = new DateTime(28, 4, 2016);
+    */
 }
 
 void Ocelia::fill_dates_valeurs(){
+    ifstream inputFileStream("dates2.txt");
+    string jour, mois, annee;
+    string line;
+    for (int i = 0; i < 35; i++)
+    {
+        getline(inputFileStream, line);
+        istringstream lineStream(line);
+        getline(lineStream, jour, ',');
+        getline(lineStream, mois, ',');
+        getline(lineStream, annee, ',');
+        this->dates_constatation_perf_[i] = new DateTime(stoi(jour), stoi(mois), stoi(annee));
+    }
+    /*
     // TODO: opti ça ?
     this->dates_valeurs_n_ans_[0] = new DateTime(15, 5, 2008);
     this->dates_valeurs_n_ans_[1] = new DateTime(16, 5, 2008);
@@ -76,6 +108,7 @@ void Ocelia::fill_dates_valeurs(){
     this->dates_valeurs_n_ans_[32] = new DateTime(26, 4, 2016);
     this->dates_valeurs_n_ans_[33] = new DateTime(27, 4, 2016);
     this->dates_valeurs_n_ans_[34] = new DateTime(28, 4, 2016);
+    */
 }
 
 // TODO: à virer d'ocelia et mettre qq part d'autre
