@@ -24,6 +24,7 @@ class Ocelia : public IDerivative{
         double shifted_payoff() const;
         void fill_dates_perf();
         void fill_dates_valeurs();
+        void fill_dates_from_file(string fileName, int nbDates);
         double compute_perf_moyenne_panier();
         void compute_valeurs_initiales();
 

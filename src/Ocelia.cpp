@@ -2,7 +2,6 @@
 #include "pnl/pnl_mathtools.h"
 #include <iostream>
 #include <fstream>
-#include <string>
 #include <sstream>
 
 using  namespace std;
@@ -24,11 +23,11 @@ Ocelia::~Ocelia(){
 
 }
 
-void Ocelia::fill_dates_perf(){
-    ifstream inputFileStream("dates.txt");
+void Ocelia::fill_dates_from_file(string fileName, int nbDates) {
+    ifstream inputFileStream(fileName);
     string jour, mois, annee;
     string line;
-    for (int i = 0; i < 16; i++)
+    for (int i = 0; i < nbDates; i++)
     {
         getline(inputFileStream, line);
         istringstream lineStream(line);
@@ -37,78 +36,14 @@ void Ocelia::fill_dates_perf(){
         getline(lineStream, annee, ',');
         this->dates_constatation_perf_[i] = new DateTime(stoi(jour), stoi(mois), stoi(annee));
     }
-    /*
-    // TODO: opti ça?
-    this->dates_constatation_perf_[0] = new DateTime(14, 11, 2008);
-    this->dates_constatation_perf_[1] = new DateTime(15, 5, 2009);
-    this->dates_constatation_perf_[2] = new DateTime(13, 11, 2009);
-    this->dates_constatation_perf_[3] = new DateTime(14, 5, 2010);
-    this->dates_constatation_perf_[4] = new DateTime(15, 11, 2010);
-    this->dates_constatation_perf_[5] = new DateTime(13, 5, 2011);
-    this->dates_constatation_perf_[6] = new DateTime(15, 11, 2011);
-    this->dates_constatation_perf_[7] = new DateTime(15, 5, 2012);
-    this->dates_constatation_perf_[8] = new DateTime(15, 11, 2012);
-    this->dates_constatation_perf_[9] = new DateTime(15, 5, 2013);
-    this->dates_constatation_perf_[10] = new DateTime(15, 11, 2013);
-    this->dates_constatation_perf_[11] = new DateTime(15, 5, 2014);
-    this->dates_constatation_perf_[12] = new DateTime(14, 11, 2014);
-    this->dates_constatation_perf_[13] = new DateTime(15, 5, 2015);
-    this->dates_constatation_perf_[14] = new DateTime(13, 11, 2015);
-    this->dates_constatation_perf_[15] = new DateTime(28, 4, 2016);
-    */
 }
 
-void Ocelia::fill_dates_valeurs(){
-    ifstream inputFileStream("dates2.txt");
-    string jour, mois, annee;
-    string line;
-    for (int i = 0; i < 35; i++)
-    {
-        getline(inputFileStream, line);
-        istringstream lineStream(line);
-        getline(lineStream, jour, ',');
-        getline(lineStream, mois, ',');
-        getline(lineStream, annee, ',');
-        this->dates_constatation_perf_[i] = new DateTime(stoi(jour), stoi(mois), stoi(annee));
-    }
-    /*
-    // TODO: opti ça ?
-    this->dates_valeurs_n_ans_[0] = new DateTime(15, 5, 2008);
-    this->dates_valeurs_n_ans_[1] = new DateTime(16, 5, 2008);
-    this->dates_valeurs_n_ans_[2] = new DateTime(19, 5, 2008);
-    this->dates_valeurs_n_ans_[3] = new DateTime(20, 5, 2008);
-    this->dates_valeurs_n_ans_[4] = new DateTime(21, 5, 2008);
-    this->dates_valeurs_n_ans_[5] = new DateTime(11, 5, 2009);
-    this->dates_valeurs_n_ans_[6] = new DateTime(12, 5, 2009);
-    this->dates_valeurs_n_ans_[7] = new DateTime(13, 5, 2009);
-    this->dates_valeurs_n_ans_[8] = new DateTime(14, 5, 2009);
-    this->dates_valeurs_n_ans_[9] = new DateTime(15, 5, 2009);
-    this->dates_valeurs_n_ans_[10] = new DateTime(23, 4, 2012);
-    this->dates_valeurs_n_ans_[11] = new DateTime(24, 4, 2012);
-    this->dates_valeurs_n_ans_[12] = new DateTime(25, 4, 2012);
-    this->dates_valeurs_n_ans_[13] = new DateTime(26, 4, 2012);
-    this->dates_valeurs_n_ans_[14] = new DateTime(27, 4, 2012);
-    this->dates_valeurs_n_ans_[15] = new DateTime(23, 4, 2013);
-    this->dates_valeurs_n_ans_[16] = new DateTime(24, 4, 2013);
-    this->dates_valeurs_n_ans_[17] = new DateTime(25, 4, 2013);
-    this->dates_valeurs_n_ans_[18] = new DateTime(26, 4, 2013);
-    this->dates_valeurs_n_ans_[19] = new DateTime(30, 4, 2013);
-    this->dates_valeurs_n_ans_[20] = new DateTime(23, 4, 2014);
-    this->dates_valeurs_n_ans_[21] = new DateTime(24, 4, 2014);
-    this->dates_valeurs_n_ans_[22] = new DateTime(25, 4, 2014);
-    this->dates_valeurs_n_ans_[23] = new DateTime(28, 4, 2014);
-    this->dates_valeurs_n_ans_[24] = new DateTime(30, 4, 2014);
-    this->dates_valeurs_n_ans_[25] = new DateTime(23, 4, 2015);
-    this->dates_valeurs_n_ans_[26] = new DateTime(24, 4, 2015);
-    this->dates_valeurs_n_ans_[27] = new DateTime(27, 4, 2015);
-    this->dates_valeurs_n_ans_[28] = new DateTime(28, 4, 2015);
-    this->dates_valeurs_n_ans_[29] = new DateTime(30, 4, 2015);
-    this->dates_valeurs_n_ans_[30] = new DateTime(22, 4, 2016);
-    this->dates_valeurs_n_ans_[31] = new DateTime(25, 4, 2016);
-    this->dates_valeurs_n_ans_[32] = new DateTime(26, 4, 2016);
-    this->dates_valeurs_n_ans_[33] = new DateTime(27, 4, 2016);
-    this->dates_valeurs_n_ans_[34] = new DateTime(28, 4, 2016);
-    */
+void Ocelia::fill_dates_perf(){
+    this->fill_dates_from_file("dates_const_semestrielles.txt", 16);
+}
+
+void Ocelia::fill_dates_valeurs(){   
+    this->fill_dates_from_file("dates_valeurs_N_ans.txt", 35);
 }
 
 // TODO: à virer d'ocelia et mettre qq part d'autre
