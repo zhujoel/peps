@@ -39,11 +39,11 @@ void Ocelia::fill_dates_from_file(string fileName, int nbDates) {
 }
 
 void Ocelia::fill_dates_perf(){
-    this->fill_dates_from_file("dates_const_semestrielles.txt", 16);
+    this->fill_dates_from_file("../Dates/dates_const_semestrielles.txt", 16);
 }
 
 void Ocelia::fill_dates_valeurs(){   
-    this->fill_dates_from_file("dates_valeurs_N_ans.txt", 35);
+    this->fill_dates_from_file("../Dates/dates_valeurs_N_ans.txt", 35);
 }
 
 // TODO: à virer d'ocelia et mettre qq part d'autre
