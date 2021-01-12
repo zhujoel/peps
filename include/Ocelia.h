@@ -2,6 +2,7 @@
 
 #include "IDerivative.h"
 #include "DateTime.h"
+#include <string>
 
 class Ocelia : public IDerivative{
     public:
