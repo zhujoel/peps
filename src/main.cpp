@@ -53,7 +53,7 @@ void ocelia_test()
     Ocelia *ocelia = new Ocelia(0, 0, 0.0, 0.0, 0.0, 0.0, 0.0, unds);
     // ocelia->fill_dates_perf();
     // ocelia->fill_dates_valeurs();
-    ocelia->payoff();
+    std::cout << ocelia->payoff() << std::endl;
 }
 
 void quanto_test(){

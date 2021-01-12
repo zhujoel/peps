@@ -2,10 +2,7 @@
 #include "pnl/pnl_mathtools.h"
 #include <iostream>
 #include <fstream>
-#include <string>
 #include <sstream>
-
-using  namespace std;
 
 // TODO: paramètres peut etre pas tous nécessaires ?
 Ocelia::Ocelia(double T, int nbTimeSteps, int size, double r_gbp, double r_chf, double r_jpy, double r_eur, IUnderlying **underlyings) : IDerivative(T, nbTimeSteps, size, r_eur, underlyings)
@@ -25,14 +22,15 @@ Ocelia::~Ocelia(){
 
 }
 
-void Ocelia::fill_dates_perf(){
-    ifstream inputFileStream("dates.txt");
-    string jour, mois, annee;
-    string line;
-    for (int i = 0; i < 16; i++)
+void Ocelia::fill_dates_from_file(std::string fileName, int nbDates) {
+    //TODO: à mettre qq part d'autre
+    std::ifstream inputFileStream(fileName);
+    std::string jour, mois, annee;
+    std::string line;
+    for (int i = 0; i < nbDates; i++)
     {
         getline(inputFileStream, line);
-        istringstream lineStream(line);
+        std::istringstream lineStream(line);
         getline(lineStream, jour, ',');
         getline(lineStream, mois, ',');
         getline(lineStream, annee, ',');
@@ -40,19 +38,12 @@ void Ocelia::fill_dates_perf(){
     }
 }
 
-void Ocelia::fill_dates_valeurs(){
-    ifstream inputFileStream("dates2.txt");
-    string jour, mois, annee;
-    string line;
-    for (int i = 0; i < 35; i++)
-    {
-        getline(inputFileStream, line);
-        istringstream lineStream(line);
-        getline(lineStream, jour, ',');
-        getline(lineStream, mois, ',');
-        getline(lineStream, annee, ',');
-        this->dates_constatation_perf_[i] = new DateTime(stoi(jour), stoi(mois), stoi(annee));
-    }
+void Ocelia::fill_dates_perf(){
+    this->fill_dates_from_file("../Dates/dates_const_semestrielles.txt", 16);
+}
+
+void Ocelia::fill_dates_valeurs(){   
+    this->fill_dates_from_file("../Dates/dates_valeurs_N_ans.txt", 35);
 }
 
 // TODO: à virer d'ocelia et mettre qq part d'autre

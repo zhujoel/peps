@@ -2,6 +2,7 @@
 
 #include "IDerivative.h"
 #include "DateTime.h"
+#include <string>
 
 class Ocelia : public IDerivative{
     public:
@@ -17,13 +18,13 @@ class Ocelia : public IDerivative{
         PnlVectInt *indices_dates_valeurs_n_ans_; // indices dans le path des dates des valeurs n ans
         PnlVect *valeurs_n_ans_; // moyenne de la valeur des indices à l'année n
         PnlVect *valeurs_initiales_; // moyenne des valeurs initiales (année 0);
-        // PnlMat *perfs_; // performances à chaque anneé n des indices (cf 1.3 Perf(N, I));
         PnlVect *valeurs_departs_;
 
         // TODO: paramètres peut etre pas tous nécessaires ?
         Ocelia(double T, int nbTimeSteps, int size, double r_gbp, double r_chf, double r_jpy, double r_eur, IUnderlying **underlyings);
         ~Ocelia();
         double payoff();
+        void fill_dates_from_file(std::string fileName, int nbDates);
         double shifted_payoff() const;
         void fill_dates_perf();
         void fill_dates_valeurs();
