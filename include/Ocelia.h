@@ -19,9 +19,10 @@ class Ocelia : public IDerivative{
         PnlVect *valeurs_initiales_; // I_0^chapeau (valeurs initiales des indices) cf 1.3
 
         // TODO: paramètres peut etre pas tous nécessaires ?
-        Ocelia(double T, int nbTimeSteps, int size, double r_gbp, double r_chf, double r_jpy, double r_eur);
+        Ocelia(double T, int nbTimeSteps, int size, double r_gbp, double r_chf, double r_jpy, double r_eur, IUnderlying **underlyings);
         ~Ocelia();
-        double payoff(const PnlMat *path) const;
+        double payoff() const;
+        double shifted_payoff() const;
         void fill_dates_perf();
         void fill_dates_valeurs();
         double compute_perf_moyenne_panier(const PnlMat *path);

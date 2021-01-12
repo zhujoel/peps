@@ -28,28 +28,34 @@
 /** CONVENTION QUANTO POUR L'INSTANT : zc en ligne 0 et risqué en ligne 1 */
 
 // TODO: tests unitaires à mettre dans des googletest
-void datetime_tests(){
-    // DateTime *dt1 = new DateTime(1, 1, 1995);
-    // DateTime *dt2 = new DateTime(2, 2, 1995);
-    // DateTime *dt3 = new DateTime(1, 1, 1995);
+void datetime_tests()
+{
+    DateTime *dt1 = new DateTime(1, 1, 1995);
+    DateTime *dt2 = new DateTime(2, 2, 1995);
+    DateTime *dt3 = new DateTime(1, 1, 1995);
 
-    // // compare
-    // std::cout << "dt1 compare dt2 ? (-1 attendu) : " << dt1->compare(dt2) << std::endl;
-    // std::cout << "dt2 compare dt1 ? (1 attendu) : " << dt2->compare(dt1) << std::endl;
-    // std::cout << "dt1 compare dt3 ? (0 attendu) : " << dt1->compare(dt3) << std::endl;
-    // std::cout << "dt3 compare dt1 ? (0 attendu) : " << dt3->compare(dt1) << std::endl;
+    // compare
+    std::cout << "dt1 compare dt2 ? (-1 attendu) : " << dt1->compare(dt2) << std::endl;
+    std::cout << "dt2 compare dt1 ? (1 attendu) : " << dt2->compare(dt1) << std::endl;
+    std::cout << "dt1 compare dt3 ? (0 attendu) : " << dt1->compare(dt3) << std::endl;
+    std::cout << "dt3 compare dt1 ? (0 attendu) : " << dt3->compare(dt1) << std::endl;
 
-    // // std cout
-    // std::cout << "(1/1/1995 attendu) : " << dt1 << std::endl;
+    // std cout
+    std::cout << "(1/1/1995 attendu) : " << dt1 << std::endl;
 }
 
-void ocelia_test(){
-    // Ocelia *ocelia = new Ocelia(0, 0, 0.0, 0.0, 0.0, 0.0, 0.0);
-    // ocelia->fill_dates_perf();
-    // ocelia->fill_dates_valeurs();
+void ocelia_test()
+{
+    IUnderlying *eur = new ForeignUnderlying(100, 10, 365);
+    IUnderlying **unds = new IUnderlying*[1];
+    unds[0] = eur;
 
-    // ocelia->payoff(NULL);
-    // datetime_tests();
+    Ocelia *ocelia = new Ocelia(0, 0, 0.0, 0.0, 0.0, 0.0, 0.0, unds);
+    ocelia->fill_dates_perf();
+    ocelia->fill_dates_valeurs();
+
+    ocelia->payoff();
+    datetime_tests();
 
 }
 
@@ -134,6 +140,7 @@ void quanto_test(){
 }
 
 int main(){
-    quanto_test();
-    // ocelia_test();
+    // quanto_test();
+    ocelia_test();
+    // datetime_tests();
 }
