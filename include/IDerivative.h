@@ -23,6 +23,6 @@ class IDerivative {
       * par la fonction asset.
       * @return le payoff du produit
       */
-      virtual double payoff() const = 0;
+      virtual double payoff() = 0;
       virtual double shifted_payoff() const = 0;
 };

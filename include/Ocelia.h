@@ -23,12 +23,12 @@ class Ocelia : public IDerivative{
         // TODO: paramètres peut etre pas tous nécessaires ?
         Ocelia(double T, int nbTimeSteps, int size, double r_gbp, double r_chf, double r_jpy, double r_eur, IUnderlying **underlyings);
         ~Ocelia();
-        double payoff() const;
+        double payoff();
         double shifted_payoff() const;
         void fill_dates_perf();
         void fill_dates_valeurs();
         double compute_perf_moyenne_panier();
-        void compute_valeurs_n_ans(PnlVect *valeurs, int n); // calcule la valeur moyenne des indices pour l'année n
+        void compute_valeurs_n_ans(PnlVect *valeurs, int N); // calcule la valeur moyenne des indices pour l'année n
         void compute_perfs_n_ans(PnlVect *perfs, int N); // compute performance pour un indice à une année
         void compute_valeurs_departs(); 
         void init_valeurs_departs();

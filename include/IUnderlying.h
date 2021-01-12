@@ -19,6 +19,3 @@ class IUnderlying {
     IUnderlying(double spot, double zc_spot, int nbTimeSteps);
     ~IUnderlying();
 };
-
-3 foreign
-1 domestic

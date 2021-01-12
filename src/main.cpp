@@ -51,12 +51,9 @@ void ocelia_test()
     unds[0] = eur;
 
     Ocelia *ocelia = new Ocelia(0, 0, 0.0, 0.0, 0.0, 0.0, 0.0, unds);
-    ocelia->fill_dates_perf();
-    ocelia->fill_dates_valeurs();
-
+    // ocelia->fill_dates_perf();
+    // ocelia->fill_dates_valeurs();
     ocelia->payoff();
-    datetime_tests();
-
 }
 
 void quanto_test(){
@@ -140,7 +137,7 @@ void quanto_test(){
 }
 
 int main(){
-    quanto_test();
-    // ocelia_test();
+    // quanto_test();
+    ocelia_test();
     // datetime_tests();
 }

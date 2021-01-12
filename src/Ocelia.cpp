@@ -38,25 +38,6 @@ void Ocelia::fill_dates_perf(){
         getline(lineStream, annee, ',');
         this->dates_constatation_perf_[i] = new DateTime(stoi(jour), stoi(mois), stoi(annee));
     }
-    /*
-    // TODO: opti ça?
-    this->dates_constatation_perf_[0] = new DateTime(14, 11, 2008);
-    this->dates_constatation_perf_[1] = new DateTime(15, 5, 2009);
-    this->dates_constatation_perf_[2] = new DateTime(13, 11, 2009);
-    this->dates_constatation_perf_[3] = new DateTime(14, 5, 2010);
-    this->dates_constatation_perf_[4] = new DateTime(15, 11, 2010);
-    this->dates_constatation_perf_[5] = new DateTime(13, 5, 2011);
-    this->dates_constatation_perf_[6] = new DateTime(15, 11, 2011);
-    this->dates_constatation_perf_[7] = new DateTime(15, 5, 2012);
-    this->dates_constatation_perf_[8] = new DateTime(15, 11, 2012);
-    this->dates_constatation_perf_[9] = new DateTime(15, 5, 2013);
-    this->dates_constatation_perf_[10] = new DateTime(15, 11, 2013);
-    this->dates_constatation_perf_[11] = new DateTime(15, 5, 2014);
-    this->dates_constatation_perf_[12] = new DateTime(14, 11, 2014);
-    this->dates_constatation_perf_[13] = new DateTime(15, 5, 2015);
-    this->dates_constatation_perf_[14] = new DateTime(13, 11, 2015);
-    this->dates_constatation_perf_[15] = new DateTime(28, 4, 2016);
-    */
 }
 
 void Ocelia::fill_dates_valeurs(){
@@ -72,44 +53,6 @@ void Ocelia::fill_dates_valeurs(){
         getline(lineStream, annee, ',');
         this->dates_constatation_perf_[i] = new DateTime(stoi(jour), stoi(mois), stoi(annee));
     }
-    /*
-    // TODO: opti ça ?
-    this->dates_valeurs_n_ans_[0] = new DateTime(15, 5, 2008);
-    this->dates_valeurs_n_ans_[1] = new DateTime(16, 5, 2008);
-    this->dates_valeurs_n_ans_[2] = new DateTime(19, 5, 2008);
-    this->dates_valeurs_n_ans_[3] = new DateTime(20, 5, 2008);
-    this->dates_valeurs_n_ans_[4] = new DateTime(21, 5, 2008);
-    this->dates_valeurs_n_ans_[5] = new DateTime(11, 5, 2009);
-    this->dates_valeurs_n_ans_[6] = new DateTime(12, 5, 2009);
-    this->dates_valeurs_n_ans_[7] = new DateTime(13, 5, 2009);
-    this->dates_valeurs_n_ans_[8] = new DateTime(14, 5, 2009);
-    this->dates_valeurs_n_ans_[9] = new DateTime(15, 5, 2009);
-    this->dates_valeurs_n_ans_[10] = new DateTime(23, 4, 2012);
-    this->dates_valeurs_n_ans_[11] = new DateTime(24, 4, 2012);
-    this->dates_valeurs_n_ans_[12] = new DateTime(25, 4, 2012);
-    this->dates_valeurs_n_ans_[13] = new DateTime(26, 4, 2012);
-    this->dates_valeurs_n_ans_[14] = new DateTime(27, 4, 2012);
-    this->dates_valeurs_n_ans_[15] = new DateTime(23, 4, 2013);
-    this->dates_valeurs_n_ans_[16] = new DateTime(24, 4, 2013);
-    this->dates_valeurs_n_ans_[17] = new DateTime(25, 4, 2013);
-    this->dates_valeurs_n_ans_[18] = new DateTime(26, 4, 2013);
-    this->dates_valeurs_n_ans_[19] = new DateTime(30, 4, 2013);
-    this->dates_valeurs_n_ans_[20] = new DateTime(23, 4, 2014);
-    this->dates_valeurs_n_ans_[21] = new DateTime(24, 4, 2014);
-    this->dates_valeurs_n_ans_[22] = new DateTime(25, 4, 2014);
-    this->dates_valeurs_n_ans_[23] = new DateTime(28, 4, 2014);
-    this->dates_valeurs_n_ans_[24] = new DateTime(30, 4, 2014);
-    this->dates_valeurs_n_ans_[25] = new DateTime(23, 4, 2015);
-    this->dates_valeurs_n_ans_[26] = new DateTime(24, 4, 2015);
-    this->dates_valeurs_n_ans_[27] = new DateTime(27, 4, 2015);
-    this->dates_valeurs_n_ans_[28] = new DateTime(28, 4, 2015);
-    this->dates_valeurs_n_ans_[29] = new DateTime(30, 4, 2015);
-    this->dates_valeurs_n_ans_[30] = new DateTime(22, 4, 2016);
-    this->dates_valeurs_n_ans_[31] = new DateTime(25, 4, 2016);
-    this->dates_valeurs_n_ans_[32] = new DateTime(26, 4, 2016);
-    this->dates_valeurs_n_ans_[33] = new DateTime(27, 4, 2016);
-    this->dates_valeurs_n_ans_[34] = new DateTime(28, 4, 2016);
-    */
 }
 
 // TODO: à virer d'ocelia et mettre qq part d'autre
@@ -127,17 +70,17 @@ void Ocelia::calcul_indices_dates(DateTime **all_dates, DateTime **dates, PnlVec
 }
 
 // TODO: à debugger
-void Ocelia::compute_valeurs_n_ans(PnlVect *valeurs, int n)
+void Ocelia::compute_valeurs_n_ans(PnlVect *valeurs, int N)
 {
     // TODO: faut pas qu'il y ait de 2 ou 3
-    if(n > 1){
-        n -= 2;
+    if(N > 1){
+        N -= 2;
     }
     // convention : tous les prix sont converti en domestique
     pnl_vect_set_zero(valeurs);
     for(int t = 0; t < 5; ++t){
         for(int i = 0; i < this->size_; ++i){
-            double S_T = GET(this->underlyings_[i]->price_converted_, GET_INT(this->indices_dates_valeurs_n_ans_, t+(n*5)));
+            double S_T = GET(this->underlyings_[i]->price_, GET_INT(this->indices_dates_valeurs_n_ans_, t+(N*5)));
             // double B_T = GET(this->underlyings_[i]->zc_, GET_INT(this->indices_dates_valeurs_n_ans_, t+(n*5)));
             // LET(valeurs, i) += (S_T / B_T);
             LET(valeurs, i) += S_T;
@@ -167,11 +110,10 @@ double Ocelia::compute_perf_moyenne_panier()
 
 void Ocelia::compute_perfs_n_ans(PnlVect *perfs, int N){
     pnl_vect_resize(perfs, 4);
-    compute_valeurs_n_ans(this->valeurs_initiales_, 0);
+    compute_valeurs_n_ans(this->valeurs_n_ans_, N);
     for(int i = 0; i < this->size_; ++i){
         // on prend le price au lieu de price converted car on calcule la performance
-        double S_T = GET(this->underlyings_[i]->price_, GET_INT(this->indices_dates_valeurs_n_ans_, t+(n*5)));
-        LET(perfs, i) = S_T/GET(this->valeurs_departs_, i) - 1;
+        LET(perfs, i) = GET(this->valeurs_n_ans_, i)/GET(this->valeurs_departs_, i) - 1;
     }
 }
 
@@ -179,7 +121,7 @@ void Ocelia::init_valeurs_departs(){
     this->valeurs_departs_ = pnl_vect_create(4);
 
     for(int i = 0; i < this->size_; ++i){
-        LET(this->valeurs_departs_, i) = this->valeurs_initiales_;
+        LET(this->valeurs_departs_, i) = GET(this->valeurs_initiales_, i);
     }
 }
 
@@ -190,14 +132,7 @@ void Ocelia::compute_valeurs_departs(){
     PnlVect *perf_1_an = pnl_vect_create(4);
     compute_perfs_n_ans(perf_1_an, 1);
 
-    bool flag = true; // devient faux s'il y a une valeur > 0.9
-    for(int i = 0; i < this->size_; ++i){
-        if(GET(this->perfs, i) > 0.9){
-            flag = false;
-        }
-    }
-
-    if(flag){
+    if(pnl_vect_max(perf_1_an) <= 0.9){
         pnl_vect_mult_scalar(this->valeurs_departs_, 0.9);
     }
 }
@@ -211,7 +146,7 @@ double Ocelia::compute_flux_n_ans(int n){
         PnlVect *perf_8_ans = pnl_vect_create(4);
         compute_perfs_n_ans(perf_8_ans, 8);
         double perf_moy = compute_perf_moyenne_panier();
-        if(are_all_perfs_positive(perf_8_ans){
+        if(are_all_perfs_positive(perf_8_ans)){
             return MAX(1.56, perf_moy);
         }
         return perf_moy;
@@ -220,27 +155,29 @@ double Ocelia::compute_flux_n_ans(int n){
 }
 
 bool Ocelia::are_all_perfs_positive(PnlVect *perfs){
-    bool flag = true; // devient faux s'il y a une valeur positive
-    for(int i = 0; i < this->size_; ++i){
-        if(GET(this->perfs, i) < 0){
-            flag = false;
-        }
-    }
-    return flag;
+    return pnl_vect_min(perfs) > 0;
 }
 
-double Ocelia::payoff() const
+double Ocelia::payoff()
 {
+    // TODO: ajouter en [out] un indice de l'année quand le produit s'exerce
+    double val_liquidative_initiale = 100.0;
     // 1. valeurs initiale
     compute_valeurs_n_ans(this->valeurs_initiales_, 0);
     // 2. on met valeur init dans valeur depart
     init_valeurs_departs();
     // 4. calcul nouveauDepart
     compute_valeurs_departs();
+    
+    PnlVect *perf_n = pnl_vect_create(4); 
+    for(int n = 4 ; n <= 8; ++n){
+        compute_perfs_n_ans(perf_n, n);
+        if(are_all_perfs_positive(perf_n)){
+            return val_liquidative_initiale*compute_flux_n_ans(n);
+        }
+    }
 
-
-
-    return 0.;
+    return -1;
 }
 
 double Ocelia::shifted_payoff() const
