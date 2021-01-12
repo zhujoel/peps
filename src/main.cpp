@@ -140,7 +140,7 @@ void quanto_test(){
 }
 
 int main(){
-    // quanto_test();
-    ocelia_test();
+    quanto_test();
+    // ocelia_test();
     // datetime_tests();
 }

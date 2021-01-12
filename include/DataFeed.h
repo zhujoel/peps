@@ -6,13 +6,13 @@
 using namespace std;
 
 
-class Datafeed{
+class DataFeed{
     
     public:
     DataTime date_;
     map<string, double> listePrix_;
-    Datafeed(DataTime date, map<string, double> listePrix);
+    DataFeed(DataTime date, map<string, double> listePrix);
     
-    ~Datafeed();
+    ~DataFeed();
 
 };
