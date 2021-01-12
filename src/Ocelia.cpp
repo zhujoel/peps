@@ -1,4 +1,5 @@
 #include "Ocelia.h"
+#include "pnl/pnl_mathtools.h"
 #include <iostream>
 
 // TODO: paramètres peut etre pas tous nécessaires ?
@@ -10,7 +11,7 @@ Ocelia::Ocelia(double T, int nbTimeSteps, int size, double r_gbp, double r_chf, 
     // TODO: mettre des variables au lieu de 16 ou 7*5
     this->dates_constatation_perf_ = new DateTime*[16];
     this->dates_valeurs_n_ans_ = new DateTime*[7*5];
-    this->indices_dates_constatation_ = pnl_vect_create(16);
+    this->indices_dates_constatation_ = pnl_vect_int_create(16);
     this->valeurs_initiales_ = pnl_vect_create(4);
 }
 
@@ -78,13 +79,13 @@ void Ocelia::fill_dates_valeurs(){
 }
 
 // TODO: à virer d'ocelia et mettre qq part d'autre
-void Ocelia::calcul_indices_dates(DateTime **all_dates, DateTime **dates, PnlVect *indices)
+void Ocelia::calcul_indices_dates(DateTime **all_dates, DateTime **dates, PnlVectInt *indices)
 {
     int cnt = 0;
     for(int i = 0; i < this->nbTimeSteps_+1; ++i){
         // TODO: à tester (peut y avoir +1 ou -1 dans les indices)
         if(all_dates[i] == dates[cnt]){
-            LET(indices, cnt++) = i;
+            LET_INT(indices, cnt++) = i;
 
             if(cnt == indices->size) break;
         }
@@ -92,45 +93,34 @@ void Ocelia::calcul_indices_dates(DateTime **all_dates, DateTime **dates, PnlVec
 }
 
 // TODO: à debugger
-double Ocelia::compute_valeurs_initiales(const PnlMat *path){
-    // convention pour le path (toutes les colonnes sont converti en domestique):
-    // 0 : zc gbp
-    // 1 : zc jpy
-    // 2 : zc chf
-    // 3 : ftse100 (gbp)
-    // 4 : nikkei (jpy)
-    // 5 : smi (chf)
-    // 6 : ftse80R (eur)
-
+void Ocelia::compute_valeurs_initiales(){
+    // convention : tous les prix sont converti en domestique
     pnl_vect_set_zero(this->valeurs_initiales_);
     for(int t = 0; t < 5; ++t){
-        for(int i = 0; i < this->valeurs_initiales_->size-1; ++i){
-            double B_T = MGET(path, i, GET(this->indices_dates_valeurs_n_ans_, t));
-            double S_T = MGET(path, i+3, GET(this->indices_dates_valeurs_n_ans_, t));
-            LET(this->valeurs_initiales_, i) += S_T / B_T;
+        for(int i = 0; i < this->valeurs_initiales_->size; ++i){
+            double S_T = GET(this->underlyings_[i]->price_, GET_INT(this->indices_dates_valeurs_n_ans_, t));
+            double B_T = GET(this->underlyings_[i]->zc_, GET_INT(this->indices_dates_valeurs_n_ans_, t));
+            LET(this->valeurs_initiales_, i) += (S_T / B_T);
         }
-        LET(this->valeurs_initiales_, 3) = MGET(path, 6, GET(this->indices_dates_valeurs_n_ans_, t));
     }
 
     // TODO: remplacer les 5 par des variables
     pnl_vect_div_scalar(this->valeurs_initiales_, 5);
-
-    return 0;
 }
 
-double Ocelia::compute_perf_moyenne_panier(const PnlMat *path)
+double Ocelia::compute_perf_moyenne_panier()
 {
     double perf_moy_panier = 0.0; // performance moyenne du panier (1.4 pdf)
 
-    // for(int t = 0; t < 16; ++t){
-    //     double somme = 0.0;
-    //     for(int i = 0; i < this->valeurs_initiales_->size-1; ++i){
-    //         double B_T = MGET(path, i, GET(this->indices_dates_valeurs_n_ans_, t));
-    //         double S_T = MGET(path, i+3, GET(this->indices_dates_valeurs_n_ans_, t));
-    //         somme += (S_T/B_T)*GET(this->valeurs_initiales_, i) /GET(this->compute_valeurs_initiales_, i);
-    //     }
-    //     perf_moy_panier += MAX(somme/4, 0);
-    // }
+    for(int t = 0; t < 16; ++t){
+        double somme = 0.0;
+        for(int i = 0; i < this->valeurs_initiales_->size; ++i){
+            double I_i_s = GET(this->underlyings_[i]->price_, GET_INT(this->indices_dates_constatation_, t));
+            double I0 = GET(this->valeurs_initiales_, i);
+            somme += I_i_s/ I0 - 1;
+        }
+        perf_moy_panier += MAX(somme/4, 0);
+    }
 
     return perf_moy_panier/16;
 }

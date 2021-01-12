@@ -5,7 +5,8 @@
 class IUnderlying {
 
   public:
-    PnlVect *price_;
+    PnlVect *price_; // prix dans la monnaie étrangère
+    PnlVect *price_converted_; // prix converti dans la monnaie domestique
     PnlVect *shifted_price_;
     double spot_;
 

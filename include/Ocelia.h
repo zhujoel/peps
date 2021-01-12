@@ -2,7 +2,6 @@
 
 #include "IDerivative.h"
 #include "DateTime.h"
-#include <unordered_set>
 
 class Ocelia : public IDerivative{
     public:
@@ -14,8 +13,8 @@ class Ocelia : public IDerivative{
         double r_eur_; // euro
         DateTime **dates_constatation_perf_; // dates de constatation de la performance du panier pour le calcul du payoff
         DateTime **dates_valeurs_n_ans_; // 1.2 du pdf d'analyse financier
-        PnlVect *indices_dates_constatation_; // indices des dates de constatation dans le path 
-        PnlVect *indices_dates_valeurs_n_ans_; // indices dans le path des dates des valeurs n ans
+        PnlVectInt *indices_dates_constatation_; // indices des dates de constatation dans le path 
+        PnlVectInt *indices_dates_valeurs_n_ans_; // indices dans le path des dates des valeurs n ans
         PnlVect *valeurs_initiales_; // I_0^chapeau (valeurs initiales des indices) cf 1.3
 
         // TODO: paramètres peut etre pas tous nécessaires ?
@@ -25,8 +24,8 @@ class Ocelia : public IDerivative{
         double shifted_payoff() const;
         void fill_dates_perf();
         void fill_dates_valeurs();
-        double compute_perf_moyenne_panier(const PnlMat *path);
-        double compute_valeurs_initiales(const PnlMat *path);
+        double compute_perf_moyenne_panier();
+        void compute_valeurs_initiales();
 
         // TODO: abstraire le calcul de ces indices dans une autre classe peut etre ?
         /**
@@ -36,6 +35,6 @@ class Ocelia : public IDerivative{
          * @param dates[in] on suppose que c'est rangé dans l'ordre croissant 
          * @param indices[out]
          */
-        void calcul_indices_dates(DateTime **all_dates, DateTime **dates, PnlVect *indices);
+        void calcul_indices_dates(DateTime **all_dates, DateTime **dates, PnlVectInt *indices);
 
 };
