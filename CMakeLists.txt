@@ -8,7 +8,25 @@ include_directories(include)
 
 add_subdirectory(src) # AJOUTER CELA 
 
+# Detect PNL
+find_package(Pnl REQUIRED)
+set(LIBS ${LIBS} ${PNL_LIBRARIES})
+include_directories(${PNL_INCLUDE_DIRS})
 
+# sources and headers
+set(SOURCES  src/IDerivative.cpp src/QuantoOption.cpp src/IModel.cpp src/IUnderlying.cpp 
+src/ForeignUnderlying.cpp src/DateTime.cpp src/BlackScholesModel.cpp src/IPricer.cpp src/DateTimeVector.cpp
+src/StandardMonteCarloPricer.cpp src/Ocelia.cpp src/SimulatedMarketData.cpp src/IMarketData.cpp src/main.cpp)
+
+set(HEADERS include/IDerivative.h include/Ocelia.h include/QuantoOption.h include/IModel.h include/DateTimeVector.h
+include/IUnderlying.h include/ForeignUnderlying.h include/DateTime.h include/BlackScholesModel.h 
+include/IPricer.h include/StandardMonteCarloPricer.h include/SimulatedMarketData.h include/IMarketData.h)
+
+include_directories(include ${PNL_INCLUDE})
+add_executable(main src/main.cpp ${SOURCES} ${HEADERS})
+target_link_libraries(main ${LIBS})
+
+# google-test
 enable_testing ()
 
 # Télécharge googletest au moment de la configureation
@@ -27,21 +45,4 @@ add_subdirectory(tests)
 
 add_test (NAME test_DateTime COMMAND test_DateTime)
 
-# Detect PNL
-find_package(Pnl REQUIRED)
-set(LIBS ${LIBS} ${PNL_LIBRARIES})
-include_directories(${PNL_INCLUDE_DIRS})
-
-# sources and headers
-set(SOURCES  src/IDerivative.cpp src/QuantoOption.cpp src/IModel.cpp src/IUnderlying.cpp 
-src/ForeignUnderlying.cpp src/DateTime.cpp src/BlackScholesModel.cpp src/IPricer.cpp src/DateTimeVector.cpp
-src/StandardMonteCarloPricer.cpp src/Ocelia.cpp src/SimulatedMarketData.cpp src/IMarketData.cpp src/main.cpp)
-
-set(HEADERS include/IDerivative.h include/Ocelia.h include/QuantoOption.h include/IModel.h include/DateTimeVector.h
-include/IUnderlying.h include/ForeignUnderlying.h include/DateTime.h include/BlackScholesModel.h 
-include/IPricer.h include/StandardMonteCarloPricer.h include/SimulatedMarketData.h include/IMarketData.h)
-
-include_directories(include ${PNL_INCLUDE})
-add_executable(main src/main.cpp ${SOURCES} ${HEADERS})
-target_link_libraries(main ${LIBS})
 pnl_add_postbuild(run_unit_tests)
