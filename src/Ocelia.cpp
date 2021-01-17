@@ -1,5 +1,6 @@
 #include "Ocelia.h"
 #include "pnl/pnl_mathtools.h"
+#include <iostream>
 
 // TODO: changer le 0.0 en un r
 Ocelia::Ocelia(double T, int nbTimeSteps, int size, IUnderlying **underlyings) : IDerivative(T, nbTimeSteps, size, 0.0, underlyings)
@@ -8,6 +9,7 @@ Ocelia::Ocelia(double T, int nbTimeSteps, int size, IUnderlying **underlyings) :
     this->dates_semestrielles_ = new DateTime*[16];
     this->dates_valeurs_n_ans_ = new DateTime*[7*5];
     this->indices_dates_constatation_ = pnl_vect_int_create(16);
+    this->indices_dates_valeurs_n_ans_ = pnl_vect_int_create(35);
     this->valeurs_n_ans_ = pnl_vect_create(4);
     this->valeurs_initiales_ = pnl_vect_create(4);
     this->perfs_ = pnl_vect_create(4);
@@ -26,7 +28,23 @@ void Ocelia::fill_dates_valeurs(){
     fill_dates_from_file(this->dates_valeurs_n_ans_, "../data/dates_valeurs_n", 35);
 }
 
-// TODO: à debugger
+double Ocelia::compute_perf_moyenne_panier()
+{
+    double perf_moy_panier = 0.0; // performance moyenne du panier (1.4 pdf)
+
+    for(int t = 0; t < 16; ++t){
+        double somme = 0.0;
+        for(int i = 0; i < 4; ++i){
+            double I_i_s = GET(this->underlyings_[i]->price_, GET_INT(this->indices_dates_constatation_, t));
+            double I0 = GET(this->valeurs_initiales_, i);
+            somme += I_i_s/ I0 - 1;
+        }
+        perf_moy_panier += MAX(somme/4, 0);
+    }
+
+    return perf_moy_panier/16;
+}
+
 void Ocelia::compute_valeurs_n_ans(PnlVect *valeurs, int N)
 {
     // TODO: faut pas qu'il y ait de 2 ou 3
@@ -46,23 +64,6 @@ void Ocelia::compute_valeurs_n_ans(PnlVect *valeurs, int N)
 
     // TODO: remplacer les 5 par des variables
     pnl_vect_div_scalar(valeurs, 5);
-}
-
-double Ocelia::compute_perf_moyenne_panier()
-{
-    double perf_moy_panier = 0.0; // performance moyenne du panier (1.4 pdf)
-
-    for(int t = 0; t < 16; ++t){
-        double somme = 0.0;
-        for(int i = 0; i < 4; ++i){
-            double I_i_s = GET(this->underlyings_[i]->price_, GET_INT(this->indices_dates_constatation_, t));
-            double I0 = GET(this->valeurs_initiales_, i);
-            somme += I_i_s/ I0 - 1;
-        }
-        perf_moy_panier += MAX(somme/4, 0);
-    }
-
-    return perf_moy_panier/16;
 }
 
 void Ocelia::compute_perfs_n_ans(PnlVect *perfs, int N){
