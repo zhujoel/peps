@@ -17,3 +17,4 @@ class DateTime{
 
 std::ostream &operator<<(std::ostream &output, const DateTime *dt);
 void fill_dates_from_file(DateTime **dates, std::string fileName, int nbDates);
+// void calcul_indices_dates(DateTime **all_dates, DateTime **dates, PnlVectInt *indices);

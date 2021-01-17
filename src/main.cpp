@@ -54,7 +54,15 @@ void ocelia_test()
 
     // ***** METHODES *****
     ocelia->fill_dates_perf();
-    // ocelia->fill_dates_valeurs();
+    ocelia->fill_dates_valeurs();
+
+    PnlVectInt *indices = pnl_vect_int_create(35);
+    // calcul_indices_dates(ocelia->dates_valeurs_n_ans_, ocelia->dates_valeurs_n_ans_, indices);
+
+    pnl_vect_int_print(indices);
+    // for(int i = 0; i < 35; ++i){
+    //     std::cout << ocelia->dates_valeurs_n_ans_[i] << std::endl;
+    // }
     // std::cout << ocelia->payoff() << std::endl;
 }
 

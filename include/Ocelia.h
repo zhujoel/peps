@@ -6,6 +6,10 @@
 
 class Ocelia : public IDerivative{
     public:
+        // TODO: data:
+        // 1 vecteur date avec toutes les dates du début 15 mai 2008 à 28 avril 2016
+        // 4 underlyings: 4 sous-jacent (euro, gbp, jpy, chf): prix et zc + spot
+
         DateTime **dates_semestrielles_; // dates de constatation de la performance du panier pour le calcul du payoff
         DateTime **dates_valeurs_n_ans_; // 1.2 du pdf d'analyse financier
         PnlVectInt *indices_dates_constatation_; // indices des dates de constatation dans le path 

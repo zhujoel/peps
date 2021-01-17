@@ -13,6 +13,7 @@ class IUnderlying {
     PnlVect *zc_;
     double zc_spot_;
     
+    // TODO: voir ce qu'on en fait de ces attributs
     PnlVect *ex_rate_;
     PnlVect *rf_;
 

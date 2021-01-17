@@ -26,18 +26,6 @@ void Ocelia::fill_dates_valeurs(){
 }
 
 // TODO: à virer d'ocelia et mettre qq part d'autre
-void Ocelia::calcul_indices_dates(DateTime **all_dates, DateTime **dates, PnlVectInt *indices)
-{
-    int cnt = 0;
-    for(int i = 0; i < this->nbTimeSteps_+1; ++i){
-        // TODO: à tester (peut y avoir +1 ou -1 dans les indices)
-        if(all_dates[i] == dates[cnt]){
-            LET_INT(indices, cnt++) = i;
-
-            if(cnt == indices->size) break;
-        }
-    }
-}
 
 // TODO: à debugger
 void Ocelia::compute_valeurs_n_ans(PnlVect *valeurs, int N)

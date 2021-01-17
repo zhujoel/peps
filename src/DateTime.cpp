@@ -45,7 +45,7 @@ int DateTime::compare(const DateTime *dt) const{
 
 
 std::ostream &operator<<(std::ostream &output, const DateTime *dt){
-    output << dt->dd_ << "/" << dt->mm_ << "/" << dt->yyyy_ << std::endl;
+    output << dt->dd_ << "/" << dt->mm_ << "/" << dt->yyyy_;
     return output;
 }
 
@@ -55,11 +55,25 @@ void fill_dates_from_file(DateTime **dates, std::string fileName, int nbDates) {
     std::string line;
     for (int i = 0; i < nbDates; i++)
     {
-        std::getline(inputFileStream, line);
+        getline(inputFileStream, line);
         std::istringstream lineStream(line);
-        std::getline(lineStream, jour, ',');
-        std::getline(lineStream, mois, ',');
-        std::getline(lineStream, annee, ',');
-        dates[i] = new DateTime(std::stoi(jour), std::stoi("1"), std::stoi("199"));
+        getline(lineStream, jour, ',');
+        getline(lineStream, mois, ',');
+        getline(lineStream, annee, ',');
+        dates[i] = new DateTime(std::stoi(jour), std::stoi(mois), std::stoi(annee));
     }
 }
+
+
+// void calcul_indices_dates(DateTime **all_dates, DateTime **dates, PnlVectInt *indices)
+// {
+//     int cnt = 0;
+//     for(int i = 0; i < indices->length; ++i){
+//         // TODO: à tester (peut y avoir +1 ou -1 dans les indices)
+//         if(all_dates[i] == dates[cnt]){
+//             LET_INT(indices, cnt++) = i;
+
+//             if(cnt == indices->size) break;
+//         }
+//     }
+// }
