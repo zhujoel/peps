@@ -15,4 +15,5 @@ class BlackScholesModel : public IModel{
         void asset(PnlRng *rng);
 
         void shiftAsset(double h, double t, double timestep);
+        void simulateMarket(int nbUnderlying);
 };
