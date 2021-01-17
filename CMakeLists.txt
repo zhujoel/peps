@@ -1,5 +1,31 @@
 cmake_minimum_required(VERSION 3.0)
-project(peps)
+
+project(Demo)
+
+set(CMAKE_CXX_FLAGS "-g -Wall")
+
+include_directories(include)
+
+add_subdirectory(src) # AJOUTER CELA 
+
+
+enable_testing ()
+
+# Télécharge googletest au moment de la configureation
+configure_file(CMakeLists.txt.in
+               googletest-download/CMakeLists.txt)
+execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
+  WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/googletest-download )
+execute_process(COMMAND ${CMAKE_COMMAND} --build .
+  WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/googletest-download )
+
+# Ajout googletest directement au moment de la compilation
+add_subdirectory(${CMAKE_BINARY_DIR}/googletest-src)
+
+include_directories(${gtest_SOURCE_DIR}/include)
+add_subdirectory(tests)
+
+add_test (NAME test_DateTime COMMAND test_DateTime)
 
 # Detect PNL
 find_package(Pnl REQUIRED)
@@ -15,6 +41,7 @@ set(HEADERS include/IDerivative.h include/Ocelia.h include/QuantoOption.h includ
 include/IUnderlying.h include/ForeignUnderlying.h include/DateTime.h include/BlackScholesModel.h 
 include/IPricer.h include/StandardMonteCarloPricer.h include/SimulatedMarketData.h include/IMarketData.h)
 
-include_directories(include)
+include_directories(include ${PNL_INCLUDE})
 add_executable(main src/main.cpp ${SOURCES} ${HEADERS})
 target_link_libraries(main ${LIBS})
+pnl_add_postbuild(run_unit_tests)

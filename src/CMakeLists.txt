@@ -1,0 +1,1 @@
+add_library(DateTime STATIC DateTime.cpp) # On lie la librarie au cpp

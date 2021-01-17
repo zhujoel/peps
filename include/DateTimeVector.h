@@ -1,6 +1,7 @@
 #pragma once
 
 #include "DateTime.h"
+#include "pnl/pnl_vector.h"
 
 class DateTimeVector{
     public:
