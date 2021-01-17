@@ -1,6 +1,6 @@
 #include "IMarketData.h"
 
-IMarketData::IMarketData(DateTime * listeDate){
+IMarketData::IMarketData(DateTime ** listeDate){
     this->listeDate_ = listeDate;
 
 }

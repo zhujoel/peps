@@ -2,16 +2,17 @@
 #include <string>
 #include <map>
 #include "DataTime.h"
-#include "DataFeed.h"
+// #include "DataFeed.h"
+#include "IUnderlying.h"
 using namespace std;
 
 class IMarketData{
     public:
-    DateTime * listeDate_;
+    DateTime ** listeDate_;
 
-    IMarketData(DateTime * listeDate);
+    IMarketData(DateTime ** listeDate);
 
     virtual ~IMarketData();
-    virtual DataFeed * getMarketdata();
+    virtual IUnderlying ** getMarketdata();
 
 };
