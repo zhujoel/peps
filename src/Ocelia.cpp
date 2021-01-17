@@ -17,6 +17,7 @@ Ocelia::~Ocelia(){
 
 }
 
+// todo: à virer d'ocelia
 void Ocelia::fill_dates_perf(){
     fill_dates_from_file(this->dates_semestrielles_, "../data/dates_semest", 16);
 }
@@ -24,8 +25,6 @@ void Ocelia::fill_dates_perf(){
 void Ocelia::fill_dates_valeurs(){   
     fill_dates_from_file(this->dates_valeurs_n_ans_, "../data/dates_valeurs_n", 35);
 }
-
-// TODO: à virer d'ocelia et mettre qq part d'autre
 
 // TODO: à debugger
 void Ocelia::compute_valeurs_n_ans(PnlVect *valeurs, int N)
