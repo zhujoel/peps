@@ -45,18 +45,18 @@ void datetime_tests()
     std::cout << "(1/1/1995 attendu) : " << dt1 << std::endl;
 }
 
-void datetimevector_tests(){
-    DateTimeVector *dates = new DateTimeVector("../data/all_dates", 3288);
-    DateTimeVector *dates2 = new DateTimeVector("../data/dates_semest", 16);
-    PnlVectInt* ok = pnl_vect_int_create(16);
-    calcul_indices_dates(dates, dates2, ok);
-    pnl_vect_int_print(ok);
-}
+// void datetimevector_tests(){
+//     DateTimeVector *dates = new DateTimeVector("../data/all_dates", 3288);
+//     DateTimeVector *dates2 = new DateTimeVector("../data/dates_semest", 16);
+//     PnlVectInt* ok = pnl_vect_int_create(16);
+//     calcul_indices_dates(dates, dates2, ok);
+//     pnl_vect_int_print(ok);
+// }
 
 // TODO: mettre autre part?
-void print_path(IUnderlying* und, DateTime **dates, int nbTimeSteps){
-    for(int i = 0; i < nbTimeSteps; ++i){
-        std::cout << dates[i] << " : price: " << GET(und->price_, i) << std::endl;
+void print_path(IUnderlying* und, DateTimeVector *dates){
+    for(int i = 0; i < dates->nbDates_; ++i){
+        std::cout << (*dates)[i] << " : price: " << GET(und->price_, i) << std::endl;
     }
 }
 
@@ -69,42 +69,31 @@ void ocelia_test()
     IUnderlying *jpy = new ForeignUnderlying(100, 10, 365);
     IUnderlying **unds = new IUnderlying*[4];
     for(int i = 0; i < 49; ++i){
-        LET(eur->price_, i) = 100+(i*10);
-        LET(gbp->price_, i) = 200+(i*10);
-        LET(chf->price_, i) = 300+(i*10);
-        LET(jpy->price_, i) = 400+(i*10);
+        LET(eur->price_, i) = 100+(i);
+        LET(gbp->price_, i) = 200+(i);
+        LET(chf->price_, i) = 300+(i);
+        LET(jpy->price_, i) = 400+(i);
     }
     unds[0] = eur;
     unds[1] = gbp;
     unds[2] = chf;
     unds[3] = jpy;
-    Ocelia *ocelia = new Ocelia(1, 500, 4, unds);
+
+    DateTimeVector *all_dates = new DateTimeVector("../data/all_dates", 3288);
+    DateTimeVector *all_dates_constatation = new DateTimeVector("../data/all_dates_constatation", 49);
+    DateTimeVector *dates_valeurs_n = new DateTimeVector("../data/dates_valeurs_n", 35);
+    DateTimeVector *dates_semest = new DateTimeVector("../data/dates_semest", 16);
+
+    Ocelia *ocelia = new Ocelia(1, 500, 4, unds, dates_semest, dates_valeurs_n);
 
     // ***** METHODES *****
-    // TODO: FACTO LES DATES POUR METTRE DANS UNE CLASSE À PART
-    // ocelia->fill_dates_perf();
-    // ocelia->fill_dates_valeurs();
-    // DateTime** all_dates = new DateTime*[3288];
-    // fill_dates_from_file(all_dates, "../data/all_dates", 3288);
+    calcul_indices_dates(all_dates_constatation, ocelia->dates_valeurs_n_ans_, ocelia->indices_dates_valeurs_n_ans_);
+    calcul_indices_dates(all_dates_constatation, ocelia->dates_semestrielles_, ocelia->indices_dates_semestrielles_);
 
-    // DateTime** all_dates_constatation = new DateTime*[49];
-    // fill_dates_from_file(all_dates_constatation, "../data/all_dates_constatation", 49);
+    // print_path(jpy, all_dates_constatation);
 
-    // PnlVectInt *indices = pnl_vect_int_create(35);
-    // calcul_indices_dates(all_dates_constatation, 49, ocelia->dates_valeurs_n_ans_, ocelia->indices_dates_valeurs_n_ans_);
-    // calcul_indices_dates(all_dates_constatation, 49, ocelia->dates_semestrielles_, ocelia->indices_dates_constatation_);
-    // // pnl_vect_int_print(indices);
-
-    // print_path(jpy, all_dates_constatation, 49);
-
-    // ocelia->compute_valeurs_n_ans(ocelia->valeurs_initiales_, 0);
+    ocelia->compute_valeurs_n_ans(ocelia->valeurs_initiales_, 0);
     // pnl_vect_print(ocelia->valeurs_initiales_);
-
-    // ocelia->init_nouveau_depart();
-    // pnl_vect_print(ocelia->nouveau_depart_);
-    
-    // ocelia->compute_perfs_n_ans(ocelia->perfs_, 8);
-    // pnl_vect_print(ocelia->perfs_);
 
     // ocelia->compute_nouveau_depart();
     // pnl_vect_print(ocelia->valeurs_initiales_);
@@ -112,22 +101,16 @@ void ocelia_test()
     // pnl_vect_print(ocelia->perfs_);
     // pnl_vect_print(ocelia->nouveau_depart_);
 
+    // ocelia->compute_perfs_n_ans(ocelia->perfs_, 8);
+    // pnl_vect_print(ocelia->perfs_);
+
     // double moy = ocelia->compute_perf_moyenne_panier();
     // std::cout << moy << std::endl;
 
     // double flux = ocelia->compute_flux_n_ans(8);
     // std::cout << flux << std::endl;
 
-    // bool pos = ocelia->are_all_perfs_positive(ocelia->perfs_);
-    // std::cout << pos << std::endl;
-
-    // for(int i = 0; i < 49; ++i){
-    //     std::cout << all_dates_constatation[i] << std::endl;
-    // }
     // std::cout << ocelia->payoff() << std::endl;
-
-    double payoff = ocelia->payoff();
-    std::cout << payoff << std::endl;
 }
 
 
@@ -213,7 +196,7 @@ void quanto_test(){
 
 int main(){
     // quanto_test();
-    // ocelia_test();
-    datetimevector_tests();
+    ocelia_test();
+    // datetimevector_tests();
     // datetime_tests();
 }

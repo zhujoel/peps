@@ -27,8 +27,8 @@ class Ocelia : public IDerivative{
         void compute_valeurs_n_ans(PnlVect *valeurs, int N); // calcule la valeur moyenne des indices pour l'année n
         void compute_perfs_n_ans(PnlVect *perfs, int N); // compute performance pour un indice à une année
         void compute_nouveau_depart(); 
-        void init_nouveau_depart();
-        bool are_all_perfs_positive(PnlVect *perfs); // détermine si tous les performances sont positives
-        double compute_flux_n_ans(int n); // calcul du C(N) cf 1.3
-
+        double compute_flux_n_ans(int N); // calcul du C(N) cf 1.3
 };
+
+void trunc(PnlVect *vect, int n); // arrondi à n decimals
+bool are_all_positive(PnlVect *vect); // détermine si tous les performances sont positives
