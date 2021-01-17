@@ -16,3 +16,4 @@ class DateTime{
 
 
 std::ostream &operator<<(std::ostream &output, const DateTime *dt);
+void fill_dates_from_file(DateTime **dates, std::string fileName, int nbDates);

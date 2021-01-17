@@ -1,14 +1,11 @@
 #include "Ocelia.h"
 #include "pnl/pnl_mathtools.h"
-#include <iostream>
-#include <fstream>
-#include <sstream>
 
 // TODO: changer le 0.0 en un r
 Ocelia::Ocelia(double T, int nbTimeSteps, int size, IUnderlying **underlyings) : IDerivative(T, nbTimeSteps, size, 0.0, underlyings)
 {
     // TODO: mettre des variables au lieu de 16 ou 7*5
-    this->dates_constatation_perf_ = new DateTime*[16];
+    this->dates_semestrielles_ = new DateTime*[16];
     this->dates_valeurs_n_ans_ = new DateTime*[7*5];
     this->indices_dates_constatation_ = pnl_vect_int_create(16);
     this->valeurs_n_ans_ = pnl_vect_create(4);
@@ -20,28 +17,12 @@ Ocelia::~Ocelia(){
 
 }
 
-void Ocelia::fill_dates_from_file(std::string fileName, int nbDates) {
-    //TODO: à mettre qq part d'autre
-    std::ifstream inputFileStream(fileName);
-    std::string jour, mois, annee;
-    std::string line;
-    for (int i = 0; i < nbDates; i++)
-    {
-        getline(inputFileStream, line);
-        std::istringstream lineStream(line);
-        getline(lineStream, jour, ',');
-        getline(lineStream, mois, ',');
-        getline(lineStream, annee, ',');
-        this->dates_constatation_perf_[i] = new DateTime(stoi(jour), stoi(mois), stoi(annee));
-    }
-}
-
 void Ocelia::fill_dates_perf(){
-    this->fill_dates_from_file("../Dates/dates_const_semestrielles.txt", 16);
+    fill_dates_from_file(this->dates_semestrielles_, "../data/dates_semest", 16);
 }
 
 void Ocelia::fill_dates_valeurs(){   
-    this->fill_dates_from_file("../Dates/dates_valeurs_N_ans.txt", 35);
+    fill_dates_from_file(this->dates_valeurs_n_ans_, "../data/dates_valeurs_n", 35);
 }
 
 // TODO: à virer d'ocelia et mettre qq part d'autre

@@ -46,14 +46,16 @@ void datetime_tests()
 
 void ocelia_test()
 {
+    // ***** DONNEES *****
     IUnderlying *eur = new ForeignUnderlying(100, 10, 365);
     IUnderlying **unds = new IUnderlying*[1];
     unds[0] = eur;
-
     Ocelia *ocelia = new Ocelia(0, 0, 0.0, unds);
-    // ocelia->fill_dates_perf();
+
+    // ***** METHODES *****
+    ocelia->fill_dates_perf();
     // ocelia->fill_dates_valeurs();
-    std::cout << ocelia->payoff() << std::endl;
+    // std::cout << ocelia->payoff() << std::endl;
 }
 
 void quanto_test(){
