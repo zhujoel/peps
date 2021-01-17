@@ -25,6 +25,7 @@
 // TODO: mettre des const dans les fonctions au bons endroits
 // TODO: abstraire pour des taux intérets non constants
 // TODO: implémenter des MC + opti ?
+// TODO: pour les valeurs, arrondir à 4
 // TODO: bcp + tard: feeder des données ?
 
 /** CONVENTION QUANTO POUR L'INSTANT : zc en ligne 0 et risqué en ligne 1 */
@@ -46,29 +47,81 @@ void datetime_tests()
     std::cout << "(1/1/1995 attendu) : " << dt1 << std::endl;
 }
 
+// TODO: mettre autre part?
+void print_path(IUnderlying* und, DateTime **dates, int nbTimeSteps){
+    for(int i = 0; i < nbTimeSteps; ++i){
+        std::cout << dates[i] << " : price: " << GET(und->price_, i) << std::endl;
+    }
+}
+
 void ocelia_test()
 {
     // ***** DONNEES *****
     IUnderlying *eur = new ForeignUnderlying(100, 10, 365);
-    IUnderlying **unds = new IUnderlying*[1];
+    IUnderlying *gbp = new ForeignUnderlying(100, 10, 365);
+    IUnderlying *chf = new ForeignUnderlying(100, 10, 365);
+    IUnderlying *jpy = new ForeignUnderlying(100, 10, 365);
+    IUnderlying **unds = new IUnderlying*[4];
+    for(int i = 0; i < 49; ++i){
+        LET(eur->price_, i) = 100+(i*10);
+        LET(gbp->price_, i) = 200+(i*10);
+        LET(chf->price_, i) = 300+(i*10);
+        LET(jpy->price_, i) = 400+(i*10);
+    }
     unds[0] = eur;
-    Ocelia *ocelia = new Ocelia(0, 0, 0.0, unds);
+    unds[1] = gbp;
+    unds[2] = chf;
+    unds[3] = jpy;
+    Ocelia *ocelia = new Ocelia(1, 500, 4, unds);
 
     // ***** METHODES *****
+    // TODO: FACTO LES DATES POUR METTRE DANS UNE CLASSE À PART
     ocelia->fill_dates_perf();
     ocelia->fill_dates_valeurs();
-    PnlVectInt *indices = pnl_vect_int_create(35);
-
     DateTime** all_dates = new DateTime*[3288];
     fill_dates_from_file(all_dates, "../data/all_dates", 3288);
 
-    // calcul_indices_dates(ocelia->dates_valeurs_n_ans_, ocelia->dates_valeurs_n_ans_, indices);
+    DateTime** all_dates_constatation = new DateTime*[49];
+    fill_dates_from_file(all_dates_constatation, "../data/all_dates_constatation", 49);
 
-    pnl_vect_int_print(indices);
-    for(int i = 0; i < 3288; ++i){
-        std::cout << all_dates[i] << std::endl;
-    }
+    // PnlVectInt *indices = pnl_vect_int_create(35);
+    calcul_indices_dates(all_dates_constatation, 49, ocelia->dates_valeurs_n_ans_, ocelia->indices_dates_valeurs_n_ans_);
+    calcul_indices_dates(all_dates_constatation, 49, ocelia->dates_semestrielles_, ocelia->indices_dates_constatation_);
+    // pnl_vect_int_print(indices);
+
+    print_path(jpy, all_dates_constatation, 49);
+
+    // ocelia->compute_valeurs_n_ans(ocelia->valeurs_initiales_, 0);
+    // pnl_vect_print(ocelia->valeurs_initiales_);
+
+    // ocelia->init_nouveau_depart();
+    // pnl_vect_print(ocelia->nouveau_depart_);
+    
+    // ocelia->compute_perfs_n_ans(ocelia->perfs_, 8);
+    // pnl_vect_print(ocelia->perfs_);
+
+    // ocelia->compute_nouveau_depart();
+    // pnl_vect_print(ocelia->valeurs_initiales_);
+    // pnl_vect_print(ocelia->valeurs_n_ans_);
+    // pnl_vect_print(ocelia->perfs_);
+    // pnl_vect_print(ocelia->nouveau_depart_);
+
+    // double moy = ocelia->compute_perf_moyenne_panier();
+    // std::cout << moy << std::endl;
+
+    // double flux = ocelia->compute_flux_n_ans(8);
+    // std::cout << flux << std::endl;
+
+    // bool pos = ocelia->are_all_perfs_positive(ocelia->perfs_);
+    // std::cout << pos << std::endl;
+
+    // for(int i = 0; i < 49; ++i){
+    //     std::cout << all_dates_constatation[i] << std::endl;
+    // }
     // std::cout << ocelia->payoff() << std::endl;
+
+    double payoff = ocelia->payoff();
+    std::cout << payoff << std::endl;
 }
 void underlying_test()
 {
@@ -82,6 +135,7 @@ void underlying_test()
     BlackScholesModel *blackscholes = new BlackScholesModel(ocelia, sigma);
     blackscholes->simulateMarket(4);
 
+
     // ***** AFFICHAGE *****
 
     for(int i=0; i<4; i++){
@@ -89,6 +143,7 @@ void underlying_test()
     }
 
 }
+
 void quanto_test(){
 // TEST DE PRICE UNE OPTION QUANTO
 
