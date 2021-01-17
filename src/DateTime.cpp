@@ -59,6 +59,7 @@ void fill_dates_from_file(DateTime **dates, std::string fileName, int nbDates) {
         getline(lineStream, jour, ';');
         getline(lineStream, mois, ';');
         getline(lineStream, annee, ';');
+        std::cout << jour << "/" << mois << "/" << annee << std::endl;
         dates[i] = new DateTime(std::stoi(jour), std::stoi(mois), std::stoi(annee));
     }
 }
