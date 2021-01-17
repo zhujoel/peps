@@ -117,11 +117,12 @@ void ocelia_test()
 void underlying_test()
 {
     // ***** DONNEES *****
-    DateTime** all_dates = new DateTime*[3288];
-    fill_dates_from_file(all_dates, "../data/all_dates", 3288);
-    IMarketData *marketData = new SimulatedMarketData(all_dates, 3288);
+    DateTimeVector *all_dates = new DateTimeVector("../data/all_dates", 3288);
+    DateTimeVector *dates_valeurs_n = new DateTimeVector("../data/dates_valeurs_n", 35);
+    DateTimeVector *dates_semest = new DateTimeVector("../data/dates_semest", 16);
+    IMarketData *marketData = new SimulatedMarketData(all_dates);
     IUnderlying **underlyings = marketData->getMarketdata(4);
-    Ocelia *ocelia = new Ocelia(1, 3288, 4, underlyings);
+    Ocelia *ocelia = new Ocelia(1, 3288, 4, underlyings, dates_semest, dates_valeurs_n);
     PnlMat *sigma = pnl_mat_create(4, 4);
     BlackScholesModel *blackscholes = new BlackScholesModel(ocelia, sigma);
     blackscholes->simulateMarket(4);

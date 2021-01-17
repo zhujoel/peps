@@ -1,9 +1,7 @@
 #include "IMarketData.h"
 
-IMarketData::IMarketData(DateTime ** listeDate, int nombreDate){
-    this->listeDate_ = listeDate;
-    this->nombreDate_ = nombreDate;
-
+IMarketData::IMarketData(DateTimeVector *dates){
+    this->dates_ = dates;
 }
 
 //IUnderlying ** IMarketData::getMarketdata(int nbUnderlying){

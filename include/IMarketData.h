@@ -1,19 +1,17 @@
 #pragma once
 #include <string>
 #include <map>
-#include "DateTime.h"
+#include "DateTimeVector.h"
 // #include "DataFeed.h"
 #include "IUnderlying.h"
 using namespace std;
 
 class IMarketData{
     public:
-        DateTime ** listeDate_;
-        int nombreDate_;
-
-        IMarketData(DateTime ** listeDate, int nombreDate);
+        DateTimeVector *dates_;
+        IMarketData(DateTimeVector *dates);
 
         virtual ~IMarketData();
-        virtual IUnderlying ** getMarketdata(int nbUnderlying) = 0;
+        virtual IUnderlying **getMarketdata(int nbUnderlying) = 0;
 
 };
