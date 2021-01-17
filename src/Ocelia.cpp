@@ -4,18 +4,16 @@
 #include <fstream>
 #include <sstream>
 
-// TODO: paramètres peut etre pas tous nécessaires ?
-Ocelia::Ocelia(double T, int nbTimeSteps, int size, double r_gbp, double r_chf, double r_jpy, double r_eur, IUnderlying **underlyings) : IDerivative(T, nbTimeSteps, size, r_eur, underlyings)
+// TODO: changer le 0.0 en un r
+Ocelia::Ocelia(double T, int nbTimeSteps, int size, IUnderlying **underlyings) : IDerivative(T, nbTimeSteps, size, 0.0, underlyings)
 {
-    this->r_gbp_ = r_gbp;
-    this->r_chf_ = r_chf;
-    this->r_jpy_ = r_jpy;
     // TODO: mettre des variables au lieu de 16 ou 7*5
     this->dates_constatation_perf_ = new DateTime*[16];
     this->dates_valeurs_n_ans_ = new DateTime*[7*5];
     this->indices_dates_constatation_ = pnl_vect_int_create(16);
     this->valeurs_n_ans_ = pnl_vect_create(4);
     this->valeurs_initiales_ = pnl_vect_create(4);
+    this->perfs_ = pnl_vect_create(4);
 }
 
 Ocelia::~Ocelia(){
@@ -100,31 +98,29 @@ double Ocelia::compute_perf_moyenne_panier()
 }
 
 void Ocelia::compute_perfs_n_ans(PnlVect *perfs, int N){
-    pnl_vect_resize(perfs, 4);
     compute_valeurs_n_ans(this->valeurs_n_ans_, N);
     for(int i = 0; i < this->size_; ++i){
         // on prend le price au lieu de price converted car on calcule la performance
-        LET(perfs, i) = GET(this->valeurs_n_ans_, i)/GET(this->valeurs_departs_, i) - 1;
+        LET(perfs, i) = GET(this->valeurs_n_ans_, i)/GET(this->nouveau_depart_, i) - 1;
     }
 }
 
-void Ocelia::init_valeurs_departs(){
-    this->valeurs_departs_ = pnl_vect_create(4);
+void Ocelia::init_nouveau_depart(){
+    this->nouveau_depart_ = pnl_vect_create(4);
 
     for(int i = 0; i < this->size_; ++i){
-        LET(this->valeurs_departs_, i) = GET(this->valeurs_initiales_, i);
+        LET(this->nouveau_depart_, i) = GET(this->valeurs_initiales_, i);
     }
 }
 
-void Ocelia::compute_valeurs_departs(){
+void Ocelia::compute_nouveau_depart(){
     compute_valeurs_n_ans(this->valeurs_initiales_, 0);
     compute_valeurs_n_ans(this->valeurs_n_ans_, 1);
 
-    PnlVect *perf_1_an = pnl_vect_create(4);
-    compute_perfs_n_ans(perf_1_an, 1);
+    compute_perfs_n_ans(this->perfs_, 1);
 
-    if(pnl_vect_max(perf_1_an) <= 0.9){
-        pnl_vect_mult_scalar(this->valeurs_departs_, 0.9);
+    if(pnl_vect_max(this->perfs_) <= 0.9){
+        pnl_vect_mult_scalar(this->nouveau_depart_, 0.9);
     }
 }
 
@@ -134,10 +130,9 @@ double Ocelia::compute_flux_n_ans(int n){
     }
     else if(n == 8){
         // TODO: mettre le perf dans un attribut
-        PnlVect *perf_8_ans = pnl_vect_create(4);
-        compute_perfs_n_ans(perf_8_ans, 8);
+        compute_perfs_n_ans(this->perfs_, 8);
         double perf_moy = compute_perf_moyenne_panier();
-        if(are_all_perfs_positive(perf_8_ans)){
+        if(are_all_perfs_positive(this->perfs_)){
             return MAX(1.56, perf_moy);
         }
         return perf_moy;
@@ -156,14 +151,13 @@ double Ocelia::payoff()
     // 1. valeurs initiale
     compute_valeurs_n_ans(this->valeurs_initiales_, 0);
     // 2. on met valeur init dans valeur depart
-    init_valeurs_departs();
+    init_nouveau_depart();
     // 4. calcul nouveauDepart
-    compute_valeurs_departs();
+    compute_nouveau_depart();
     
-    PnlVect *perf_n = pnl_vect_create(4); 
     for(int n = 4 ; n <= 8; ++n){
-        compute_perfs_n_ans(perf_n, n);
-        if(are_all_perfs_positive(perf_n)){
+        compute_perfs_n_ans(this->perfs_, n);
+        if(are_all_perfs_positive(this->perfs_)){
             return val_liquidative_initiale*compute_flux_n_ans(n);
         }
     }

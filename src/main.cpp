@@ -50,7 +50,7 @@ void ocelia_test()
     IUnderlying **unds = new IUnderlying*[1];
     unds[0] = eur;
 
-    Ocelia *ocelia = new Ocelia(0, 0, 0.0, 0.0, 0.0, 0.0, 0.0, unds);
+    Ocelia *ocelia = new Ocelia(0, 0, 0.0, unds);
     // ocelia->fill_dates_perf();
     // ocelia->fill_dates_valeurs();
     std::cout << ocelia->payoff() << std::endl;

@@ -6,22 +6,16 @@
 
 class Ocelia : public IDerivative{
     public:
-        // TODO: peut etre mettre une classe InterestRate qui garde toutes données de taux d'intéret
-        // TODO: on considère que c'est constant
-        double r_gbp_; // taux d'intéret gbp
-        double r_chf_; // taux d'intéret franc suisse
-        double r_jpy_; // japonais
-        double r_eur_; // euro
         DateTime **dates_constatation_perf_; // dates de constatation de la performance du panier pour le calcul du payoff
         DateTime **dates_valeurs_n_ans_; // 1.2 du pdf d'analyse financier
         PnlVectInt *indices_dates_constatation_; // indices des dates de constatation dans le path 
         PnlVectInt *indices_dates_valeurs_n_ans_; // indices dans le path des dates des valeurs n ans
         PnlVect *valeurs_n_ans_; // moyenne de la valeur des indices à l'année n
         PnlVect *valeurs_initiales_; // moyenne des valeurs initiales (année 0);
-        PnlVect *valeurs_departs_;
+        PnlVect *nouveau_depart_; // valeurs de l'effet nouveau départ
+        PnlVect *perfs_;
 
-        // TODO: paramètres peut etre pas tous nécessaires ?
-        Ocelia(double T, int nbTimeSteps, int size, double r_gbp, double r_chf, double r_jpy, double r_eur, IUnderlying **underlyings);
+        Ocelia(double T, int nbTimeSteps, int size, IUnderlying **underlyings);
         ~Ocelia();
         double payoff();
         void fill_dates_from_file(std::string fileName, int nbDates);
@@ -31,8 +25,8 @@ class Ocelia : public IDerivative{
         double compute_perf_moyenne_panier();
         void compute_valeurs_n_ans(PnlVect *valeurs, int N); // calcule la valeur moyenne des indices pour l'année n
         void compute_perfs_n_ans(PnlVect *perfs, int N); // compute performance pour un indice à une année
-        void compute_valeurs_departs(); 
-        void init_valeurs_departs();
+        void compute_nouveau_depart(); 
+        void init_nouveau_depart();
         bool are_all_perfs_positive(PnlVect *perfs); // détermine si tous les performances sont positives
         double compute_flux_n_ans(int n); // calcul du C(N) cf 1.3
 
