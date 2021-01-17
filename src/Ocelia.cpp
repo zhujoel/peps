@@ -110,6 +110,7 @@ void Ocelia::compute_nouveau_depart(){
     }
 }
 
+// done
 double Ocelia::compute_flux_n_ans(int n){
     if(n >= 4 && n <= 7){
         return 1.24 + (n - 4) * 0.08;
@@ -119,20 +120,21 @@ double Ocelia::compute_flux_n_ans(int n){
         compute_perfs_n_ans(this->perfs_, 8);
         double perf_moy = compute_perf_moyenne_panier();
         if(are_all_perfs_positive(this->perfs_)){
-            return MAX(1.56, perf_moy);
+            return MAX(1.56, 1+perf_moy);
         }
-        return perf_moy;
+        return 1+perf_moy;
     }
     return 0;
 }
 
+// done
 bool Ocelia::are_all_perfs_positive(PnlVect *perfs){
-    return pnl_vect_min(perfs) > 0;
+    return pnl_vect_min(perfs) >= 0;
 }
 
 double Ocelia::payoff()
 {
-    // TODO: ajouter en [out] un indice de l'année quand le produit s'exerce
+    // TODO: ajouter en [out] un indice de l'année pour indiquer quand le produit s'exerce
     double val_liquidative_initiale = 100.0;
     // 1. valeurs initiale
     compute_valeurs_n_ans(this->valeurs_initiales_, 0);

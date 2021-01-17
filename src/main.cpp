@@ -61,10 +61,10 @@ void ocelia_test()
     IUnderlying *jpy = new ForeignUnderlying(100, 10, 365);
     IUnderlying **unds = new IUnderlying*[4];
     for(int i = 0; i < 49; ++i){
-        LET(eur->price_, i) = 100+i;
-        LET(gbp->price_, i) = 200+i;
-        LET(chf->price_, i) = 300+i;
-        LET(jpy->price_, i) = 400+i;
+        LET(eur->price_, i) = 100+(i*10);
+        LET(gbp->price_, i) = 200+(i*10);
+        LET(chf->price_, i) = 300+(i*10);
+        LET(jpy->price_, i) = 400+(i*10);
     }
     unds[0] = eur;
     unds[1] = gbp;
@@ -89,10 +89,10 @@ void ocelia_test()
 
     print_path(jpy, all_dates_constatation, 49);
 
-    ocelia->compute_valeurs_n_ans(ocelia->valeurs_initiales_, 0);
+    // ocelia->compute_valeurs_n_ans(ocelia->valeurs_initiales_, 0);
     // pnl_vect_print(ocelia->valeurs_initiales_);
 
-    ocelia->init_nouveau_depart();
+    // ocelia->init_nouveau_depart();
     // pnl_vect_print(ocelia->nouveau_depart_);
     
     // ocelia->compute_perfs_n_ans(ocelia->perfs_, 8);
@@ -104,13 +104,22 @@ void ocelia_test()
     // pnl_vect_print(ocelia->perfs_);
     // pnl_vect_print(ocelia->nouveau_depart_);
 
-    double moy = ocelia->compute_perf_moyenne_panier();
-    std::cout << moy << std::endl;
+    // double moy = ocelia->compute_perf_moyenne_panier();
+    // std::cout << moy << std::endl;
+
+    // double flux = ocelia->compute_flux_n_ans(8);
+    // std::cout << flux << std::endl;
+
+    // bool pos = ocelia->are_all_perfs_positive(ocelia->perfs_);
+    // std::cout << pos << std::endl;
 
     // for(int i = 0; i < 49; ++i){
     //     std::cout << all_dates_constatation[i] << std::endl;
     // }
     // std::cout << ocelia->payoff() << std::endl;
+
+    double payoff = ocelia->payoff();
+    std::cout << payoff << std::endl;
 }
 
 
