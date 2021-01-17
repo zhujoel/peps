@@ -2,9 +2,13 @@
 
 IMarketData::IMarketData(DateTime ** listeDate, int nombreDate){
     this->listeDate_ = listeDate;
-    this->nombredate_ = nombreDate;
+    this->nombreDate_ = nombreDate;
 
 }
+
+//IUnderlying ** IMarketData::getMarketdata(int nbUnderlying){
+
+//}
 
 IMarketData::~IMarketData(){}
 

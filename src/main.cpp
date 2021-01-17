@@ -11,7 +11,9 @@
 #include "DateTimeVector.h"
 #include "IUnderlying.h"
 #include "ForeignUnderlying.h"
-
+#include "IMarketData.h"
+#include "SimulatedMarketData.h"
+#include "pnl/pnl_mathtools.h"
 // TODO: voir comment générer les .dll 
 // TODO: TEST UNITAIRES en googletest
 // TODO: Gestion des données
@@ -112,7 +114,26 @@ void ocelia_test()
 
     // std::cout << ocelia->payoff() << std::endl;
 }
+void underlying_test()
+{
+    // ***** DONNEES *****
+    DateTime** all_dates = new DateTime*[3288];
+    fill_dates_from_file(all_dates, "../data/all_dates", 3288);
+    IMarketData *marketData = new SimulatedMarketData(all_dates, 3288);
+    IUnderlying **underlyings = marketData->getMarketdata(4);
+    Ocelia *ocelia = new Ocelia(1, 3288, 4, underlyings);
+    PnlMat *sigma = pnl_mat_create(4, 4);
+    BlackScholesModel *blackscholes = new BlackScholesModel(ocelia, sigma);
+    blackscholes->simulateMarket(4);
 
+
+    // ***** AFFICHAGE *****
+
+    for(int i=0; i<4; i++){
+        pnl_vect_print_asrow(blackscholes->derivative_->underlyings_[i]->price_);   
+    }
+
+}
 
 void quanto_test(){
 // TEST DE PRICE UNE OPTION QUANTO
@@ -196,7 +217,8 @@ void quanto_test(){
 
 int main(){
     // quanto_test();
-    ocelia_test();
+    // ocelia_test();
     // datetimevector_tests();
     // datetime_tests();
+    underlying_test();
 }

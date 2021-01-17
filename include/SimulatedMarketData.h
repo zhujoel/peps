@@ -3,8 +3,8 @@
 
 class SimulatedMarketData: public IMarketData{
     public:
-        SimulatedMarketData(DateTime ** listeDate);
+        SimulatedMarketData(DateTime ** listeDate, int nombreDate);
 
         ~SimulatedMarketData();
         IUnderlying ** getMarketdata(int nbUnderlying);
-}
+};
