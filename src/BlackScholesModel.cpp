@@ -67,7 +67,7 @@ void BlackScholesModel::shiftAsset(double h, double t, double timestep)
 void BlackScholesModel::simulateMarket(int nbUnderlying){
     for(int i=0; i<this->derivative_->nbTimeSteps_; i++){
         for(int j=0; j<nbUnderlying; j++){
-            LET(this->derivative_->underlyings_[j]->price_, i)=100;
+            pnl_vect_set(this->derivative_->underlyings_[j]->price_, i, 100);
         }
     }
 
