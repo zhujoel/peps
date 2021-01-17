@@ -6,5 +6,5 @@ class SimulatedMarketData: public IMarketData{
         SimulatedMarketData(DateTime ** listeDate);
 
         ~SimulatedMarketData();
-        IUnderlying ** getMarketdata();
+        IUnderlying ** getMarketdata(int nbUnderlying);
 }

@@ -9,10 +9,11 @@ using namespace std;
 class IMarketData{
     public:
     DateTime ** listeDate_;
+    int nombreDate_:
 
-    IMarketData(DateTime ** listeDate);
+    IMarketData(DateTime ** listeDate, int nombreDate);
 
     virtual ~IMarketData();
-    virtual IUnderlying ** getMarketdata();
+    virtual IUnderlying ** getMarketdata(int nbUnderlying);
 
 };
