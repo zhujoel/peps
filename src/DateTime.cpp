@@ -46,35 +46,3 @@ std::ostream &operator<<(std::ostream &output, const DateTime *dt){
     output << dt->dd_ << "/" << dt->mm_ << "/" << dt->yyyy_;
     return output;
 }
-
-void fill_dates_from_file(DateTime **dates, std::string fileName, int nbDates) {
-    std::ifstream inputFileStream(fileName);
-    std::string jour, mois, annee;
-    std::string line;
-    for (int i = 0; i < nbDates; i++)
-    {
-        getline(inputFileStream, line);
-        std::istringstream lineStream(line);
-        getline(lineStream, jour, ';');
-        getline(lineStream, mois, ';');
-        getline(lineStream, annee, ';');
-        dates[i] = new DateTime(std::stoi(jour), std::stoi(mois), std::stoi(annee));
-    }
-}
-
-
-void calcul_indices_dates(DateTime **all_dates, int all_dates_size, DateTime **dates, PnlVectInt *indices)
-{
-    int cnt = 0;
-
-    for(int i = 0; i < all_dates_size; ++i){
-        // TODO: à tester (peut y avoir +1 ou -1 dans les indices)
-        if(all_dates[i]->compare(dates[cnt]) == 0){
-            LET_INT(indices, cnt++) = i;
-
-            if(cnt == indices->size){
-                break;
-            }
-        }
-    }
-}

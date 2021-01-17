@@ -8,13 +8,13 @@
 #include "pnl/pnl_finance.h"
 #include "Ocelia.h"
 #include "DateTime.h"
+#include "DateTimeVector.h"
 #include "IUnderlying.h"
 #include "ForeignUnderlying.h"
 
 // TODO: voir comment générer les .dll 
 // TODO: TEST UNITAIRES en googletest
 // TODO: Gestion des données
-// TODO: Gestion des dates
 // TODO: ajouter classe taux d'intéret ?
 // TODO: ajouter des classes pour séparer les zc et les actifs risqué dans un pf ?
 // TODO: calcul du sigma pour généraliser avec des dimensions > 2
@@ -43,6 +43,14 @@ void datetime_tests()
 
     // std cout
     std::cout << "(1/1/1995 attendu) : " << dt1 << std::endl;
+}
+
+void datetimevector_tests(){
+    DateTimeVector *dates = new DateTimeVector("../data/all_dates", 3288);
+    DateTimeVector *dates2 = new DateTimeVector("../data/dates_semest", 16);
+    PnlVectInt* ok = pnl_vect_int_create(16);
+    calcul_indices_dates(dates, dates2, ok);
+    pnl_vect_int_print(ok);
 }
 
 // TODO: mettre autre part?
@@ -74,20 +82,20 @@ void ocelia_test()
 
     // ***** METHODES *****
     // TODO: FACTO LES DATES POUR METTRE DANS UNE CLASSE À PART
-    ocelia->fill_dates_perf();
-    ocelia->fill_dates_valeurs();
-    DateTime** all_dates = new DateTime*[3288];
-    fill_dates_from_file(all_dates, "../data/all_dates", 3288);
+    // ocelia->fill_dates_perf();
+    // ocelia->fill_dates_valeurs();
+    // DateTime** all_dates = new DateTime*[3288];
+    // fill_dates_from_file(all_dates, "../data/all_dates", 3288);
 
-    DateTime** all_dates_constatation = new DateTime*[49];
-    fill_dates_from_file(all_dates_constatation, "../data/all_dates_constatation", 49);
+    // DateTime** all_dates_constatation = new DateTime*[49];
+    // fill_dates_from_file(all_dates_constatation, "../data/all_dates_constatation", 49);
 
     // PnlVectInt *indices = pnl_vect_int_create(35);
-    calcul_indices_dates(all_dates_constatation, 49, ocelia->dates_valeurs_n_ans_, ocelia->indices_dates_valeurs_n_ans_);
-    calcul_indices_dates(all_dates_constatation, 49, ocelia->dates_semestrielles_, ocelia->indices_dates_constatation_);
-    // pnl_vect_int_print(indices);
+    // calcul_indices_dates(all_dates_constatation, 49, ocelia->dates_valeurs_n_ans_, ocelia->indices_dates_valeurs_n_ans_);
+    // calcul_indices_dates(all_dates_constatation, 49, ocelia->dates_semestrielles_, ocelia->indices_dates_constatation_);
+    // // pnl_vect_int_print(indices);
 
-    print_path(jpy, all_dates_constatation, 49);
+    // print_path(jpy, all_dates_constatation, 49);
 
     // ocelia->compute_valeurs_n_ans(ocelia->valeurs_initiales_, 0);
     // pnl_vect_print(ocelia->valeurs_initiales_);
@@ -205,6 +213,7 @@ void quanto_test(){
 
 int main(){
     // quanto_test();
-    ocelia_test();
+    // ocelia_test();
+    datetimevector_tests();
     // datetime_tests();
 }

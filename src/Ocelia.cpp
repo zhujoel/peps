@@ -3,51 +3,38 @@
 #include <iostream>
 #include <math.h>
 
-// TODO: changer le 0.0 en un r
-Ocelia::Ocelia(double T, int nbTimeSteps, int size, IUnderlying **underlyings) : IDerivative(T, nbTimeSteps, size, 0.0, underlyings)
+// TODO: changer le 0.0 en un r?
+Ocelia::Ocelia(double T, int nbTimeSteps, int size, IUnderlying **underlyings, DateTimeVector *dates_semestrielles, DateTimeVector *date_valeurs_n_ans) : IDerivative(T, nbTimeSteps, size, 0.0, underlyings)
 {
-    // TODO: mettre des variables au lieu de 16 ou 7*5
-    this->dates_semestrielles_ = new DateTime*[16];
-    this->dates_valeurs_n_ans_ = new DateTime*[7*5];
-    this->indices_dates_constatation_ = pnl_vect_int_create(16);
-    this->indices_dates_valeurs_n_ans_ = pnl_vect_int_create(35);
-    this->valeurs_n_ans_ = pnl_vect_create(4);
-    this->valeurs_initiales_ = pnl_vect_create(4);
-    this->perfs_ = pnl_vect_create(4);
-    this->nouveau_depart_ = pnl_vect_create(4);
+    this->dates_semestrielles_ = dates_semestrielles;
+    this->dates_valeurs_n_ans_ = date_valeurs_n_ans;
+    this->indices_dates_semestrielles_ = pnl_vect_int_create(this->dates_semestrielles_->nbDates_);
+    this->indices_dates_valeurs_n_ans_ = pnl_vect_int_create(this->dates_valeurs_n_ans_->nbDates_);
+    this->valeurs_n_ans_ = pnl_vect_create(this->size_);
+    this->valeurs_initiales_ = pnl_vect_create(this->size_);
+    this->perfs_ = pnl_vect_create(this->size_);
+    this->nouveau_depart_ = pnl_vect_create(this->size_);
 }
 
 Ocelia::~Ocelia(){
-
-}
-
-// todo: à virer d'ocelia
-// done
-void Ocelia::fill_dates_perf(){
-    fill_dates_from_file(this->dates_semestrielles_, "../data/dates_semest", 16);
-}
-
-// done
-void Ocelia::fill_dates_valeurs(){   
-    fill_dates_from_file(this->dates_valeurs_n_ans_, "../data/dates_valeurs_n", 35);
+    // TODO: valgrind
 }
 
 // done
 double Ocelia::compute_perf_moyenne_panier()
 {
     double perf_moy_panier = 0.0; // performance moyenne du panier (1.4 pdf)
-
-    for(int t = 0; t < 16; ++t){
+    for(int t = 0; t < this->dates_semestrielles_->nbDates_; ++t){
         double somme = 0.0;
-        for(int i = 0; i < 4; ++i){
+        for(int i = 0; i < this->size_; ++i){
             double I_i_s = GET(this->underlyings_[i]->price_, GET_INT(this->indices_dates_constatation_, t));
             double I0 = GET(this->valeurs_initiales_, i);
             somme += I_i_s/ I0 - 1;
         }
-        perf_moy_panier += MAX(somme/4, 0);
+        perf_moy_panier += MAX(somme/this->size_, 0);
     }
 
-    return perf_moy_panier/16;
+    return perf_moy_panier/this->dates_semestrielles_->nbDates_;
 }
 
 // done
