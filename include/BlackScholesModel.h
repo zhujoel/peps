@@ -16,4 +16,5 @@ class BlackScholesModel : public IModel{
 
         void shiftAsset(double h, double t, double timestep);
         void simulateMarket(int nbUnderlying);
+        void compute_sigma();
 };

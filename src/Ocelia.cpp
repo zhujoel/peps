@@ -14,6 +14,11 @@ Ocelia::Ocelia(double T, int nbTimeSteps, int size, IUnderlying **underlyings, D
     this->valeurs_initiales_ = pnl_vect_create(this->size_);
     this->perfs_ = pnl_vect_create(this->size_);
     this->nouveau_depart_ = pnl_vect_create(this->size_);
+
+    DateTimeVector *all_dates_constatation = new DateTimeVector("../data/all_dates_constatation", 49);
+    DateTimeVector *all_dates = new DateTimeVector("../data/all_dates", 3288);
+    calcul_indices_dates(all_dates_constatation, this->dates_valeurs_n_ans_, this->indices_dates_valeurs_n_ans_);
+    calcul_indices_dates(all_dates_constatation, this->dates_semestrielles_, this->indices_dates_semestrielles_);
 }
 
 Ocelia::~Ocelia(){
@@ -22,7 +27,7 @@ Ocelia::~Ocelia(){
 
 double Ocelia::compute_perf_moyenne_panier()
 {
-    double perf_moy_panier = 0.0; // performance moyenne du panier (1.4 pdf)
+    double perf_moy_panier = 0.0;
     for(int t = 0; t < this->dates_semestrielles_->nbDates_; ++t){
         double somme = 0.0;
         for(int i = 0; i < this->size_; ++i){
@@ -106,6 +111,7 @@ double Ocelia::payoff()
     return -1;
 }
 
+// TODO: factorize this
 double Ocelia::shifted_payoff() const
 {
     return 0.;

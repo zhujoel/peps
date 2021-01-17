@@ -70,5 +70,8 @@ void BlackScholesModel::simulateMarket(int nbUnderlying){
             pnl_vect_set(this->derivative_->underlyings_[j]->price_, i, 100);
         }
     }
+}
 
+void BlackScholesModel::compute_sigma(){
+    
 }

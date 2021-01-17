@@ -20,15 +20,11 @@
 // TODO: ajouter classe taux d'intéret ?
 // TODO: ajouter des classes pour séparer les zc et les actifs risqué dans un pf ?
 // TODO: calcul du sigma pour généraliser avec des dimensions > 2
-// TODO: on a implémenté pour un quanto avec 2 sous jacents (zc et risqué) -> vérifier que le programme reste cohérent pour un instrment avec 3, 4, etc sous-jacents
 // TODO: pricing en t
 // TODO: mettre des const dans les fonctions au bons endroits
 // TODO: abstraire pour des taux intérets non constants
 // TODO: implémenter des MC + opti ?
-// TODO: pour les valeurs, arrondir à 4
-// TODO: bcp + tard: feeder des données ?
-
-/** CONVENTION QUANTO POUR L'INSTANT : zc en ligne 0 et risqué en ligne 1 */
+// TODO: feeder des données ?
 
 // TODO: tests unitaires à mettre dans des googletest
 void datetime_tests()
@@ -43,7 +39,7 @@ void datetime_tests()
     std::cout << "dt1 compare dt3 ? (0 attendu) : " << dt1->compare(dt3) << std::endl;
     std::cout << "dt3 compare dt1 ? (0 attendu) : " << dt3->compare(dt1) << std::endl;
 
-    // std cout
+    // operator<<
     std::cout << "(1/1/1995 attendu) : " << dt1 << std::endl;
 }
 
@@ -55,46 +51,27 @@ void datetime_tests()
 //     pnl_vect_int_print(ok);
 // }
 
-// TODO: mettre autre part?
 void print_path(IUnderlying* und, DateTimeVector *dates){
     for(int i = 0; i < dates->nbDates_; ++i){
         std::cout << (*dates)[i] << " : price: " << GET(und->price_, i) << std::endl;
     }
 }
 
+void print_all_paths(IUnderlying** unds, DateTimeVector *dates){
+    for(int i = 0; i < dates->nbDates_; ++i){
+        std::cout << (*dates)[i] << " : ";
+        for(int j = 0; j < 4; ++j){
+            std::cout << GET(unds[j]->price_, i) << " | ";
+        }
+        std::cout << std::endl;
+    }
+}
+
 void ocelia_test()
 {
-    // ***** DONNEES *****
-    IUnderlying *eur = new ForeignUnderlying(100, 10, 365);
-    IUnderlying *gbp = new ForeignUnderlying(100, 10, 365);
-    IUnderlying *chf = new ForeignUnderlying(100, 10, 365);
-    IUnderlying *jpy = new ForeignUnderlying(100, 10, 365);
-    IUnderlying **unds = new IUnderlying*[4];
-    for(int i = 0; i < 49; ++i){
-        LET(eur->price_, i) = 100+(i);
-        LET(gbp->price_, i) = 200+(i);
-        LET(chf->price_, i) = 300+(i);
-        LET(jpy->price_, i) = 400+(i);
-    }
-    unds[0] = eur;
-    unds[1] = gbp;
-    unds[2] = chf;
-    unds[3] = jpy;
-
-    DateTimeVector *all_dates = new DateTimeVector("../data/all_dates", 3288);
-    DateTimeVector *all_dates_constatation = new DateTimeVector("../data/all_dates_constatation", 49);
-    DateTimeVector *dates_valeurs_n = new DateTimeVector("../data/dates_valeurs_n", 35);
-    DateTimeVector *dates_semest = new DateTimeVector("../data/dates_semest", 16);
-
-    Ocelia *ocelia = new Ocelia(1, 500, 4, unds, dates_semest, dates_valeurs_n);
-
-    // ***** METHODES *****
-    calcul_indices_dates(all_dates_constatation, ocelia->dates_valeurs_n_ans_, ocelia->indices_dates_valeurs_n_ans_);
-    calcul_indices_dates(all_dates_constatation, ocelia->dates_semestrielles_, ocelia->indices_dates_semestrielles_);
-
-    // print_path(jpy, all_dates_constatation);
-
-    ocelia->compute_valeurs_n_ans(ocelia->valeurs_initiales_, 0);
+    // TODO: mettre dans des tests unitaires
+    // ***** TESTS (à copier coller celui qu'on veut) *****
+    // ocelia->compute_valeurs_n_ans(ocelia->valeurs_initiales_, 0);
     // pnl_vect_print(ocelia->valeurs_initiales_);
 
     // ocelia->compute_nouveau_depart();
@@ -127,13 +104,10 @@ void underlying_test()
     BlackScholesModel *blackscholes = new BlackScholesModel(ocelia, sigma);
     blackscholes->simulateMarket(4);
 
-
     // ***** AFFICHAGE *****
+    print_all_paths(underlyings, all_dates);
 
-    for(int i=0; i<4; i++){
-        pnl_vect_print_asrow(blackscholes->derivative_->underlyings_[i]->price_);   
-    }
-
+    std::cout << ocelia->payoff() << std::endl;
 }
 
 void quanto_test(){
