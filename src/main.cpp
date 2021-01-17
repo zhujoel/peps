@@ -23,6 +23,7 @@
 // TODO: mettre des const dans les fonctions au bons endroits
 // TODO: abstraire pour des taux intérets non constants
 // TODO: implémenter des MC + opti ?
+// TODO: pour les valeurs, arrondir à 4
 // TODO: bcp + tard: feeder des données ?
 
 /** CONVENTION QUANTO POUR L'INSTANT : zc en ligne 0 et risqué en ligne 1 */
@@ -86,16 +87,32 @@ void ocelia_test()
     calcul_indices_dates(all_dates_constatation, 49, ocelia->dates_semestrielles_, ocelia->indices_dates_constatation_);
     // pnl_vect_int_print(indices);
 
-    // print_path(jpy, all_dates_constatation, 49);
+    print_path(jpy, all_dates_constatation, 49);
 
     ocelia->compute_valeurs_n_ans(ocelia->valeurs_initiales_, 0);
     // pnl_vect_print(ocelia->valeurs_initiales_);
+
+    ocelia->init_nouveau_depart();
+    // pnl_vect_print(ocelia->nouveau_depart_);
+    
+    // ocelia->compute_perfs_n_ans(ocelia->perfs_, 8);
+    // pnl_vect_print(ocelia->perfs_);
+
+    // ocelia->compute_nouveau_depart();
+    // pnl_vect_print(ocelia->valeurs_initiales_);
+    // pnl_vect_print(ocelia->valeurs_n_ans_);
+    // pnl_vect_print(ocelia->perfs_);
+    // pnl_vect_print(ocelia->nouveau_depart_);
+
+    double moy = ocelia->compute_perf_moyenne_panier();
+    std::cout << moy << std::endl;
 
     // for(int i = 0; i < 49; ++i){
     //     std::cout << all_dates_constatation[i] << std::endl;
     // }
     // std::cout << ocelia->payoff() << std::endl;
 }
+
 
 void quanto_test(){
 // TEST DE PRICE UNE OPTION QUANTO

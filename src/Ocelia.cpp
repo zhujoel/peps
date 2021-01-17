@@ -1,6 +1,7 @@
 #include "Ocelia.h"
 #include "pnl/pnl_mathtools.h"
 #include <iostream>
+#include <math.h>
 
 // TODO: changer le 0.0 en un r
 Ocelia::Ocelia(double T, int nbTimeSteps, int size, IUnderlying **underlyings) : IDerivative(T, nbTimeSteps, size, 0.0, underlyings)
@@ -13,6 +14,7 @@ Ocelia::Ocelia(double T, int nbTimeSteps, int size, IUnderlying **underlyings) :
     this->valeurs_n_ans_ = pnl_vect_create(4);
     this->valeurs_initiales_ = pnl_vect_create(4);
     this->perfs_ = pnl_vect_create(4);
+    this->nouveau_depart_ = pnl_vect_create(4);
 }
 
 Ocelia::~Ocelia(){
@@ -20,14 +22,17 @@ Ocelia::~Ocelia(){
 }
 
 // todo: à virer d'ocelia
+// done
 void Ocelia::fill_dates_perf(){
     fill_dates_from_file(this->dates_semestrielles_, "../data/dates_semest", 16);
 }
 
+// done
 void Ocelia::fill_dates_valeurs(){   
     fill_dates_from_file(this->dates_valeurs_n_ans_, "../data/dates_valeurs_n", 35);
 }
 
+// done
 double Ocelia::compute_perf_moyenne_panier()
 {
     double perf_moy_panier = 0.0; // performance moyenne du panier (1.4 pdf)
@@ -45,8 +50,12 @@ double Ocelia::compute_perf_moyenne_panier()
     return perf_moy_panier/16;
 }
 
+// done
 void Ocelia::compute_valeurs_n_ans(PnlVect *valeurs, int N)
 {
+    if(N == 2 || N == 3){
+        std::cout << "NOOOON" << std::endl;
+    }
     // TODO: faut pas qu'il y ait de 2 ou 3
     if(N > 1){
         N -= 2;
@@ -64,8 +73,14 @@ void Ocelia::compute_valeurs_n_ans(PnlVect *valeurs, int N)
 
     // TODO: remplacer les 5 par des variables
     pnl_vect_div_scalar(valeurs, 5);
+
+    // TODO: put in a function
+    for(int i = 0; i < this->size_; ++i){
+        LET(valeurs, i) = roundf(GET(valeurs, i)*10000)/10000;
+    }
 }
 
+// done
 void Ocelia::compute_perfs_n_ans(PnlVect *perfs, int N){
     compute_valeurs_n_ans(this->valeurs_n_ans_, N);
     for(int i = 0; i < this->size_; ++i){
@@ -74,21 +89,23 @@ void Ocelia::compute_perfs_n_ans(PnlVect *perfs, int N){
     }
 }
 
+// done
 void Ocelia::init_nouveau_depart(){
-    this->nouveau_depart_ = pnl_vect_create(4);
-
     for(int i = 0; i < this->size_; ++i){
         LET(this->nouveau_depart_, i) = GET(this->valeurs_initiales_, i);
     }
 }
 
+//done
 void Ocelia::compute_nouveau_depart(){
+    init_nouveau_depart();
+
     compute_valeurs_n_ans(this->valeurs_initiales_, 0);
     compute_valeurs_n_ans(this->valeurs_n_ans_, 1);
 
     compute_perfs_n_ans(this->perfs_, 1);
 
-    if(pnl_vect_max(this->perfs_) <= 0.9){
+    if(pnl_vect_max(this->perfs_) <= -0.1){
         pnl_vect_mult_scalar(this->nouveau_depart_, 0.9);
     }
 }
@@ -119,8 +136,6 @@ double Ocelia::payoff()
     double val_liquidative_initiale = 100.0;
     // 1. valeurs initiale
     compute_valeurs_n_ans(this->valeurs_initiales_, 0);
-    // 2. on met valeur init dans valeur depart
-    init_nouveau_depart();
     // 4. calcul nouveauDepart
     compute_nouveau_depart();
     
