@@ -15,7 +15,6 @@
 #include "SimulatedMarketData.h"
 #include "pnl/pnl_mathtools.h"
 // TODO: voir comment générer les .dll 
-// TODO: TEST UNITAIRES en googletest
 // TODO: Gestion des données
 // TODO: ajouter classe taux d'intéret ?
 // TODO: ajouter des classes pour séparer les zc et les actifs risqué dans un pf ?
@@ -26,30 +25,6 @@
 // TODO: implémenter des MC + opti ?
 // TODO: feeder des données ?
 
-// TODO: tests unitaires à mettre dans des googletest
-void datetime_tests()
-{
-    DateTime *dt1 = new DateTime(1, 1, 1995);
-    DateTime *dt2 = new DateTime(2, 2, 1995);
-    DateTime *dt3 = new DateTime(1, 1, 1995);
-
-    // compare
-    std::cout << "dt1 compare dt2 ? (-1 attendu) : " << dt1->compare(dt2) << std::endl;
-    std::cout << "dt2 compare dt1 ? (1 attendu) : " << dt2->compare(dt1) << std::endl;
-    std::cout << "dt1 compare dt3 ? (0 attendu) : " << dt1->compare(dt3) << std::endl;
-    std::cout << "dt3 compare dt1 ? (0 attendu) : " << dt3->compare(dt1) << std::endl;
-
-    // operator<<
-    std::cout << "(1/1/1995 attendu) : " << dt1 << std::endl;
-}
-
-// void datetimevector_tests(){
-//     DateTimeVector *dates = new DateTimeVector("../data/all_dates", 3288);
-//     DateTimeVector *dates2 = new DateTimeVector("../data/dates_semest", 16);
-//     PnlVectInt* ok = pnl_vect_int_create(16);
-//     calcul_indices_dates(dates, dates2, ok);
-//     pnl_vect_int_print(ok);
-// }
 
 void print_path(IUnderlying* und, DateTimeVector *dates){
     for(int i = 0; i < dates->nbDates_; ++i){
@@ -193,7 +168,5 @@ void quanto_test(){
 int main(){
     // quanto_test();
     // ocelia_test();
-    // datetimevector_tests();
-    // datetime_tests();
     underlying_test();
 }

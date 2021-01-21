@@ -12,6 +12,7 @@ class DateTimeVectorTest: public ::testing::Test{
         }
 
         virtual void TearDown(){
+            delete this->dates;
         }
 };
 
@@ -52,6 +53,9 @@ TEST_F(DateTimeVectorTest, calculIndicesDates){
     EXPECT_EQ(10, GET_INT(indices, 2));
     EXPECT_EQ(14, GET_INT(indices, 3));
     EXPECT_EQ(15, GET_INT(indices, 4));
+
+    delete subset;
+    pnl_vect_int_free(&indices);
 }
 
 

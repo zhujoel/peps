@@ -23,7 +23,10 @@ DateTimeVector::DateTimeVector(std::string fileName, int nbDates)
 }
 
 DateTimeVector::~DateTimeVector(){
-
+    for(int i = 0; i < this->nbDates_; ++i){
+        delete this->dates_[i];
+    }
+    delete[] this->dates_;
 }
 
 DateTime* DateTimeVector::operator[](int index){
@@ -37,11 +40,9 @@ DateTime* DateTimeVector::operator[](int index){
 void calcul_indices_dates(DateTimeVector *all_dates, DateTimeVector *dates, PnlVectInt *indices)
 {
     int cnt = 0;
-
     for(int i = 0; i < all_dates->nbDates_; ++i){
         if((*all_dates)[i]->compare((*dates)[cnt]) == 0){
             LET_INT(indices, cnt++) = i;
-
             if(cnt == indices->size){
                 break;
             }
