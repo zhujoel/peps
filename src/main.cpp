@@ -14,14 +14,15 @@
 #include "IMarketData.h"
 #include "SimulatedMarketData.h"
 #include "pnl/pnl_mathtools.h"
+
 // TODO: voir comment générer les .dll 
 // TODO: Gestion des données
 // TODO: ajouter classe taux d'intéret ?
 // TODO: ajouter des classes pour séparer les zc et les actifs risqué dans un pf ?
 // TODO: calcul du sigma pour généraliser avec des dimensions > 2
-// TODO: pricing en t
-// TODO: mettre des const dans les fonctions au bons endroits
-// TODO: abstraire pour des taux intérets non constants
+// TODO: pricing en tnctions au bons endroits
+// TODO: abstraire pour des taux int
+// TODO: mettre des const dans les foérets non constants
 // TODO: implémenter des MC + opti ?
 // TODO: feeder des données ?
 
@@ -42,45 +43,20 @@ void print_all_paths(IUnderlying** unds, DateTimeVector *dates){
     }
 }
 
-void ocelia_test()
-{
-    // ocelia->compute_valeurs_n_ans(ocelia->valeurs_initiales_, 0);
-    // pnl_vect_print(ocelia->valeurs_initiales_);
-
-    // ocelia->compute_nouveau_depart();
-    // pnl_vect_print(ocelia->valeurs_initiales_);
-    // pnl_vect_print(ocelia->valeurs_n_ans_);
-    // pnl_vect_print(ocelia->perfs_);
-    // pnl_vect_print(ocelia->nouveau_depart_);
-
-    // ocelia->compute_perfs_n_ans(ocelia->perfs_, 8);
-    // pnl_vect_print(ocelia->perfs_);
-
-    // double moy = ocelia->compute_perf_moyenne_panier();
-    // std::cout << moy << std::endl;
-
-    // double flux = ocelia->compute_flux_n_ans(8);
-    // std::cout << flux << std::endl;
-
-    // std::cout << ocelia->payoff() << std::endl;
-}
 void underlying_test()
 {
     // ***** DONNEES *****
-    // DateTimeVector *all_dates = new DateTimeVector("../data/all_dates", 3288);
-    // DateTimeVector *dates_valeurs_n = new DateTimeVector("../data/dates_valeurs_n", 35);
-    // DateTimeVector *dates_semest = new DateTimeVector("../data/dates_semest", 16);
-    // IMarketData *marketData = new SimulatedMarketData(all_dates);
-    // IUnderlying **underlyings = marketData->getMarketdata(4);
-    // Ocelia *ocelia = new Ocelia(1, 3288, 4, underlyings, dates_semest, dates_valeurs_n);
-    // PnlMat *sigma = pnl_mat_create(4, 4);
-    // BlackScholesModel *blackscholes = new BlackScholesModel(ocelia, sigma);
-    // blackscholes->simulateMarket(4);
+    DateTimeVector *all_dates = new DateTimeVector("../data/all_dates", 3288);
+    IMarketData *marketData = new SimulatedMarketData(all_dates);
+    IUnderlying **underlyings = marketData->getMarketdata(4);
+    Ocelia *ocelia = new Ocelia(1, 3288, 4, underlyings, all_dates);
+    PnlMat *sigma = pnl_mat_create(4, 4);
+    BlackScholesModel *blackscholes = new BlackScholesModel(ocelia, sigma);
+    blackscholes->simulateMarket(4);
 
-    // // ***** AFFICHAGE *****
-    // print_all_paths(underlyings, all_dates);
-
-    // std::cout << ocelia->payoff() << std::endl;
+    // ***** AFFICHAGE *****
+    print_all_paths(underlyings, all_dates);
+    std::cout << ocelia->payoff() << std::endl;
 }
 
 void quanto_test(){
@@ -91,7 +67,7 @@ void quanto_test(){
     double nbTimeSteps = 365;
     double rf = 0.05;
     double K = 90.0;
-    double nbProduits = 2;
+    double nbProduits = 1;
     double rd = 0.03; // taux constants pour l'instant
     double sigma_tx_change = 0.05;
     double sigma_actif = 0.1;
@@ -105,7 +81,7 @@ void quanto_test(){
     pnl_rng_sseed(rng, std::time(NULL));
 
     // TODO : ce calcul du sigma ne fonctionnera (enfin il dépend de la taille et du contenu de la matrice du pf de couverture)
-    PnlMat* sigma = pnl_mat_create(nbProduits, nbProduits); // c'est une matrice de covariance
+    PnlMat* sigma = pnl_mat_create(nbProduits*2, nbProduits*2); // c'est une matrice de covariance
     MLET(sigma, 0, 0) = sigma_tx_change * sigma_tx_change;
     MLET(sigma, 1, 1) = sigma_actif * sigma_actif;
     MLET(sigma, 0, 1) = sigma_tx_change * sigma_actif * rho;
@@ -136,8 +112,8 @@ void quanto_test(){
 
     double prix = 0.0;
     double prix_std_dev = 0.0;
-    PnlVect* delta = pnl_vect_create(quanto->size_);
-    PnlVect* delta_std_dev = pnl_vect_create(quanto->size_);
+    PnlVect* delta = pnl_vect_create(quanto->size_*2);
+    PnlVect* delta_std_dev = pnl_vect_create(quanto->size_*2);
     pricer->simulate(prix, prix_std_dev, delta, delta_std_dev);
     std::cout << "prix simulé : " << prix << " std dev : " << prix_std_dev << std::endl;
     std::cout << "price est dedans : " << (abs(prix2 - prix) <= 1.96*prix_std_dev) << std::endl;
@@ -165,6 +141,5 @@ void quanto_test(){
 
 int main(){
     // quanto_test();
-    // ocelia_test();
     underlying_test();
 }

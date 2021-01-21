@@ -4,8 +4,8 @@
 
 BlackScholesModel::BlackScholesModel(IDerivative *derivative, PnlMat *sigma) : IModel(derivative, sigma)
 {
-    this->G_ = pnl_vect_create(this->derivative_->size_); 
-    this->B_ = pnl_vect_create(this->derivative_->size_);
+    this->G_ = pnl_vect_create(this->derivative_->size_*2); 
+    this->B_ = pnl_vect_create(this->derivative_->size_*2);
 }
 
 BlackScholesModel::~BlackScholesModel()
@@ -18,11 +18,11 @@ void BlackScholesModel::asset(PnlRng *rng)
 {
     // TODO: works for derivative of size 1, make this work with derivative with d underlyings (instead of [0] everywhere)
     double timestep = this->derivative_->T_/this->derivative_->nbTimeSteps_;
-    PnlVect *row = pnl_vect_create(this->derivative_->size_);
-    for (int k = 1; k <= this->derivative_->nbTimeSteps_; ++k)
+    PnlVect *row = pnl_vect_create(this->derivative_->size_*2);
+    for (int k = 1; k < this->derivative_->nbTimeSteps_; ++k)
     {
         // for(int d ; 0 < this->derivative->size )
-        pnl_vect_rng_normal(this->G_, this->derivative_->size_, rng); // G Vecteur gaussien
+        pnl_vect_rng_normal(this->G_, this->derivative_->size_*2, rng); // G Vecteur gaussien
         pnl_mat_mult_vect_inplace(this->B_, this->sigma_, this->G_);
 
         pnl_mat_get_row(row, this->sigma_, 0);
@@ -46,17 +46,17 @@ void BlackScholesModel::shiftAsset(double h, double t, double timestep)
     // }
 
 
-    for(int d = 0; d < this->derivative_->size_/2; ++d){
+    for(int d = 0; d < this->derivative_->size_; ++d){
         if (h>0)
         {
             pnl_vect_clone(this->derivative_->underlyings_[d]->shifted_price_, this->derivative_->underlyings_[d]->price_);
-            for (int k = i+1; k <= this->derivative_->nbTimeSteps_; ++k)
+            for (int k = i+1; k < this->derivative_->nbTimeSteps_; ++k)
             {  
                 LET(this->derivative_->underlyings_[d]->shifted_price_, k) = GET(this->derivative_->underlyings_[d]->shifted_price_, k) * (1+h);
             }
 
         } else {
-            for (int k = i+1; k <= this->derivative_->nbTimeSteps_; ++k)
+            for (int k = i+1; k < this->derivative_->nbTimeSteps_; ++k)
             {  
                 LET(this->derivative_->underlyings_[d]->shifted_price_, k) = (GET(this->derivative_->underlyings_[d]->shifted_price_, k) / (1-h)) * (1+h);
             }

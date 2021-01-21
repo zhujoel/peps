@@ -12,13 +12,13 @@ QuantoOption::~QuantoOption(){
 }
 
 double QuantoOption::payoff(){
-    double B_T = GET(this->underlyings_[0]->zc_, this->nbTimeSteps_); // valeur finale de l'actif sans risque converti 
-    double S_T = GET(this->underlyings_[0]->price_, this->nbTimeSteps_); // valeur finale de l'actif sans risque converti 
+    double B_T = GET(this->underlyings_[0]->zc_, this->nbTimeSteps_-1); // valeur finale de l'actif sans risque converti 
+    double S_T = GET(this->underlyings_[0]->price_, this->nbTimeSteps_-1); // valeur finale de l'actif sans risque converti 
 
     return MAX(S_T - this->K_, 0);   
 }
 
 double QuantoOption::shifted_payoff() const{
-    double S_T = GET(this->underlyings_[0]->shifted_price_, this->nbTimeSteps_); // valeur finale de l'actif sans risque converti 
+    double S_T = GET(this->underlyings_[0]->shifted_price_, this->nbTimeSteps_-1); // valeur finale de l'actif sans risque converti 
     return MAX(S_T - this->K_, 0);
 }
