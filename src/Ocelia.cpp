@@ -6,13 +6,14 @@
 // TODO: changer le 0.0 en un r?
 Ocelia::Ocelia(double T, int nbTimeSteps, int size, IUnderlying **underlyings, DateTimeVector *all_dates) : IDerivative(T, nbTimeSteps, size, 0.0, underlyings)
 {
+    // TODO: mettre une vérif que le nb de timesteps soit le meme que la taille de all_dates
     this->valeurs_n_ans_ = pnl_vect_create(this->size_);
     this->valeurs_initiales_ = pnl_vect_create(this->size_);
     this->nouveau_depart_ = pnl_vect_create(this->size_);
     this->perfs_ = pnl_vect_create(this->size_);
     
     DateTimeVector *dates_semestrielles = new DateTimeVector("../data/dates_semest", 16);
-    DateTimeVector *dates_valeurs_n_ans = new DateTimeVector("../data/dates_valeurs_n", 36);
+    DateTimeVector *dates_valeurs_n_ans = new DateTimeVector("../data/dates_valeurs_n", 35);
 
     this->indices_dates_semestrielles_ = pnl_vect_int_create(dates_semestrielles->nbDates_);
     this->indices_dates_valeurs_n_ans_ = pnl_vect_int_create(dates_valeurs_n_ans->nbDates_);
@@ -53,7 +54,7 @@ void Ocelia::compute_valeurs_n_ans(PnlVect *valeurs, int N)
     if(N == 2 || N == 3){
         throw std::invalid_argument("N n'a pas de valeurs pour N=2 ou N=3 !");
     }
-    if(N > 1){
+    if(N > 3){
         N -= 2;
     }
 
@@ -99,7 +100,7 @@ double Ocelia::compute_flux_n_ans(int N){
         }
         return 1 + perf_moy;
     }
-    return 0;
+    return 0.;
 }
 
 double Ocelia::payoff()
