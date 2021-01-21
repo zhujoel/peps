@@ -26,7 +26,6 @@
 // TODO: implémenter des MC + opti ?
 // TODO: feeder des données ?
 
-
 void print_path(IUnderlying* und, DateTimeVector *dates){
     for(int i = 0; i < dates->nbDates_; ++i){
         std::cout << (*dates)[i] << " : price: " << GET(und->price_, i) << std::endl;
