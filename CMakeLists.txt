@@ -44,5 +44,6 @@ include_directories(${gtest_SOURCE_DIR}/include)
 add_subdirectory(tests)
 
 add_test (NAME test_DateTime COMMAND test_DateTime)
+add_test (NAME test_DateTimeVector COMMAND test_DateTimeVector)
 
 pnl_add_postbuild(run_unit_tests)

@@ -6,7 +6,6 @@
 
 DateTime::DateTime(int dd, int mm, int yyyy)
 {
-    // TODO: faire les vérifs
     this->dd_ = dd;
     this->mm_ = mm;
     this->yyyy_ = yyyy;

@@ -15,4 +15,5 @@ class DateTimeVector{
 };
 
 
+// LES DATES DOIVENT ETRE DANS L'ORDRE
 void calcul_indices_dates(DateTimeVector *all_dates, DateTimeVector *dates, PnlVectInt *indices);

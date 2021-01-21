@@ -1,5 +1,6 @@
 #include "gtest/gtest.h"
 #include "DateTime.h"
+#include "pnl/pnl_vector.h"
 #include <fstream>
 
 class DateTimeTest: public ::testing::Test{
