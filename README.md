@@ -1,6 +1,7 @@
 # Projet PEPS 2021
 
 ## Auteurs
+
 * Kaouthar HRAIM
 * Mohamed Mahmoud KHOUNA
 * Philippe MORAIS
@@ -42,5 +43,7 @@ mkdir build
 cd build
 
 cmake -DCMAKE_PREFIX_PATH=<location_lib_pnl> .. (e.g. : cmake -DCMAKE_PREFIX_PATH=/home/zhujo/Downloads/pnl/build/lib/cmake/pnl ..)
+
+make
 
 ctest -V
