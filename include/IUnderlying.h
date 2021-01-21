@@ -12,6 +12,8 @@ class IUnderlying {
 
     PnlVect *zc_; // zéro coupon de la place du sous jacent
     double zc_spot_; 
+
+    double nbTimeSteps_;
     
     // TODO: voir ce qu'on en fait de ces attributs
     PnlVect *ex_rate_; // taux de change entre le marché du sous jacent et le marché domestique

@@ -10,16 +10,14 @@ class Ocelia : public IDerivative{
         // 1 vecteur date avec toutes les dates du début 15 mai 2008 à 28 avril 2016
         // 4 underlyings: 4 sous-jacent (euro, gbp, jpy, chf): prix et zc + spot
 
-        DateTimeVector *dates_semestrielles_; // dates de constatation semestrielles de la performance du panier pour le calcul du payoff
-        DateTimeVector *dates_valeurs_n_ans_; // 1.2 du pdf d'analyse financier
         PnlVectInt *indices_dates_semestrielles_; // indices des dates de constatation dans le path 
         PnlVectInt *indices_dates_valeurs_n_ans_; // indices dans le path des dates des valeurs n ans
         PnlVect *valeurs_n_ans_; // moyenne de la valeur des indices à l'année n
         PnlVect *valeurs_initiales_; // moyenne des valeurs initiales (année 0);
         PnlVect *nouveau_depart_; // valeurs de l'effet nouveau départ
-        PnlVect *perfs_;
+        PnlVect *perfs_; // perfs à l'année n
 
-        Ocelia(double T, int nbTimeSteps, int size, IUnderlying **underlyings, DateTimeVector *dates_semestrielles, DateTimeVector *date_valeurs_n_ans);
+        Ocelia(double T, int nbTimeSteps, int size, IUnderlying **underlyings, DateTimeVector *all_dates);
         ~Ocelia();
         double payoff();
         double shifted_payoff() const;

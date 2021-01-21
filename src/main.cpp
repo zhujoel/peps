@@ -44,8 +44,6 @@ void print_all_paths(IUnderlying** unds, DateTimeVector *dates){
 
 void ocelia_test()
 {
-    // TODO: mettre dans des tests unitaires
-    // ***** TESTS (à copier coller celui qu'on veut) *****
     // ocelia->compute_valeurs_n_ans(ocelia->valeurs_initiales_, 0);
     // pnl_vect_print(ocelia->valeurs_initiales_);
 
@@ -69,20 +67,20 @@ void ocelia_test()
 void underlying_test()
 {
     // ***** DONNEES *****
-    DateTimeVector *all_dates = new DateTimeVector("../data/all_dates", 3288);
-    DateTimeVector *dates_valeurs_n = new DateTimeVector("../data/dates_valeurs_n", 35);
-    DateTimeVector *dates_semest = new DateTimeVector("../data/dates_semest", 16);
-    IMarketData *marketData = new SimulatedMarketData(all_dates);
-    IUnderlying **underlyings = marketData->getMarketdata(4);
-    Ocelia *ocelia = new Ocelia(1, 3288, 4, underlyings, dates_semest, dates_valeurs_n);
-    PnlMat *sigma = pnl_mat_create(4, 4);
-    BlackScholesModel *blackscholes = new BlackScholesModel(ocelia, sigma);
-    blackscholes->simulateMarket(4);
+    // DateTimeVector *all_dates = new DateTimeVector("../data/all_dates", 3288);
+    // DateTimeVector *dates_valeurs_n = new DateTimeVector("../data/dates_valeurs_n", 35);
+    // DateTimeVector *dates_semest = new DateTimeVector("../data/dates_semest", 16);
+    // IMarketData *marketData = new SimulatedMarketData(all_dates);
+    // IUnderlying **underlyings = marketData->getMarketdata(4);
+    // Ocelia *ocelia = new Ocelia(1, 3288, 4, underlyings, dates_semest, dates_valeurs_n);
+    // PnlMat *sigma = pnl_mat_create(4, 4);
+    // BlackScholesModel *blackscholes = new BlackScholesModel(ocelia, sigma);
+    // blackscholes->simulateMarket(4);
 
-    // ***** AFFICHAGE *****
-    print_all_paths(underlyings, all_dates);
+    // // ***** AFFICHAGE *****
+    // print_all_paths(underlyings, all_dates);
 
-    std::cout << ocelia->payoff() << std::endl;
+    // std::cout << ocelia->payoff() << std::endl;
 }
 
 void quanto_test(){

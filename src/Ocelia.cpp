@@ -4,31 +4,38 @@
 #include <math.h>
 
 // TODO: changer le 0.0 en un r?
-Ocelia::Ocelia(double T, int nbTimeSteps, int size, IUnderlying **underlyings, DateTimeVector *dates_semestrielles, DateTimeVector *date_valeurs_n_ans) : IDerivative(T, nbTimeSteps, size, 0.0, underlyings)
+Ocelia::Ocelia(double T, int nbTimeSteps, int size, IUnderlying **underlyings, DateTimeVector *all_dates) : IDerivative(T, nbTimeSteps, size, 0.0, underlyings)
 {
-    this->dates_semestrielles_ = dates_semestrielles;
-    this->dates_valeurs_n_ans_ = date_valeurs_n_ans;
-    this->indices_dates_semestrielles_ = pnl_vect_int_create(this->dates_semestrielles_->nbDates_);
-    this->indices_dates_valeurs_n_ans_ = pnl_vect_int_create(this->dates_valeurs_n_ans_->nbDates_);
     this->valeurs_n_ans_ = pnl_vect_create(this->size_);
     this->valeurs_initiales_ = pnl_vect_create(this->size_);
-    this->perfs_ = pnl_vect_create(this->size_);
     this->nouveau_depart_ = pnl_vect_create(this->size_);
+    this->perfs_ = pnl_vect_create(this->size_);
+    
+    DateTimeVector *dates_semestrielles = new DateTimeVector("../data/dates_semest", 16);
+    DateTimeVector *dates_valeurs_n_ans = new DateTimeVector("../data/dates_valeurs_n", 36);
 
-    DateTimeVector *all_dates_constatation = new DateTimeVector("../data/all_dates_constatation", 49);
-    DateTimeVector *all_dates = new DateTimeVector("../data/all_dates", 3288);
-    calcul_indices_dates(all_dates_constatation, this->dates_valeurs_n_ans_, this->indices_dates_valeurs_n_ans_);
-    calcul_indices_dates(all_dates_constatation, this->dates_semestrielles_, this->indices_dates_semestrielles_);
+    this->indices_dates_semestrielles_ = pnl_vect_int_create(dates_semestrielles->nbDates_);
+    this->indices_dates_valeurs_n_ans_ = pnl_vect_int_create(dates_valeurs_n_ans->nbDates_);
+    calcul_indices_dates(all_dates, dates_semestrielles, this->indices_dates_semestrielles_);
+    calcul_indices_dates(all_dates, dates_valeurs_n_ans, this->indices_dates_valeurs_n_ans_);
+
+    delete dates_semestrielles;
+    delete dates_valeurs_n_ans;
 }
 
 Ocelia::~Ocelia(){
-    // TODO: valgrind
+    pnl_vect_int_free(&this->indices_dates_semestrielles_);
+    pnl_vect_int_free(&this->indices_dates_valeurs_n_ans_);
+    pnl_vect_free(&this->valeurs_n_ans_);
+    pnl_vect_free(&this->valeurs_initiales_);
+    pnl_vect_free(&this->nouveau_depart_);
+    pnl_vect_free(&this->perfs_);
 }
 
 double Ocelia::compute_perf_moyenne_panier()
 {
     double perf_moy_panier = 0.0;
-    for(int t = 0; t < this->dates_semestrielles_->nbDates_; ++t){
+    for(int t = 0; t < this->indices_dates_semestrielles_->size; ++t){
         double somme = 0.0;
         for(int i = 0; i < this->size_; ++i){
             double I_i_s = GET(this->underlyings_[i]->price_, GET_INT(this->indices_dates_semestrielles_, t));
@@ -38,7 +45,7 @@ double Ocelia::compute_perf_moyenne_panier()
         perf_moy_panier += MAX(somme/this->size_, 0);
     }
 
-    return perf_moy_panier/this->dates_semestrielles_->nbDates_;
+    return perf_moy_panier/this->indices_dates_semestrielles_->size;
 }
 
 void Ocelia::compute_valeurs_n_ans(PnlVect *valeurs, int N)
@@ -120,7 +127,7 @@ double Ocelia::shifted_payoff() const
 void trunc(PnlVect* vect, int n){
     int ten = pow(10, n);
     for(int i = 0; i < vect->size; ++i){
-        LET(vect, i) = roundf(GET(vect, i)*ten)/ten;
+        LET(vect, i) = roundl(GET(vect, i)*ten)/ten;
     }
 }
 
