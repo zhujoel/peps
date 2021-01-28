@@ -8,6 +8,12 @@ BlackScholesModel::BlackScholesModel(IDerivative *derivative, PnlMat *sigma) : I
     this->B_ = pnl_vect_create(this->derivative_->size_*2);
 }
 
+BlackScholesModel::BlackScholesModel(){
+
+    this->G_ = pnl_vect_create(7); 
+    this->B_ = pnl_vect_create(7);
+}
+
 BlackScholesModel::~BlackScholesModel()
 {
     pnl_vect_free(&this->G_);
@@ -36,6 +42,41 @@ void BlackScholesModel::asset(PnlRng *rng)
     
     pnl_vect_free(&row);
 }
+
+void BlackScholesModel::asset(PnlMat *path, PnlMat *sigma, PnlVect *volatility, double rd, double T, double nbTimeSteps, PnlVect* spot, PnlRng *rng){
+    // path c'est 4 sous-jacent + 3 zc
+    // path, size: 4 + 3 (actif sans risque étrangers en domestique)
+    // 0: ss-jct gbp
+    // 1: ss-jct jpy
+    // 2: ss-jct chf
+    // 3: ss-jct euro
+    // 4: zc gbp
+    // 5: zc jpy
+    // 6: zc chf    
+    double timestep = T/nbTimeSteps;
+    pnl_mat_set_row(path, spot, 0);
+
+    for (int k = 1; k <= nbTimeSteps; ++k)
+    {
+        pnl_vect_rng_normal(this->G_, 7, rng); // G Vecteur gaussien
+        pnl_mat_mult_vect_inplace(this->B_, sigma, this->G_);
+        for (int d = 0; d < 7; ++d)
+        {
+            double sigma_d = GET(volatility, d);
+            MLET(path, k, d) = MGET(path, k-1, d) * exp( (rd - (sigma_d*sigma_d)/2 ) * timestep + sqrt(timestep) * GET(this->B_, d));
+        }
+    }
+}
+
+// à taux constant
+// todo: récup donneés de marchés
+// todo: calculer volatility and sigma
+// todo: bs asset
+// todo: modifier ocelia / mc pour prendre path
+// todo: tester volatility and sigma
+// todo: tracking error
+// todo: rd en vecteur et calcul intégrale
+// todo: pricing en t
 
 void BlackScholesModel::shiftAsset(double h, double t, double timestep)
 {

@@ -5,6 +5,10 @@ IModel::IModel(IDerivative *derivative, PnlMat *sigma){
     this->sigma_ = sigma;
 }
 
+IModel::IModel(){
+
+}
+
 IModel::~IModel(){
 }
 
