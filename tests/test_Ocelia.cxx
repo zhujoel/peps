@@ -3,47 +3,38 @@
 #include "IMarketData.h"
 #include "SimulatedMarketData.h"
 #include "ForeignUnderlying.h"
+#include "pnl/pnl_matrix.h"
 #include <fstream>
+#include <iostream>
 
 class OceliaTest: public ::testing::Test{
     protected:
         Ocelia *ocelia;
         DateTimeVector *all_dates;
-        IUnderlying **underlyings;
+        PnlMat *path;
 
         virtual void SetUp(){
             this->all_dates = new DateTimeVector("../data/all_dates_constatation", 49);
-            IUnderlying *eur = new ForeignUnderlying(100, 10, 49);
-            IUnderlying *gbp = new ForeignUnderlying(100, 10, 49);
-            IUnderlying *chf = new ForeignUnderlying(100, 10, 49);
-            IUnderlying *jpy = new ForeignUnderlying(100, 10, 49);
-            this->underlyings = new IUnderlying*[4];
+            this->path = pnl_mat_create(7, 49);
             for(int i = 0; i < 49; ++i){
-                LET(eur->price_, i) = 100+i;
-                LET(gbp->price_, i) = 200+i;
-                LET(chf->price_, i) = 300+i;
-                LET(jpy->price_, i) = 400+i;
+                MLET(path, 0, i) = 100+i;
+                MLET(path, 1, i) = 200+i;
+                MLET(path, 2, i) = 300+i;
+                MLET(path, 3, i) = 400+i;
             }
-            this->underlyings[0] = eur;
-            this->underlyings[1] = gbp;
-            this->underlyings[2] = chf;
-            this->underlyings[3] = jpy;
 
-            this->ocelia = new Ocelia(1, 49, 4, underlyings, all_dates);
+            this->ocelia = new Ocelia(1, 49, 7, 4, all_dates);
         }
 
         virtual void TearDown(){
             delete this->ocelia;
             delete this->all_dates;
-            for(int i = 0; i < 4; ++i){
-                delete this->underlyings[i];
-            }
-            delete[] this->underlyings;
+            pnl_mat_free(&this->path);
         }
 };
 
 TEST_F(OceliaTest, constructor_size){
-    EXPECT_EQ(4, this->ocelia->size_);
+    EXPECT_EQ(7, this->ocelia->size_);
 }
 
 TEST_F(OceliaTest, constructor_NbTimeSteps){
@@ -71,19 +62,19 @@ TEST_F(OceliaTest, indices_n_ans_last_value){
 }
 
 TEST_F(OceliaTest, valeurs_n_ans_size){
-    EXPECT_EQ(ocelia->size_, ocelia->valeurs_n_ans_->size);
+    EXPECT_EQ(ocelia->nb_sous_jacents_, ocelia->valeurs_n_ans_->size);
 }
 
 TEST_F(OceliaTest, perfs_size){
-    EXPECT_EQ(ocelia->size_, ocelia->perfs_->size);
+    EXPECT_EQ(ocelia->nb_sous_jacents_, ocelia->perfs_->size);
 }
 
 TEST_F(OceliaTest, valeurs_initiales_size){
-    EXPECT_EQ(ocelia->size_, ocelia->valeurs_initiales_->size);
+    EXPECT_EQ(ocelia->nb_sous_jacents_, ocelia->valeurs_initiales_->size);
 }
 
 TEST_F(OceliaTest, nouveau_depart_size){
-    EXPECT_EQ(ocelia->size_, ocelia->nouveau_depart_->size);
+    EXPECT_EQ(ocelia->nb_sous_jacents_, ocelia->nouveau_depart_->size);
 }
 
 TEST_F(OceliaTest, trunc){
@@ -129,7 +120,7 @@ TEST_F(OceliaTest, are_all_positive_true){
 }
 
 TEST_F(OceliaTest, compute_valeurs_0_ans){
-    ocelia->compute_valeurs_n_ans(ocelia->valeurs_n_ans_, 0);
+    ocelia->compute_valeurs_n_ans(this->path, ocelia->valeurs_n_ans_, 0);
     EXPECT_EQ(102, GET(ocelia->valeurs_n_ans_, 0));
     EXPECT_EQ(202, GET(ocelia->valeurs_n_ans_, 1));
     EXPECT_EQ(302, GET(ocelia->valeurs_n_ans_, 2));
@@ -137,7 +128,7 @@ TEST_F(OceliaTest, compute_valeurs_0_ans){
 }
 
 TEST_F(OceliaTest, compute_valeurs_0_ans_valeurs_initiales){
-    ocelia->compute_valeurs_n_ans(ocelia->valeurs_initiales_, 0);
+    ocelia->compute_valeurs_n_ans(this->path, ocelia->valeurs_initiales_, 0);
     EXPECT_EQ(102, GET(ocelia->valeurs_initiales_, 0));
     EXPECT_EQ(202, GET(ocelia->valeurs_initiales_, 1));
     EXPECT_EQ(302, GET(ocelia->valeurs_initiales_, 2));
@@ -145,7 +136,7 @@ TEST_F(OceliaTest, compute_valeurs_0_ans_valeurs_initiales){
 }
 
 TEST_F(OceliaTest, compute_valeurs_1_ans){
-    ocelia->compute_valeurs_n_ans(ocelia->valeurs_n_ans_, 1);
+    ocelia->compute_valeurs_n_ans(this->path, ocelia->valeurs_n_ans_, 1);
     EXPECT_EQ(108, GET(ocelia->valeurs_n_ans_, 0));
     EXPECT_EQ(208, GET(ocelia->valeurs_n_ans_, 1));
     EXPECT_EQ(308, GET(ocelia->valeurs_n_ans_, 2));
@@ -153,7 +144,7 @@ TEST_F(OceliaTest, compute_valeurs_1_ans){
 }
 
 TEST_F(OceliaTest, compute_valeurs_4_ans){
-    ocelia->compute_valeurs_n_ans(ocelia->valeurs_n_ans_, 4);
+    ocelia->compute_valeurs_n_ans(this->path, ocelia->valeurs_n_ans_, 4);
     EXPECT_EQ(118, GET(ocelia->valeurs_n_ans_, 0));
     EXPECT_EQ(218, GET(ocelia->valeurs_n_ans_, 1));
     EXPECT_EQ(318, GET(ocelia->valeurs_n_ans_, 2));
@@ -161,7 +152,7 @@ TEST_F(OceliaTest, compute_valeurs_4_ans){
 }
 
 TEST_F(OceliaTest, compute_valeurs_8_ans){
-    ocelia->compute_valeurs_n_ans(ocelia->valeurs_n_ans_, 8);
+    ocelia->compute_valeurs_n_ans(this->path, ocelia->valeurs_n_ans_, 8);
     EXPECT_EQ(146, GET(ocelia->valeurs_n_ans_, 0));
     EXPECT_EQ(246, GET(ocelia->valeurs_n_ans_, 1));
     EXPECT_EQ(346, GET(ocelia->valeurs_n_ans_, 2));
@@ -169,7 +160,7 @@ TEST_F(OceliaTest, compute_valeurs_8_ans){
 }
 
 TEST_F(OceliaTest, compute_nouveau_depart){
-    ocelia->compute_nouveau_depart();
+    ocelia->compute_nouveau_depart(this->path);
     EXPECT_EQ(102, GET(ocelia->nouveau_depart_, 0));
     EXPECT_EQ(202, GET(ocelia->nouveau_depart_, 1));
     EXPECT_EQ(302, GET(ocelia->nouveau_depart_, 2));
@@ -178,8 +169,8 @@ TEST_F(OceliaTest, compute_nouveau_depart){
 
 
 TEST_F(OceliaTest, compute_perfs_1_ans){
-    ocelia->compute_nouveau_depart();
-    ocelia->compute_perfs_n_ans(ocelia->perfs_, 1);
+    ocelia->compute_nouveau_depart(this->path);
+    ocelia->compute_perfs_n_ans(this->path, ocelia->perfs_, 1);
     EXPECT_NEAR(6./102, GET(ocelia->perfs_, 0), 0.00001);
     EXPECT_NEAR(6./202, GET(ocelia->perfs_, 1), 0.00001);
     EXPECT_NEAR(6./302, GET(ocelia->perfs_, 2), 0.00001);
@@ -187,8 +178,8 @@ TEST_F(OceliaTest, compute_perfs_1_ans){
 }
 
 TEST_F(OceliaTest, compute_perfs_4_ans){
-    ocelia->compute_nouveau_depart();
-    ocelia->compute_perfs_n_ans(ocelia->perfs_, 4);
+    ocelia->compute_nouveau_depart(this->path);
+    ocelia->compute_perfs_n_ans(this->path, ocelia->perfs_, 4);
     EXPECT_NEAR(16./102, GET(ocelia->perfs_, 0), 0.00001);
     EXPECT_NEAR(16./202, GET(ocelia->perfs_, 1), 0.00001);
     EXPECT_NEAR(16./302, GET(ocelia->perfs_, 2), 0.00001);
@@ -196,8 +187,8 @@ TEST_F(OceliaTest, compute_perfs_4_ans){
 }
 
 TEST_F(OceliaTest, compute_perfs_8_ans){
-    ocelia->compute_nouveau_depart();
-    ocelia->compute_perfs_n_ans(ocelia->perfs_, 8);
+    ocelia->compute_nouveau_depart(this->path);
+    ocelia->compute_perfs_n_ans(this->path, ocelia->perfs_, 8);
     EXPECT_NEAR(44./102, GET(ocelia->perfs_, 0), 0.00001);
     EXPECT_NEAR(44./202, GET(ocelia->perfs_, 1), 0.00001);
     EXPECT_NEAR(44./302, GET(ocelia->perfs_, 2), 0.00001);
@@ -205,34 +196,34 @@ TEST_F(OceliaTest, compute_perfs_8_ans){
 }
 
 TEST_F(OceliaTest, compute_perf_moyenne_panier){
-    ocelia->compute_valeurs_n_ans(ocelia->valeurs_initiales_, 0);
-    double moy = ocelia->compute_perf_moyenne_panier();
+    ocelia->compute_valeurs_n_ans(this->path, ocelia->valeurs_initiales_, 0);
+    double moy = ocelia->compute_perf_moyenne_panier(this->path);
     EXPECT_NEAR(0.1130428, moy, 0.0000001);
 }
 
 TEST_F(OceliaTest, compute_flux_1_ans){
-    double flux = ocelia->compute_flux_n_ans(1);
+    double flux = ocelia->compute_flux_n_ans(this->path, 1);
     EXPECT_EQ(0.0, flux);
 }
 
 TEST_F(OceliaTest, compute_flux_5_ans){
-    double flux = ocelia->compute_flux_n_ans(5);
+    double flux = ocelia->compute_flux_n_ans(this->path, 5);
     EXPECT_EQ(1.32, flux);
 }
 
 TEST_F(OceliaTest, compute_flux_7_ans){
-    double flux = ocelia->compute_flux_n_ans(7);
+    double flux = ocelia->compute_flux_n_ans(this->path, 7);
     EXPECT_EQ(1.48, flux);
 }
 
 TEST_F(OceliaTest, compute_flux_8_ans){
-    ocelia->compute_nouveau_depart();
-    double flux = ocelia->compute_flux_n_ans(8);
+    ocelia->compute_nouveau_depart(this->path);
+    double flux = ocelia->compute_flux_n_ans(this->path, 8);
     EXPECT_EQ(1.56, flux);
 }
 
 TEST_F(OceliaTest, payoff){
-    double payoff = ocelia->payoff();
+    double payoff = ocelia->payoff(this->path);
     EXPECT_EQ(124, payoff);
 }
 

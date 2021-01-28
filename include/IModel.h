@@ -2,26 +2,17 @@
 
 #include "pnl/pnl_matrix.h"
 #include "pnl/pnl_random.h"
-#include "IDerivative.h"
 
 class IModel{
     public:
-        IDerivative *derivative_; // pointeur sur le produit dérivé qu'on calcule
-        PnlMat *sigma_; /// Matrice de volatilité
+        int size_; /// nombre d'actifs du modèle
+        double rd_; /// taux d'intérêt domestique (domestic rate) // TODO: à changer si on a besoin qu'il ne soit pas constant 
+        PnlMat *sigma_;
+        PnlVect *volatility_;
+        PnlVect *spot_; /// valeurs initiales des sous-jacents
 
-        IModel(IDerivative *derivative, PnlMat *sigma);
-        IModel();
-        ~IModel();
-        
-        virtual void asset(PnlRng *rng) = 0;
-        virtual void asset(PnlMat *path, PnlMat *sigma, PnlVect *volatility, double rd, double T, double nbTimeSteps, PnlVect* spot, PnlRng *rng) = 0;
-
-        virtual void shiftAsset(double h, double t, double timestep) = 0;
-        double getUnderlyingSpot(int d);
-        void compute_sigma();
+        IModel(int size, double rd, PnlMat *sigma, PnlVect *volatility, PnlVect *spot);
+        virtual ~IModel();
+        virtual void asset(PnlMat *path, double T, int nbTimeSteps, PnlRng *rng) = 0;
+        virtual void shiftAsset(PnlMat *shift_path, const PnlMat *path, int d, double h, double t, double timestep) = 0;
 };
-
-// couverture en tx stochastique :
-// un frwd pour un ss-jacent
-// un zc domestique pour tous les ss-jct + ss-jacent <-
-// actif ss risque étranger + zc domestique

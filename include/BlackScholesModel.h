@@ -9,14 +9,9 @@ class BlackScholesModel : public IModel{
         PnlVect *G_; /// Vecteur Gaussien
         PnlVect *B_; // Brownien (produit matriciel L * G);
 
-        BlackScholesModel(IDerivative *derivative, PnlMat *sigma);
-        BlackScholesModel();
+        BlackScholesModel(int size, double rd, PnlMat *sigma, PnlVect *volatility, PnlVect *spot);
         ~BlackScholesModel();
         
-        void asset(PnlRng *rng);
-        void asset(PnlMat *path, PnlMat *sigma, PnlVect *volatility, double rd, double T, double nbTimeSteps, PnlVect* spot, PnlRng *rng);
-
-        void shiftAsset(double h, double t, double timestep);
-        void simulateMarket(int nbUnderlying);
-        void compute_sigma();
+        void asset(PnlMat *path, double T, int nbTimeSteps, PnlRng *rng);
+        void shiftAsset(PnlMat *shift_path, const PnlMat *path, int d, double h, double t, double timestep);
 };

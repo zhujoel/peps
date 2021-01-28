@@ -3,6 +3,7 @@
 #include "IDerivative.h"
 #include "DateTimeVector.h"
 #include <string>
+#include "pnl/pnl_matrix.h"
 
 class Ocelia : public IDerivative{
     public:
@@ -10,6 +11,7 @@ class Ocelia : public IDerivative{
         // 1 vecteur date avec toutes les dates du début 15 mai 2008 à 28 avril 2016
         // 4 underlyings: 4 sous-jacent (euro, gbp, jpy, chf): prix et zc + spot
 
+        int nb_sous_jacents_;
         PnlVectInt *indices_dates_semestrielles_; // indices des dates de constatation dans le path 
         PnlVectInt *indices_dates_valeurs_n_ans_; // indices dans le path des dates des valeurs n ans
         PnlVect *valeurs_n_ans_; // moyenne de la valeur des indices à l'année n
@@ -17,15 +19,14 @@ class Ocelia : public IDerivative{
         PnlVect *nouveau_depart_; // valeurs de l'effet nouveau départ
         PnlVect *perfs_; // perfs à l'année n
 
-        Ocelia(double T, int nbTimeSteps, int size, IUnderlying **underlyings, DateTimeVector *all_dates);
+        Ocelia(double T, int nbTimeSteps, int size, int nb_sous_jacents, DateTimeVector *all_dates);
         ~Ocelia();
-        double payoff();
-        double shifted_payoff() const;
-        double compute_perf_moyenne_panier();
-        void compute_valeurs_n_ans(PnlVect *valeurs, int N); // calcule la valeur moyenne des indices pour l'année n
-        void compute_perfs_n_ans(PnlVect *perfs, int N); // compute performance pour un indice à une année
-        void compute_nouveau_depart(); 
-        double compute_flux_n_ans(int N); // calcul du C(N) cf 1.3
+        double payoff(const PnlMat *path);
+        double compute_perf_moyenne_panier(const PnlMat *path);
+        void compute_valeurs_n_ans(const PnlMat *path, PnlVect *valeurs, int N); // calcule la valeur moyenne des indices pour l'année n
+        void compute_perfs_n_ans(const PnlMat *path, PnlVect *perfs, int N); // compute performance pour un indice à une année
+        void compute_nouveau_depart(const PnlMat *path); 
+        double compute_flux_n_ans(const PnlMat *path, int N); // calcul du C(N) cf 1.3
 };
 
 void trunc(PnlVect *vect, int n); // arrondi à n decimals

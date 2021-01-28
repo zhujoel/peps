@@ -1,21 +1,12 @@
 #include "IModel.h"
 
-IModel::IModel(IDerivative *derivative, PnlMat *sigma){
-    this->derivative_ = derivative;
+IModel::IModel(int size, double rd, PnlMat *sigma, PnlVect *volatility, PnlVect *spot){
+    this->size_ = size;
+    this->rd_ = rd;
     this->sigma_ = sigma;
-}
-
-IModel::IModel(){
-
+    this->volatility_ = volatility;
+    this->spot_ = spot;
 }
 
 IModel::~IModel(){
-}
-
-
-double IModel::getUnderlyingSpot(int d){
-    if(d % 2 == 0){
-        return this->derivative_->underlyings_[d/2]->zc_spot_;
-    }
-    return this->derivative_->underlyings_[d/2]->spot_;
 }

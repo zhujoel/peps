@@ -46,5 +46,6 @@ add_subdirectory(tests)
 add_test (NAME test_DateTime COMMAND test_DateTime)
 add_test (NAME test_DateTimeVector COMMAND test_DateTimeVector)
 add_test (NAME test_Ocelia COMMAND test_Ocelia)
+add_test (NAME test_Quanto COMMAND test_Quanto)
 
 pnl_add_postbuild(run_unit_tests)

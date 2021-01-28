@@ -4,7 +4,6 @@
 #include "DateTimeVector.h"
 // #include "DataFeed.h"
 #include "IUnderlying.h"
-using namespace std;
 
 class IMarketData{
     public:

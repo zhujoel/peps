@@ -6,3 +6,6 @@ target_link_libraries(test_DateTimeVector gtest DateTimeVector DateTime ${PNL_LI
 
 add_executable(test_Ocelia test_Ocelia.cxx)
 target_link_libraries(test_Ocelia gtest Ocelia SimulatedMarketData IMarketData IDerivative ForeignUnderlying IUnderlying DateTimeVector DateTime ${PNL_LIBRARIES})
+
+add_executable(test_Quanto test_Quanto.cxx)
+target_link_libraries(test_Quanto gtest QuantoOption  BlackScholesModel StandardMonteCarloPricer IPricer IModel IDerivative ${PNL_LIBRARIES})

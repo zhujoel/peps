@@ -1,7 +1,6 @@
 #pragma once
 
 #include "pnl/pnl_matrix.h"
-#include "IUnderlying.h"
 
 // Produit dérivé abstrait
 class IDerivative {
@@ -9,10 +8,8 @@ class IDerivative {
       double T_;        // maturité finale du produit
       int nbTimeSteps_; // nb de pas de temps de discrétisation
       int size_; // nombre de sous-jacents dans le payoff du produit
-      double rd_; // taux d'intéret domestique // TODO: faire en sorte que ça soit pas constant
-      IUnderlying **underlyings_;
 
-      IDerivative(double T, int nbTimeSteps, int size, double rd, IUnderlying** underlying);
+      IDerivative(double T, int nbTimeSteps, int size);
       virtual ~IDerivative();
       
       /**
@@ -23,6 +20,5 @@ class IDerivative {
       * par la fonction asset.
       * @return le payoff du produit
       */
-      virtual double payoff() = 0;
-      virtual double shifted_payoff() const = 0;
+      virtual double payoff(const PnlMat *path) = 0;
 };
