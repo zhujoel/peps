@@ -78,6 +78,7 @@ class QuantoTest: public ::testing::Test{
         }
 };
 
+// TODO: add asserts
 TEST_F(QuantoTest, price){
     // prix théorique avec pnl
     double prix2 = 0.0;

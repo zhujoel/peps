@@ -6,6 +6,7 @@ include_directories(${PNL_INCLUDE_DIRS})
 add_library(DateTime STATIC DateTime.cpp) # On lie la librarie au cpp
 add_library(DateTimeVector STATIC DateTimeVector.cpp)
 add_library(IMarketData STATIC IMarketData.cpp)
+add_library(MathLib STATIC MathLib.cpp)
 add_library(IModel STATIC IModel.cpp)
 add_library(BlackScholesModel STATIC BlackScholesModel.cpp)
 add_library(IPricer STATIC IPricer.cpp)
