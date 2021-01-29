@@ -2,7 +2,6 @@
 #include "Ocelia.h"
 #include "IMarketData.h"
 #include "SimulatedMarketData.h"
-#include "ForeignUnderlying.h"
 #include "pnl/pnl_matrix.h"
 #include <fstream>
 #include <iostream>

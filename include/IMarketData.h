@@ -3,7 +3,6 @@
 #include <map>
 #include "DateTimeVector.h"
 // #include "DataFeed.h"
-#include "IUnderlying.h"
 
 class IMarketData{
     public:
@@ -11,6 +10,6 @@ class IMarketData{
         IMarketData(DateTimeVector *dates);
 
         virtual ~IMarketData();
-        virtual IUnderlying **getMarketdata(int nbUnderlying) = 0;
+        // virtual IUnderlying **getMarketdata(int nbUnderlying) = 0;
 
 };

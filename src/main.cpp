@@ -8,28 +8,26 @@
 #include "Ocelia.h"
 #include "DateTime.h"
 #include "DateTimeVector.h"
-#include "IUnderlying.h"
-#include "ForeignUnderlying.h"
 #include "IMarketData.h"
 #include "SimulatedMarketData.h"
 #include "MathLib.h"
 #include "pnl/pnl_mathtools.h"
 
-void print_path(IUnderlying* und, DateTimeVector *dates){
-    for(int i = 0; i < dates->nbDates_; ++i){
-        std::cout << (*dates)[i] << " : price: " << GET(und->price_, i) << std::endl;
-    }
-}
+// void print_path(IUnderlying* und, DateTimeVector *dates){
+//     for(int i = 0; i < dates->nbDates_; ++i){
+//         std::cout << (*dates)[i] << " : price: " << GET(und->price_, i) << std::endl;
+//     }
+// }
 
-void print_all_paths(IUnderlying** unds, DateTimeVector *dates){
-    for(int i = 0; i < dates->nbDates_; ++i){
-        std::cout << (*dates)[i] << " : ";
-        for(int j = 0; j < 4; ++j){
-            std::cout << GET(unds[j]->price_, i) << " | ";
-        }
-        std::cout << std::endl;
-    }
-}
+// void print_all_paths(IUnderlying** unds, DateTimeVector *dates){
+//     for(int i = 0; i < dates->nbDates_; ++i){
+//         std::cout << (*dates)[i] << " : ";
+//         for(int j = 0; j < 4; ++j){
+//             std::cout << GET(unds[j]->price_, i) << " | ";
+//         }
+//         std::cout << std::endl;
+//     }
+// }
 
 // void underlying_test()
 // {

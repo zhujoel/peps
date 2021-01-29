@@ -6,5 +6,5 @@ class SimulatedMarketData: public IMarketData{
         SimulatedMarketData(DateTimeVector *dates);
 
         ~SimulatedMarketData();
-        IUnderlying **getMarketdata(int nbUnderlying);
+        // IUnderlying **getMarketdata(int nbUnderlying);
 };
