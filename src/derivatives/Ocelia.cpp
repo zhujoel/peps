@@ -36,7 +36,7 @@ Ocelia::~Ocelia(){
 // TODO: tester cette fonction
 double Ocelia::get_foreign_index_market_value(const PnlMat* path, int date_idx, int idx){
     if(idx > 3) throw std::invalid_argument("N n'a pas de valeurs pour N=2 ou N=3 !");
-
+    
     double S_T = MGET(path, date_idx, idx);
     if(idx == 3) return S_T;
     // TODO: ajouter un T qui représente le temps écoulé entre 0 et actuellement aussi
