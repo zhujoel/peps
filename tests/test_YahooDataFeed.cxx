@@ -10,7 +10,12 @@ class YahooDataFeedTest: public ::testing::Test{
         }
 };
 
-TEST_F(YahooDataFeedTest, frgfzorgzk){
+TEST_F(YahooDataFeedTest, testaAAAA){
+
+    char str[] = "../data/market_data/^N100.csv";
+    YahooDataFeed *yahoo = new YahooDataFeed(str);
+    yahoo->getData(NULL, NULL);
+
     EXPECT_EQ(1, 2);
 }
 
