@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IModel.h"
+#include "models/IModel.h"
 #include "pnl/pnl_vector.h"
 
 class BlackScholesModel : public IModel{

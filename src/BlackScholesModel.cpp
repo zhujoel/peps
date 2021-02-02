@@ -1,8 +1,8 @@
 #include "BlackScholesModel.h"
 #include <iostream>
 
-BlackScholesModel::BlackScholesModel(int size, double rd, PnlMat *sigma, PnlVect *volatility, PnlVect *spot) :
-IModel(size, rd, sigma, volatility, spot)
+BlackScholesModel::BlackScholesModel(int size, double rd, PnlMat *sigma, PnlVect *volatility, PnlVect *spot)
+    : IModel(size, rd, sigma, volatility, spot)
 {
     this->G_ = pnl_vect_create(this->size_); 
     this->B_ = pnl_vect_create(this->size_);

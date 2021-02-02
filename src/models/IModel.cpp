@@ -1,4 +1,4 @@
-#include "IModel.h"
+#include "models/IModel.h"
 
 IModel::IModel(int size, double rd, PnlMat *sigma, PnlVect *volatility, PnlVect *spot){
     this->size_ = size;

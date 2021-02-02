@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IModel.h"
+#include "models/IModel.h"
 #include "IDerivative.h"
 #include "pnl/pnl_random.h"
 

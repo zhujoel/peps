@@ -1,15 +1,14 @@
 #pragma once
-#include <string>
-#include <map>
 #include "DateTimeVector.h"
-// #include "DataFeed.h"
 
 class IMarketData{
     public:
-        DateTimeVector *dates_;
-        IMarketData(DateTimeVector *dates);
+        char* name_; // name of the data
+        DateTime *startDate_; // date de début où récupérer les données
+        DateTime *endDate_; // date de fin
+        DateTimeVector *dates_; // toutes les dates entre start_date_ et end_date_ ayant un prix
+        PnlVect *path_; // tous les prix entre start_date_ et end_date_
+        IMarketData(char* name, DateTime *startDate, DateTime *endDate);
 
-        virtual ~IMarketData();
-        // virtual IUnderlying **getMarketdata(int nbUnderlying) = 0;
-
+        virtual ~IMarketData() = 0;
 };

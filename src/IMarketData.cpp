@@ -1,12 +1,10 @@
 #include "IMarketData.h"
 
-IMarketData::IMarketData(DateTimeVector *dates){
-    this->dates_ = dates;
+IMarketData::IMarketData(char* name, DateTime *startDate, DateTime *endDate){
+    this->name_ = name;
+    this->startDate_ = startDate;
+    this->endDate_ = endDate;
 }
-
-//IUnderlying ** IMarketData::getMarketdata(int nbUnderlying){
-
-//}
 
 IMarketData::~IMarketData(){}
 
