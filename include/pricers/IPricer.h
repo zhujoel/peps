@@ -1,7 +1,7 @@
 #pragma once
 
 #include "models/IModel.h"
-#include "IDerivative.h"
+#include "derivatives/IDerivative.h"
 #include "pnl/pnl_random.h"
 
 class IPricer{

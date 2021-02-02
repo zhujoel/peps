@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IPricer.h"
+#include "pricers/IPricer.h"
 
 class StandardMonteCarloPricer : public IPricer{
     public:

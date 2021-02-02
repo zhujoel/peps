@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
-#include "Ocelia.h"
-#include "IMarketData.h"
+#include "derivatives/Ocelia.h"
+#include "market_data/IMarketData.h"
 #include "pnl/pnl_matrix.h"
 #include <fstream>
 #include <iostream>

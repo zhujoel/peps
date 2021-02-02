@@ -1,6 +1,5 @@
-#include "QuantoOption.h"
+#include "derivatives/QuantoOption.h"
 #include "pnl/pnl_mathtools.h"
-#include <iostream>
 
 QuantoOption::QuantoOption(double T, int nbTimeSteps, int size, double rf, double K) : IDerivative(T, nbTimeSteps, size){
     this->rf_ = rf;

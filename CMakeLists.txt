@@ -14,13 +14,18 @@ set(LIBS ${LIBS} ${PNL_LIBRARIES})
 include_directories(${PNL_INCLUDE_DIRS})
 
 # sources and headers
-set(SOURCES  src/IDerivative.cpp src/QuantoOption.cpp src/models/IModel.cpp src/DateTime.cpp 
-src/BlackScholesModel.cpp src/IPricer.cpp src/DateTimeVector.cpp src/StandardMonteCarloPricer.cpp 
-src/Ocelia.cpp src/IMarketData.cpp src/HistoricalMarketData.cpp src/MathLib.cpp src/main.cpp)
+set(SOURCES src/derivatives/IDerivative.cpp src/derivatives/Ocelia.cpp src/derivatives/QuantoOption.cpp
+src/models/IModel.cpp src/models/BlackScholesModel.cpp 
+src/libs/DateTime.cpp src/libs/DateTimeVector.cpp src/libs/MathLib.cpp 
+src/pricers/IPricer.cpp src/pricers/StandardMonteCarloPricer.cpp 
+src/market_data/IMarketData.cpp src/market_data/HistoricalMarketData.cpp 
+src/main.cpp)
 
-set(HEADERS include/IDerivative.h include/Ocelia.h include/QuantoOption.h include/models/IModel.h 
-include/DateTimeVector.h include/DateTime.h include/BlackScholesModel.h 
-include/IPricer.h include/StandardMonteCarloPricer.h include/HistoricalMarketData.h include/MathLib.h include/IMarketData.h)
+set(HEADERS include/derivatives/IDerivative.h include/derivatives/Ocelia.h include/derivatives/QuantoOption.h 
+include/models/IModel.h include/models/BlackScholesModel.h 
+include/libs/DateTime.h include/libs/DateTimeVector.h include/libs/MathLib.h 
+include/pricers/IPricer.h include/pricers/StandardMonteCarloPricer.h 
+include/market_data/HistoricalMarketData.h include/market_data/IMarketData.h)
 
 include_directories(include ${PNL_INCLUDE})
 add_executable(main src/main.cpp ${SOURCES} ${HEADERS})

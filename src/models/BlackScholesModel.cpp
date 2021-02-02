@@ -1,5 +1,4 @@
-#include "BlackScholesModel.h"
-#include <iostream>
+#include "models/BlackScholesModel.h"
 
 BlackScholesModel::BlackScholesModel(int size, double rd, PnlMat *sigma, PnlVect *volatility, PnlVect *spot)
     : IModel(size, rd, sigma, volatility, spot)

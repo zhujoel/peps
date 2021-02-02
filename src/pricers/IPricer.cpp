@@ -1,4 +1,4 @@
-#include "IPricer.h"
+#include "pricers/IPricer.h"
 
 IPricer::IPricer(IModel *model, IDerivative *derivative, PnlRng *rng, double fdStep, int nbSamples){
     this->model_ = model;
