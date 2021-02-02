@@ -14,12 +14,15 @@ class OceliaTest: public ::testing::Test{
 
         virtual void SetUp(){
             this->all_dates = new DateTimeVector("../data/all_dates_constatation", 49);
-            this->path = pnl_mat_create(7, 49);
+            this->path = pnl_mat_create(49, 7);
             for(int i = 0; i < 49; ++i){
-                MLET(path, 0, i) = 100+i;
-                MLET(path, 1, i) = 200+i;
-                MLET(path, 2, i) = 300+i;
-                MLET(path, 3, i) = 400+i;
+                MLET(path, i, 0) = 100+i;
+                MLET(path, i, 1) = 200+i;
+                MLET(path, i, 2) = 300+i;
+                MLET(path, i, 3) = 400+i;
+                MLET(path, i, 4) = 1;
+                MLET(path, i, 5) = 1;
+                MLET(path, i, 6) = 1;
             }
 
             this->ocelia = new Ocelia(1, 49, 7, 4, all_dates);

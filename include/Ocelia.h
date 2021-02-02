@@ -21,12 +21,13 @@ class Ocelia : public IDerivative{
 
         Ocelia(double T, int nbTimeSteps, int size, int nb_sous_jacents, DateTimeVector *all_dates);
         ~Ocelia();
-        double payoff(const PnlMat *path);
+        double get_foreign_index_market_value(const PnlMat* path, int date_idx, int idx);
         double compute_perf_moyenne_panier(const PnlMat *path);
         void compute_valeurs_n_ans(const PnlMat *path, PnlVect *valeurs, int N); // calcule la valeur moyenne des indices pour l'année n
         void compute_perfs_n_ans(const PnlMat *path, PnlVect *perfs, int N); // compute performance pour un indice à une année
         void compute_nouveau_depart(const PnlMat *path); 
         double compute_flux_n_ans(const PnlMat *path, int N); // calcul du C(N) cf 1.3
+        double payoff(const PnlMat *path);
 };
 
 void trunc(PnlVect *vect, int n); // arrondi à n decimals

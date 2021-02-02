@@ -34,13 +34,23 @@ Ocelia::~Ocelia(){
     pnl_vect_free(&this->perfs_);
 }
 
+// TODO: tester cette fonction
+double Ocelia::get_foreign_index_market_value(const PnlMat* path, int date_idx, int idx){
+    if(idx > 3) std::cout << "index must be between 0 and 3 (included)" << std::endl;
+
+    double S_T = MGET(path, date_idx, idx);
+    if(idx == 3) return S_T;
+    // TODO: ajouter un T qui représente le temps écoulé entre 0 et actuellement aussi
+    return S_T/MGET(path, date_idx, idx+this->nb_sous_jacents_)*exp(0); // TODO: exp(0) devrait etre l'actif sans risque étranger à la place
+}
+
 double Ocelia::compute_perf_moyenne_panier(const PnlMat *path)
 {
     double perf_moy_panier = 0.0;
     for(int t = 0; t < this->indices_dates_semestrielles_->size; ++t){
         double somme = 0.0;
         for(int i = 0; i < this->nb_sous_jacents_; ++i){
-            double I_i_s = MGET(path, i, GET_INT(this->indices_dates_semestrielles_, t));
+            double I_i_s = get_foreign_index_market_value(path, GET_INT(this->indices_dates_semestrielles_, t), i);
             double I0 = GET(this->valeurs_initiales_, i);
             somme += I_i_s/ I0 - 1;
         }
@@ -62,7 +72,7 @@ void Ocelia::compute_valeurs_n_ans(const PnlMat *path, PnlVect *valeurs, int N)
     pnl_vect_set_zero(valeurs);
     for(int t = 0; t < 5; ++t){
         for(int i = 0; i < this->nb_sous_jacents_; ++i){
-            double S_T = MGET(path, i, GET_INT(this->indices_dates_valeurs_n_ans_, t+(N*5)));
+            double S_T = get_foreign_index_market_value(path, GET_INT(this->indices_dates_valeurs_n_ans_, t+(N*5)), i);
             LET(valeurs, i) += S_T;
         }
     }

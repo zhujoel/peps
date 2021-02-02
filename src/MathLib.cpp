@@ -44,7 +44,7 @@ PnlMat* MathLib::compute_covariance(PnlMat *market_data){
         }
     }
 
-    pnl_mat_mult_scalar(covariances, 250);
+    pnl_mat_mult_scalar(covariances, 250); // 250: nb de jours ouvrés TODO: changer pour mettre un taux variable basé sur les dim de market data
 
     pnl_mat_free(&log_returns);
     pnl_vect_free(&means);
