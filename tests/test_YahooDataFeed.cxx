@@ -12,7 +12,7 @@ class YahooDataFeedTest: public ::testing::Test{
 
 TEST_F(YahooDataFeedTest, testaAAAA){
 
-    char str[] = "../data/market_data/^N100.csv";
+    char str[] = "../data/market_data/^SSMI.csv";
     YahooDataFeed *yahoo = new YahooDataFeed(str);
     yahoo->getData(NULL, NULL);
 

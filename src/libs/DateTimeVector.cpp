@@ -34,7 +34,6 @@ DateTime* DateTimeVector::operator[](int index){
         throw std::out_of_range("index out of bounds");
     }
     return this->dates_[index];
-
 }
 
 void calcul_indices_dates(DateTimeVector *all_dates, DateTimeVector *dates, PnlVectInt *indices)
