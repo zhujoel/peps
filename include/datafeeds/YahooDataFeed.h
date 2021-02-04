@@ -5,11 +5,13 @@
 
 class YahooDataFeed : public IDataFeed{
     public:
-        char* filepath_;
+        std::string filepath_;
 
-        YahooDataFeed(char* filepath);
+        YahooDataFeed(std::string filepath);
         ~YahooDataFeed();
         
         int getNumberValidData();
         void getData(DateTimeVector *dates, PnlVect *path);
+        void parseAndOutput();
+
 };

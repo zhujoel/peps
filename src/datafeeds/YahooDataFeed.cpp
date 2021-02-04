@@ -5,7 +5,7 @@
 #include "libs/Utilities.h"
 #include <stdlib.h>
 
-YahooDataFeed::YahooDataFeed(char* filepath)
+YahooDataFeed::YahooDataFeed(std::string filepath)
 {
     this->filepath_ = filepath;
 }
@@ -50,4 +50,30 @@ void YahooDataFeed::getData(DateTimeVector *dates, PnlVect *path)
         LET(path, i) = std::atof(parsedLine[4].c_str()); // c_str(): needs a char* to use atof
         i++;
     }
+
+    dataFile.close();
+}
+
+
+void YahooDataFeed::parseAndOutput(){
+    std::ifstream dataFile(this->filepath_);
+    std::string line;
+    std::string parsedLine[7];
+
+
+    std::ofstream datesOut(this->filepath_ + "-dates.csv");
+    std::ofstream pricesOut(this->filepath_ + "-prices.csv");
+
+    std::getline(dataFile, line); // skip header line
+    while (std::getline(dataFile, line))
+    {
+        split(line, ',', parsedLine);
+        if(parsedLine[4] == "null") continue;
+        datesOut << parsedLine[0] << std::endl;
+        pricesOut << parsedLine[4] << std::endl;
+    }
+
+    datesOut.close();
+    pricesOut.close();
+    dataFile.close();
 }

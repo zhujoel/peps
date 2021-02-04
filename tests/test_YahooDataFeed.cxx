@@ -10,13 +10,21 @@ class YahooDataFeedTest: public ::testing::Test{
         }
 };
 
-TEST_F(YahooDataFeedTest, testaAAAA){
+// TEST_F(YahooDataFeedTest, getData)
+// {
+//     char str[] = "../data/market_data/^SSMI.csv";
+//     YahooDataFeed *yahoo = new YahooDataFeed(str);
+//     PnlVect *vect = pnl_vect_new();
+//     DateTimeVector *dates = new DateTimeVector(0);
+//     yahoo->getData(dates, vect);
+//     EXPECT_EQ(1, 1);
+// }
 
-    char str[] = "../data/market_data/^SSMI.csv";
+TEST_F(YahooDataFeedTest, parseAndOutput)
+{
+    char str[] = "../data/market_data/SSMI.csv";
     YahooDataFeed *yahoo = new YahooDataFeed(str);
-    PnlVect *vect = pnl_vect_new();
-    DateTimeVector *dates = new DateTimeVector(0);
-    yahoo->getData(dates, vect);
+    yahoo->parseAndOutput();
     EXPECT_EQ(1, 2);
 }
 

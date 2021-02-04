@@ -10,4 +10,5 @@ class IDataFeed{
         
         virtual int getNumberValidData() = 0;
         virtual void getData(DateTimeVector *dates, PnlVect *path) = 0;
+        virtual void parseAndOutput() = 0;
 };
