@@ -10,5 +10,6 @@ class YahooDataFeed : public IDataFeed{
         YahooDataFeed(char* filepath);
         ~YahooDataFeed();
         
+        int getNumberValidData();
         void getData(DateTimeVector *dates, PnlVect *path);
 };

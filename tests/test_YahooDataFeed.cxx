@@ -14,8 +14,9 @@ TEST_F(YahooDataFeedTest, testaAAAA){
 
     char str[] = "../data/market_data/^SSMI.csv";
     YahooDataFeed *yahoo = new YahooDataFeed(str);
-    yahoo->getData(NULL, NULL);
-
+    PnlVect *vect = pnl_vect_new();
+    DateTimeVector *dates = new DateTimeVector(0);
+    yahoo->getData(dates, vect);
     EXPECT_EQ(1, 2);
 }
 

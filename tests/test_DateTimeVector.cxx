@@ -8,8 +8,7 @@ class DateTimeVectorTest: public ::testing::Test{
         DateTimeVector *dates;
 
         virtual void SetUp(){
-            this->dates = new DateTimeVector(16);
-            this->dates->parseFile("../tests/test_data/dateVector");
+            this->dates = parseDatesFile("../tests/test_data/dateVector.csv", 16, '-');
         }
 
         virtual void TearDown(){
@@ -46,8 +45,7 @@ TEST_F(DateTimeVectorTest, operatorCrochetElement15){
 }
 
 TEST_F(DateTimeVectorTest, calculIndicesDates){
-    DateTimeVector *subset = new DateTimeVector(5);
-    subset->parseFile("../tests/test_data/dateVectorSubset");
+    DateTimeVector *subset = parseDatesFile("../tests/test_data/dateVectorSubset.csv", 5, '-');
     PnlVectInt *indices = pnl_vect_int_create(5);
     calcul_indices_dates(this->dates, subset, indices);
     EXPECT_EQ(0, GET_INT(indices, 0));

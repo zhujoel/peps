@@ -2,6 +2,7 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <iostream>
 
 void split(std::string line, char delimiter, std::string *output){
     std::stringstream string_stream(line);

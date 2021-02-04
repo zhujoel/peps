@@ -12,8 +12,7 @@ class OceliaTest: public ::testing::Test{
         PnlMat *path;
 
         virtual void SetUp(){
-            this->all_dates = new DateTimeVector(49);
-            this->all_dates->parseFile("../data/all_dates_constatation");
+            this->all_dates = parseDatesFile("../data/all_dates_constatation.csv", 49, '-');
             this->path = pnl_mat_create(49, 7);
             for(int i = 0; i < 49; ++i){
                 MLET(path, i, 0) = 100+i;

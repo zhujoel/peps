@@ -17,19 +17,13 @@ DateTimeVector::~DateTimeVector(){
     delete[] this->dates_;
 }
 
-void DateTimeVector::parseFile(std::string fileName){
-    std::ifstream inputFileStream(fileName);
-    std::string jour, mois, annee;
-    std::string line;
-    for (int i = 0; i < this->nbDates_; i++)
-    {
-        getline(inputFileStream, line);
-        std::istringstream lineStream(line);
-        getline(lineStream, jour, ';');
-        getline(lineStream, mois, ';');
-        getline(lineStream, annee, ';');
-        this->dates_[i] = new DateTime(std::stoi(jour), std::stoi(mois), std::stoi(annee));
+void DateTimeVector::resize(int nbDates){
+    for(int i = 0; i < this->nbDates_; ++i){
+        delete this->dates_[i];
     }
+    delete[] this->dates_;
+    this->nbDates_ = nbDates;
+    this->dates_ = new DateTime*[this->nbDates_];
 }
 
 DateTime* DateTimeVector::operator[](int index){
@@ -50,4 +44,16 @@ void calcul_indices_dates(DateTimeVector *all_dates, DateTimeVector *dates, PnlV
             }
         }
     }
+}
+
+DateTimeVector* parseDatesFile(std::string fileName, int nbDates, char delimiter){
+    DateTimeVector *dates = new DateTimeVector(nbDates);
+    std::ifstream datesStream(fileName);
+    std::string date;
+    for (int i = 0; i < dates->nbDates_; i++)
+    {
+        getline(datesStream, date);
+        dates->dates_[i] = parseDateString(date, delimiter);
+    }
+    return dates;
 }
