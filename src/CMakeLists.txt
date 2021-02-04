@@ -3,11 +3,12 @@ find_package(Pnl REQUIRED)
 set(LIBS ${LIBS} ${PNL_LIBRARIES})
 include_directories(${PNL_INCLUDE_DIRS})
 
-add_library(DateTime STATIC libs/DateTime.cpp) # On lie la librarie au cpp
+add_library(Utilities STATIC libs/Utilities.cpp) # On lie la librarie au cpp
+add_library(DateTime STATIC libs/DateTime.cpp)
 add_library(DateTimeVector STATIC libs/DateTimeVector.cpp)
 add_library(MathLib STATIC libs/MathLib.cpp)
-add_library(IDataFeed STATIC datafeeds/IDataFeed)
-add_library(YahooDataFeed STATIC datafeeds/YahooDataFeed)
+add_library(IDataFeed STATIC datafeeds/IDataFeed.cpp)
+add_library(YahooDataFeed STATIC datafeeds/YahooDataFeed.cpp)
 add_library(IMarketData STATIC market_data/IMarketData.cpp)
 add_library(HistoricalMarketData STATIC market_data/HistoricalMarketData.cpp)
 add_library(IModel STATIC models/IModel.cpp)

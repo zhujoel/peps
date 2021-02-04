@@ -8,9 +8,10 @@ class DateTimeVector{
         DateTime **dates_;
         int nbDates_;
 
-        DateTimeVector(std::string fileName, int nbDates);
+        DateTimeVector(int nbDates);
         ~DateTimeVector();
 
+        void parseFile(std::string fileName);
         DateTime *operator[](int index);
 };
 

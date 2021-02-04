@@ -1,6 +1,6 @@
 #pragma once
 
-#include <ostream>
+#include <string>
 
 class DateTime{
     public:
@@ -15,5 +15,5 @@ class DateTime{
 
 };
 
-
 std::ostream &operator<<(std::ostream &output, const DateTime *dt);
+DateTime* parseDateString(std::string dateString, char delimiter); // format is american (YYYY-MM-DD)

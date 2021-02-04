@@ -88,6 +88,22 @@ TEST_F(DateTimeTest, operatorPrint){
     EXPECT_EQ("15/7/1992", str.str());
 }
 
+TEST_F(DateTimeTest, parseDateString_dash){
+    DateTime *date = parseDateString("2012-08-30", '-');
+    EXPECT_EQ(date->yyyy_, 2012);
+    EXPECT_EQ(date->mm_, 8);
+    EXPECT_EQ(date->dd_, 30);
+    delete date;
+}
+
+TEST_F(DateTimeTest, parseDateString_slash){
+    DateTime *date = parseDateString("2012/08/30", '/');
+    EXPECT_EQ(date->yyyy_, 2012);
+    EXPECT_EQ(date->mm_, 8);
+    EXPECT_EQ(date->dd_, 30);
+    delete date;
+}
+
 int main(int argc, char** argv){
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "datafeeds/IDataFeed.h"
+#include <string>
 
 class YahooDataFeed : public IDataFeed{
     public:

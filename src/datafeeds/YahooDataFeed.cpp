@@ -2,7 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include <string>
+#include "libs/Utilities.h"
 
 YahooDataFeed::YahooDataFeed(char* filepath){
     this->filepath_ = filepath;
@@ -10,25 +10,25 @@ YahooDataFeed::YahooDataFeed(char* filepath){
 YahooDataFeed::~YahooDataFeed(){}
 
 void YahooDataFeed::getData(DateTimeVector *dates, PnlVect *path){
-    std::ifstream fin;
+    std::ifstream dataFile(this->filepath_);
     std::string line;
-    std::string answer[7];
-    fin.open(this->filepath_);
-    while(!fin.eof()){
-        fin >> line;
-        std::stringstream string_stream(line);  // creating string stream object
-        int i=0;            // declaring i and assign  to 0
-        while(string_stream.good())   // loop will continue if string stream is error free
-        {
-            std::string a;       
-            getline( string_stream, a, ',' );   //calling getline fuction
-            answer[i]=a;
-            i++;
-            
-            std::cout << answer[0] << " ";
-            if(answer[4] == "") std::cout << "null" << std::endl;
-            else std::cout << answer[4] << std::endl;
-        }
-        // std::cout << line << " ";
+    std::string parsedLine[7];
+    char delimiter = ',';
+    int nbDates = 0;
+
+    // on fait 2 parcours: un pour avoir le nombre de dates valides, et un pour remplir les vecteurs
+    // TODO: a voir si on peut faire qu'un seul parcours
+    while (dataFile >> line) 
+    {
+        split(line, delimiter, parsedLine);
+        if(parsedLine[4] != "null") nbDates++;
+        std::cout << parsedLine[0] << std::endl;
+
     }
+
+    dates = new DateTimeVector(nbDates);
+    path = pnl_vect_create(nbDates);
+    int idx = 0;
+
+
 }

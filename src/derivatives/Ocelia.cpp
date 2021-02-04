@@ -1,6 +1,7 @@
 #include "derivatives/Ocelia.h"
 #include "pnl/pnl_mathtools.h"
 #include <math.h>
+#include <stdexcept>
 
 // TODO: changer le 0.0 en un r?
 Ocelia::Ocelia(double T, int nbTimeSteps, int size, int nb_sous_jacents, DateTimeVector *all_dates) : IDerivative(T, nbTimeSteps, size)
@@ -12,8 +13,10 @@ Ocelia::Ocelia(double T, int nbTimeSteps, int size, int nb_sous_jacents, DateTim
     this->nouveau_depart_ = pnl_vect_create_from_zero(this->nb_sous_jacents_);
     this->perfs_ = pnl_vect_create_from_zero(this->nb_sous_jacents_);
     
-    DateTimeVector *dates_semestrielles = new DateTimeVector("../data/dates_semest", 16);
-    DateTimeVector *dates_valeurs_n_ans = new DateTimeVector("../data/dates_valeurs_n", 35);
+    DateTimeVector *dates_semestrielles = new DateTimeVector(16);
+    dates_semestrielles->parseFile("../data/dates_semest");
+    DateTimeVector *dates_valeurs_n_ans = new DateTimeVector(35);
+    dates_valeurs_n_ans->parseFile("../data/dates_valeurs_n");
 
     this->indices_dates_semestrielles_ = pnl_vect_int_create(dates_semestrielles->nbDates_);
     this->indices_dates_valeurs_n_ans_ = pnl_vect_int_create(dates_valeurs_n_ans->nbDates_);
@@ -35,7 +38,7 @@ Ocelia::~Ocelia(){
 
 // TODO: tester cette fonction
 double Ocelia::get_foreign_index_market_value(const PnlMat* path, int date_idx, int idx){
-    if(idx > 3) throw std::invalid_argument("N n'a pas de valeurs pour N=2 ou N=3 !");
+    if(idx > 3) throw std::invalid_argument("idx must be between 0 and 3!");
     
     double S_T = MGET(path, date_idx, idx);
     if(idx == 3) return S_T;

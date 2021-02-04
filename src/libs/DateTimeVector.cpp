@@ -4,14 +4,24 @@
 #include <sstream>
 #include <string>
 
-DateTimeVector::DateTimeVector(std::string fileName, int nbDates)
+DateTimeVector::DateTimeVector(int nbDates)
 {
     this->nbDates_ = nbDates;
     this->dates_ = new DateTime*[this->nbDates_];
+}
+
+DateTimeVector::~DateTimeVector(){
+    for(int i = 0; i < this->nbDates_; ++i){
+        delete this->dates_[i];
+    }
+    delete[] this->dates_;
+}
+
+void DateTimeVector::parseFile(std::string fileName){
     std::ifstream inputFileStream(fileName);
     std::string jour, mois, annee;
     std::string line;
-    for (int i = 0; i < nbDates; i++)
+    for (int i = 0; i < this->nbDates_; i++)
     {
         getline(inputFileStream, line);
         std::istringstream lineStream(line);
@@ -20,13 +30,6 @@ DateTimeVector::DateTimeVector(std::string fileName, int nbDates)
         getline(lineStream, annee, ';');
         this->dates_[i] = new DateTime(std::stoi(jour), std::stoi(mois), std::stoi(annee));
     }
-}
-
-DateTimeVector::~DateTimeVector(){
-    for(int i = 0; i < this->nbDates_; ++i){
-        delete this->dates_[i];
-    }
-    delete[] this->dates_;
 }
 
 DateTime* DateTimeVector::operator[](int index){
