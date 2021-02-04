@@ -16,5 +16,5 @@ target_link_libraries(test_Quanto gtest QuantoOption BlackScholesModel StandardM
 add_executable(test_HistoricalMarketData test_HistoricalMarketData.cxx)
 target_link_libraries(test_HistoricalMarketData gtest HistoricalMarketData IMarketData DateTimeVector DateTime Utilities)
 
-add_executable(test_YahooDataFeed test_YahooDataFeed.cxx)
-target_link_libraries(test_YahooDataFeed gtest YahooDataFeed IDataFeed DateTimeVector DateTime Utilities ${PNL_LIBRARIES})
+add_executable(test_DataFeeds test_DataFeeds.cxx)
+target_link_libraries(test_DataFeeds gtest YahooDataFeed FTSEDataFeed IDataFeed DateTimeVector DateTime Utilities ${PNL_LIBRARIES})

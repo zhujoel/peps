@@ -2,13 +2,12 @@
 
 #include "datafeeds/IDataFeed.h"
 
-class YahooDataFeed : public IDataFeed{
+class FTSEDataFeed : public IDataFeed{
     public:
-        YahooDataFeed(std::string filepath);
-        ~YahooDataFeed();
+        FTSEDataFeed(std::string filepath);
+        ~FTSEDataFeed();
         
         int getNumberValidData();
         void getData(DateTimeVector *dates, PnlVect *path);
         void parseAndOutput();
-
 };

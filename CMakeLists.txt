@@ -19,7 +19,7 @@ src/models/IModel.cpp src/models/BlackScholesModel.cpp
 src/libs/Utilities.cpp src/libs/DateTime.cpp src/libs/DateTimeVector.cpp src/libs/MathLib.cpp 
 src/pricers/IPricer.cpp src/pricers/StandardMonteCarloPricer.cpp 
 src/market_data/IMarketData.cpp src/market_data/HistoricalMarketData.cpp 
-src/datafeeds/IDataFeed.cpp src/datafeeds/YahooDataFeed.cpp
+src/datafeeds/IDataFeed.cpp src/datafeeds/FTSEDataFeed.cpp src/datafeeds/YahooDataFeed.cpp
 src/main.cpp)
 
 set(HEADERS include/derivatives/IDerivative.h include/derivatives/Ocelia.h include/derivatives/QuantoOption.h 
@@ -27,7 +27,7 @@ include/models/IModel.h include/models/BlackScholesModel.h
 include/libs/Utilities.h include/libs/DateTime.h include/libs/DateTimeVector.h include/libs/MathLib.h 
 include/pricers/IPricer.h include/pricers/StandardMonteCarloPricer.h 
 include/market_data/HistoricalMarketData.h include/market_data/IMarketData.h
-include/datafeeds/IDataFeed.h include/datafeeds/YahooDataFeed.h)
+include/datafeeds/IDataFeed.h include/datafeeds/FTSEDataFeed.h include/datafeeds/YahooDataFeed.h)
 
 include_directories(include ${PNL_INCLUDE})
 add_executable(main src/main.cpp ${SOURCES} ${HEADERS})
@@ -56,6 +56,6 @@ add_test (NAME test_MathLib COMMAND test_MathLib)
 add_test (NAME test_Ocelia COMMAND test_Ocelia)
 add_test (NAME test_Quanto COMMAND test_Quanto)
 add_test (NAME test_HistoricalMarketData COMMAND test_HistoricalMarketData)
-add_test (NAME test_YahooDataFeed COMMAND test_YahooDataFeed)
+add_test (NAME test_DataFeeds COMMAND test_DataFeeds)
 
 pnl_add_postbuild(run_unit_tests)

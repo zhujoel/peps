@@ -2,10 +2,13 @@
 
 #include "libs/DateTimeVector.h"
 #include "pnl/pnl_vector.h"
+#include <string>
 
 class IDataFeed{
     public:
-        IDataFeed();
+        std::string filepath_;
+
+        IDataFeed(std::string filepath);
         ~IDataFeed();
         
         virtual int getNumberValidData() = 0;
