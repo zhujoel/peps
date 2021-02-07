@@ -4,9 +4,10 @@
 
 class HistoricalMarketData : public IMarketData{
     public:
-        char* filepath_; // path to the file to parse for the data
+        std::string* name_; // path to the file to parse for the data
 
-        HistoricalMarketData(char* filepath, char* name, DateTime *startDate, DateTime *endDate);
+        HistoricalMarketData(std::string name, DateTime *startDate, DateTime *endDate);
         ~HistoricalMarketData();
 
+        void getData();
 };
