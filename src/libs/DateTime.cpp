@@ -39,6 +39,10 @@ int DateTime::compare(const DateTime *dt) const{
     return 0;
 }
 
+DateTime* DateTime::copy() const{
+    return new DateTime(this->dd_, this->mm_, this->yyyy_);
+}
+
 std::ostream &operator<<(std::ostream &output, const DateTime *dt){
     output << dt->dd_ << "/" << dt->mm_ << "/" << dt->yyyy_;
     return output;

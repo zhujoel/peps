@@ -57,3 +57,50 @@ DateTimeVector* parseDatesFile(std::string fileName, int nbDates, char delimiter
     }
     return dates;
 }
+
+// TODO: facto and opti
+void sameDates(DateTimeVector *v1, DateTimeVector *v2, DateTimeVector *result)
+{
+    int len1 = v1->nbDates_;
+    int len2 = v2->nbDates_;
+    int idx = 0;
+    int idx1 = 0;
+    int idx2 = 0;
+    DateTimeVector *tmp_vect = new DateTimeVector(std::min(len1, len2));
+    while(idx < std::max(len1, len2) && idx1 < len1 && idx2 < len2){
+        int cmp = v1->dates_[idx1]->compare(v2->dates_[idx2]);
+        if(cmp == 0){
+            tmp_vect->dates_[idx++] = v1->dates_[idx1]->copy();
+            idx1++;
+            idx2++;
+        }
+        else if(cmp > 0){
+            idx2++;
+        }
+        else{
+            idx1++;
+        }
+    }
+
+    result->resize(idx);
+
+    for(int i = 0; i < idx; ++i){
+        result->dates_[i] = tmp_vect->dates_[i]->copy();
+    }
+}
+
+// TODO: we could also use getIndicesFromDates?
+void getPricesFromDate(DateTimeVector *allDates, DateTimeVector *relevantDates, PnlVect *allPrices, PnlVect *result)
+{
+    pnl_vect_resize(result, relevantDates->nbDates_);
+    int idx = 0;
+    int idx2 = 0;
+    while(idx < relevantDates->nbDates_){
+        if((allDates->dates_[idx2]->compare(relevantDates->dates_[idx]) == 0)){
+            LET(result, idx++) = GET(allPrices, idx2++);
+        }
+        else{
+            idx2++;
+        }
+    }
+}

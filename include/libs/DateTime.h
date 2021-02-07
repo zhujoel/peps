@@ -11,6 +11,7 @@ class DateTime{
         DateTime(int dd_, int mm_, int yyyy_);
         ~DateTime();
         
+        DateTime* copy() const;
         int compare(const DateTime *dt) const;
 
 };
