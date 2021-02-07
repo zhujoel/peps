@@ -103,8 +103,23 @@ TEST_F(DataFeedsTest, getPricesFromDate){
     EXPECT_EQ(1, 1);
 }
 
+TEST_F(DataFeedsTest, fromDateToDate){
+    std::string ftse_filepath = "../data/market_data/FTSE80R.csv";
+    FTSEDataFeed *ftse = new FTSEDataFeed(ftse_filepath);
+    PnlVect *pricesFTSE = pnl_vect_new();
+    DateTimeVector *datesFTSE = new DateTimeVector(0);
+    ftse->getData(datesFTSE, pricesFTSE);
 
-int main(int argc, char** argv){
+    DateTimeVector *dateResult = new DateTimeVector(0);
+    fromDateToDate(datesFTSE, new DateTime(1, 1, 2006), new DateTime(3, 3, 2010), dateResult);
+
+    std::cout << "dates: " << std::endl;
+    dateResult->print();
+
+    EXPECT_EQ(1, 1);
+}
+
+int main(int argc, char** argv){    
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
 }

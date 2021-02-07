@@ -17,6 +17,13 @@ DateTimeVector::~DateTimeVector(){
     delete[] this->dates_;
 }
 
+
+void DateTimeVector::print() const{
+    for(int i = 0; i < this->nbDates_; ++i){
+        std::cout << this->dates_[i] << std::endl;
+    }
+}
+
 void DateTimeVector::resize(int nbDates){
     for(int i = 0; i < this->nbDates_; ++i){
         delete this->dates_[i];
@@ -102,5 +109,35 @@ void getPricesFromDate(DateTimeVector *allDates, DateTimeVector *relevantDates, 
         else{
             idx2++;
         }
+    }
+}
+
+void fromDateToDate(DateTimeVector *allDates, DateTime *from, DateTime *to, DateTimeVector *result){
+    int idx = 0;
+
+    int startIdx = 0;
+    int endIdx = 0;
+
+    bool flag = false;
+    while(idx < allDates->nbDates_){
+        int cmpFrom = allDates->dates_[idx]->compare(from);
+        if(!flag && cmpFrom >= 0){
+            flag = true;
+            startIdx = idx;
+        }
+        if(flag){
+            int cmpTo = allDates->dates_[idx]->compare(to);
+            if(cmpTo == 1){
+                endIdx = idx;
+                break;
+            }
+        }
+        idx++;
+    }
+
+    result->resize(endIdx - startIdx);
+    int i = 0;
+    while(startIdx < endIdx){
+        result->dates_[i++] = allDates->dates_[startIdx++];
     }
 }
