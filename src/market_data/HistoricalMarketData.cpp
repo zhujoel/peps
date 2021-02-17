@@ -11,8 +11,9 @@ HistoricalMarketData::HistoricalMarketData(std::string name, DateTime *startDate
 
 HistoricalMarketData::~HistoricalMarketData(){}
 
-void HistoricalMarketData::getData(){
+PnlMat* HistoricalMarketData::getData(){
     // TODO: faire une boucle lol
+    // TODO: vérifier qu'on a les données de marché d'océlia dans les données
     YahooDataFeed *ftse = new YahooDataFeed("../data/market_data/FTSE80.csv");
     PnlVect *pricesFTSE = pnl_vect_new();
     DateTimeVector *datesFTSE = new DateTimeVector(0);
@@ -73,14 +74,16 @@ void HistoricalMarketData::getData(){
 
     PnlMat *path = pnl_mat_create(dateResult->nbDates_, 7);
 
-    pnl_mat_set_col(path, pricesFTSEFiltered, 0);
-    pnl_mat_set_col(path, pricesSSMIFiltered, 1);
-    pnl_mat_set_col(path, pricesN225Filted, 2);
-    pnl_mat_set_col(path, pricesN100Filtered, 3);
+    pnl_mat_set_col(path, pricesN100Filtered, 0);
+    pnl_mat_set_col(path, pricesN225Filted, 1);
+    pnl_mat_set_col(path, pricesSSMIFiltered, 2);
+    pnl_mat_set_col(path, pricesFTSEFiltered, 3);
     pnl_mat_set_col(path, pricesGBPFiltered, 4);
     pnl_mat_set_col(path, pricesCHFFiltered, 5);
     pnl_mat_set_col(path, pricesJPYFiltered, 6);
 
-    pnl_mat_print(path);
+    // pnl_mat_print(path);
+
+    return path;
 }
 

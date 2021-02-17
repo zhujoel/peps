@@ -5,7 +5,7 @@ add_executable(test_DateTimeVector test_DateTimeVector.cxx)
 target_link_libraries(test_DateTimeVector gtest DateTimeVector DateTime Utilities ${PNL_LIBRARIES}) 
 
 add_executable(test_MathLib test_MathLib.cxx)
-target_link_libraries(test_MathLib gtest MathLib ${PNL_LIBRARIES})
+target_link_libraries(test_MathLib gtest MathLib HistoricalMarketData IMarketData YahooDataFeed FTSEDataFeed IDataFeed DateTimeVector DateTime Utilities ${PNL_LIBRARIES})
 
 add_executable(test_Ocelia test_Ocelia.cxx)
 target_link_libraries(test_Ocelia gtest Ocelia IMarketData IDerivative DateTimeVector DateTime Utilities ${PNL_LIBRARIES})

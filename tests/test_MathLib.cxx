@@ -2,6 +2,7 @@
 #include "libs/MathLib.h"
 #include "pnl/pnl_matrix.h"
 #include <fstream>
+#include "market_data/HistoricalMarketData.h"
 
 // TODO: add more tests
 class MathLibTest: public ::testing::Test{
@@ -36,6 +37,25 @@ TEST_F(MathLibTest, compute_sigma_volatility){
 
     pnl_mat_free(&sigma);
     pnl_vect_free(&vol);
+}
+
+TEST_F(MathLibTest, compute_sigma_volatility_for_market_data){
+    HistoricalMarketData *historical = new HistoricalMarketData("Ocelia market data", new DateTime(01, 01, 2003), new DateTime(01, 01, 2013));
+    PnlVect *volatility = pnl_vect_new();
+    PnlMat *sigma = pnl_mat_new();
+
+    PnlMat *past = historical->getData();
+
+    MathLib::compute_sigma_volatility(past, sigma, volatility);
+
+    std::cout << "sigma: " << std::endl;
+    pnl_mat_print(sigma);
+
+    std::cout << "volatility: " << std::endl;
+    pnl_vect_print(volatility);
+
+    pnl_mat_free(&sigma);
+    pnl_vect_free(&volatility);
 }
 
 int main(int argc, char** argv){

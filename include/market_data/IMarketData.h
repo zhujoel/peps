@@ -12,5 +12,5 @@ class IMarketData{
         IMarketData(std::string name, DateTime *startDate, DateTime *endDate);
 
         virtual ~IMarketData() = 0;
-        virtual void getData() = 0;
+        virtual PnlMat* getData() = 0;
 };
