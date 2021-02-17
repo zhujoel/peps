@@ -10,5 +10,6 @@ class MathLib {
       static double compute_covariance(PnlMat *log_returns, PnlVect *means, int k, int l);
       static PnlMat* compute_covariance(PnlMat *market_data);
       static void compute_sigma_volatility(PnlMat *covariance, PnlMat *sigma, PnlVect *volatility);
-
+      static void adjust_sigma_Ocelia(PnlMat *sigma);
+      static void adjust_spot_Ocelia(PnlVect *spot);
 };

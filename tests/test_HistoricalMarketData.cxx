@@ -13,7 +13,7 @@ class HistoricalMarketDataTest: public ::testing::Test{
 
 TEST_F(HistoricalMarketDataTest, getData){
     HistoricalMarketData *historical = new HistoricalMarketData("name of the thing", NULL, NULL);
-    historical->getData();
+    historical->getData(NULL);
     EXPECT_EQ(1, 1);
 }
 

@@ -20,7 +20,7 @@ TEST_F(BlackScholesModelTest, asset){
     PnlVect *volatility = pnl_vect_new();
     PnlMat *sigma = pnl_mat_new();
 
-    PnlMat *past = historical->getData();
+    PnlMat *past = historical->getData(NULL);
 
     MathLib::compute_sigma_volatility(past, sigma, volatility);
 
