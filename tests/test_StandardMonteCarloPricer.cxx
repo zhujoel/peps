@@ -30,7 +30,7 @@ class StandardMonteCarloPricerTest: public ::testing::Test{
         virtual void SetUp(){
             // BLACK-SCHOLES
             // TODO: mettre fenetre d'estimation
-            HistoricalMarketData *historical = new HistoricalMarketData("Ocelia market data", new DateTime(1, 1, 2003), new DateTime(1, 1, 2017));
+            HistoricalMarketData *historical = new HistoricalMarketData("Ocelia market data", new DateTime(15, 5, 2008), new DateTime(28, 4, 2016));
             this->volatility = pnl_vect_new();
             this->sigma = pnl_mat_new();
             this->all_dates = new DateTimeVector(0);

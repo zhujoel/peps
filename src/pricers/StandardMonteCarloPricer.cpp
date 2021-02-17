@@ -49,8 +49,11 @@ void StandardMonteCarloPricer::delta(PnlVect *delta, PnlVect *std_dev)
     }
 }
 
+// TODO: on peut simuler jusqu'au 13 mai 2016 (au lieu de 28 avril 2016)
 void StandardMonteCarloPricer::discount_price(double t, double &prix, double &std_dev)
 {
+    // TODO: changer le t en : convertir une date (le 15/05/2008) jusqu'à le date de payoff qui devient le t
+    // TODO: on a la proportion en faisant par ex: (nb de jours entre 2 dates)/(nb de jours entre toutes les dates)
     double r = this->model_->rd_;
     double T = this->derivative_->getMaturity();
     double M = this->nbSamples_;
