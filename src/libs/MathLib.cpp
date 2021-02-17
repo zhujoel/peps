@@ -44,7 +44,7 @@ PnlMat* MathLib::compute_covariance(PnlMat *market_data){
         }
     }
 
-    pnl_mat_mult_scalar(covariances, 250); // 250: nb de jours ouvrés TODO: changer pour mettre un taux variable basé sur les dim de market data
+    pnl_mat_mult_scalar(covariances, 250); // TODO: 250: nb de jours ouvrés TODO: changer pour mettre un taux variable basé sur les dim de market data
 
     pnl_mat_free(&log_returns);
     pnl_vect_free(&means);
@@ -55,7 +55,7 @@ PnlMat* MathLib::compute_covariance(PnlMat *market_data){
 void MathLib::compute_sigma_volatility(PnlMat *market_data, PnlMat *sigma, PnlVect *volatility){
     PnlMat *covariance = compute_covariance(market_data);
     int size = covariance->n;
-    pnl_mat_print(sigma);
+    pnl_mat_clone(sigma, covariance);
     pnl_mat_chol(sigma);
     pnl_vect_resize(volatility, size);
     PnlVect *tmp = pnl_vect_create(size);

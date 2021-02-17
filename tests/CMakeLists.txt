@@ -18,3 +18,9 @@ target_link_libraries(test_DataFeeds gtest YahooDataFeed FTSEDataFeed IDataFeed 
 
 add_executable(test_HistoricalMarketData test_HistoricalMarketData.cxx)
 target_link_libraries(test_HistoricalMarketData gtest HistoricalMarketData IMarketData YahooDataFeed FTSEDataFeed IDataFeed DateTimeVector DateTime Utilities ${PNL_LIBRARIES})
+
+add_executable(test_BlackScholesModel test_BlackScholesModel.cxx)
+target_link_libraries(test_BlackScholesModel gtest BlackScholesModel IModel MathLib HistoricalMarketData IMarketData YahooDataFeed FTSEDataFeed IDataFeed DateTimeVector DateTime Utilities ${PNL_LIBRARIES})
+
+add_executable(test_StandardMonteCarloPricer test_StandardMonteCarloPricer.cxx)
+target_link_libraries(test_StandardMonteCarloPricer gtest StandardMonteCarloPricer IPricer Ocelia IDerivative BlackScholesModel IModel MathLib HistoricalMarketData IMarketData YahooDataFeed FTSEDataFeed IDataFeed DateTimeVector DateTime Utilities ${PNL_LIBRARIES})

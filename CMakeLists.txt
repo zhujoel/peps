@@ -57,5 +57,7 @@ add_test (NAME test_Ocelia COMMAND test_Ocelia)
 add_test (NAME test_Quanto COMMAND test_Quanto)
 add_test (NAME test_HistoricalMarketData COMMAND test_HistoricalMarketData)
 add_test (NAME test_DataFeeds COMMAND test_DataFeeds)
+add_test (NAME test_BlackScholesModel COMMAND test_BlackScholesModel)
+add_test (NAME test_StandardMonteCarloPricer COMMAND test_StandardMonteCarloPricer)
 
 pnl_add_postbuild(run_unit_tests)
