@@ -12,6 +12,7 @@ class IDerivative {
       IDerivative(double T, int nbTimeSteps, int size);
       virtual ~IDerivative();
       
+      virtual double getMaturity() = 0;
       /**
       * Calcule la valeur du payoff sur la trajectoire
       *

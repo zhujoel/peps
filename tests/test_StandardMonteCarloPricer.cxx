@@ -38,7 +38,7 @@ class StandardMonteCarloPricerTest: public ::testing::Test{
             MathLib::compute_sigma_volatility(past, sigma, volatility);
 
             this->size = 7;
-            this->rd = 0;
+            this->rd = 0.03;
             this->nbTimeSteps = all_dates->nbDates_;
             this->T = nbTimeSteps/250;
             this->rng = pnl_rng_create(PNL_RNG_MERSENNE);
@@ -54,7 +54,7 @@ class StandardMonteCarloPricerTest: public ::testing::Test{
 
             // MONTE CARLO
             this->fdStep = 0.05;
-            this->nbSamples = 100;
+            this->nbSamples = 1000;
             this->mc = new StandardMonteCarloPricer(model, ocelia, rng, fdStep, nbSamples);
         }
 
@@ -71,6 +71,9 @@ TEST_F(StandardMonteCarloPricerTest, simul)
     this->mc->simulate(prix, prix_std_dev, delta, delta_std_dev);
 
     std::cout << "prix: " << prix << std::endl;
+    std::cout << "prix_std_dev: " << prix_std_dev << std::endl;
+    // pnl_vect_print(delta);
+    // pnl_vect_print(delta_std_dev);
     
     EXPECT_EQ(1, 2);
 }

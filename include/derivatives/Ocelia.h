@@ -11,6 +11,7 @@ class Ocelia : public IDerivative{
         // 1 vecteur date avec toutes les dates du début 15 mai 2008 à 28 avril 2016
         // 4 underlyings: 4 sous-jacent (euro, gbp, jpy, chf): prix et zc + spot
 
+        int annee_payoff;
         int nb_sous_jacents_;
         PnlVectInt *indices_dates_semestrielles_; // indices des dates de constatation dans le path 
         PnlVectInt *indices_dates_valeurs_n_ans_; // indices dans le path des dates des valeurs n ans
@@ -21,6 +22,7 @@ class Ocelia : public IDerivative{
 
         Ocelia(double T, int nbTimeSteps, int size, int nb_sous_jacents, DateTimeVector *all_dates);
         ~Ocelia();
+        double getMaturity();
         double get_foreign_index_market_value(const PnlMat* path, int date_idx, int idx);
         double compute_perf_moyenne_panier(const PnlMat *path);
         void compute_valeurs_n_ans(const PnlMat *path, PnlVect *valeurs, int N); // calcule la valeur moyenne des indices pour l'année n

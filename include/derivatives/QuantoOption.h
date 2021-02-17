@@ -13,5 +13,6 @@ class QuantoOption : public IDerivative {
      QuantoOption(double T, int nbTimeSteps, int size, double rf, double K);
     ~QuantoOption();
     
+    double getMaturity();
     double payoff(const PnlMat *path);
 };

@@ -10,6 +10,10 @@ QuantoOption::~QuantoOption(){
 
 }
 
+double QuantoOption::getMaturity(){
+    return this->T_;
+}
+
 double QuantoOption::payoff(const PnlMat *path){
     // double B_T = MGET(path, this->nbTimeSteps_, 0); // valeur finale de l'actif sans risque converti 
     double S_T = MGET(path, this->nbTimeSteps_, 1); // valeur finale de l'actif risqué converti

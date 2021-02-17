@@ -14,7 +14,7 @@ void StandardMonteCarloPricer::simulate(double &prix, double &price_std_dev, Pnl
     for(int j = 0; j < this->nbSamples_; ++j){
         this->model_->asset(this->path_, this->derivative_->T_, this->derivative_->nbTimeSteps_, this->rng_);
         this->price(prix, price_std_dev);
-        //this->delta(delta, delta_std_dev);
+        this->delta(delta, delta_std_dev);
     }
 
     prix /= this->nbSamples_;
@@ -52,7 +52,7 @@ void StandardMonteCarloPricer::delta(PnlVect *delta, PnlVect *std_dev)
 void StandardMonteCarloPricer::discount_price(double t, double &prix, double &std_dev)
 {
     double r = this->model_->rd_;
-    double T = this->derivative_->T_;
+    double T = this->derivative_->getMaturity();
     double M = this->nbSamples_;
     std_dev = sqrt(exp(-2*r*(T-t))*(std_dev - prix * prix)/M);
     prix = exp(-r*(T-t))*prix;
@@ -61,7 +61,7 @@ void StandardMonteCarloPricer::discount_price(double t, double &prix, double &st
 void StandardMonteCarloPricer::discount_delta(double t, PnlVect *delta, PnlVect *std_dev)
 {
     double r = this->model_->rd_;
-    double T = this->derivative_->T_;
+    double T = this->derivative_->getMaturity();
     double M = this->nbSamples_;
     for (int d = 0; d < this->derivative_->size_; ++d)
     {   
