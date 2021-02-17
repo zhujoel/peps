@@ -50,13 +50,15 @@ PnlMat* HistoricalMarketData::getData(DateTimeVector *used_dates){
     DateTimeVector *datesJPY = new DateTimeVector(0);
     jpy_eur->getData(datesJPY, pricesJPY);
 
-    // used_dates = new DateTimeVector(0);
-    sameDates(datesFTSE, datesSSMI, used_dates);
-    sameDates(datesN225, used_dates, used_dates);
-    sameDates(datesN100, used_dates, used_dates);
-    sameDates(datesCHF, used_dates, used_dates);
-    sameDates(datesGBP, used_dates, used_dates);
-    sameDates(datesJPY, used_dates, used_dates);
+    DateTimeVector *dateResult = new DateTimeVector(0);
+    sameDates(datesFTSE, datesSSMI, dateResult);
+    sameDates(datesN225, dateResult, dateResult);
+    sameDates(datesN100, dateResult, dateResult);
+    sameDates(datesCHF, dateResult, dateResult);
+    sameDates(datesGBP, dateResult, dateResult);
+    sameDates(datesJPY, dateResult, dateResult);
+
+    fromDateToDate(dateResult, this->startDate_, this->endDate_, used_dates);
 
     PnlVect *pricesFTSEFiltered = pnl_vect_new();
     PnlVect *pricesSSMIFiltered = pnl_vect_new();
@@ -65,15 +67,15 @@ PnlMat* HistoricalMarketData::getData(DateTimeVector *used_dates){
     PnlVect *pricesGBPFiltered = pnl_vect_new();
     PnlVect *pricesCHFFiltered = pnl_vect_new();
     PnlVect *pricesJPYFiltered = pnl_vect_new();
-    getPricesFromDate(datesFTSE, used_dates, pricesFTSE, pricesFTSEFiltered);
-    getPricesFromDate(datesSSMI, used_dates, pricesSSMI, pricesSSMIFiltered);
-    getPricesFromDate(datesN225, used_dates, pricesN225, pricesN225Filted);
-    getPricesFromDate(datesN100, used_dates, pricesN100, pricesN100Filtered);
-    getPricesFromDate(datesGBP, used_dates, pricesGBP, pricesGBPFiltered);
-    getPricesFromDate(datesCHF, used_dates, pricesCHF, pricesCHFFiltered);
-    getPricesFromDate(datesJPY, used_dates, pricesJPY, pricesJPYFiltered);
+    getPricesFromDate(datesFTSE, dateResult, pricesFTSE, pricesFTSEFiltered);
+    getPricesFromDate(datesSSMI, dateResult, pricesSSMI, pricesSSMIFiltered);
+    getPricesFromDate(datesN225, dateResult, pricesN225, pricesN225Filted);
+    getPricesFromDate(datesN100, dateResult, pricesN100, pricesN100Filtered);
+    getPricesFromDate(datesGBP, dateResult, pricesGBP, pricesGBPFiltered);
+    getPricesFromDate(datesCHF, dateResult, pricesCHF, pricesCHFFiltered);
+    getPricesFromDate(datesJPY, dateResult, pricesJPY, pricesJPYFiltered);
 
-    PnlMat *path = pnl_mat_create(used_dates->nbDates_, 7);
+    PnlMat *path = pnl_mat_create(dateResult->nbDates_, 7);
 
     pnl_mat_set_col(path, pricesN100Filtered, 0);
     pnl_mat_set_col(path, pricesN225Filted, 1);
@@ -82,8 +84,6 @@ PnlMat* HistoricalMarketData::getData(DateTimeVector *used_dates){
     pnl_mat_set_col(path, pricesGBPFiltered, 4);
     pnl_mat_set_col(path, pricesCHFFiltered, 5);
     pnl_mat_set_col(path, pricesJPYFiltered, 6);
-
-    // std::cout << used_dates->nbDates_ << std::endl;
 
     // pnl_mat_print(path);
 

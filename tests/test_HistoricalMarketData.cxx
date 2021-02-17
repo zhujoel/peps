@@ -12,8 +12,9 @@ class HistoricalMarketDataTest: public ::testing::Test{
 };
 
 TEST_F(HistoricalMarketDataTest, getData){
-    HistoricalMarketData *historical = new HistoricalMarketData("name of the thing", NULL, NULL);
-    historical->getData(NULL);
+    HistoricalMarketData *historical = new HistoricalMarketData("name of the thing", new DateTime(1, 1, 2003), new DateTime(1, 1, 2008));
+    DateTimeVector *dates = new DateTimeVector(0);
+    historical->getData(dates);
     EXPECT_EQ(1, 1);
 }
 

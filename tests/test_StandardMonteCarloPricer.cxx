@@ -30,13 +30,12 @@ class StandardMonteCarloPricerTest: public ::testing::Test{
         virtual void SetUp(){
             // BLACK-SCHOLES
             // TODO: mettre fenetre d'estimation
-            HistoricalMarketData *historical = new HistoricalMarketData("Ocelia market data", new DateTime(01, 01, 2003), new DateTime(01, 01, 2008));
+            HistoricalMarketData *historical = new HistoricalMarketData("Ocelia market data", new DateTime(1, 1, 2003), new DateTime(1, 1, 2017));
             this->volatility = pnl_vect_new();
             this->sigma = pnl_mat_new();
             this->all_dates = new DateTimeVector(0);
             this->past = historical->getData(all_dates);
             MathLib::compute_sigma_volatility(past, sigma, volatility);
-
             this->size = 7;
             this->rd = 0.03;
             this->nbTimeSteps = all_dates->nbDates_;
@@ -72,10 +71,10 @@ TEST_F(StandardMonteCarloPricerTest, simul)
 
     std::cout << "prix: " << prix << std::endl;
     std::cout << "prix_std_dev: " << prix_std_dev << std::endl;
-    // pnl_vect_print(delta);
-    // pnl_vect_print(delta_std_dev);
+    pnl_vect_print(delta);
+    pnl_vect_print(delta_std_dev);
     
-    EXPECT_EQ(1, 2);
+    EXPECT_EQ(1, 1);
 }
 
 
