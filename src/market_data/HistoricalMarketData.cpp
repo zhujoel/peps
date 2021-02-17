@@ -13,10 +13,10 @@ HistoricalMarketData::~HistoricalMarketData(){}
 
 void HistoricalMarketData::getData(){
     // TODO: faire une boucle lol
-    // FTSEDataFeed *ftse = new FTSEDataFeed("../data/market_data/FTSE80R.csv");
-    // PnlVect *pricesFTSE = pnl_vect_new();
-    // DateTimeVector *datesFTSE = new DateTimeVector(0);
-    // ftse->getData(datesFTSE, pricesFTSE);
+    YahooDataFeed *ftse = new YahooDataFeed("../data/market_data/FTSE80.csv");
+    PnlVect *pricesFTSE = pnl_vect_new();
+    DateTimeVector *datesFTSE = new DateTimeVector(0);
+    ftse->getData(datesFTSE, pricesFTSE);
     
     YahooDataFeed *ssmi = new YahooDataFeed("../data/market_data/SSMI.csv");
     PnlVect *pricesSSMI = pnl_vect_new();
@@ -49,19 +49,21 @@ void HistoricalMarketData::getData(){
     jpy_eur->getData(datesJPY, pricesJPY);
 
     DateTimeVector *dateResult = new DateTimeVector(0);
-    // sameDates(datesFTSE, datesSSMI, dateResult);
-    sameDates(datesN225, datesSSMI, dateResult);
+    sameDates(datesFTSE, datesSSMI, dateResult);
+    sameDates(datesN225, dateResult, dateResult);
     sameDates(datesN100, dateResult, dateResult);
     sameDates(datesCHF, dateResult, dateResult);
     sameDates(datesGBP, dateResult, dateResult);
     sameDates(datesJPY, dateResult, dateResult);
 
+    PnlVect *pricesFTSEFiltered = pnl_vect_new();
     PnlVect *pricesSSMIFiltered = pnl_vect_new();
     PnlVect *pricesN225Filted = pnl_vect_new();
     PnlVect *pricesN100Filtered = pnl_vect_new();
     PnlVect *pricesGBPFiltered = pnl_vect_new();
     PnlVect *pricesCHFFiltered = pnl_vect_new();
     PnlVect *pricesJPYFiltered = pnl_vect_new();
+    getPricesFromDate(datesFTSE, dateResult, pricesFTSE, pricesFTSEFiltered);
     getPricesFromDate(datesSSMI, dateResult, pricesSSMI, pricesSSMIFiltered);
     getPricesFromDate(datesN225, dateResult, pricesN225, pricesN225Filted);
     getPricesFromDate(datesN100, dateResult, pricesN100, pricesN100Filtered);
@@ -69,22 +71,15 @@ void HistoricalMarketData::getData(){
     getPricesFromDate(datesCHF, dateResult, pricesCHF, pricesCHFFiltered);
     getPricesFromDate(datesJPY, dateResult, pricesJPY, pricesJPYFiltered);
 
-    std::cout << pricesSSMIFiltered->size << std::endl;
-    std::cout << pricesN225Filted->size << std::endl;
-    std::cout << pricesN100Filtered->size << std::endl;
-    std::cout << pricesGBPFiltered->size << std::endl;
-    std::cout << pricesCHFFiltered->size << std::endl;
-    std::cout << pricesJPYFiltered->size << std::endl;
-    std::cout << dateResult->nbDates_ << std::endl;
+    PnlMat *path = pnl_mat_create(dateResult->nbDates_, 7);
 
-    PnlMat *path = pnl_mat_create(dateResult->nbDates_, 6);
-
-    pnl_mat_set_col(path, pricesSSMIFiltered, 0);
-    pnl_mat_set_col(path, pricesN225Filted, 1);
-    pnl_mat_set_col(path, pricesN100Filtered, 2);
-    pnl_mat_set_col(path, pricesGBPFiltered, 3);
-    pnl_mat_set_col(path, pricesCHFFiltered, 4);
-    pnl_mat_set_col(path, pricesJPYFiltered, 5);
+    pnl_mat_set_col(path, pricesFTSEFiltered, 0);
+    pnl_mat_set_col(path, pricesSSMIFiltered, 1);
+    pnl_mat_set_col(path, pricesN225Filted, 2);
+    pnl_mat_set_col(path, pricesN100Filtered, 3);
+    pnl_mat_set_col(path, pricesGBPFiltered, 4);
+    pnl_mat_set_col(path, pricesCHFFiltered, 5);
+    pnl_mat_set_col(path, pricesJPYFiltered, 6);
 
     pnl_mat_print(path);
 }
