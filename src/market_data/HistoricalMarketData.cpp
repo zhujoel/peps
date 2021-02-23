@@ -15,6 +15,8 @@ HistoricalMarketData::~HistoricalMarketData(){}
 PnlMat* HistoricalMarketData::getData(DateTimeVector *used_dates){
     // TODO: faire une boucle lol
     // TODO: vérifier qu'on a les données de marché d'océlia dans les données
+
+    /*
     YahooDataFeed *ftse = new YahooDataFeed("../data/market_data/FTSE80.csv");
     PnlVect *pricesFTSE = pnl_vect_new();
     DateTimeVector *datesFTSE = new DateTimeVector(0);
@@ -88,5 +90,8 @@ PnlMat* HistoricalMarketData::getData(DateTimeVector *used_dates){
     // pnl_mat_print(path);
 
     return path;
+    */
+
+    return pnl_mat_new();
 }
 

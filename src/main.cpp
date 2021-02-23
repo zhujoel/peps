@@ -19,6 +19,7 @@
  * 6. tracking error
  */
 
+ // TODO: mettre les trucs trunc et all_positive de Ocelia dans MathLib
 int main(){
     std::cout << "hello" << std::endl;
 }

@@ -5,10 +5,7 @@
 #include "libs/Utilities.h"
 #include <stdlib.h>
 
-FTSEDataFeed::FTSEDataFeed(std::string filepath) : IDataFeed(filepath)
-{
-    this->filepath_ = filepath;
-}
+FTSEDataFeed::FTSEDataFeed(std::string filepath) : IDataFeed(filepath){}
 
 FTSEDataFeed::~FTSEDataFeed(){}
 
@@ -28,11 +25,11 @@ int FTSEDataFeed::getNumberValidData()
     return count;
 }
 
-void FTSEDataFeed::getData(DateTimeVector *dates, PnlVect *path)
+void FTSEDataFeed::getData()
 {
     int nbDates = this->getNumberValidData();
-    dates->resize(nbDates);
-    pnl_vect_resize(path, nbDates);
+    this->dates_->resize(nbDates);
+    pnl_vect_resize(this->prices_, nbDates);
 
     std::ifstream dataFile(this->filepath_);
     std::string line;
@@ -43,15 +40,15 @@ void FTSEDataFeed::getData(DateTimeVector *dates, PnlVect *path)
     while (std::getline(dataFile, line))
     {
         split(line, ',', parsedLine);
-        dates->dates_[i] = parseDateString(parsedLine[0], '-');
-        LET(path, i) = std::atof(parsedLine[1].c_str()); // c_str(): needs a char* to use atof
+        this->dates_->dates_[i] = parseDateString(parsedLine[0], '-');
+        LET(this->prices_, i) = std::atof(parsedLine[1].c_str()); // c_str(): needs a char* to use atof
         i++;
     }
 
     dataFile.close();
 }
 
-
+/*
 void FTSEDataFeed::parseAndOutput(){
     std::ifstream dataFile(this->filepath_);
     std::string line;
@@ -73,3 +70,4 @@ void FTSEDataFeed::parseAndOutput(){
     pricesOut.close();
     dataFile.close();
 }
+*/

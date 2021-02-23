@@ -23,6 +23,7 @@ TEST_F(DataFeedsTest, YahooGetData)
     EXPECT_EQ(1, 1);
 }
 
+/*
 TEST_F(DataFeedsTest, YahooParseAndOutput)
 {
     char str[] = "../data/market_data/SSMI.csv";
@@ -30,6 +31,7 @@ TEST_F(DataFeedsTest, YahooParseAndOutput)
     yahoo->parseAndOutput();
     EXPECT_EQ(1, 1);
 }
+*/
 
 TEST_F(DataFeedsTest, FTSEGetData)
 {

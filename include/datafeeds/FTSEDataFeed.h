@@ -8,6 +8,6 @@ class FTSEDataFeed : public IDataFeed{
         ~FTSEDataFeed();
         
         int getNumberValidData();
-        void getData(DateTimeVector *dates, PnlVect *path);
-        void parseAndOutput();
+        void getData();
+        //void parseAndOutput();
 };

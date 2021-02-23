@@ -5,10 +5,7 @@
 #include "libs/Utilities.h"
 #include <stdlib.h>
 
-YahooDataFeed::YahooDataFeed(std::string filepath) : IDataFeed(filepath)
-{
-    this->filepath_ = filepath;
-}
+YahooDataFeed::YahooDataFeed(std::string filepath) : IDataFeed(filepath){}
 
 YahooDataFeed::~YahooDataFeed(){}
 
@@ -30,11 +27,11 @@ int YahooDataFeed::getNumberValidData()
     return count;
 }
 
-void YahooDataFeed::getData(DateTimeVector *dates, PnlVect *path)
+void YahooDataFeed::getData()
 {
     int nbDates = this->getNumberValidData();
-    dates->resize(nbDates);
-    pnl_vect_resize(path, nbDates);
+    this->dates_->resize(nbDates);
+    pnl_vect_resize(this->prices_, nbDates);
 
     std::ifstream dataFile(this->filepath_);
     std::string line;
@@ -46,15 +43,15 @@ void YahooDataFeed::getData(DateTimeVector *dates, PnlVect *path)
     {
         split(line, ',', parsedLine);
         if(parsedLine[4] == "null") continue;
-        dates->dates_[i] = parseDateString(parsedLine[0], '-');
-        LET(path, i) = std::atof(parsedLine[4].c_str()); // c_str(): needs a char* to use atof
+        this->dates_->dates_[i] = parseDateString(parsedLine[0], '-');
+        LET(this->prices_, i) = std::atof(parsedLine[4].c_str()); // c_str(): needs a char* to use atof
         i++;
     }
 
     dataFile.close();
 }
 
-
+/*
 void YahooDataFeed::parseAndOutput(){
     std::ifstream dataFile(this->filepath_);
     std::string line;
@@ -77,3 +74,4 @@ void YahooDataFeed::parseAndOutput(){
     pricesOut.close();
     dataFile.close();
 }
+*/

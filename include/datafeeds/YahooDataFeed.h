@@ -8,7 +8,7 @@ class YahooDataFeed : public IDataFeed{
         ~YahooDataFeed();
         
         int getNumberValidData();
-        void getData(DateTimeVector *dates, PnlVect *path);
-        void parseAndOutput();
+        void getData();
+        //void parseAndOutput();
 
 };
