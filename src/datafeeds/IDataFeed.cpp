@@ -1,7 +1,7 @@
-#include "datafeeds/IDataFeed.h"
+// #include "datafeeds/IDataFeed.h"
 
-IDataFeed::IDataFeed(std::string filepath){
-    this->filepath_ = filepath;
-    this->prices_ = pnl_vect_new();
-}
-IDataFeed::~IDataFeed(){}
+// IDataFeed::IDataFeed(std::string filepath){
+//     this->filepath_ = filepath;
+//     this->prices_ = pnl_vect_new();
+// }
+// IDataFeed::~IDataFeed(){}

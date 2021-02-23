@@ -3,11 +3,11 @@
 #include "datafeeds/IDataFeed.h"
 
 class FTSEDataFeed : public IDataFeed{
-    public:
-        FTSEDataFeed(std::string filepath);
-        ~FTSEDataFeed();
+    // public:
+    //     FTSEDataFeed(std::string filepath);
+    //     ~FTSEDataFeed();
         
-        int getNumberValidData();
-        void getData();
-        //void parseAndOutput();
+    //     int getNumberValidData();
+    //     void getData();
+    //     //void parseAndOutput();
 };
