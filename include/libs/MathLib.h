@@ -17,6 +17,4 @@ class MathLib {
       static void compute_sigma(PnlMat *market_data, PnlMat *sigma);
       static void compute_sigma(PnlMat *market_data, PnlMat *sigma, int start, int end);
       static void compute_volatility(PnlMat *sigma, PnlVect *volatility);
-      static void adjust_sigma_Ocelia(PnlMat *sigma);
-      static void adjust_spot_Ocelia(PnlVect *spot);
 };

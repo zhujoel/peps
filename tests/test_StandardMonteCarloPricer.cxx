@@ -44,7 +44,7 @@ class StandardMonteCarloPricerTest: public ::testing::Test{
             pnl_rng_sseed(rng, std::time(NULL));
             this->spot = pnl_vect_new();
             pnl_mat_get_row(spot, past, (past->n)-1);
-            MathLib::adjust_spot_Ocelia(spot);
+            //MathLib::adjust_spot_Ocelia(spot); // TODO: je comemente ça pour que ça compile, à voir comment on a besoin de changer
             this->model = new BlackScholesModel(size, rd, sigma, volatility, spot);
 
             // OCELIA

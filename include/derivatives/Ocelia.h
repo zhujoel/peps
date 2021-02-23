@@ -22,6 +22,11 @@ class Ocelia : public IDerivative{
 
         Ocelia(double T, int nbTimeSteps, int size, int nb_sous_jacents, DateTimeVector *all_dates);
         ~Ocelia();
+
+
+        void adjust_sigma(PnlMat *sigma); // adjust computed sigma en fonction du nombre de produit dans la matrix path et de comment ils sont organisés
+        void adjust_spot(PnlVect *spot); // same as above
+
         double getMaturity();
         double get_foreign_index_market_value(const PnlMat* path, int date_idx, int idx);
         double compute_perf_moyenne_panier(const PnlMat *path);

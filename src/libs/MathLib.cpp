@@ -93,8 +93,8 @@ void MathLib::compute_sigma_volatility(PnlMat *market_data, PnlMat *sigma, PnlVe
     pnl_mat_chol(sigma);
     pnl_vect_resize(volatility, size);
     PnlVect *tmp = pnl_vect_create(size);
-    // TODO: mettre le adjust en générique
-    MathLib::adjust_sigma_Ocelia(sigma);
+    // TODO: faire l'appel du sigma en dehors de la fonction (avant le calcul de la volatility j'imagine)
+    // MathLib::adjust_sigma_Ocelia(sigma);
     for(int i = 0; i < size; ++i){
         pnl_mat_get_row(tmp, sigma, i);
         double sigma_d = pnl_vect_norm_two(tmp);
@@ -131,21 +131,4 @@ void MathLib::compute_volatility(PnlMat *sigma, PnlVect *volatility){
     }
 
     pnl_vect_free(&tmp);
-}
-
-// FONCTION QUI SERT A CALCULER LE SIGMA AVEC LES ZERO COUPONS 
-// TODO: généraliser et facto
-void MathLib::adjust_sigma_Ocelia(PnlMat *sigma){
-    for(int i = 0; i < 3; ++i){
-        for(int j = 0; j < sigma->n; ++j){
-            MLET(sigma, i, j) += MGET(sigma, i+4, j);
-        }
-    }
-}
-
-// TODO: factooooooo
-void MathLib::adjust_spot_Ocelia(PnlVect *spot){
-    for(int i = 0; i < 3; ++i){
-        LET(spot, i) = GET(spot, i)*GET(spot, i+4);
-    }
 }

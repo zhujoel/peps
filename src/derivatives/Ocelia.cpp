@@ -40,6 +40,20 @@ double Ocelia::getMaturity(){
     return this->annee_payoff;
 }
 
+void Ocelia::adjust_sigma(PnlMat *sigma){
+    for(int i = 0; i < 3; ++i){
+        for(int j = 0; j < sigma->n; ++j){
+            MLET(sigma, i, j) += MGET(sigma, i+4, j);
+        }
+    }
+}
+
+void Ocelia::adjust_spot(PnlVect *spot){
+    for(int i = 0; i < 3; ++i){
+        LET(spot, i) = GET(spot, i)*GET(spot, i+4);
+    }
+}
+
 // TODO: tester cette fonction
 double Ocelia::get_foreign_index_market_value(const PnlMat* path, int date_idx, int idx){
     if(idx > 3) throw std::invalid_argument("idx must be between 0 and 3!");

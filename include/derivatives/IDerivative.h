@@ -11,7 +11,11 @@ class IDerivative {
 
       IDerivative(double T, int nbTimeSteps, int size);
       virtual ~IDerivative();
-      
+
+      // SERT A CALCULER LE SIGMA AVEC LES ZERO COUPONS 
+      virtual void adjust_sigma(PnlMat *sigma) = 0; // adjust computed sigma en fonction du nombre de produit dans la matrix path et de comment ils sont organisés
+      virtual void adjust_spot(PnlVect *spot) = 0; // same as above
+
       virtual double getMaturity() = 0;
       /**
       * Calcule la valeur du payoff sur la trajectoire
