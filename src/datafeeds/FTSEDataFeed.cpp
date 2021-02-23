@@ -28,7 +28,6 @@ int FTSEDataFeed::getNumberValidData()
 void FTSEDataFeed::getData()
 {
     int nbDates = this->getNumberValidData();
-    this->dates_->resize(nbDates);
     pnl_vect_resize(this->prices_, nbDates);
 
     std::ifstream dataFile(this->filepath_);
@@ -40,7 +39,7 @@ void FTSEDataFeed::getData()
     while (std::getline(dataFile, line))
     {
         split(line, ',', parsedLine);
-        this->dates_->dates_[i] = parseDateString(parsedLine[0], '-');
+        this->dates_[i] = parseDateString(parsedLine[0], '-');
         LET(this->prices_, i) = std::atof(parsedLine[1].c_str()); // c_str(): needs a char* to use atof
         i++;
     }

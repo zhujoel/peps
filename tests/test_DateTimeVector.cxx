@@ -8,7 +8,7 @@ class DateTimeVectorTest: public ::testing::Test{
         DateTimeVector *dates;
 
         virtual void SetUp(){
-            this->dates = parseDatesFile("../tests/test_data/dateVector.csv", 16, '-');
+            this->dates = parseDatesFile("../tests/test_data/dateTimeVector/dateVector.csv", 16, '-');
         }
 
         virtual void TearDown(){
@@ -45,7 +45,7 @@ TEST_F(DateTimeVectorTest, operatorCrochetElement15){
 }
 
 TEST_F(DateTimeVectorTest, calculIndicesDates){
-    DateTimeVector *subset = parseDatesFile("../tests/test_data/dateVectorSubset.csv", 5, '-');
+    DateTimeVector *subset = parseDatesFile("../tests/test_data/dateTimeVector/dateVectorSubset.csv", 5, '-');
     PnlVectInt *indices = pnl_vect_int_create(5);
     calcul_indices_dates(this->dates, subset, indices);
     EXPECT_EQ(0, GET_INT(indices, 0));
@@ -58,6 +58,20 @@ TEST_F(DateTimeVectorTest, calculIndicesDates){
     pnl_vect_int_free(&indices);
 }
 
+TEST_F(DateTimeVectorTest, resize){
+    DateTimeVector *vector = new DateTimeVector(5);
+    vector->resize(10);
+    // EXPECT_EQ(10, vector->nbDates_);
+    // delete vector;
+}
+
+// TEST_F(DateTimeVectorTest, operatorPrint){
+//     DateTimeVector *vector = parseDatesFile("../tests/test_data/dateTimeVector/print.csv", 3, '-');
+//     std::stringstream str;
+//     str << vector;
+//     EXPECT_EQ("2008-11-14\n2009-05-15\n2009-11-13\n", str.str());
+
+// }
 
 int main(int argc, char** argv){
     testing::InitGoogleTest(&argc, argv);

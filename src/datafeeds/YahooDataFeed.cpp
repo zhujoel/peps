@@ -30,7 +30,6 @@ int YahooDataFeed::getNumberValidData()
 void YahooDataFeed::getData()
 {
     int nbDates = this->getNumberValidData();
-    this->dates_->resize(nbDates);
     pnl_vect_resize(this->prices_, nbDates);
 
     std::ifstream dataFile(this->filepath_);
@@ -43,7 +42,7 @@ void YahooDataFeed::getData()
     {
         split(line, ',', parsedLine);
         if(parsedLine[4] == "null") continue;
-        this->dates_->dates_[i] = parseDateString(parsedLine[0], '-');
+        this->dates_[i] = parseDateString(parsedLine[0], '-');
         LET(this->prices_, i) = std::atof(parsedLine[4].c_str()); // c_str(): needs a char* to use atof
         i++;
     }

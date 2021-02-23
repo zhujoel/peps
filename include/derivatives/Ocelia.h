@@ -20,7 +20,7 @@ class Ocelia : public IDerivative{
         PnlVect *nouveau_depart_; // valeurs de l'effet nouveau départ
         PnlVect *perfs_; // perfs à l'année n
 
-        Ocelia(double T, int nbTimeSteps, int size, int nb_sous_jacents, DateTimeVector *all_dates);
+        Ocelia(double T, int nbTimeSteps, int size, int nb_sous_jacents, std::vector<DateTime*> all_dates);
         ~Ocelia();
 
 

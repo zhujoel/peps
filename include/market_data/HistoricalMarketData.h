@@ -9,5 +9,5 @@ class HistoricalMarketData : public IMarketData{
         HistoricalMarketData(std::string name, DateTime *startDate, DateTime *endDate);
         ~HistoricalMarketData();
 
-        PnlMat* getData(DateTimeVector *used_dates);
+        PnlMat* getData(std::vector<DateTime*> *used_dates);
 };

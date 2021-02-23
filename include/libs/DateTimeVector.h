@@ -2,22 +2,10 @@
 
 #include "libs/DateTime.h"
 #include "pnl/pnl_vector.h"
+#include <vector>
 
-class DateTimeVector{
-    public:
-        DateTime **dates_;
-        int nbDates_;
-
-        DateTimeVector(int nbDates);
-        ~DateTimeVector();
-
-        void resize(int nbDates);
-        DateTime *operator[](int index);
-};
-
-std::ostream &operator<<(std::ostream &output, const DateTime *dt);
-void calcul_indices_dates(DateTimeVector *all_dates, DateTimeVector *dates, PnlVectInt *indices); // LES DATES DOIVENT ETRE DANS L'ORDRE
-DateTimeVector* parseDatesFile(std::string fileName, int nbDates, char delimiter);
-void sameDates(DateTimeVector *v1, DateTimeVector *v2, DateTimeVector *result);
-void getPricesFromDate(DateTimeVector *allDates, DateTimeVector *relevantDates, PnlVect *allPrices, PnlVect *result);
-void fromDateToDate(DateTimeVector *allDates, DateTime *from, DateTime *to, DateTimeVector *result);
+std::vector<DateTime*> parseDatesFile(std::string fileName, int nbDates, char delimiter);
+void calcul_indices_dates(std::vector<DateTime*> all_dates, std::vector<DateTime*> dates, PnlVectInt *indices); // LES DATES DOIVENT ETRE DANS L'ORDRE
+std::vector<DateTime*> sameDates(std::vector<DateTime*> v1, std::vector<DateTime*> v2);
+void getPricesFromDate(std::vector<DateTime*> allDates, std::vector<DateTime*> relevantDates, PnlVect *allPrices, PnlVect *result);
+std::vector<DateTime*> fromDateToDate(std::vector<DateTime*> allDates, DateTime *from, DateTime *to);

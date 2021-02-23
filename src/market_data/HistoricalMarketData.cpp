@@ -12,7 +12,7 @@ HistoricalMarketData::HistoricalMarketData(std::string name, DateTime *startDate
 HistoricalMarketData::~HistoricalMarketData(){}
 
 // TODO: facto
-PnlMat* HistoricalMarketData::getData(DateTimeVector *used_dates){
+PnlMat* HistoricalMarketData::getData(std::vector<DateTime*> *used_dates){
     // TODO: faire une boucle lol
     // TODO: vérifier qu'on a les données de marché d'océlia dans les données
 

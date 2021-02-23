@@ -5,7 +5,7 @@
 #include <iostream>
 
 // TODO: changer le 0.0 en un r?
-Ocelia::Ocelia(double T, int nbTimeSteps, int size, int nb_sous_jacents, DateTimeVector *all_dates) : IDerivative(T, nbTimeSteps, size)
+Ocelia::Ocelia(double T, int nbTimeSteps, int size, int nb_sous_jacents, std::vector<DateTime*> all_dates) : IDerivative(T, nbTimeSteps, size)
 {
     this->annee_payoff = 0;    
     this->nb_sous_jacents_ = nb_sous_jacents;
@@ -15,11 +15,11 @@ Ocelia::Ocelia(double T, int nbTimeSteps, int size, int nb_sous_jacents, DateTim
     this->nouveau_depart_ = pnl_vect_create_from_zero(this->nb_sous_jacents_);
     this->perfs_ = pnl_vect_create_from_zero(this->nb_sous_jacents_);
     
-    DateTimeVector *dates_semestrielles = parseDatesFile("../data/dates/dates_semest.csv", 16, '-');
-    DateTimeVector *dates_valeurs_n_ans = parseDatesFile("../data/dates/dates_valeurs_n.csv", 35, '-');
+    std::vector<DateTime*> dates_semestrielles = parseDatesFile("../data/dates/dates_semest.csv", 16, '-');
+    std::vector<DateTime*> dates_valeurs_n_ans = parseDatesFile("../data/dates/dates_valeurs_n.csv", 35, '-');
 
-    this->indices_dates_semestrielles_ = pnl_vect_int_create(dates_semestrielles->nbDates_);
-    this->indices_dates_valeurs_n_ans_ = pnl_vect_int_create(dates_valeurs_n_ans->nbDates_);
+    this->indices_dates_semestrielles_ = pnl_vect_int_create(dates_semestrielles.size());
+    this->indices_dates_valeurs_n_ans_ = pnl_vect_int_create(dates_valeurs_n_ans.size());
     calcul_indices_dates(all_dates, dates_semestrielles, this->indices_dates_semestrielles_);
     calcul_indices_dates(all_dates, dates_valeurs_n_ans, this->indices_dates_valeurs_n_ans_);
 

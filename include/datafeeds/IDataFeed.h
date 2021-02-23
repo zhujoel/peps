@@ -3,11 +3,12 @@
 #include "libs/DateTimeVector.h"
 #include "pnl/pnl_vector.h"
 #include <string>
+#include <vector>
 
 class IDataFeed{
     public:
         std::string filepath_;
-        DateTimeVector *dates_;
+        std::vector<DateTime*> *dates_;
         PnlVect *prices_;
 
         IDataFeed(std::string filepath);
