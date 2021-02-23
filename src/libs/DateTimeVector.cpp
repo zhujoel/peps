@@ -17,13 +17,6 @@ DateTimeVector::~DateTimeVector(){
     delete[] this->dates_;
 }
 
-
-void DateTimeVector::print() const{
-    for(int i = 0; i < this->nbDates_; ++i){
-        std::cout << this->dates_[i] << std::endl;
-    }
-}
-
 void DateTimeVector::resize(int nbDates){
     for(int i = 0; i < this->nbDates_; ++i){
         delete this->dates_[i];
@@ -38,6 +31,13 @@ DateTime* DateTimeVector::operator[](int index){
         throw std::out_of_range("index out of bounds");
     }
     return this->dates_[index];
+}
+
+std::ostream &operator<<(std::ostream &output, const DateTimeVector *vector){
+    for(int i = 0; i < vector->nbDates_; ++i){
+        output << vector->dates_[i] << std::endl;
+    }
+    return output;
 }
 
 void calcul_indices_dates(DateTimeVector *all_dates, DateTimeVector *dates, PnlVectInt *indices)

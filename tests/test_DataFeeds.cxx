@@ -114,7 +114,7 @@ TEST_F(DataFeedsTest, fromDateToDate){
     fromDateToDate(datesFTSE, new DateTime(1, 1, 2006), new DateTime(3, 3, 2010), dateResult);
 
     std::cout << "dates: " << std::endl;
-    dateResult->print();
+    std::cout << dateResult << std::endl;
 
     EXPECT_EQ(1, 1);
 }

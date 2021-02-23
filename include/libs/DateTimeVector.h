@@ -11,11 +11,11 @@ class DateTimeVector{
         DateTimeVector(int nbDates);
         ~DateTimeVector();
 
-        void print() const;
         void resize(int nbDates);
         DateTime *operator[](int index);
 };
 
+std::ostream &operator<<(std::ostream &output, const DateTime *dt);
 void calcul_indices_dates(DateTimeVector *all_dates, DateTimeVector *dates, PnlVectInt *indices); // LES DATES DOIVENT ETRE DANS L'ORDRE
 DateTimeVector* parseDatesFile(std::string fileName, int nbDates, char delimiter);
 void sameDates(DateTimeVector *v1, DateTimeVector *v2, DateTimeVector *result);
