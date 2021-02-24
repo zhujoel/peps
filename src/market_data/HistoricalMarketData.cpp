@@ -2,13 +2,12 @@
 #include <iostream>
 #include "datafeeds/YahooDataFeed.h"
 #include "pnl/pnl_matrix.h"
+#include <cstring>
 
 HistoricalMarketData::HistoricalMarketData(std::string name, DateTime *startDate, DateTime *endDate) 
     : IMarketData(name, startDate, endDate)
 {
 }
-
-HistoricalMarketData::~HistoricalMarketData(){}
 
 void HistoricalMarketData::getData()
 {
@@ -33,17 +32,21 @@ void HistoricalMarketData::getOceliaData(){
         dataFeeds[i]->getData();
     }
 
-    this->dates_ = dataFeeds[0]->dates_;
-    this->dates_ = fromDateToDate(this->dates_, this->startDate_, this->endDate_);
+    this->dates_ = fromDateToDate(dataFeeds[0]->dates_, this->startDate_, this->endDate_);
     
     for(int i = 1; i < size; ++i){
         this->dates_ = sameDates(this->dates_, dataFeeds[i]->dates_);
     }
 
-    this->path_ = pnl_mat_create(this->dates_.size(), 7);
+    pnl_mat_resize(this->path_, this->dates_.size(), size);
 
     for(int i = 0; i < size; ++i){
         PnlVect *prices = getPricesFromDate(dataFeeds[i]->dates_, this->dates_, dataFeeds[i]->prices_);
         pnl_mat_set_col(this->path_, prices, i);
+        pnl_vect_free(&prices);
+    }
+
+    for(int i = 0; i < size; ++i){
+        delete dataFeeds[i];
     }
 }

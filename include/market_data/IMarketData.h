@@ -1,6 +1,6 @@
 #pragma once
 #include "libs/DateTimeVector.h"
-#include <string>
+#include "pnl/pnl_matrix.h"
 
 class IMarketData{
     public:
@@ -11,7 +11,7 @@ class IMarketData{
         PnlMat *path_; // tous les prix entre start_date_ et end_date_
         
         IMarketData(std::string name, DateTime *startDate, DateTime *endDate);
-
         virtual ~IMarketData();
+
         virtual void getData() = 0;
 };

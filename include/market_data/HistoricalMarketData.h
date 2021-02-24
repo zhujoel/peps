@@ -7,7 +7,6 @@ class HistoricalMarketData : public IMarketData{
         std::string* name_; // path to the file to parse for the data
 
         HistoricalMarketData(std::string name, DateTime *startDate, DateTime *endDate);
-        ~HistoricalMarketData();
 
         void getData();
         void getOceliaData();

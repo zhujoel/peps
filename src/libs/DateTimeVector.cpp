@@ -32,7 +32,6 @@ PnlVectInt* calcul_indices_dates(std::vector<DateTime*> all_dates, std::vector<D
     return indices;
 }
 
-// TODO: facto and opti
 std::vector<DateTime*> sameDates(std::vector<DateTime*> v1, std::vector<DateTime*> v2)
 {
     std::vector<DateTime*> result;

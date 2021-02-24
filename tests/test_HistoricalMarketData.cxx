@@ -4,7 +4,6 @@
 
 class HistoricalMarketDataTest: public ::testing::Test{
     protected:
-
         virtual void SetUp(){
         }
 
@@ -17,6 +16,8 @@ TEST_F(HistoricalMarketDataTest, getData){
     historical->getData();
 
     EXPECT_EQ(4, historical->dates_.size());
+
+    delete historical;
 }
 
 int main(int argc, char** argv){
