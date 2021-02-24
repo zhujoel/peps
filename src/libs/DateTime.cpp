@@ -39,6 +39,10 @@ int DateTime::compare(const DateTime *dt) const{
     return 0;
 }
 
+std::string DateTime::str() const{
+    return std::to_string(this->dd_) + "-" + std::to_string(this->mm_) + "-" + std::to_string(this->yyyy_);
+}
+
 DateTime* DateTime::copy() const{
     return new DateTime(this->dd_, this->mm_, this->yyyy_);
 }

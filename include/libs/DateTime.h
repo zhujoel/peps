@@ -13,6 +13,7 @@ class DateTime{
         
         DateTime* copy() const;
         int compare(const DateTime *dt) const;
+        std::string str() const;
 
 };
 
