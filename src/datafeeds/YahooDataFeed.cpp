@@ -7,8 +7,6 @@
 
 YahooDataFeed::YahooDataFeed(std::string filepath) : IDataFeed(filepath){}
 
-YahooDataFeed::~YahooDataFeed(){}
-
 int YahooDataFeed::getNumberValidData()
 {
     std::ifstream dataFile(this->filepath_);

@@ -12,7 +12,7 @@ class IDataFeed{
         PnlVect *prices_;
 
         IDataFeed(std::string filepath);
-        ~IDataFeed();
+        virtual ~IDataFeed();
         
         virtual int getNumberValidData() = 0; // ignores null-value prices
         virtual void getData() = 0;
