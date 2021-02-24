@@ -17,8 +17,9 @@ std::vector<DateTime*> parseDatesFile(std::string fileName, int nbDates, char de
     return dates;
 }
 
-void calcul_indices_dates(std::vector<DateTime*> all_dates, std::vector<DateTime*> dates, PnlVectInt *indices)
+PnlVectInt* calcul_indices_dates(std::vector<DateTime*> all_dates, std::vector<DateTime*> dates)
 {
+    PnlVectInt *indices = pnl_vect_int_create(dates.size());
     int cnt = 0;
     for(long unsigned int i = 0; i < all_dates.size(); ++i){
         if(all_dates[i]->compare(dates[cnt]) == 0){
@@ -28,6 +29,7 @@ void calcul_indices_dates(std::vector<DateTime*> all_dates, std::vector<DateTime
             }
         }
     }
+    return indices;
 }
 
 // TODO: facto and opti
@@ -59,19 +61,20 @@ std::vector<DateTime*> sameDates(std::vector<DateTime*> v1, std::vector<DateTime
 }
 
 // TODO: we could also use getIndicesFromDates?
-void getPricesFromDate(std::vector<DateTime*> allDates, std::vector<DateTime*> subset, PnlVect *allPrices, PnlVect *result)
+PnlVect* getPricesFromDate(std::vector<DateTime*> allDates, std::vector<DateTime*> subset, PnlVect *allPrices)
 {
-    pnl_vect_resize(result, subset.size());
+    PnlVect *prices = pnl_vect_create(subset.size());
     int idx = 0;
     int idx2 = 0;
     while(idx < subset.size()){
         if((allDates[idx2]->compare(subset[idx]) == 0)){
-            LET(result, idx++) = GET(allPrices, idx2++);
+            LET(prices, idx++) = GET(allPrices, idx2++);
         }
         else{
             idx2++;
         }
     }
+    return prices;
 }
 
 std::vector<DateTime*> fromDateToDate(std::vector<DateTime*> allDates, DateTime *from, DateTime *to)

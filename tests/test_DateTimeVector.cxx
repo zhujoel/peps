@@ -26,8 +26,7 @@ TEST_F(DateTimeVectorTest, parseDatesFile){
 TEST_F(DateTimeVectorTest, calculIndicesDates){
     std::vector<DateTime*> dates = parseDatesFile("../tests/test_data/dateTimeVector/dateVector.csv", 16, '-');
     std::vector<DateTime*> subset = parseDatesFile("../tests/test_data/dateTimeVector/dateVectorSubset.csv", 5, '-');
-    PnlVectInt *indices = pnl_vect_int_create(5);
-    calcul_indices_dates(dates, subset, indices);
+    PnlVectInt *indices = calcul_indices_dates(dates, subset);
     
     EXPECT_EQ(5, indices->size);
     EXPECT_EQ(0, GET_INT(indices, 0));
@@ -63,8 +62,7 @@ TEST_F(DateTimeVectorTest, getPricesFromDate){
     PnlVect *allPrices = pnl_vect_create(size);
     for(int i = 0; i < size; ++i) LET(allPrices, i) = i;
 
-    PnlVect *result = pnl_vect_new();
-    getPricesFromDate(dates, subset, allPrices, result);
+    PnlVect *result = getPricesFromDate(dates, subset, allPrices);
 
     EXPECT_EQ(5, result->size);
     EXPECT_EQ(0, GET(result, 0));

@@ -11,46 +11,33 @@
 
 // HistoricalMarketData::~HistoricalMarketData(){}
 
-// // TODO: facto
 // PnlMat* HistoricalMarketData::getData(std::vector<DateTime*> *used_dates){
-//     // TODO: faire une boucle lol
-//     // TODO: vérifier qu'on a les données de marché d'océlia dans les données
-
-//     /*
 //     YahooDataFeed *ftse = new YahooDataFeed("../data/market_data/FTSE80.csv");
-//     PnlVect *pricesFTSE = pnl_vect_new();
-//     DateTimeVector *datesFTSE = new DateTimeVector(0);
-//     ftse->getData(datesFTSE, pricesFTSE);
+//     ftse->getData();
     
 //     YahooDataFeed *ssmi = new YahooDataFeed("../data/market_data/SSMI.csv");
-//     PnlVect *pricesSSMI = pnl_vect_new();
-//     DateTimeVector *datesSSMI = new DateTimeVector(0);
-//     ssmi->getData(datesSSMI, pricesSSMI);
+//     ssmi->getData();
 
 //     YahooDataFeed *n225 = new YahooDataFeed("../data/market_data/N225.csv");
-//     PnlVect *pricesN225 = pnl_vect_new();
-//     DateTimeVector *datesN225 = new DateTimeVector(0);
-//     n225->getData(datesN225, pricesN225);
+//     n225->getData();
     
 //     YahooDataFeed *n100 = new YahooDataFeed("../data/market_data/N100.csv");
-//     PnlVect *pricesN100 = pnl_vect_new();
-//     DateTimeVector *datesN100 = new DateTimeVector(0);
-//     n100->getData(datesN100, pricesN100);
+//     n100->getData();
 
 //     YahooDataFeed *chf_eur = new YahooDataFeed("../data/market_data/CHF-EUR.csv");
-//     PnlVect *pricesCHF = pnl_vect_new();
-//     DateTimeVector *datesCHF = new DateTimeVector(0);
-//     chf_eur->getData(datesCHF, pricesCHF);
+//     chf_eur->getData();
 
 //     YahooDataFeed *gbp_eur = new YahooDataFeed("../data/market_data/GBP-EUR.csv");
-//     PnlVect *pricesGBP = pnl_vect_new();
-//     DateTimeVector *datesGBP = new DateTimeVector(0);
-//     gbp_eur->getData(datesGBP, pricesGBP);
+//     gbp_eur->getData();
 
 //     YahooDataFeed *jpy_eur = new YahooDataFeed("../data/market_data/JPY-EUR.csv");
-//     PnlVect *pricesJPY = pnl_vect_new();
-//     DateTimeVector *datesJPY = new DateTimeVector(0);
-//     jpy_eur->getData(datesJPY, pricesJPY);
+//     jpy_eur->getData();
+
+//     for(int i to 7){
+//         new YahooDataFeed();
+//         yahoo->getData();
+//         sameDates()
+//     }
 
 //     DateTimeVector *dateResult = new DateTimeVector(0);
 //     sameDates(datesFTSE, datesSSMI, dateResult);
@@ -90,8 +77,6 @@
 //     // pnl_mat_print(path);
 
 //     return path;
-//     */
 
-//     return pnl_mat_new();
 // }
 
