@@ -1,6 +1,7 @@
 #include "gtest/gtest.h"
 #include "libs/Utilities.h"
 #include "pnl/pnl_vector.h"
+#include <string>
 
 class UtilitiesTest: public ::testing::Test{
     protected:
@@ -10,6 +11,16 @@ class UtilitiesTest: public ::testing::Test{
         virtual void TearDown(){
         }
 };
+
+TEST_F(UtilitiesTest, split){
+    std::string str = "hello,world,?";
+    std::string output[3];
+    split(str, ',', output);
+
+    EXPECT_EQ("hello", output[0]);
+    EXPECT_EQ("world", output[1]);
+    EXPECT_EQ("?", output[2]);
+}
 
 TEST_F(UtilitiesTest, trunc){
     PnlVect *vect = pnl_vect_create(3);
