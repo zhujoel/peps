@@ -23,19 +23,46 @@ class MathLibTest: public ::testing::Test{
         }
 };
 
-// TEST_F(MathLibTest, log_returns){
-//     PnlMat *returns = log_returns(this->path, 0, 3);
+TEST_F(MathLibTest, log_returns){
+    PnlMat *returns = log_returns(this->path, 0, 3);
 
-//     std::cout << MGET(returns, 0, 0) << std::endl; // 0.0487902 ??
+    EXPECT_NEAR(0.04879, MGET(returns, 0, 0), 0.000001);
+    EXPECT_NEAR(0.04652, MGET(returns, 1, 0), 0.000001);
+    EXPECT_NEAR(0.09531018, MGET(returns, 0, 1), 0.000001);
+    EXPECT_NEAR(-0.09531, MGET(returns, 1, 1), 0.000001);
 
-//     EXPECT_NEAR(1.05, MGET(returns, 0, 0), 0.000001);
-//     EXPECT_NEAR(1.0476, MGET(returns, 1, 0), 0.000001);
-//     EXPECT_NEAR(1.1, MGET(returns, 0, 1), 0.000001);
-//     EXPECT_NEAR(0.9091, MGET(returns, 1, 1), 0.000001);
+    pnl_mat_free(&returns);
+}
 
-//     pnl_mat_free(&returns);
-// }
+TEST_F(MathLibTest, means){
+    PnlVect *means_path = means(this->path);
 
+    EXPECT_NEAR(105, GET(means_path, 0), 0.000001);
+    EXPECT_NEAR(103.333333, GET(means_path, 1), 0.000001);
+
+    pnl_vect_free(&means_path);
+}
+
+TEST_F(MathLibTest, compute_covariance_k_l){
+    PnlMat *returns = log_returns(this->path, 0, 3);
+    PnlVect *means_returns = means(returns);
+    double covariance_0_0 = compute_covariance(returns, means_returns, 0, 0);
+    EXPECT_NEAR(0.0000025764, covariance_0_0, 0.000000001);
+
+    pnl_mat_free(&returns);
+    pnl_vect_free(&means_returns);
+}
+
+TEST_F(MathLibTest, compute_covariance){
+    PnlMat *covariances = compute_covariance(this->path, 0, 3);
+
+    EXPECT_NEAR(0.0006441, MGET(covariances, 0, 0), 0.000001);
+    EXPECT_NEAR(0.054092, MGET(covariances, 0, 1), 0.000001);
+    EXPECT_NEAR(0.054092, MGET(covariances, 1, 0), 0.000001);
+    EXPECT_NEAR(4.5420152, MGET(covariances, 1, 1), 0.000001);
+
+    pnl_mat_free(&covariances);
+}
 
 TEST_F(MathLibTest, compute_sigma){
     PnlMat *sigma = compute_sigma(this->path, 0, 3);

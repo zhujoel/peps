@@ -12,10 +12,10 @@ PnlMat* log_returns(PnlMat *path, int start, int end){
     return log_returns;
 }
 
-PnlVect* mean(PnlMat *log_returns){
-    PnlVect *means = pnl_vect_create(log_returns->n);
-    pnl_mat_sum_vect(means, log_returns, 'r');
-    pnl_vect_div_scalar(means, log_returns->m);
+PnlVect* means(PnlMat *path){
+    PnlVect *means = pnl_vect_create(path->n);
+    pnl_mat_sum_vect(means, path, 'r');
+    pnl_vect_div_scalar(means, path->m);
     return means;
 }
 
@@ -31,14 +31,14 @@ double compute_covariance(PnlMat *log_returns, PnlVect *means, int k, int l){
 
 PnlMat* compute_covariance(PnlMat *path, int start, int end){
     PnlMat *returns = log_returns(path, start, end);
-    PnlVect *means = mean(returns);
+    PnlVect *means_returns = means(returns);
     int n = path->n;
     PnlMat *covariances = pnl_mat_create(n, n);
 
     for(int i = 0; i < n; ++i){
-        MLET(covariances, i, i) = compute_covariance(returns, means, i, i);
+        MLET(covariances, i, i) = compute_covariance(returns, means_returns, i, i);
         for(int j = 0; j < i; ++j){
-            double covar = compute_covariance(returns, means, i, j);
+            double covar = compute_covariance(returns, means_returns, i, j);
             MLET(covariances, i, j) = covar;
             MLET(covariances, j, i) = covar;
         }
@@ -47,7 +47,7 @@ PnlMat* compute_covariance(PnlMat *path, int start, int end){
     pnl_mat_mult_scalar(covariances, 250); // TODO: 250: nb de jours ouvrés TODO: changer pour mettre un taux variable basé sur les dim de market data
 
     pnl_mat_free(&returns);
-    pnl_vect_free(&means);
+    pnl_vect_free(&means_returns);
     return covariances;
 }
 
