@@ -1,6 +1,4 @@
 // #include "derivatives/Ocelia.h"
-// #include "pnl/pnl_mathtools.h"
-// #include <math.h>
 // #include <stdexcept>
 // #include <iostream>
 
@@ -153,15 +151,4 @@
 //     }
 
 //     return -1;
-// }
-
-// void trunc(PnlVect* vect, int n){
-//     int ten = pow(10, n);
-//     for(int i = 0; i < vect->size; ++i){
-//         LET(vect, i) = roundl(GET(vect, i)*ten)/ten;
-//     }
-// }
-
-// bool are_all_positive(PnlVect *vect){
-//     return pnl_vect_min(vect) >= 0;
 // }

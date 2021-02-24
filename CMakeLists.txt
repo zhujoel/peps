@@ -59,5 +59,6 @@ add_test (NAME test_HistoricalMarketData COMMAND test_HistoricalMarketData)
 add_test (NAME test_DataFeeds COMMAND test_DataFeeds)
 add_test (NAME test_BlackScholesModel COMMAND test_BlackScholesModel)
 add_test (NAME test_StandardMonteCarloPricer COMMAND test_StandardMonteCarloPricer)
+add_test (NAME test_Utilities COMMAND test_Utilities)
 
 pnl_add_postbuild(run_unit_tests)

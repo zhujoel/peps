@@ -78,48 +78,6 @@ class OceliaTest: public ::testing::Test{
 //     EXPECT_EQ(ocelia->nb_sous_jacents_, ocelia->nouveau_depart_->size);
 // }
 
-// TEST_F(OceliaTest, trunc){
-//     PnlVect *vect = pnl_vect_create(3);
-//     LET(vect, 0) = 1.123456;
-//     LET(vect, 1) = 0.547;
-//     LET(vect, 2) = 3.14153;
-//     trunc(vect, 4);
-//     EXPECT_DOUBLE_EQ(1.1235, GET(vect, 0));
-//     EXPECT_DOUBLE_EQ(0.547, GET(vect, 1));
-//     EXPECT_DOUBLE_EQ(3.1415, GET(vect, 2));
-
-//     pnl_vect_free(&vect);
-// }
-
-// TEST_F(OceliaTest, trunc_zero){
-//     PnlVect *vect = pnl_vect_create(1);
-//     LET(vect, 0) = 0.0000000;
-//     trunc(vect, 4);
-//     EXPECT_DOUBLE_EQ(0.0000, GET(vect, 0));
-
-//     pnl_vect_free(&vect);
-// }
-
-// TEST_F(OceliaTest, are_all_positive_false){
-//     PnlVect *vect = pnl_vect_create(3);
-//     LET(vect, 0) = -1.123456;
-//     LET(vect, 1) = 0.547;
-//     LET(vect, 2) = 3.14153;
-//     EXPECT_FALSE(are_all_positive(vect));
-
-//     pnl_vect_free(&vect);
-// }
-
-// TEST_F(OceliaTest, are_all_positive_true){
-//     PnlVect *vect = pnl_vect_create(3);
-//     LET(vect, 0) = 1.123456;
-//     LET(vect, 1) = 0.547;
-//     LET(vect, 2) = 3.14153;
-//     EXPECT_TRUE(are_all_positive(vect));
-
-//     pnl_vect_free(&vect);
-// }
-
 // TEST_F(OceliaTest, compute_valeurs_0_ans){
 //     ocelia->compute_valeurs_n_ans(this->path, ocelia->valeurs_n_ans_, 0);
 //     EXPECT_EQ(102, GET(ocelia->valeurs_n_ans_, 0));

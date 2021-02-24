@@ -36,6 +36,3 @@ class Ocelia : public IDerivative{
         // double compute_flux_n_ans(const PnlMat *path, int N); // calcul du C(N) cf 1.3
         // double payoff(const PnlMat *path);
 };
-
-// void trunc(PnlVect *vect, int n); // arrondi à n decimals
-// bool are_all_positive(PnlVect *vect); // détermine si tous les performances sont positives

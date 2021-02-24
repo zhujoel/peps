@@ -2,7 +2,7 @@
 #include <fstream>
 #include <sstream>
 #include <string>
-#include <iostream>
+#include <math.h>
 
 void split(std::string line, char delimiter, std::string *output){
     std::stringstream string_stream(line);
@@ -11,4 +11,15 @@ void split(std::string line, char delimiter, std::string *output){
     {
         getline(string_stream, output[i++], delimiter );
     }
+}
+
+void trunc(PnlVect* vect, int n){
+    int ten = pow(10, n);
+    for(int i = 0; i < vect->size; ++i){
+        LET(vect, i) = roundl(GET(vect, i)*ten)/ten;
+    }
+}
+
+bool are_all_positive(PnlVect *vect){
+    return pnl_vect_min(vect) >= 0;
 }
