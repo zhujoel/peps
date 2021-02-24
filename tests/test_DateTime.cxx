@@ -104,6 +104,12 @@ TEST_F(DateTimeTest, parseDateString_slash){
     delete date;
 }
 
+TEST_F(DateTimeTest, str){
+    DateTime *date = parseDateString("2012/08/30", '/');
+    EXPECT_EQ("30-8-2012", date->str());
+    delete date;
+}
+
 int main(int argc, char** argv){
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
