@@ -1,6 +1,5 @@
 #include "gtest/gtest.h"
 #include "datafeeds/YahooDataFeed.h"
-#include "datafeeds/FTSEDataFeed.h"
 #include <string>
 #include "libs/Utilities.h"
 
