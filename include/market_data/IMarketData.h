@@ -8,7 +8,7 @@ class IMarketData{
         DateTime *startDate_; // date de début où récupérer les données
         DateTime *endDate_; // date de fin
         std::vector<DateTime*> dates_; // toutes les dates entre start_date_ et end_date_ ayant un prix
-        PnlVect *path_; // tous les prix entre start_date_ et end_date_
+        PnlMat *path_; // tous les prix entre start_date_ et end_date_
         
         IMarketData(std::string name, DateTime *startDate, DateTime *endDate);
 

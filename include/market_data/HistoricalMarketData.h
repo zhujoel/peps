@@ -10,4 +10,5 @@ class HistoricalMarketData : public IMarketData{
         ~HistoricalMarketData();
 
         void getData();
+        void getOceliaData();
 };
