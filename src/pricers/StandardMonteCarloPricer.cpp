@@ -57,7 +57,7 @@ void StandardMonteCarloPricer::discount_price(double t, double &prix, double &st
     // TODO: changer le t en : convertir une date (le 15/05/2008) jusqu'à le date de payoff qui devient le t
     // TODO: on a la proportion en faisant par ex: (nb de jours entre 2 dates)/(nb de jours entre toutes les dates)
     double r = this->model_->rd_;
-    double T = this->derivative_->get_effective_maturity();
+    double T = this->derivative_->get_annee_payoff();
     double M = this->nbSamples_;
     std_dev = sqrt(exp(-2*r*(T-t))*(std_dev - prix * prix)/M);
     prix = exp(-r*(T-t))*prix;
@@ -66,7 +66,7 @@ void StandardMonteCarloPricer::discount_price(double t, double &prix, double &st
 void StandardMonteCarloPricer::discount_delta(double t, PnlVect *delta, PnlVect *std_dev)
 {
     double r = this->model_->rd_;
-    double T = this->derivative_->get_effective_maturity();
+    double T = this->derivative_->get_annee_payoff();
     double M = this->nbSamples_;
     for (int d = 0; d < this->derivative_->size_; ++d)
     {   

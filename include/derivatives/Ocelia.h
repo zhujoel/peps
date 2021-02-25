@@ -7,7 +7,7 @@
 
 class Ocelia : public IDerivative{
     public:
-        int annee_payoff;
+        int annee_payoff_;
         int nb_sous_jacents_;
         PnlVectInt *indices_dates_semestrielles_; // indices des dates de constatation dans le path 
         PnlVectInt *indices_dates_valeurs_n_ans_; // indices dans le path des dates des valeurs n ans
@@ -22,7 +22,7 @@ class Ocelia : public IDerivative{
         void adjust_sigma(PnlMat *sigma); // adjust computed sigma en fonction du nombre de produit dans la matrix path et de comment ils sont organisés
         void adjust_past(PnlMat *past);
 
-        double get_effective_maturity();
+        double get_annee_payoff();
         double get_foreign_index_market_value(const PnlMat* path, int date_idx, int idx);
         double compute_perf_moyenne_panier(const PnlMat *path);
         void compute_valeurs_n_ans(const PnlMat *path, PnlVect *valeurs, int N); // calcule la valeur moyenne des indices pour l'année n

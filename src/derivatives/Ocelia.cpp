@@ -7,7 +7,7 @@
 // TODO: changer le 0.0 en un r?
 Ocelia::Ocelia(double T, int nbTimeSteps, int size, int nb_sous_jacents, std::vector<DateTime*> all_dates) : IDerivative(T, nbTimeSteps, size)
 {
-    this->annee_payoff = 0;    
+    this->annee_payoff_ = 0;    
     this->nb_sous_jacents_ = nb_sous_jacents;
     // TODO: mettre une vérif que le nb de timesteps soit le meme que la taille de all_dates
     this->valeurs_n_ans_ = pnl_vect_create_from_zero(this->nb_sous_jacents_);
@@ -34,8 +34,8 @@ Ocelia::~Ocelia(){
     pnl_vect_free(&this->perfs_);
 }
 
-double Ocelia::get_effective_maturity(){
-    return this->annee_payoff;
+double Ocelia::get_annee_payoff(){
+    return this->annee_payoff_;
 }
 
 void Ocelia::adjust_sigma(PnlMat *sigma){
@@ -145,7 +145,7 @@ double Ocelia::payoff(const PnlMat *path)
         if(are_all_positive(this->perfs_) || n == 8){
             double flux_n = compute_flux_n_ans(path, n);
             // std::cout << "flux: " << flux_n << std::endl;
-            this->annee_payoff = n;
+            this->annee_payoff_ = n;
             // std::cout << "n: " << this->annee_payoff << std::endl;
             return val_liquidative_initiale*flux_n;
             // return val_liquidative_initiale*compute_flux_n_ans(path, n);
