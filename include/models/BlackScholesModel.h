@@ -8,7 +8,7 @@ class BlackScholesModel : public IModel{
         PnlVect *G_; /// Vecteur Gaussien
         PnlVect *B_; // Brownien (produit matriciel L * G);
 
-        BlackScholesModel(int size, double rd, PnlMat *sigma, PnlVect *volatility, PnlMat *past);
+        BlackScholesModel(int size, double rd, PnlMat *past);
         ~BlackScholesModel();
         
         void asset(PnlMat *path, double T, int nbTimeSteps, PnlRng *rng);
