@@ -1,5 +1,4 @@
 #include "datafeeds/YahooDataFeed.h"
-#include <iostream>
 #include <fstream>
 #include <sstream>
 #include "libs/Utilities.h"

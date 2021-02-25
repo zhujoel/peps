@@ -1,5 +1,4 @@
 #include "market_data/HistoricalMarketData.h"
-#include <iostream>
 #include "datafeeds/YahooDataFeed.h"
 #include "pnl/pnl_matrix.h"
 #include <cstring>
