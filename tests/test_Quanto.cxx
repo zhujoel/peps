@@ -37,7 +37,6 @@ class QuantoTest: public ::testing::Test{
             // this->rng = pnl_rng_create(PNL_RNG_MERSENNE);
             // pnl_rng_sseed(this->rng, std::time(NULL));
 
-            // // TODO : ce calcul du sigma ne fonctionnera (enfin il dépend de la taille et du contenu de la matrice du pf de couverture)
             // this->sigma = pnl_mat_create(nbProduits, nbProduits); // c'est une matrice de covariance
             // MLET(this->sigma, 0, 0) = sigma_tx_change * sigma_tx_change;
             // MLET(this->sigma, 1, 1) = sigma_actif * sigma_actif;
@@ -78,7 +77,6 @@ class QuantoTest: public ::testing::Test{
         }
 };
 
-// // TODO: add asserts
 // TEST_F(QuantoTest, price){
 //     // prix théorique avec pnl
 //     double prix2 = 0.0;

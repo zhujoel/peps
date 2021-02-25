@@ -1,7 +1,6 @@
 #include <iostream>
 
 /**
- * TODO: TODO: TODO: TODO: TODO: TODO: TODO: TODO: TODO: TODO: TODO: TODO: TODO: TODO: 
  * 1. estimation des parametres donc il faut une date de début et de fin d'estimation
  *  -> ça va permettre de calculer les matrices sigma et volatilité
  *  -> TODO: split calcul sigma / vol et génériciser adjust sigma (ok)
@@ -19,7 +18,6 @@
  * 6. tracking error
  */
 
- // TODO: mettre les trucs trunc et all_positive de Ocelia dans MathLib
 int main(){
     std::cout << "hello" << std::endl;
 }

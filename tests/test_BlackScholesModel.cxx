@@ -5,7 +5,6 @@
 #include "models/BlackScholesModel.h"
 #include "market_data/HistoricalMarketData.h"
 
-// TODO: faire ça bien
 class BlackScholesModelTest: public ::testing::Test{
     protected:
         IMarketData *historical;

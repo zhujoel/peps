@@ -4,7 +4,6 @@
 #include "pnl/pnl_mathtools.h"
 #include "libs/Utilities.h"
 
-// TODO: changer le 0.0 en un r?
 Ocelia::Ocelia(double T, int nbTimeSteps, int size, int nb_sous_jacents, std::vector<DateTime*> all_dates) : IDerivative(T, nbTimeSteps, size)
 {
     this->annee_payoff_ = 0;    
@@ -136,7 +135,6 @@ double Ocelia::compute_flux_n_ans(const PnlMat *path, int N){
 
 double Ocelia::payoff(const PnlMat *path)
 {
-    // TODO: ajouter en [out] un indice de l'année pour indiquer quand le produit s'exerce
     double val_liquidative_initiale = 100.0;
     compute_nouveau_depart(path);
     
@@ -144,9 +142,7 @@ double Ocelia::payoff(const PnlMat *path)
         compute_perfs_n_ans(path, this->perfs_, n);
         if(are_all_positive(this->perfs_) || n == 8){
             double flux_n = compute_flux_n_ans(path, n);
-            // std::cout << "flux: " << flux_n << std::endl;
             this->annee_payoff_ = n;
-            // std::cout << "n: " << this->annee_payoff << std::endl;
             return val_liquidative_initiale*flux_n;
             // return val_liquidative_initiale*compute_flux_n_ans(path, n);
         }
