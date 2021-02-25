@@ -89,7 +89,7 @@ TEST_F(DateTimeTest, operatorPrint){
 }
 
 TEST_F(DateTimeTest, parseDateString_dash){
-    DateTime *date = parseDateString("2012-08-30", '-');
+    DateTime *date = parse_date_string("2012-08-30", '-');
     EXPECT_EQ(date->yyyy_, 2012);
     EXPECT_EQ(date->mm_, 8);
     EXPECT_EQ(date->dd_, 30);
@@ -97,7 +97,7 @@ TEST_F(DateTimeTest, parseDateString_dash){
 }
 
 TEST_F(DateTimeTest, parseDateString_slash){
-    DateTime *date = parseDateString("2012/08/30", '/');
+    DateTime *date = parse_date_string("2012/08/30", '/');
     EXPECT_EQ(date->yyyy_, 2012);
     EXPECT_EQ(date->mm_, 8);
     EXPECT_EQ(date->dd_, 30);
@@ -105,7 +105,7 @@ TEST_F(DateTimeTest, parseDateString_slash){
 }
 
 TEST_F(DateTimeTest, str){
-    DateTime *date = parseDateString("2012/08/30", '/');
+    DateTime *date = parse_date_string("2012/08/30", '/');
     EXPECT_EQ("30-8-2012", date->str());
     delete date;
 }

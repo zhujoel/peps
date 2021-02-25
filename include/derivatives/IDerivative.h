@@ -15,6 +15,6 @@ class IDerivative {
       virtual void adjust_sigma(PnlMat *sigma) = 0; // adjust computed sigma en fonction du nombre de produit dans la matrix path et de comment ils sont organisés
       virtual void adjust_past(PnlMat *past) = 0; 
 
-      virtual double getMaturity() = 0; // la maturité effective du produit, i.e. quand il paie
+      virtual double get_effective_maturity() = 0; // la date de maturité du produit, i.e. quand il paie
       virtual double payoff(const PnlMat *path) = 0;
 };

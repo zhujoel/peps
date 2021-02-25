@@ -15,11 +15,11 @@ Ocelia::Ocelia(double T, int nbTimeSteps, int size, int nb_sous_jacents, std::ve
     this->nouveau_depart_ = pnl_vect_create_from_zero(this->nb_sous_jacents_);
     this->perfs_ = pnl_vect_create_from_zero(this->nb_sous_jacents_);
     
-    std::vector<DateTime*> dates_semestrielles = parseDatesFile("../data/dates/dates_semest.csv", 16, '-');
-    std::vector<DateTime*> dates_valeurs_n_ans = parseDatesFile("../data/dates/dates_valeurs_n.csv", 35, '-');
+    std::vector<DateTime*> dates_semestrielles = parse_dates_file("../data/dates/dates_semest.csv", 16, '-');
+    std::vector<DateTime*> dates_valeurs_n_ans = parse_dates_file("../data/dates/dates_valeurs_n.csv", 35, '-');
 
     this->indices_dates_semestrielles_ = calcul_indices_dates(all_dates, dates_semestrielles);
-    this->indices_dates_valeurs_n_ans_ =calcul_indices_dates(all_dates, dates_valeurs_n_ans);
+    this->indices_dates_valeurs_n_ans_ = calcul_indices_dates(all_dates, dates_valeurs_n_ans);
 
     delete_date_vector(dates_semestrielles);
     delete_date_vector(dates_valeurs_n_ans);
@@ -34,7 +34,7 @@ Ocelia::~Ocelia(){
     pnl_vect_free(&this->perfs_);
 }
 
-double Ocelia::getMaturity(){
+double Ocelia::get_effective_maturity(){
     return this->annee_payoff;
 }
 

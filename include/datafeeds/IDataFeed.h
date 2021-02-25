@@ -14,6 +14,6 @@ class IDataFeed{
         IDataFeed(std::string filepath);
         virtual ~IDataFeed();
         
-        virtual int getNumberValidData() = 0; // ignores null-value prices
-        virtual void getData() = 0;
+        virtual int get_number_valid_data() = 0; // ignores null-value prices
+        virtual void get_data() = 0;
 };

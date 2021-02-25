@@ -4,7 +4,7 @@
 #include <sstream>
 #include <string>
 
-std::vector<DateTime*> parseDatesFile(std::string fileName, int nbDates, char delimiter)
+std::vector<DateTime*> parse_dates_file(std::string fileName, int nbDates, char delimiter)
 {
     std::vector<DateTime*> dates;
     std::ifstream datesStream(fileName);
@@ -12,7 +12,7 @@ std::vector<DateTime*> parseDatesFile(std::string fileName, int nbDates, char de
     for (int i = 0; i < nbDates; i++)
     {
         getline(datesStream, date);
-        dates.push_back(parseDateString(date, delimiter));
+        dates.push_back(parse_date_string(date, delimiter));
     }
     return dates;
 }
@@ -32,7 +32,7 @@ PnlVectInt* calcul_indices_dates(std::vector<DateTime*> all_dates, std::vector<D
     return indices;
 }
 
-std::vector<DateTime*> sameDates(std::vector<DateTime*> v1, std::vector<DateTime*> v2)
+std::vector<DateTime*> same_dates(std::vector<DateTime*> v1, std::vector<DateTime*> v2)
 {
     std::vector<DateTime*> result;
     int len1 = v1.size();
@@ -60,7 +60,7 @@ std::vector<DateTime*> sameDates(std::vector<DateTime*> v1, std::vector<DateTime
 }
 
 // TODO: we could also use getIndicesFromDates?
-PnlVect* getPricesFromDate(std::vector<DateTime*> allDates, std::vector<DateTime*> subset, PnlVect *allPrices)
+PnlVect* get_prices_from_date(std::vector<DateTime*> allDates, std::vector<DateTime*> subset, PnlVect *allPrices)
 {
     PnlVect *prices = pnl_vect_create(subset.size());
     int idx = 0;
@@ -76,7 +76,7 @@ PnlVect* getPricesFromDate(std::vector<DateTime*> allDates, std::vector<DateTime
     return prices;
 }
 
-std::vector<DateTime*> fromDateToDate(std::vector<DateTime*> allDates, DateTime *from, DateTime *to)
+std::vector<DateTime*> from_date_to_date(std::vector<DateTime*> allDates, DateTime *from, DateTime *to)
 {
     std::vector<DateTime*> result;
     int idx = 0;

@@ -30,7 +30,7 @@ class StandardMonteCarloPricerTest: public ::testing::Test{
             // BLACK-SCHOLES
             // TODO: mettre fenetre d'estimation
             HistoricalMarketData *historical = new HistoricalMarketData("Ocelia", new DateTime(15, 5, 2008), new DateTime(28, 4, 2016));
-            historical->getData();
+            historical->get_data();
             this->size = 7;
             this->rd = 0.03;
             this->nbTimeSteps = historical->dates_.size();

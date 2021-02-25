@@ -7,7 +7,7 @@
 
 YahooDataFeed::YahooDataFeed(std::string filepath) : IDataFeed(filepath){}
 
-int YahooDataFeed::getNumberValidData()
+int YahooDataFeed::get_number_valid_data()
 {
     std::ifstream dataFile(this->filepath_);
     std::string line;
@@ -25,9 +25,9 @@ int YahooDataFeed::getNumberValidData()
     return count;
 }
 
-void YahooDataFeed::getData()
+void YahooDataFeed::get_data()
 {
-    int nbDates = this->getNumberValidData();
+    int nbDates = this->get_number_valid_data();
     pnl_vect_resize(this->prices_, nbDates);
 
     std::ifstream dataFile(this->filepath_);
@@ -40,7 +40,7 @@ void YahooDataFeed::getData()
     {
         split(line, ',', parsedLine);
         if(parsedLine[4] == "null") continue;
-        this->dates_.push_back(parseDateString(parsedLine[0], '-'));
+        this->dates_.push_back(parse_date_string(parsedLine[0], '-'));
         LET(this->prices_, i++) = std::atof(parsedLine[4].c_str()); // c_str(): needs a char* to use atof
     }
 

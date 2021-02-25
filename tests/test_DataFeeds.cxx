@@ -14,7 +14,7 @@ class DataFeedsTest: public ::testing::Test{
 TEST_F(DataFeedsTest, getNumberValidData1)
 {
     IDataFeed *dataFeed = new YahooDataFeed("../tests/test_data/market_data/yahoo1.csv");
-    int number = dataFeed->getNumberValidData();
+    int number = dataFeed->get_number_valid_data();
 
     EXPECT_EQ(7, number);
 
@@ -24,7 +24,7 @@ TEST_F(DataFeedsTest, getNumberValidData1)
 TEST_F(DataFeedsTest, getNumberValidData2)
 {
     IDataFeed *dataFeed = new YahooDataFeed("../tests/test_data/market_data/yahoo2.csv");
-    int number = dataFeed->getNumberValidData();
+    int number = dataFeed->get_number_valid_data();
     
     EXPECT_EQ(4, number);
 
@@ -34,7 +34,7 @@ TEST_F(DataFeedsTest, getNumberValidData2)
 TEST_F(DataFeedsTest, getNumberValidData3)
 {
     IDataFeed *dataFeed = new YahooDataFeed("../tests/test_data/market_data/yahoo3.csv");
-    int number = dataFeed->getNumberValidData();
+    int number = dataFeed->get_number_valid_data();
     
     EXPECT_EQ(0, number);
 
@@ -44,7 +44,7 @@ TEST_F(DataFeedsTest, getNumberValidData3)
 TEST_F(DataFeedsTest, getData1)
 {
     IDataFeed *dataFeed = new YahooDataFeed("../tests/test_data/market_data/yahoo1.csv");
-    dataFeed->getData();
+    dataFeed->get_data();
 
     EXPECT_EQ("3-1-2003", dataFeed->dates_[0]->str());
     EXPECT_EQ(4899.5, GET(dataFeed->prices_, 0));

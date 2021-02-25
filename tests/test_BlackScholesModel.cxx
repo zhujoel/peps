@@ -17,7 +17,7 @@ class BlackScholesModelTest: public ::testing::Test{
         IModel *bs;
         virtual void SetUp(){
             this->historical = new HistoricalMarketData("Ocelia", new DateTime(01, 01, 2003), new DateTime(01, 01, 2013));
-            this->historical->getData();
+            this->historical->get_data();
             this->size = 7;
             this->rd = 0;
             this->nbTimeSteps = 10000;

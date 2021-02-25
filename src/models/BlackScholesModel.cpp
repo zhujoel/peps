@@ -40,7 +40,7 @@ void BlackScholesModel::asset(PnlMat *path, double T, int nbTimeSteps, PnlRng *r
     }
 }
 
-void BlackScholesModel::shiftAsset(PnlMat *shift_path, const PnlMat *path, int d, double h, double t, double timestep)
+void BlackScholesModel::shift_asset(PnlMat *shift_path, const PnlMat *path, int d, double h, double t, double timestep)
 {
     int i = t/timestep;
     // if (abs( (i+1)*timestep - t)<1E-5)
