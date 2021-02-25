@@ -26,7 +26,7 @@ void BlackScholesModel::asset(PnlMat *path, double T, int nbTimeSteps, PnlRng *r
     // 6: zc chf    
     double timestep = T/nbTimeSteps;
     PnlVect *spot = pnl_vect_create(this->past_->m);
-    pnl_mat_get_row(spot, this->past_, this->past_->n);
+    pnl_mat_get_row(spot, this->past_, this->past_->n-1);
     pnl_mat_set_row(path, spot, 0);
 
     for (int k = 1; k <= nbTimeSteps; ++k)
