@@ -46,7 +46,7 @@ void Ocelia::adjust_sigma(PnlMat *sigma){
     }
 }
 
-void Ocelia::adjust_spot(PnlMat *past){
+void Ocelia::adjust_past(PnlMat *past){
     for(int i = 0; i < 3; ++i){
         for(int j = 0; j < past->n; ++j){
             MLET(past, i, j) = MGET(past, i, j)*MGET(past, i+4, j);

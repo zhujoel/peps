@@ -11,6 +11,8 @@ StandardMonteCarloPricer::~StandardMonteCarloPricer(){
 
 void StandardMonteCarloPricer::simulate(double &prix, double &price_std_dev, PnlVect *delta, PnlVect *delta_std_dev)
 {
+    this->derivative_->adjust_past(this->model_->past_);
+
     for(int j = 0; j < this->nbSamples_; ++j){
         this->model_->asset(this->path_, this->derivative_->T_, this->derivative_->nbTimeSteps_, this->rng_);
         this->price(prix, price_std_dev);
