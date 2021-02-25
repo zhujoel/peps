@@ -1,6 +1,7 @@
 #include "models/BlackScholesModel.h"
 
-BlackScholesModel::BlackScholesModel(int size, double rd, PnlMat *past) : IModel(size, rd, past)
+BlackScholesModel::BlackScholesModel(int size, double rd, PnlMat *sigma, PnlVect *volatility, PnlMat *past)
+    : IModel(size, rd, sigma, volatility, past)
 {
     this->G_ = pnl_vect_create(this->size_); 
     this->B_ = pnl_vect_create(this->size_);

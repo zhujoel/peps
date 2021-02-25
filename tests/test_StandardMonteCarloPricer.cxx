@@ -9,35 +9,35 @@
 
 class StandardMonteCarloPricerTest: public ::testing::Test{
     protected:
+        IMarketData *historical;
+        PnlMat *sigma;
+        PnlVect *volatility;
         IPricer *mc;
         Ocelia *ocelia;
         IModel *model;
         PnlRng *rng;
-        PnlVect *volatility;
-        PnlMat *sigma;
-        PnlMat *past;
         int size;
         double rd;
         int nbTimeSteps;
         double T;
-        PnlVect *spot;
         int nb_sous_jacents;
         double fdStep;
         int nbSamples;
 
-
         virtual void SetUp(){
             // BLACK-SCHOLES
             // TODO: mettre fenetre d'estimation
-            HistoricalMarketData *historical = new HistoricalMarketData("Ocelia", new DateTime(15, 5, 2008), new DateTime(28, 4, 2016));
+            this->historical = new HistoricalMarketData("Ocelia", new DateTime(15, 5, 2008), new DateTime(28, 4, 2016));
             historical->get_data();
+            this->sigma = compute_sigma(this->historical->path_, 0, this->historical->path_->m);
+            this->volatility = compute_volatility(this->sigma);
             this->size = 7;
             this->rd = 0.03;
             this->nbTimeSteps = historical->dates_.size();
             this->T = this->nbTimeSteps/250;
             this->rng = pnl_rng_create(PNL_RNG_MERSENNE);
             pnl_rng_sseed(this->rng, std::time(NULL));
-            this->model = new BlackScholesModel(size, rd, historical->path_);
+            this->model = new BlackScholesModel(this->size, this->rd, this->sigma, this->volatility, this->historical->path_);
 
             // OCELIA
             this->nb_sous_jacents = 4;
@@ -45,11 +45,18 @@ class StandardMonteCarloPricerTest: public ::testing::Test{
 
             // MONTE CARLO
             this->fdStep = 0.05;
-            this->nbSamples = 1000;
+            this->nbSamples = 1;
             this->mc = new StandardMonteCarloPricer(model, ocelia, rng, fdStep, nbSamples);
         }
 
         virtual void TearDown(){
+            delete this->historical;
+            pnl_mat_free(&this->sigma);
+            pnl_vect_free(&this->volatility);
+            delete this->mc;
+            delete this->ocelia;
+            delete this->model;
+            pnl_rng_free(&this->rng);
         }
 };
 
@@ -57,16 +64,19 @@ TEST_F(StandardMonteCarloPricerTest, simul)
 {
     double prix = 0.0;
     double prix_std_dev = 0.0;
-    PnlVect* delta = pnl_vect_create(7);
-    PnlVect* delta_std_dev = pnl_vect_create(7);
+    PnlVect* delta = pnl_vect_create(this->size);
+    PnlVect* delta_std_dev = pnl_vect_create(this->size);
     this->mc->simulate(prix, prix_std_dev, delta, delta_std_dev);
 
-    std::cout << "prix: " << prix << std::endl;
-    std::cout << "prix_std_dev: " << prix_std_dev << std::endl;
-    pnl_vect_print(delta);
-    pnl_vect_print(delta_std_dev);
+    // std::cout << "prix: " << prix << std::endl;
+    // std::cout << "prix_std_dev: " << prix_std_dev << std::endl;
+    // pnl_vect_print(delta);<
+    // pnl_vect_print(delta_std_d>ev);
     
     EXPECT_EQ(1, 1);
+
+    pnl_vect_free(&delta);
+    pnl_vect_free(&delta_std_dev);
 }
 
 

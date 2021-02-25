@@ -8,27 +8,34 @@
 class BlackScholesModelTest: public ::testing::Test{
     protected:
         IMarketData *historical;
+        PnlMat *sigma;
+        PnlVect *volatility;
         int size;
         double rd;
         int nbTimeSteps;
         double T;
         PnlRng *rng;
         IModel *bs;
+
         virtual void SetUp(){
             this->historical = new HistoricalMarketData("Ocelia", new DateTime(01, 01, 2003), new DateTime(01, 01, 2013));
             this->historical->get_data();
+            this->sigma = compute_sigma(this->historical->path_, 0, this->historical->path_->m);
+            this->volatility = compute_volatility(this->sigma);
             this->size = 7;
             this->rd = 0;
             this->nbTimeSteps = 10000;
             this->T = this->nbTimeSteps/250;
             this->rng = pnl_rng_create(PNL_RNG_MERSENNE);
             pnl_rng_sseed(this->rng, std::time(NULL));
-            this->bs = new BlackScholesModel(this->size, this->rd, this->historical->path_);
+            this->bs = new BlackScholesModel(this->size, this->rd, this->sigma, this->volatility, this->historical->path_);
         }
 
         virtual void TearDown(){
             delete this->historical;
             pnl_rng_free(&this->rng);
+            pnl_mat_free(&this->sigma);
+            pnl_vect_free(&this->volatility);
             delete this->bs;
         }
 };

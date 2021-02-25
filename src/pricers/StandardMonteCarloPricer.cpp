@@ -11,6 +11,7 @@ StandardMonteCarloPricer::~StandardMonteCarloPricer(){
 
 void StandardMonteCarloPricer::simulate(double &prix, double &price_std_dev, PnlVect *delta, PnlVect *delta_std_dev)
 {
+    this->derivative_->adjust_sigma(this->model_->sigma_);
     this->derivative_->adjust_past(this->model_->past_);
 
     for(int j = 0; j < this->nbSamples_; ++j){
@@ -26,7 +27,7 @@ void StandardMonteCarloPricer::simulate(double &prix, double &price_std_dev, Pnl
         LET(delta, d) = GET(delta, d) / this->nbSamples_;
         LET(delta_std_dev, d) = GET(delta_std_dev, d) / this->nbSamples_;
     }
-    discount_delta(0, delta, delta_std_dev);
+    // discount_delta(0, delta, delta_std_dev);
 }
 
 void StandardMonteCarloPricer::price(double &prix, double &std_dev)
@@ -70,8 +71,7 @@ void StandardMonteCarloPricer::discount_delta(double t, PnlVect *delta, PnlVect 
     double M = this->nbSamples_;
     for (int d = 0; d < this->derivative_->size_; ++d)
     {   
-        // double s0 = GET(this->model_->spot_, d); on récupère le spot
-        double s0 = MGET(this->model_->past_, this->model_->past_->n-1, d);
+        double s0 = MGET(this->model_->past_, this->model_->past_->n-1, d); // on récupère le spot
         double acc = GET(delta, d) / (2*this->fdStep_*s0);
         LET(std_dev, d) = sqrt(exp(-2*r*(T-t))*(GET(std_dev, d) - acc * acc)/(2*M*this->fdStep_*s0));
         LET(delta, d) = exp(-r*(T-t))*acc;

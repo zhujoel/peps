@@ -1,9 +1,6 @@
 #include <iostream>
 
 /**
- * 1. estimation des parametres donc il faut une date de début et de fin d'estimation
- *  -> ça va permettre de calculer les matrices sigma et volatilité
- *  -> TODO: split calcul sigma / vol et génériciser adjust sigma (ok)
  * 2. simulation -> vecteurs spot (entre 15/05/08 et t (par ex 01/01/09))
  *  -> TODO: remplacer vecteur spot par une matrice
  *  -> on fait le 2eme adjust sur le past (où on multiplie les 3 premieres colonnes par les 3 dernieres)
