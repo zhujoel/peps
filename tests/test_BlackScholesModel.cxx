@@ -20,7 +20,7 @@ class BlackScholesModelTest: public ::testing::Test{
         virtual void SetUp(){
             this->historical = new HistoricalMarketData("Ocelia", new DateTime(01, 01, 2003), new DateTime(01, 01, 2013));
             this->historical->get_data();
-            this->sigma = compute_sigma(this->historical->path_, 0, this->historical->path_->m);
+            this->sigma = compute_sigma(this->historical->path_, 0, this->historical->path_->m-1);
             this->volatility = compute_volatility(this->sigma);
             this->size = 7;
             this->rd = 0;
@@ -43,7 +43,7 @@ class BlackScholesModelTest: public ::testing::Test{
 TEST_F(BlackScholesModelTest, asset){
     PnlMat *path = pnl_mat_create(this->nbTimeSteps+1, this->size);
     bs->asset(path, 0, T, nbTimeSteps, rng, this->historical->path_, this->sigma);
-    PnlMat *bs_sigma = compute_sigma(path, 0, path->m);
+    PnlMat *bs_sigma = compute_sigma(path, 0, path->m-1);
     PnlVect *bs_volatility = compute_volatility(bs_sigma);
 
     for(int i = 0; i < this->size; ++i){

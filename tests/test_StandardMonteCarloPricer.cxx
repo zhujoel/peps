@@ -23,16 +23,28 @@ class StandardMonteCarloPricerTest: public ::testing::Test{
         int nb_sous_jacents;
         double fdStep;
         int nbSamples;
+        PnlMat *estimation_path;
+        PnlMat *past;
 
         virtual void SetUp(){
             // BLACK-SCHOLES
             // TODO: mettre fenetre d'estimation
-            this->historical = new HistoricalMarketData("Ocelia", new DateTime(15, 5, 2006), new DateTime(15, 5, 2016));
+            this->historical = new HistoricalMarketData("Ocelia", new DateTime(1, 1, 2000), new DateTime(1, 1, 2017));
             historical->get_data();
-            this->sigma = compute_sigma(this->historical->path_, 0, this->historical->path_->m);
+
+            // PROCESSING DES DONNEES
+            std::vector<DateTime*> ocelia_dates = from_date_to_date(this->historical->dates_, new DateTime(15, 5, 2008), new DateTime(28, 4, 2016));
+            std::vector<DateTime*> estimation_window = from_date_to_date(this->historical->dates_, new DateTime(15, 5, 2006), new DateTime(15, 5, 2008));
+            this->estimation_path = get_path_from_dates(this->historical->dates_, estimation_window, this->historical->path_);
+            
+            std::vector<DateTime*> past_dates = from_date_to_date(this->historical->dates_, new DateTime(15, 5, 2008), new DateTime(15, 5, 2008));
+            this->past = get_path_from_dates(this->historical->dates_, past_dates, this->historical->path_);
+
+            // PARAMETERS
+            this->sigma = compute_sigma(estimation_path, 0, estimation_window.size()-1);
             this->size = 7;
             this->rd = 0.03;
-            this->nbTimeSteps = historical->dates_.size();
+            this->nbTimeSteps = ocelia_dates.size();
             this->T = this->nbTimeSteps/250;
             this->rng = pnl_rng_create(PNL_RNG_MERSENNE);
             pnl_rng_sseed(this->rng, std::time(NULL));
@@ -40,7 +52,7 @@ class StandardMonteCarloPricerTest: public ::testing::Test{
 
             // OCELIA
             this->nb_sous_jacents = 4;
-            this->ocelia = new Ocelia(T, nbTimeSteps, size, nb_sous_jacents, historical->dates_);
+            this->ocelia = new Ocelia(T, nbTimeSteps, size, nb_sous_jacents, ocelia_dates);
 
             // MONTE CARLO
             this->fdStep = 0.05;
@@ -66,9 +78,9 @@ TEST_F(StandardMonteCarloPricerTest, simul)
     PnlVect* delta = pnl_vect_create(this->size);
     PnlVect* delta_std_dev = pnl_vect_create(this->size);
 
-    // this->ocelia->adjust_sigma(this->model_->sigma_);
-    // this->ocelia->adjust_past(past); // TODO: a virer d'ici
-    this->mc->simulate(this->historical->path_, 0, this->sigma, prix, prix_std_dev, delta, delta_std_dev);
+    this->ocelia->adjust_sigma(this->sigma);
+    this->ocelia->adjust_past(this->past);
+    this->mc->simulate(this->past, 0, this->sigma, prix, prix_std_dev, delta, delta_std_dev);
 
     std::cout << "prix: " << prix << std::endl;
     std::cout << "prix_std_dev: " << prix_std_dev << std::endl;

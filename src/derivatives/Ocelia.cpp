@@ -3,6 +3,7 @@
 #include "libs/DateTimeVector.h"
 #include "pnl/pnl_mathtools.h"
 #include "libs/Utilities.h"
+#include <iostream>
 
 Ocelia::Ocelia(double T, int nbTimeSteps, int size, int nb_sous_jacents, std::vector<DateTime*> all_dates) : IDerivative(T, nbTimeSteps, size)
 {
@@ -45,10 +46,10 @@ void Ocelia::adjust_sigma(PnlMat *sigma){
     }
 }
 
-void Ocelia::adjust_past(PnlMat *past){
-    for(int i = 0; i < 3; ++i){
-        for(int j = 0; j < past->n; ++j){
-            MLET(past, i, j) = MGET(past, i, j)*MGET(past, i+4, j);
+void Ocelia::adjust_past(PnlMat *past){ // TODO: PHILIPPE CHECK CA
+    for(int i = 0; i < past->m; ++i){
+        for(int j = 0; j < 3; ++j){
+            MLET(past, i, j) = MGET(past, i, j)*MGET(past, i, j+4);
         }
     }
 }

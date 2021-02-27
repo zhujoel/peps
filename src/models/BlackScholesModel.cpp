@@ -26,8 +26,8 @@ void BlackScholesModel::asset(PnlMat *path, double t, double T, int nbTimeSteps,
     // 6: zc chf
     PnlVect *volatility = compute_volatility(sigma);
     double timestep = T/nbTimeSteps;
-    PnlVect *spot = pnl_vect_create(past->m);
-    pnl_mat_get_row(spot, past, past->n-1);
+    PnlVect *spot = pnl_vect_create(past->n);
+    pnl_mat_get_row(spot, past, past->m-1);
     pnl_mat_set_row(path, spot, 0);
 
     for (int k = 1; k <= nbTimeSteps; ++k)
@@ -40,6 +40,9 @@ void BlackScholesModel::asset(PnlMat *path, double t, double T, int nbTimeSteps,
             MLET(path, k, d) = MGET(path, k-1, d) * exp( (this->rd_ - (sigma_d*sigma_d)/2 ) * timestep + sqrt(timestep) * GET(this->B_, d));
         }
     }
+
+    pnl_vect_free(&volatility);
+    pnl_vect_free(&spot);
 }
 
 void BlackScholesModel::shift_asset(PnlMat *shift_path, const PnlMat *path, int d, double h, double t, double timestep)

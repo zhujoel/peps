@@ -11,21 +11,20 @@ StandardMonteCarloPricer::~StandardMonteCarloPricer(){
 
 void StandardMonteCarloPricer::simulate(const PnlMat *past, double t, const PnlMat *sigma, double &prix, double &price_std_dev, PnlVect *delta, PnlVect *delta_std_dev)
 {
-
     for(int j = 0; j < this->nbSamples_; ++j){
         this->model_->asset(this->path_, t, this->derivative_->T_, this->derivative_->nbTimeSteps_, this->rng_, past, sigma);
         this->price(prix, price_std_dev);
-        this->delta(delta, delta_std_dev);
+        this->delta(t, delta, delta_std_dev);
     }
 
     prix /= this->nbSamples_;
     price_std_dev /= this->nbSamples_;
-    discount_price(0, prix, price_std_dev);
+    discount_price(t, prix, price_std_dev);
     for(int d = 0 ; d < this->derivative_->size_; ++d){
         LET(delta, d) = GET(delta, d) / this->nbSamples_;
         LET(delta_std_dev, d) = GET(delta_std_dev, d) / this->nbSamples_;
     }
-    // discount_delta(0, delta, delta_std_dev);
+    discount_delta(0, delta, delta_std_dev);
 }
 
 void StandardMonteCarloPricer::price(double &prix, double &std_dev)
@@ -35,14 +34,14 @@ void StandardMonteCarloPricer::price(double &prix, double &std_dev)
     std_dev += price * price;
 }
 
-void StandardMonteCarloPricer::delta(PnlVect *delta, PnlVect *std_dev)
+void StandardMonteCarloPricer::delta(double t, PnlVect *delta, PnlVect *std_dev)
 {
     double timeStep = this->derivative_->T_/this->derivative_->nbTimeSteps_;
     for (int d = 0; d < this->derivative_->size_; ++d)
     {
-        this->model_->shift_asset(this->shift_path_, this->path_, d, this->fdStep_, 0, timeStep);
+        this->model_->shift_asset(this->shift_path_, this->path_, d, this->fdStep_, t, timeStep);
         double payoff_1 = this->derivative_->payoff(this->shift_path_);
-        this->model_->shift_asset(this->shift_path_, this->path_, d, -this->fdStep_, 0, timeStep);
+        this->model_->shift_asset(this->shift_path_, this->path_, d, -this->fdStep_, t, timeStep);
         double payoff_2 = this->derivative_->payoff(this->shift_path_);
         double diff = payoff_1 - payoff_2;
         LET(delta, d) += diff;

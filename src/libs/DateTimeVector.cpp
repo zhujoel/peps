@@ -69,7 +69,21 @@ PnlVect* get_prices_from_date(std::vector<DateTime*> allDates, std::vector<DateT
     return prices;
 }
 
-std::vector<DateTime*> from_date_to_date(std::vector<DateTime*> allDates, DateTime *from, DateTime *to)
+// TODO: tester cette fonction
+PnlMat* get_path_from_dates(std::vector<DateTime*> allDates, std::vector<DateTime*> subset, PnlMat *path)
+{
+    PnlVectInt* indices = calcul_indices_dates(allDates, subset);
+    PnlMat *newPath = pnl_mat_create(indices->size, path->n);
+    for(int i = 0; i < indices->size; ++i){
+        for(int j = 0; j < path->n; ++j){
+            MLET(newPath, i, j) = MGET(path, GET_INT(indices, i), j);
+        }
+    }
+    pnl_vect_int_free(&indices);
+    return newPath;
+}
+
+std::vector<DateTime*> from_date_to_date(std::vector<DateTime*> allDates, DateTime *from, DateTime *to) // includes both from and to
 {
     std::vector<DateTime*> result;
     unsigned int idx = 0;

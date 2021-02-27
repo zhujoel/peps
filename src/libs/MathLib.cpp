@@ -1,8 +1,8 @@
 #include "libs/MathLib.h"
 #include "pnl/pnl_mathtools.h"
 
-PnlMat* log_returns(PnlMat *path, int start, int end){
-    int nbDates = end-start;
+PnlMat* log_returns(PnlMat *path, int start, int end){ // start and end included
+    int nbDates = 1+end-start; // +1 to include index end
     PnlMat *log_returns = pnl_mat_create(nbDates-1, path->n);
     for(int i = 0; i < nbDates-1; ++i){
         for(int j = 0; j < path->n; ++j){
