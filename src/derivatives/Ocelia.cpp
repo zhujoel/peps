@@ -47,6 +47,7 @@ void Ocelia::adjust_sigma(PnlMat *sigma){
 }
 
 void Ocelia::adjust_past(PnlMat *past){ // TODO: PHILIPPE CHECK CA
+    pnl_mat_print(past);
     for(int i = 0; i < past->m; ++i){
         for(int j = 0; j < 3; ++j){
             MLET(past, i, j) = MGET(past, i, j)*MGET(past, i, j+4);

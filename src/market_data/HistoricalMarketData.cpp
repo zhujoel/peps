@@ -16,13 +16,13 @@ void HistoricalMarketData::get_data()
 void HistoricalMarketData::get_Ocelia_data(){
     int size = 7;
     std::string files[] = {
-        "../data/market_data/FTSE80.csv",
-        "../data/market_data/SSMI.csv",
-        "../data/market_data/N225.csv",
         "../data/market_data/N100.csv",
-        "../data/market_data/CHF-EUR.csv",
+        "../data/market_data/N225.csv",
+        "../data/market_data/SSMI.csv",
+        "../data/market_data/FTSE80.csv",
         "../data/market_data/GBP-EUR.csv",
-        "../data/market_data/JPY-EUR.csv"
+        "../data/market_data/JPY-EUR.csv",
+        "../data/market_data/CHF-EUR.csv"
     };
     IDataFeed *dataFeeds[size];
 
