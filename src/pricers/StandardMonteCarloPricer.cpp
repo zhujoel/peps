@@ -9,13 +9,11 @@ StandardMonteCarloPricer::~StandardMonteCarloPricer(){
     
 }
 
-void StandardMonteCarloPricer::simulate(double &prix, double &price_std_dev, PnlVect *delta, PnlVect *delta_std_dev)
+void StandardMonteCarloPricer::simulate(const PnlMat *past, double t, const PnlMat *sigma, double &prix, double &price_std_dev, PnlVect *delta, PnlVect *delta_std_dev)
 {
-    this->derivative_->adjust_sigma(this->model_->sigma_);
-    this->derivative_->adjust_past(this->model_->past_);
 
     for(int j = 0; j < this->nbSamples_; ++j){
-        this->model_->asset(this->path_, this->derivative_->T_, this->derivative_->nbTimeSteps_, this->rng_);
+        this->model_->asset(this->path_, t, this->derivative_->T_, this->derivative_->nbTimeSteps_, this->rng_, past, sigma);
         this->price(prix, price_std_dev);
         this->delta(delta, delta_std_dev);
     }
@@ -66,14 +64,14 @@ void StandardMonteCarloPricer::discount_price(double t, double &prix, double &st
     
 void StandardMonteCarloPricer::discount_delta(double t, PnlVect *delta, PnlVect *std_dev)
 {
-    double r = this->model_->rd_;
-    double T = this->derivative_->get_annee_payoff();
-    double M = this->nbSamples_;
-    for (int d = 0; d < this->derivative_->size_; ++d)
-    {   
-        double s0 = MGET(this->model_->past_, this->model_->past_->n-1, d); // on récupère le spot
-        double acc = GET(delta, d) / (2*this->fdStep_*s0);
-        LET(std_dev, d) = sqrt(exp(-2*r*(T-t))*(GET(std_dev, d) - acc * acc)/(2*M*this->fdStep_*s0));
-        LET(delta, d) = exp(-r*(T-t))*acc;
-    }
+    // double r = this->model_->rd_;
+    // double T = this->derivative_->get_annee_payoff();
+    // double M = this->nbSamples_;
+    // for (int d = 0; d < this->derivative_->size_; ++d)
+    // {   
+    //     double s0 = MGET(this->model_->past_, this->model_->past_->n-1, d); // on récupère le spot
+    //     double acc = GET(delta, d) / (2*this->fdStep_*s0);
+    //     LET(std_dev, d) = sqrt(exp(-2*r*(T-t))*(GET(std_dev, d) - acc * acc)/(2*M*this->fdStep_*s0));
+    //     LET(delta, d) = exp(-r*(T-t))*acc;
+    // }
 }

@@ -57,7 +57,7 @@ PnlMat* compute_sigma(PnlMat *path, int start, int end){
     return covariance;
 }
 
-PnlVect* compute_volatility(PnlMat *sigma){
+PnlVect* compute_volatility(const PnlMat *sigma){
     int size = sigma->n;
     PnlVect *volatility = pnl_vect_create(size);
     PnlVect *tmp = pnl_vect_create(size);

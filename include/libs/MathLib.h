@@ -8,4 +8,4 @@ PnlVect* means(PnlMat *path);
 double compute_covariance(PnlMat *log_returns, PnlVect *means, int k, int l); // compute covariance between index k and l
 PnlMat* compute_covariance(PnlMat *path, int start, int end); // compute covariance entre deux dates
 PnlMat* compute_sigma(PnlMat *path, int start, int end);
-PnlVect* compute_volatility(PnlMat *sigma);
+PnlVect* compute_volatility(const PnlMat *sigma);

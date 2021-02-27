@@ -28,7 +28,7 @@ class BlackScholesModelTest: public ::testing::Test{
             this->T = this->nbTimeSteps/250;
             this->rng = pnl_rng_create(PNL_RNG_MERSENNE);
             pnl_rng_sseed(this->rng, std::time(NULL));
-            this->bs = new BlackScholesModel(this->size, this->rd, this->sigma, this->volatility, this->historical->path_);
+            this->bs = new BlackScholesModel(this->size, this->rd);
         }
 
         virtual void TearDown(){
@@ -42,15 +42,14 @@ class BlackScholesModelTest: public ::testing::Test{
 
 TEST_F(BlackScholesModelTest, asset){
     PnlMat *path = pnl_mat_create(this->nbTimeSteps+1, this->size);
-    bs->asset(path, T, nbTimeSteps, rng);
+    bs->asset(path, 0, T, nbTimeSteps, rng, this->historical->path_, this->sigma);
     PnlMat *bs_sigma = compute_sigma(path, 0, path->m);
     PnlVect *bs_volatility = compute_volatility(bs_sigma);
 
     for(int i = 0; i < this->size; ++i){
         for(int j = 0; j < this->size; ++j){
-            EXPECT_NEAR(MGET(this->bs->sigma_, i, j), MGET(bs_sigma, i, j), 0.01);
+            EXPECT_NEAR(MGET(this->sigma, i, j), MGET(bs_sigma, i, j), 0.01);
         }
-        EXPECT_NEAR(GET(this->bs->volatility_, i), GET(bs_volatility, i), 0.01);
     }
 
     pnl_mat_free(&path);

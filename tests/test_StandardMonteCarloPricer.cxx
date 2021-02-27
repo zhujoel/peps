@@ -27,17 +27,16 @@ class StandardMonteCarloPricerTest: public ::testing::Test{
         virtual void SetUp(){
             // BLACK-SCHOLES
             // TODO: mettre fenetre d'estimation
-            this->historical = new HistoricalMarketData("Ocelia", new DateTime(15, 5, 2008), new DateTime(28, 4, 2016));
+            this->historical = new HistoricalMarketData("Ocelia", new DateTime(15, 5, 2006), new DateTime(15, 5, 2016));
             historical->get_data();
             this->sigma = compute_sigma(this->historical->path_, 0, this->historical->path_->m);
-            this->volatility = compute_volatility(this->sigma);
             this->size = 7;
             this->rd = 0.03;
             this->nbTimeSteps = historical->dates_.size();
             this->T = this->nbTimeSteps/250;
             this->rng = pnl_rng_create(PNL_RNG_MERSENNE);
             pnl_rng_sseed(this->rng, std::time(NULL));
-            this->model = new BlackScholesModel(this->size, this->rd, this->sigma, this->volatility, this->historical->path_);
+            this->model = new BlackScholesModel(this->size, this->rd);
 
             // OCELIA
             this->nb_sous_jacents = 4;
@@ -66,7 +65,10 @@ TEST_F(StandardMonteCarloPricerTest, simul)
     double prix_std_dev = 0.0;
     PnlVect* delta = pnl_vect_create(this->size);
     PnlVect* delta_std_dev = pnl_vect_create(this->size);
-    this->mc->simulate(prix, prix_std_dev, delta, delta_std_dev);
+
+    // this->ocelia->adjust_sigma(this->model_->sigma_);
+    // this->ocelia->adjust_past(past); // TODO: a virer d'ici
+    this->mc->simulate(this->historical->path_, 0, this->sigma, prix, prix_std_dev, delta, delta_std_dev);
 
     std::cout << "prix: " << prix << std::endl;
     std::cout << "prix_std_dev: " << prix_std_dev << std::endl;
