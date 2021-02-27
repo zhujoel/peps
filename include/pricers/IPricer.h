@@ -18,8 +18,8 @@ class IPricer{
         virtual ~IPricer();
 
         virtual void simulate(const PnlMat *past, double t, const PnlMat *sigma, double &prix, double &price_std_dev, PnlVect *delta, PnlVect *delta_std_dev) = 0;
-        virtual void price(double &prix, double &std_dev) = 0;
+        virtual void price(double t, double &prix, double &std_dev) = 0;
         virtual void delta(double t, PnlVect *delta, PnlVect *std_dev) = 0;
         virtual void discount_price(double t, double &prix, double &std_dev) = 0;
-        virtual void discount_delta(double t, PnlVect *delta, PnlVect *std_dev) = 0;
+        virtual void discount_delta(const PnlMat *past, double t, PnlVect *delta, PnlVect *std_dev) = 0;
 };
