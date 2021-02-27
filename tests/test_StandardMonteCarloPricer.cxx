@@ -43,7 +43,7 @@ class StandardMonteCarloPricerTest: public ::testing::Test{
             // PARAMETERS
             this->sigma = compute_sigma(estimation_path, 0, estimation_window.size()-1);
             this->size = 7;
-            this->rd = 0.03;
+            this->rd = 0;
             this->nbTimeSteps = ocelia_dates.size();
             this->T = this->nbTimeSteps/250;
             this->rng = pnl_rng_create(PNL_RNG_MERSENNE);
@@ -56,7 +56,7 @@ class StandardMonteCarloPricerTest: public ::testing::Test{
 
             // MONTE CARLO
             this->fdStep = 0.05;
-            this->nbSamples = 1000;
+            this->nbSamples = 15000;
             this->mc = new StandardMonteCarloPricer(model, ocelia, rng, fdStep, nbSamples);
         }
 
