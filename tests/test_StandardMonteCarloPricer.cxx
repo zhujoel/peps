@@ -43,7 +43,7 @@ class StandardMonteCarloPricerTest: public ::testing::Test{
             // PARAMETERS
             this->sigma = compute_sigma(estimation_path, 0, estimation_window.size()-1);
             this->size = 7;
-            this->rd = 0;
+            this->rd = 0.03;
             this->nbTimeSteps = ocelia_dates.size();
             this->T = this->nbTimeSteps/250;
             this->rng = pnl_rng_create(PNL_RNG_MERSENNE);
@@ -56,7 +56,7 @@ class StandardMonteCarloPricerTest: public ::testing::Test{
 
             // MONTE CARLO
             this->fdStep = 0.05;
-            this->nbSamples = 1000;
+            this->nbSamples = 20000;
             this->mc = new StandardMonteCarloPricer(model, ocelia, rng, fdStep, nbSamples);
         }
 
@@ -79,6 +79,7 @@ TEST_F(StandardMonteCarloPricerTest, simul)
 
     this->ocelia->adjust_sigma(this->sigma);
     this->ocelia->adjust_past(this->past);
+
     this->mc->simulate(this->past, 0, this->sigma, prix, prix_std_dev, delta, delta_std_dev); // en t=0
 
     std::cout << "prix: " << prix << std::endl;
@@ -86,13 +87,6 @@ TEST_F(StandardMonteCarloPricerTest, simul)
     std::cout << "delta: " << std::endl;
     pnl_vect_print(delta);
     // pnl_vect_print(delta_std_dev);
-
-    PnlVect *spot = pnl_vect_new();
-    pnl_mat_get_row(spot, this->past, this->past->m-1);
-    double should_be_0_if_delta_is_good = prix - pnl_vect_scalar_prod(delta, spot);
-    std::cout << "spot: " << std::endl;
-    pnl_vect_print(spot);
-    std::cout << "V: " << should_be_0_if_delta_is_good << std::endl;
     
     EXPECT_EQ(1, 1);
 

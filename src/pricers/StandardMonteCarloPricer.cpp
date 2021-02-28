@@ -30,21 +30,29 @@ void StandardMonteCarloPricer::simulate(const PnlMat *past, double t, const PnlM
 
 void StandardMonteCarloPricer::price(double t, double &prix, double &std_dev)
 {
+    double r = this->model_->rd_;
+    double T = this->derivative_->get_annee_payoff();
     double price = this->derivative_->payoff(this->path_);
+    price = exp(-r*(T-t))*price;
+    
     prix += price;
     std_dev += price * price;
 }
 
 void StandardMonteCarloPricer::delta(double t, PnlVect *delta, PnlVect *std_dev)
 {
+    double r = this->model_->rd_;
     double timeStep = this->derivative_->T_/this->derivative_->nbTimeSteps_;
     for (int d = 0; d < this->derivative_->size_; ++d)
     {
+        double T = this->derivative_->get_annee_payoff();
         this->model_->shift_asset(this->shift_path_, this->path_, d, this->fdStep_, t, timeStep);
         double payoff_1 = this->derivative_->payoff(this->shift_path_);
         this->model_->shift_asset(this->shift_path_, this->path_, d, -this->fdStep_, t, timeStep);
         double payoff_2 = this->derivative_->payoff(this->shift_path_);
         double diff = payoff_1 - payoff_2;
+        diff = exp(-r*(T-t))*diff;
+
         LET(delta, d) += diff;
         LET(std_dev, d) += diff * diff;
     }
@@ -55,23 +63,21 @@ void StandardMonteCarloPricer::discount_price(double t, double &prix, double &st
 {
     // TODO: changer le t en : convertir une date (le 15/05/2008) jusqu'à le date de payoff qui devient le t
     // TODO: on a la proportion en faisant par ex: (nb de jours entre 2 dates)/(nb de jours entre toutes les dates)
-    double r = this->model_->rd_;
-    double T = this->derivative_->get_annee_payoff();
+    // double r = this->model_->rd_;
+    // double T = this->derivative_->get_annee_payoff();
     double M = this->nbSamples_;
-    std_dev = sqrt(exp(-2*r*(T-t))*(std_dev - prix * prix)/M);
-    prix = exp(-r*(T-t))*prix;
+    std_dev = sqrt(exp(-2)*(std_dev - prix * prix)/M);
 }
     
 void StandardMonteCarloPricer::discount_delta(const PnlMat* past, double t, PnlVect *delta, PnlVect *std_dev)
 {
-    double r = this->model_->rd_;
-    double T = this->derivative_->get_annee_payoff();
+    // double r = this->model_->rd_;
+    // double T = this->derivative_->get_annee_payoff();
     double M = this->nbSamples_;
     for (int d = 0; d < this->derivative_->size_; ++d)
     {   
         double s0 = MGET(past, past->m-1, d); // on récupère le spot
         double acc = GET(delta, d) / (2*this->fdStep_*s0);
-        LET(std_dev, d) = sqrt(exp(-2*r*(T-t))*(GET(std_dev, d) - acc * acc)/(2*M*this->fdStep_*s0));
-        LET(delta, d) = exp(-r*(T-t))*acc;
+        LET(std_dev, d) = sqrt(exp(-2)*(GET(std_dev, d) - acc * acc)/(2*M*this->fdStep_*s0));
     }
 }
