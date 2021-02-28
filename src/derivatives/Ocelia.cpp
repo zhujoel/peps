@@ -3,7 +3,6 @@
 #include "libs/DateTimeVector.h"
 #include "pnl/pnl_mathtools.h"
 #include "libs/Utilities.h"
-#include <iostream>
 
 Ocelia::Ocelia(double T, int nbTimeSteps, int size, int nb_sous_jacents, std::vector<DateTime*> all_dates) : IDerivative(T, nbTimeSteps, size)
 {
@@ -34,8 +33,26 @@ Ocelia::~Ocelia(){
     pnl_vect_free(&this->perfs_);
 }
 
-double Ocelia::get_annee_payoff(){
-    return this->annee_payoff_;
+double Ocelia::get_annee_payoff(){ // TODO: changer le nom de la méthode
+    // date de début : 15/05/2008
+    if(this->annee_payoff_ == 4){ // 11/05/2012
+        return 1457./365.25;
+    }
+    else if(this->annee_payoff_ == 5){ // 13/05/2013
+        return 1824./365.25;
+    }
+    else if(this->annee_payoff_ == 6){ // 13/05/2014
+        return 2189./365.25;
+    }
+    else if(this->annee_payoff_ == 7){ // 13/05/2015
+        return 2554./365.25;
+
+    }
+    else if(this->annee_payoff_ == 8){ // 13/05/2016
+        return 2920./365.25;
+
+    }
+    return -1;
 }
 
 void Ocelia::adjust_sigma(PnlMat *sigma){
@@ -146,7 +163,7 @@ double Ocelia::payoff(const PnlMat *path)
             double flux_n = compute_flux_n_ans(path, n);
             this->annee_payoff_ = n;
             return val_liquidative_initiale*flux_n;
-            // return val_liquidative_initiale*compute_flux_n_ans(path, n);
+            return val_liquidative_initiale*compute_flux_n_ans(path, n);
         }
     }
 

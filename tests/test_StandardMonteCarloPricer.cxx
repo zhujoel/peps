@@ -38,6 +38,7 @@ class StandardMonteCarloPricerTest: public ::testing::Test{
 
             // PROCESSING DES DONNEES
             std::vector<DateTime*> ocelia_dates = from_date_to_date(this->historical->dates_, new DateTime(15, 5, 2008), new DateTime(28, 4, 2016));
+            this->ocelia_path = get_path_from_dates(this->historical->dates_, ocelia_dates, this->historical->path_);
             std::vector<DateTime*> past_dates = from_date_to_date(this->historical->dates_, new DateTime(15, 5, 2008), new DateTime(15, 5, 2008));
             this->past = get_path_from_dates(this->historical->dates_, past_dates, this->historical->path_);
             this->past_index = get_indice_from_date(this->historical->dates_, new DateTime(15, 5, 2008));
@@ -49,7 +50,7 @@ class StandardMonteCarloPricerTest: public ::testing::Test{
             this->size = 7;
             this->rd = 0.03;
             this->nbTimeSteps = ocelia_dates.size();
-            this->T = this->nbTimeSteps/250;
+            this->T = 2920./365.25; // 2920 est le nb de jours entre 15/05/2008 et 13/05/2016
             this->rng = pnl_rng_create(PNL_RNG_MERSENNE);
             pnl_rng_sseed(this->rng, std::time(NULL));
             this->model = new BlackScholesModel(this->size, this->rd);
@@ -84,7 +85,12 @@ TEST_F(StandardMonteCarloPricerTest, simul)
     this->ocelia->adjust_sigma(this->sigma);
     this->ocelia->adjust_past(this->past);
     
-    PnlVect* newPastRow = pnl_vect_new();;
+    PnlVect* newPastRow = pnl_vect_new();
+
+    // pnl_mat_print(this->ocelia_path);
+    // std::cout << this->ocelia->payoff(this->ocelia_path) << std::endl;
+    // std::cout << this->ocelia->get_annee_payoff() << std::endl;
+    // std::cout << this->ocelia->compute_perf_moyenne_panier(this->ocelia_path) << std::endl;
 
     for(int k = 1; k < this->nbTimeSteps; ++k)
     {
