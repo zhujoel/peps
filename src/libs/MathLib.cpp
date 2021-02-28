@@ -1,18 +1,19 @@
 #include "libs/MathLib.h"
 #include "pnl/pnl_mathtools.h"
+#include <iostream>
 
 PnlMat* log_returns(PnlMat *path, int start, int end){ // start and end included
     int nbDates = 1+end-start; // +1 to include index end
     PnlMat *log_returns = pnl_mat_create(nbDates-1, path->n);
     for(int i = 0; i < nbDates-1; ++i){
         for(int j = 0; j < path->n; ++j){
-            MLET(log_returns, i+start, j) = log(MGET(path, i+start+1, j) / MGET(path, i+start, j));
+            MLET(log_returns, i, j) = log(MGET(path, i+start+1, j) / MGET(path, i+start, j));
         }
     }
     return log_returns;
 }
 
-PnlVect* means(PnlMat *path){
+PnlVect* means(PnlMat *path){ // TODO faire que la moyenne sur start et end inclus
     PnlVect *means = pnl_vect_create(path->n);
     pnl_mat_sum_vect(means, path, 'r');
     pnl_vect_div_scalar(means, path->m);

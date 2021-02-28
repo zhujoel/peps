@@ -31,6 +31,16 @@ PnlVectInt* calcul_indices_dates(std::vector<DateTime*> all_dates, std::vector<D
     return indices;
 }
 
+int get_indice_from_date(std::vector<DateTime*> all_dates, DateTime* date) // TODO: à tester
+{
+    for(unsigned int i = 0; i < all_dates.size(); ++i){
+        if(all_dates[i]->compare(date) == 0){
+            return i;
+        }
+    }
+    return -1;
+}
+
 std::vector<DateTime*> same_dates(std::vector<DateTime*> v1, std::vector<DateTime*> v2)
 {
     std::vector<DateTime*> result;

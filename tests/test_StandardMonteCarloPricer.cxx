@@ -23,29 +23,33 @@ class StandardMonteCarloPricerTest: public ::testing::Test{
         int nb_sous_jacents;
         double fdStep;
         int nbSamples;
+        PnlMat *ocelia_path;
         PnlMat *estimation_path;
         PnlMat *past;
+        int estimation_start;
+        int estimation_end;
+        int past_index;
 
         virtual void SetUp(){
             // BLACK-SCHOLES
             // TODO: mettre fenetre d'estimation
-            this->historical = new HistoricalMarketData("Ocelia", new DateTime(1, 1, 2000), new DateTime(1, 1, 2017));
+            this->historical = new HistoricalMarketData("Ocelia", new DateTime(1, 1, 2005), new DateTime(1, 1, 2017));
             historical->get_data();
 
             // PROCESSING DES DONNEES
             std::vector<DateTime*> ocelia_dates = from_date_to_date(this->historical->dates_, new DateTime(15, 5, 2008), new DateTime(28, 4, 2016));
-            std::vector<DateTime*> estimation_window = from_date_to_date(this->historical->dates_, new DateTime(15, 5, 2006), new DateTime(15, 5, 2008));
-            this->estimation_path = get_path_from_dates(this->historical->dates_, estimation_window, this->historical->path_);
-            
             std::vector<DateTime*> past_dates = from_date_to_date(this->historical->dates_, new DateTime(15, 5, 2008), new DateTime(15, 5, 2008));
             this->past = get_path_from_dates(this->historical->dates_, past_dates, this->historical->path_);
+            this->past_index = get_indice_from_date(this->historical->dates_, new DateTime(15, 5, 2008));
 
             // PARAMETERS
-            this->sigma = compute_sigma(estimation_path, 0, estimation_window.size()-1);
+            this->estimation_start = get_indice_from_date(this->historical->dates_, new DateTime(15, 5, 2006));
+            this->estimation_end = get_indice_from_date(this->historical->dates_, new DateTime(15, 5, 2008));
+            this->sigma = compute_sigma(this->historical->path_, this->estimation_start, this->estimation_end);
             this->size = 7;
             this->rd = 0.03;
-            this->nbTimeSteps = past->m + 10000;
-                this->T = this->nbTimeSteps/250;
+            this->nbTimeSteps = ocelia_dates.size();
+            this->T = this->nbTimeSteps/250;
             this->rng = pnl_rng_create(PNL_RNG_MERSENNE);
             pnl_rng_sseed(this->rng, std::time(NULL));
             this->model = new BlackScholesModel(this->size, this->rd);
@@ -56,7 +60,7 @@ class StandardMonteCarloPricerTest: public ::testing::Test{
 
             // MONTE CARLO
             this->fdStep = 0.05;
-            this->nbSamples = 1000;
+            this->nbSamples = 100;
             this->mc = new StandardMonteCarloPricer(model, ocelia, rng, fdStep, nbSamples);
         }
 
@@ -79,12 +83,24 @@ TEST_F(StandardMonteCarloPricerTest, simul)
 
     this->ocelia->adjust_sigma(this->sigma);
     this->ocelia->adjust_past(this->past);
+    
+    PnlVect* newPastRow = pnl_vect_new();;
 
-    // for(int k = 0; k < this->nbTimeSteps; ++k){
-
-        this->mc->simulate(this->past, 0, this->sigma, prix, prix_std_dev, delta, delta_std_dev); // en t=0
+    for(int k = 1; k < this->nbTimeSteps; ++k)
+    {
+        std::cout << k << std::endl;
         
-    // }
+        pnl_mat_get_row(newPastRow, this->historical->path_, this->past_index+k);
+        pnl_mat_add_row(this->past, past->m, newPastRow);
+
+        pnl_mat_free(&this->sigma);
+
+        this->sigma = compute_sigma(this->historical->path_, this->estimation_start+k, this->estimation_end+k);
+        
+        this->mc->simulate(this->past, k*(this->T/this->nbTimeSteps), this->sigma, prix, prix_std_dev, delta, delta_std_dev);
+
+        std::cout << this->historical->dates_[this->past_index+k] << " : " << prix << std::endl;
+    }
 
     std::cout << "prix: " << prix << std::endl;
     std::cout << "prix_std_dev: " << prix_std_dev << std::endl;
