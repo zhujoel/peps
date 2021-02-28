@@ -14,8 +14,8 @@ void StandardMonteCarloPricer::simulate(const PnlMat *past, double t, const PnlM
 {
     for(int j = 0; j < this->nbSamples_; ++j){
         this->model_->asset(this->path_, t, this->derivative_->T_, this->derivative_->nbTimeSteps_, this->rng_, past, sigma);
-        this->price(t, prix, price_std_dev);
-        this->delta(t, delta, delta_std_dev);
+        // this->price(t, prix, price_std_dev);
+        // this->delta(t, past->m, delta, delta_std_dev);
     }
 
     prix /= this->nbSamples_;
@@ -25,7 +25,7 @@ void StandardMonteCarloPricer::simulate(const PnlMat *past, double t, const PnlM
         LET(delta, d) = GET(delta, d) / this->nbSamples_;
         LET(delta_std_dev, d) = GET(delta_std_dev, d) / this->nbSamples_;
     }
-    discount_delta(past, 0, delta, delta_std_dev);
+    discount_delta(past, t, delta, delta_std_dev);
 }
 
 void StandardMonteCarloPricer::price(double t, double &prix, double &std_dev)
@@ -39,16 +39,16 @@ void StandardMonteCarloPricer::price(double t, double &prix, double &std_dev)
     std_dev += price * price;
 }
 
-void StandardMonteCarloPricer::delta(double t, PnlVect *delta, PnlVect *std_dev)
+void StandardMonteCarloPricer::delta(double t, int pastSize, PnlVect *delta, PnlVect *std_dev)
 {
     double r = this->model_->rd_;
-    double timeStep = this->derivative_->T_/this->derivative_->nbTimeSteps_;
+    //double timeStep = this->derivative_->T_/this->derivative_->nbTimeSteps_;
     for (int d = 0; d < this->derivative_->size_; ++d)
     {
         double T = this->derivative_->get_annee_payoff();
-        this->model_->shift_asset(this->shift_path_, this->path_, d, this->fdStep_, t, timeStep);
+        this->model_->shift_asset(this->shift_path_, this->path_, d, this->fdStep_, pastSize);
         double payoff_1 = this->derivative_->payoff(this->shift_path_);
-        this->model_->shift_asset(this->shift_path_, this->path_, d, -this->fdStep_, t, timeStep);
+        this->model_->shift_asset(this->shift_path_, this->path_, d, -this->fdStep_, pastSize);
         double payoff_2 = this->derivative_->payoff(this->shift_path_);
         double diff = payoff_1 - payoff_2;
         diff = exp(-r*(T-t))*diff;
@@ -69,6 +69,7 @@ void StandardMonteCarloPricer::discount_price(double t, double &prix, double &st
     std_dev = sqrt(exp(-2)*(std_dev - prix * prix)/M);
 }
     
+// TODO: facto les discount
 void StandardMonteCarloPricer::discount_delta(const PnlMat* past, double t, PnlVect *delta, PnlVect *std_dev)
 {
     // double r = this->model_->rd_;

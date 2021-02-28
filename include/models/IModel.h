@@ -11,5 +11,5 @@ class IModel{
         IModel(int size, double rd);
         virtual ~IModel();
         virtual void asset(PnlMat *path, double t, double T, int nbTimeSteps, PnlRng *rng, const PnlMat *past, const PnlMat *sigma) = 0;
-        virtual void shift_asset(PnlMat *shift_path, const PnlMat *path, int d, double h, double t, double timestep) = 0;
+        virtual void shift_asset(PnlMat *shift_path, const PnlMat *path, int d, double h, int startIndex) = 0;
 };

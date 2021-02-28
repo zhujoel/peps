@@ -1,5 +1,6 @@
 #include "models/BlackScholesModel.h"
 #include "libs/MathLib.h"
+#include <iostream>
 
 BlackScholesModel::BlackScholesModel(int size, double rd) : IModel(size, rd)
 {
@@ -25,12 +26,13 @@ void BlackScholesModel::asset(PnlMat *path, double t, double T, int nbTimeSteps,
     // 5: zc jpy
     // 6: zc chf
     PnlVect *volatility = compute_volatility(sigma);
-    double timestep = T/nbTimeSteps;
+    double timestep = T/nbTimeSteps; // TODO: ya peut etre une erreur ici
+    // pnl_mat_set_subblock(path, past, 0, 0);
     PnlVect *spot = pnl_vect_create(past->n);
     pnl_mat_get_row(spot, past, past->m-1);
     pnl_mat_set_row(path, spot, 0);
 
-    for (int k = 1; k <= nbTimeSteps; ++k)
+    for (unsigned int k = past->m; k <= nbTimeSteps; ++k)
     {
         pnl_vect_rng_normal(this->G_, this->size_, rng); // G Vecteur gaussien
         pnl_mat_mult_vect_inplace(this->B_, sigma, this->G_);
@@ -42,28 +44,21 @@ void BlackScholesModel::asset(PnlMat *path, double t, double T, int nbTimeSteps,
     }
 
     pnl_vect_free(&volatility);
-    pnl_vect_free(&spot);
 }
 
-void BlackScholesModel::shift_asset(PnlMat *shift_path, const PnlMat *path, int d, double h, double t, double timestep)
+void BlackScholesModel::shift_asset(PnlMat *shift_path, const PnlMat *path, int d, double h, int startIdx)
 {
-    int i = t/timestep;
-    // if (abs( (i+1)*timestep - t)<1E-5)
-    // {
-    //     i+=1;
-    // }
     if (h>0)
     {
         pnl_mat_clone(shift_path, path);
-        for (int k = i+1; k < path->m; ++k)
+        for (int k = startIdx; k < path->m; ++k)
         {  
             MLET(shift_path, k, d) = MGET(shift_path, k, d) * (1+h);
         }
     } else {
-        for (int k = i+1; k < path->m; ++k)
+        for (int k = startIdx; k < path->m; ++k)
         {  
             MLET(shift_path, k, d) = (MGET(shift_path, k, d) / (1-h)) * (1+h);
         }
     }
-    
 }

@@ -44,7 +44,7 @@ class StandardMonteCarloPricerTest: public ::testing::Test{
             this->sigma = compute_sigma(estimation_path, 0, estimation_window.size()-1);
             this->size = 7;
             this->rd = 0.03;
-            this->nbTimeSteps = ocelia_dates.size();
+            this->nbTimeSteps = past_dates.size() + 10000;
             this->T = this->nbTimeSteps/250;
             this->rng = pnl_rng_create(PNL_RNG_MERSENNE);
             pnl_rng_sseed(this->rng, std::time(NULL));
@@ -56,7 +56,7 @@ class StandardMonteCarloPricerTest: public ::testing::Test{
 
             // MONTE CARLO
             this->fdStep = 0.05;
-            this->nbSamples = 20000;
+            this->nbSamples = 1;
             this->mc = new StandardMonteCarloPricer(model, ocelia, rng, fdStep, nbSamples);
         }
 
@@ -80,7 +80,11 @@ TEST_F(StandardMonteCarloPricerTest, simul)
     this->ocelia->adjust_sigma(this->sigma);
     this->ocelia->adjust_past(this->past);
 
-    this->mc->simulate(this->past, 0, this->sigma, prix, prix_std_dev, delta, delta_std_dev); // en t=0
+    for(int k = 0; k < this->nbTimeSteps; ++k){
+
+        this->mc->simulate(this->past, 0, this->sigma, prix, prix_std_dev, delta, delta_std_dev); // en t=0
+        
+    }
 
     std::cout << "prix: " << prix << std::endl;
     std::cout << "prix_std_dev: " << prix_std_dev << std::endl;

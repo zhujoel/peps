@@ -12,5 +12,5 @@ class BlackScholesModel : public IModel{
         ~BlackScholesModel();
         
         void asset(PnlMat *path, double t, double T, int nbTimeSteps, PnlRng *rng, const PnlMat *past, const PnlMat *sigma);
-        void shift_asset(PnlMat *shift_path, const PnlMat *path, int d, double h, double t, double timestep);
+        void shift_asset(PnlMat *shift_path, const PnlMat *path, int d, double h, int startIdx);
 };

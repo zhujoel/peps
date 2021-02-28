@@ -24,7 +24,7 @@ class BlackScholesModelTest: public ::testing::Test{
             this->volatility = compute_volatility(this->sigma);
             this->size = 7;
             this->rd = 0;
-            this->nbTimeSteps = 10000;
+            this->nbTimeSteps = this->historical->path_->m + 10000;
             this->T = this->nbTimeSteps/250;
             this->rng = pnl_rng_create(PNL_RNG_MERSENNE);
             pnl_rng_sseed(this->rng, std::time(NULL));
@@ -41,7 +41,7 @@ class BlackScholesModelTest: public ::testing::Test{
 };
 
 TEST_F(BlackScholesModelTest, asset){
-    PnlMat *path = pnl_mat_create(this->nbTimeSteps+1, this->size);
+    PnlMat *path = pnl_mat_create(this->nbTimeSteps+1, this->size); // TODO: retirer le nbTimeSteps+1 (vu qu'on colle le past dans path, on a plus de spot)
     bs->asset(path, 0, T, nbTimeSteps, rng, this->historical->path_, this->sigma);
     PnlMat *bs_sigma = compute_sigma(path, 0, path->m-1);
     PnlVect *bs_volatility = compute_volatility(bs_sigma);
