@@ -56,14 +56,13 @@ class StandardMonteCarloPricerTest: public ::testing::Test{
 
             // MONTE CARLO
             this->fdStep = 0.05;
-            this->nbSamples = 15000;
+            this->nbSamples = 1000;
             this->mc = new StandardMonteCarloPricer(model, ocelia, rng, fdStep, nbSamples);
         }
 
         virtual void TearDown(){
             delete this->historical;
             pnl_mat_free(&this->sigma);
-            pnl_vect_free(&this->volatility);
             delete this->mc;
             delete this->ocelia;
             delete this->model;
@@ -75,8 +74,8 @@ TEST_F(StandardMonteCarloPricerTest, simul)
 {
     double prix = 0.0;
     double prix_std_dev = 0.0;
-    PnlVect* delta = pnl_vect_create(this->size);
-    PnlVect* delta_std_dev = pnl_vect_create(this->size);
+    PnlVect* delta = pnl_vect_create_from_zero(this->size);
+    PnlVect* delta_std_dev = pnl_vect_create_from_zero(this->size);
 
     this->ocelia->adjust_sigma(this->sigma);
     this->ocelia->adjust_past(this->past);
