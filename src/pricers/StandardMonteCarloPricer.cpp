@@ -14,8 +14,8 @@ void StandardMonteCarloPricer::simulate(const PnlMat *past, double t, const PnlM
 {
     for(int j = 0; j < this->nbSamples_; ++j){
         this->model_->asset(this->path_, t, this->derivative_->T_, this->derivative_->nbTimeSteps_, this->rng_, past, sigma);
-        // this->price(t, prix, price_std_dev);
-        // this->delta(t, past->m, delta, delta_std_dev);
+        this->price(t, prix, price_std_dev);
+        this->delta(t, past->m, delta, delta_std_dev);
     }
 
     prix /= this->nbSamples_;
@@ -42,7 +42,6 @@ void StandardMonteCarloPricer::price(double t, double &prix, double &std_dev)
 void StandardMonteCarloPricer::delta(double t, int pastSize, PnlVect *delta, PnlVect *std_dev)
 {
     double r = this->model_->rd_;
-    //double timeStep = this->derivative_->T_/this->derivative_->nbTimeSteps_;
     for (int d = 0; d < this->derivative_->size_; ++d)
     {
         double T = this->derivative_->get_annee_payoff();
