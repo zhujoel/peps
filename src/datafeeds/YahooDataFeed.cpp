@@ -16,7 +16,7 @@ int YahooDataFeed::get_number_valid_data()
     std::getline(dataFile, line); // skip header line
     while (std::getline(dataFile, line))
     {
-        split(line, ',', parsedLine);
+        split(parsedLine, line, ',');
         if(parsedLine[4] != "null") count++;
     }
 
@@ -37,7 +37,7 @@ void YahooDataFeed::get_data()
     std::getline(dataFile, line); // skip header line
     while (std::getline(dataFile, line))
     {
-        split(line, ',', parsedLine);
+        split(parsedLine, line, ',');
         if(parsedLine[4] == "null") continue;
         this->dates_.push_back(parse_date_string(parsedLine[0], '-'));
         LET(this->prices_, i++) = std::atof(parsedLine[4].c_str()); // c_str(): needs a char* to use atof

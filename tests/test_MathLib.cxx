@@ -25,7 +25,7 @@ class MathLibTest: public ::testing::Test{
 TEST_F(MathLibTest, log_returns){
 
     PnlMat *returns = pnl_mat_new();
-    log_returns(this->path, returns, 0, 2);
+    log_returns(returns, this->path, 0, 2);
 
     EXPECT_NEAR(0.04879, MGET(returns, 0, 0), 0.000001);
     EXPECT_NEAR(0.04652, MGET(returns, 1, 0), 0.000001);
@@ -37,7 +37,7 @@ TEST_F(MathLibTest, log_returns){
 
 TEST_F(MathLibTest, means){
     PnlVect *means_path = pnl_vect_new();
-    means(this->path, means_path);
+    means(means_path, this->path);
 
     EXPECT_NEAR(105, GET(means_path, 0), 0.000001);
     EXPECT_NEAR(103.333333, GET(means_path, 1), 0.000001);
@@ -47,9 +47,9 @@ TEST_F(MathLibTest, means){
 
 TEST_F(MathLibTest, compute_covariance_k_l){
     PnlMat *returns = pnl_mat_new();
-    log_returns(this->path, returns, 0, 2);
+    log_returns(returns, this->path, 0, 2);
     PnlVect *means_returns = pnl_vect_new();
-    means(returns, means_returns);
+    means(means_returns, returns);
     double covariance_0_0 = compute_covariance(returns, means_returns, 0, 0);
     EXPECT_NEAR(0.0000025764, covariance_0_0, 0.000000001);
 
@@ -59,7 +59,7 @@ TEST_F(MathLibTest, compute_covariance_k_l){
 
 TEST_F(MathLibTest, compute_covariances){
     PnlMat *covariances = pnl_mat_new();
-    compute_covariances(this->path, covariances, 0, 2);
+    compute_covariances(covariances, this->path, 0, 2);
 
     EXPECT_NEAR(0.0006441, MGET(covariances, 0, 0), 0.000001);
     EXPECT_NEAR(0.054092, MGET(covariances, 0, 1), 0.000001);
@@ -85,7 +85,7 @@ TEST_F(MathLibTest, compute_volatility){
     PnlMat *sigma = pnl_mat_new();
     compute_sigma(sigma, this->path, 0, 2);
     PnlVect *volatility = pnl_vect_new();
-    compute_volatility(sigma, volatility);
+    compute_volatility(volatility, sigma);
 
     EXPECT_NEAR(0.059751, GET(volatility, 0), 0.000001);
     EXPECT_NEAR(2.1312, GET(volatility, 1), 0.000001);
