@@ -3,7 +3,6 @@
 #include "pnl/pnl_matrix.h"
 #include <fstream>
 
-// TODO: add more tests
 class MathLibTest: public ::testing::Test{
     protected:
         PnlMat *path;

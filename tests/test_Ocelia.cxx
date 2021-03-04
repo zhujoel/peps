@@ -182,6 +182,11 @@ TEST_F(OceliaTest, compute_flux_8_ans){
     EXPECT_EQ(1.56, flux);
 }
 
+TEST_F(OceliaTest, get_foreign_index_market_value){
+    double value = ocelia->get_foreign_index_market_value(this->path, 1, 0);
+    EXPECT_EQ(101, value);
+}
+
 TEST_F(OceliaTest, payoff){
     double payoff = ocelia->payoff(this->path);
     EXPECT_EQ(124, payoff);

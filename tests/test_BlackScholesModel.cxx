@@ -43,7 +43,7 @@ class BlackScholesModelTest: public ::testing::Test{
 };
 
 TEST_F(BlackScholesModelTest, asset){
-    PnlMat *path = pnl_mat_create(this->nbTimeSteps+1, this->size); // TODO: retirer le nbTimeSteps+1 (vu qu'on colle le past dans path, on a plus de spot)
+    PnlMat *path = pnl_mat_create(this->nbTimeSteps, this->size);
     bs->asset(path, 0, T, nbTimeSteps, rng, this->historical->path_, this->sigma);
     PnlMat *bs_sigma = pnl_mat_new();
     compute_sigma(bs_sigma, path, 0, path->m-1);

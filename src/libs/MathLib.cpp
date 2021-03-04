@@ -12,7 +12,7 @@ void log_returns(PnlMat *log_returns, const PnlMat *path, int start, int end){ /
     }
 }
 
-void means(PnlVect *means, const PnlMat *path){ // TODO faire que la moyenne sur start et end inclus
+void means(PnlVect *means, const PnlMat *path){
     pnl_vect_resize(means, path->n);
     pnl_mat_sum_vect(means, path, 'r');
     pnl_vect_div_scalar(means, path->m);
@@ -45,7 +45,9 @@ void compute_covariances(PnlMat *covariances, const PnlMat *path, int start, int
         }
     }
 
-    pnl_mat_mult_scalar(covariances, 250); // TODO: 250: nb de jours ouvrés TODO: changer pour mettre un taux variable basé sur les dim de market data
+    // 250: nb de jours ouvrés en une année
+    // TODO: changer pour mettre un taux variable basé sur les dim de market data
+    pnl_mat_mult_scalar(covariances, 250);
 
     pnl_mat_free(&returns);
     pnl_vect_free(&means_returns);

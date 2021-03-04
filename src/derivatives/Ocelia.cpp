@@ -6,9 +6,12 @@
 
 Ocelia::Ocelia(double T, int nbTimeSteps, int size, int nb_sous_jacents, const std::vector<DateTime*> &all_dates) : IDerivative(T, nbTimeSteps, size)
 {
+    if(nbTimeSteps != all_dates.size()){
+        throw std::invalid_argument("nbTimeSteps must be equal to the size of all_dates!");
+    }
+
     this->annee_payoff_ = 0;    
     this->nb_sous_jacents_ = nb_sous_jacents;
-    // TODO: mettre une vérif que le nb de timesteps soit le meme que la taille de all_dates
     this->valeurs_n_ans_ = pnl_vect_create_from_zero(this->nb_sous_jacents_);
     this->valeurs_initiales_ = pnl_vect_create_from_zero(this->nb_sous_jacents_);
     this->nouveau_depart_ = pnl_vect_create_from_zero(this->nb_sous_jacents_);
@@ -45,14 +48,14 @@ void Ocelia::adjust_sigma(PnlMat *sigma) const {
     }
 }
 
-void Ocelia::adjust_past(PnlMat *past) const { // TODO: PHILIPPE CHECK CA
+void Ocelia::adjust_past(PnlMat *past) const {
     for(int i = 0; i < past->m; ++i){
         for(int j = 0; j < 3; ++j){
             MLET(past, i, j) = MGET(past, i, j)*MGET(past, i, j+4);
         }
     }
 }
-void Ocelia::adjust_spot(PnlVect *spot) const { // TODO: PHILIPPE CHECK CA
+void Ocelia::adjust_spot(PnlVect *spot) const {
     for(int j = 0; j < 3; ++j){
         LET(spot, j) = GET(spot, j)*GET(spot, j+4);
     }
@@ -62,14 +65,14 @@ double Ocelia::get_annee_payoff() const {
     return this->annee_payoff_;
 }
 
-// TODO: tester cette fonction
 double Ocelia::get_foreign_index_market_value(const PnlMat* path, int date_idx, int idx) const {
     if(idx > 3) throw std::invalid_argument("idx must be between 0 and 3!");
     
     double S_T = MGET(path, date_idx, idx);
     if(idx == 3) return S_T;
     // TODO: ajouter un T qui représente le temps écoulé entre 0 et actuellement aussi
-    return S_T/MGET(path, date_idx, idx+this->nb_sous_jacents_)*exp(0); // TODO: exp(0) devrait etre l'actif sans risque étranger à la place
+    // TODO: exp(0) devrait etre l'actif sans risque étranger à la place
+    return S_T/MGET(path, date_idx, idx+this->nb_sous_jacents_)*exp(0);
 }
 
 double Ocelia::compute_perf_moyenne_panier(const PnlMat *path) const

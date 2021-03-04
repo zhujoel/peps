@@ -28,7 +28,7 @@ void calcul_indices_dates(PnlVectInt *indices, const std::vector<DateTime*> &all
     }
 }
 
-int get_indice_from_date(const std::vector<DateTime*> &all_dates, const DateTime *date) // TODO: à tester
+int get_indice_from_date(const std::vector<DateTime*> &all_dates, const DateTime *date)
 {
     for(unsigned int i = 0; i < all_dates.size(); ++i){
         if(all_dates[i]->compare(date) == 0){
@@ -70,7 +70,6 @@ void get_prices_from_date(PnlVect *prices, const std::vector<DateTime*> &allDate
     pnl_vect_int_free(&indices);
 }
 
-// TODO: tester cette fonction
 void get_subset_path_from_dates(PnlMat *subset_path, const std::vector<DateTime*> &allDates, const std::vector<DateTime*> &subset, const PnlMat *path)
 {
     PnlVectInt* indices = pnl_vect_int_new();
