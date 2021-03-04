@@ -35,24 +35,24 @@ Ocelia::~Ocelia(){
 
 double Ocelia::get_annee_payoff(){ // TODO: changer le nom de la méthode
     // date de début : 15/05/2008
-    if(this->annee_payoff_ == 4){ // 11/05/2012
-        return 1457./365.25;
-    }
-    else if(this->annee_payoff_ == 5){ // 13/05/2013
-        return 1824./365.25;
-    }
-    else if(this->annee_payoff_ == 6){ // 13/05/2014
-        return 2189./365.25;
-    }
-    else if(this->annee_payoff_ == 7){ // 13/05/2015
-        return 2554./365.25;
+    // if(this->annee_payoff_ == 4){ // 11/05/2012
+    //     return 1457./365.25;
+    // }
+    // else if(this->annee_payoff_ == 5){ // 13/05/2013
+    //     return 1824./365.25;
+    // }
+    // else if(this->annee_payoff_ == 6){ // 13/05/2014
+    //     return 2189./365.25;
+    // }
+    // else if(this->annee_payoff_ == 7){ // 13/05/2015
+    //     return 2554./365.25;
 
-    }
-    else if(this->annee_payoff_ == 8){ // 13/05/2016
-        return 2920./365.25;
-
-    }
-    return -1;
+    // }
+    // else if(this->annee_payoff_ == 8){ // 13/05/2016
+    //     return 2920./365.25;
+    // }
+    // return -1;
+    return this->annee_payoff_;
 }
 
 void Ocelia::adjust_sigma(PnlMat *sigma){

@@ -87,15 +87,8 @@ TEST_F(StandardMonteCarloPricerTest, simul)
     
     PnlVect* newPastRow = pnl_vect_new();
 
-    // pnl_mat_print(this->ocelia_path);
-    // std::cout << this->ocelia->payoff(this->ocelia_path) << std::endl;
-    // std::cout << this->ocelia->get_annee_payoff() << std::endl;
-    // std::cout << this->ocelia->compute_perf_moyenne_panier(this->ocelia_path) << std::endl;
-
     for(int k = 1; k < this->nbTimeSteps; ++k)
     {
-        std::cout << k << std::endl;
-        
         pnl_mat_get_row(newPastRow, this->historical->path_, this->past_index+k);
         pnl_mat_add_row(this->past, past->m, newPastRow);
 
@@ -105,13 +98,14 @@ TEST_F(StandardMonteCarloPricerTest, simul)
         
         this->mc->simulate(this->past, k*(this->T/this->nbTimeSteps), this->sigma, prix, prix_std_dev, delta, delta_std_dev);
 
+        std::cout << k << std::endl;
         std::cout << this->historical->dates_[this->past_index+k] << " : " << prix << std::endl;
     }
 
-    std::cout << "prix: " << prix << std::endl;
-    std::cout << "prix_std_dev: " << prix_std_dev << std::endl;
-    std::cout << "delta: " << std::endl;
-    pnl_vect_print(delta);
+    // std::cout << "prix: " << prix << std::endl;
+    // std::cout << "prix_std_dev: " << prix_std_dev << std::endl;
+    // std::cout << "delta: " << std::endl;
+    // pnl_vect_print(delta);
     // pnl_vect_print(delta_std_dev);
     
     EXPECT_EQ(1, 1);

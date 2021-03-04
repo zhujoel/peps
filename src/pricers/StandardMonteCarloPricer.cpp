@@ -12,15 +12,16 @@ StandardMonteCarloPricer::~StandardMonteCarloPricer(){
 
 void StandardMonteCarloPricer::simulate(const PnlMat *past, double t, const PnlMat *sigma, double &prix, double &price_std_dev, PnlVect *delta, PnlVect *delta_std_dev)
 {
-    for(int j = 0; j < this->nbSamples_; ++j){
+    double M = this->nbSamples_;
+    for(int j = 0; j < M; ++j){
         this->model_->asset(this->path_, t, this->derivative_->T_, this->derivative_->nbTimeSteps_, this->rng_, past, sigma);
         this->price(t, prix, price_std_dev);
         // this->delta(t, past->m, delta, delta_std_dev);
     }
 
-    prix /= this->nbSamples_;
-    price_std_dev /= this->nbSamples_;
-    discount_price(t, prix, price_std_dev);
+    prix /= M;
+    price_std_dev /= M;
+    std_dev = sqrt(exp(-2)*(std_dev - prix * prix)/M);
     // for(int d = 0 ; d < this->derivative_->size_; ++d){
     //     LET(delta, d) = GET(delta, d) / this->nbSamples_;
     //     LET(delta_std_dev, d) = GET(delta_std_dev, d) / this->nbSamples_;
@@ -64,8 +65,8 @@ void StandardMonteCarloPricer::discount_price(double t, double &prix, double &st
     // TODO: on a la proportion en faisant par ex: (nb de jours entre 2 dates)/(nb de jours entre toutes les dates)
     // double r = this->model_->rd_;
     // double T = this->derivative_->get_annee_payoff();
-    double M = this->nbSamples_;
-    std_dev = sqrt(exp(-2)*(std_dev - prix * prix)/M);
+    // double M = this->nbSamples_;
+    // std_dev = sqrt(exp(-2)*(std_dev - prix * prix)/M);
 }
     
 // TODO: facto les discount
