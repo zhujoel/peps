@@ -21,7 +21,7 @@ void StandardMonteCarloPricer::simulate(const PnlMat *past, double t, const PnlM
 
     prix /= M;
     price_std_dev /= M;
-    std_dev = sqrt(exp(-2)*(std_dev - prix * prix)/M);
+    price_std_dev = sqrt(exp(-2)*(price_std_dev - prix * prix)/M);
     // for(int d = 0 ; d < this->derivative_->size_; ++d){
     //     LET(delta, d) = GET(delta, d) / this->nbSamples_;
     //     LET(delta_std_dev, d) = GET(delta_std_dev, d) / this->nbSamples_;

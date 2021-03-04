@@ -90,6 +90,7 @@ TEST_F(StandardMonteCarloPricerTest, simul)
     for(int k = 1; k < this->nbTimeSteps; ++k)
     {
         pnl_mat_get_row(newPastRow, this->historical->path_, this->past_index+k);
+        this->ocelia->adjust_spot(newPastRow);
         pnl_mat_add_row(this->past, past->m, newPastRow);
 
         pnl_mat_free(&this->sigma);

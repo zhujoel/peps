@@ -64,13 +64,18 @@ void Ocelia::adjust_sigma(PnlMat *sigma){
 }
 
 void Ocelia::adjust_past(PnlMat *past){ // TODO: PHILIPPE CHECK CA
-    pnl_mat_print(past);
     for(int i = 0; i < past->m; ++i){
         for(int j = 0; j < 3; ++j){
             MLET(past, i, j) = MGET(past, i, j)*MGET(past, i, j+4);
         }
     }
 }
+void Ocelia::adjust_spot(PnlVect *spot){ // TODO: PHILIPPE CHECK CA
+    for(int j = 0; j < 3; ++j){
+        LET(spot, j) = GET(spot, j)*GET(spot, j+4);
+    }
+}
+
 
 // TODO: tester cette fonction
 double Ocelia::get_foreign_index_market_value(const PnlMat* path, int date_idx, int idx){

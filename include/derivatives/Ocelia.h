@@ -21,6 +21,7 @@ class Ocelia : public IDerivative{
 
         void adjust_sigma(PnlMat *sigma); // adjust computed sigma en fonction du nombre de produit dans la matrix path et de comment ils sont organisés
         void adjust_past(PnlMat *past);
+        void adjust_spot(PnlVect *spot);
 
         double get_annee_payoff();
         double get_foreign_index_market_value(const PnlMat* path, int date_idx, int idx);
