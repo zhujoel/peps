@@ -25,13 +25,12 @@ void HistoricalMarketData::set_Ocelia_data(){
         "../data/market_data/JPY-EUR.csv",
         "../data/market_data/CHF-EUR.csv"
     };
-    IDataFeed *dataFeeds[size];
+    IDataFeed **dataFeeds = new IDataFeed*[size];
 
     for(int i = 0; i < size; ++i){
         dataFeeds[i] = new YahooDataFeed(files[i]);
         dataFeeds[i]->set_data();
     }
-
 
     from_date_to_date(this->dates_, dataFeeds[0]->dates_, this->startDate_, this->endDate_);
     
@@ -54,4 +53,5 @@ void HistoricalMarketData::set_Ocelia_data(){
     for(int i = 0; i < size; ++i){
         delete dataFeeds[i];
     }
+    delete[] dataFeeds;
 }
