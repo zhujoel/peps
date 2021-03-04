@@ -16,19 +16,19 @@ class Ocelia : public IDerivative{
         PnlVect *nouveau_depart_; // valeurs de l'effet nouveau départ
         PnlVect *perfs_; // perfs à l'année n
 
-        Ocelia(double T, int nbTimeSteps, int size, int nb_sous_jacents, std::vector<DateTime*> all_dates);
+        Ocelia(double T, int nbTimeSteps, int size, int nb_sous_jacents, const std::vector<DateTime*> &all_dates);
         ~Ocelia();
 
-        void adjust_sigma(PnlMat *sigma); // adjust computed sigma en fonction du nombre de produit dans la matrix path et de comment ils sont organisés
-        void adjust_past(PnlMat *past);
-        void adjust_spot(PnlVect *spot);
+        void adjust_sigma(PnlMat *sigma) const; // adjust computed sigma en fonction du nombre de produit dans la matrix path et de comment ils sont organisés
+        void adjust_past(PnlMat *past) const;
+        void adjust_spot(PnlVect *spot) const;
+        double get_annee_payoff() const;
 
-        double get_annee_payoff();
-        double get_foreign_index_market_value(const PnlMat* path, int date_idx, int idx);
-        double compute_perf_moyenne_panier(const PnlMat *path);
-        void compute_valeurs_n_ans(const PnlMat *path, PnlVect *valeurs, int N); // calcule la valeur moyenne des indices pour l'année n
-        void compute_perfs_n_ans(const PnlMat *path, PnlVect *perfs, int N); // compute performance pour un indice à une année
+        double get_foreign_index_market_value(const PnlMat* path, int date_idx, int idx) const;
+        double compute_perf_moyenne_panier(const PnlMat *path) const;
+        void compute_valeurs_n_ans(PnlVect *valeurs, const PnlMat *path, int N) const; // calcule la valeur moyenne des indices pour l'année n
+        void compute_perfs_n_ans(PnlVect *perfs, const PnlMat *path, int N) const; // compute performance pour un indice à une année
         void compute_nouveau_depart(const PnlMat *path); 
-        double compute_flux_n_ans(const PnlMat *path, int N); // calcul du C(N) cf 1.3
+        double compute_flux_n_ans(const PnlMat *path, int N) const; // calcul du C(N) cf 1.3
         double payoff(const PnlMat *path);
 };
