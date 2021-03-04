@@ -16,7 +16,6 @@ class QuantoTest: public ::testing::Test{
         PnlRng *rng;
         PnlMat *sigma;
         PnlMat *spot;
-        PnlVect *volatility;
         double T = 1;
         double nbTimeSteps = 365;
         double rf = 0.05;
@@ -27,7 +26,7 @@ class QuantoTest: public ::testing::Test{
         double sigma_actif = 0.1;
         double spot_actif_sans_risque = 1;
         double spot_actif_risque = 100;
-        double nbSimul = 10000;
+        double nbSimul = 100;
         double spot_taux_change_initial = 1.2;
         double rho = 0.2; // corrélation entre zc et actif risqué étranger
         double h = 0.01;
@@ -56,12 +55,11 @@ class QuantoTest: public ::testing::Test{
         }
 
         virtual void TearDown(){
-            pnl_mat_free(&this->sigma);
-            pnl_vect_free(&this->volatility);
-            delete(this->quanto);
-            pnl_mat_free(&this->spot);
-            delete(this->model);
             pnl_rng_free(&this->rng);
+            pnl_mat_free(&this->sigma);
+            pnl_mat_free(&this->spot);
+            delete(this->quanto);
+            delete(this->model);
             delete(this->pricer);
         }
 };
@@ -77,8 +75,8 @@ TEST_F(QuantoTest, price){
     // simulation
     double prix = 0.0;
     double prix_std_dev = 0.0;
-    PnlVect* delta = pnl_vect_create(this->quanto->size_);
-    PnlVect* delta_std_dev = pnl_vect_create(this->quanto->size_);
+    PnlVect* delta = pnl_vect_create_from_zero(this->quanto->size_);
+    PnlVect* delta_std_dev = pnl_vect_create_from_zero(this->quanto->size_);
     pricer->simulate(this->spot, 0, this->sigma, prix, prix_std_dev, delta, delta_std_dev);
     std::cout << "prix simulé : " << prix << " std dev : " << prix_std_dev << std::endl;
     std::cout << "price est dedans : " << (abs(prix2 - prix) <= 1.96*prix_std_dev) << std::endl;
