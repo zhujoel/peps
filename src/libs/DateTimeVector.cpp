@@ -14,12 +14,12 @@ void parse_dates_file(std::vector<DateTime*> &dates, const std::string &fileName
     }
 }
 
-void calcul_indices_dates(PnlVectInt *indices, const std::vector<DateTime*> &all_dates, const std::vector<DateTime*> &dates)
+void calcul_indices_dates(PnlVectInt *indices, const std::vector<DateTime*> &all_dates, const std::vector<DateTime*> &dates_subset)
 {
-    pnl_vect_int_resize(indices, dates.size());
+    pnl_vect_int_resize(indices, dates_subset.size());
     int cnt = 0;
     for(unsigned int i = 0; i < all_dates.size(); ++i){
-        if(all_dates[i]->compare(dates[cnt]) == 0){
+        if(all_dates[i]->compare(dates_subset[cnt]) == 0){
             LET_INT(indices, cnt++) = i;
             if(cnt == indices->size){
                 break;
@@ -62,6 +62,7 @@ void get_prices_from_date(PnlVect *prices, const std::vector<DateTime*> &allDate
 {
     PnlVectInt* indices = pnl_vect_int_new();
     calcul_indices_dates(indices, allDates, subset);
+
     pnl_vect_resize(prices, indices->size);
     for(int i = 0; i < indices->size; ++i){
         LET(prices, i) = GET(allPrices, GET_INT(indices, i));
