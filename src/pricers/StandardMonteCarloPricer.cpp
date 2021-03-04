@@ -16,17 +16,17 @@ void StandardMonteCarloPricer::simulate(const PnlMat *past, double t, const PnlM
     for(int j = 0; j < M; ++j){
         this->model_->asset(this->path_, t, this->derivative_->T_, this->derivative_->nbTimeSteps_, this->rng_, past, sigma);
         this->price(t, prix, price_std_dev);
-        // this->delta(t, past->m, delta, delta_std_dev);
+        this->delta(t, past->m, delta, delta_std_dev);
     }
 
     prix /= M;
     price_std_dev /= M;
     price_std_dev = sqrt(exp(-2)*(price_std_dev - prix * prix)/M);
-    // for(int d = 0 ; d < this->derivative_->size_; ++d){
-    //     LET(delta, d) = GET(delta, d) / this->nbSamples_;
-    //     LET(delta_std_dev, d) = GET(delta_std_dev, d) / this->nbSamples_;
-    // }
-    // discount_delta(past, t, delta, delta_std_dev);
+    for(int d = 0 ; d < this->derivative_->size_; ++d){
+        LET(delta, d) = GET(delta, d) / this->nbSamples_;
+        LET(delta_std_dev, d) = GET(delta_std_dev, d) / this->nbSamples_;
+    }
+    discount_delta(past, t, delta, delta_std_dev);
 }
 
 void StandardMonteCarloPricer::price(double t, double &prix, double &std_dev)

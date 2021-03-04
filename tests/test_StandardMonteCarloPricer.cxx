@@ -60,8 +60,8 @@ class StandardMonteCarloPricerTest: public ::testing::Test{
             this->ocelia = new Ocelia(T, nbTimeSteps, size, nb_sous_jacents, ocelia_dates);
 
             // MONTE CARLO
-            this->fdStep = 0.05;
-            this->nbSamples = 100;
+            this->fdStep = 0.00005; // NE PAS CHANGER !!!!!!!! TODO adapter en fonction de la Share Val
+            this->nbSamples = 10000; // TODO METTRE EN ZERO UN TRUC TRES ELEVEE CAR FORT IMPACT SUR LES DELTA EN ZERO
             this->mc = new StandardMonteCarloPricer(model, ocelia, rng, fdStep, nbSamples);
         }
 
@@ -77,37 +77,69 @@ class StandardMonteCarloPricerTest: public ::testing::Test{
 
 TEST_F(StandardMonteCarloPricerTest, simul)
 {
-    double prix = 0.0;
-    double prix_std_dev = 0.0;
+    double prix = 0.;
+    double prix_std_dev = 0.;
+    double finalPnL = 0.;
     PnlVect* delta = pnl_vect_create_from_zero(this->size);
+    PnlVect* previous_delta = pnl_vect_create_from_zero(this->size);
     PnlVect* delta_std_dev = pnl_vect_create_from_zero(this->size);
-
-    this->ocelia->adjust_sigma(this->sigma);
+    PnlVect* share_values = pnl_vect_new();
+    pnl_mat_get_row(share_values, this->historical->path_, 0);
+    this->ocelia->adjust_spot(share_values);
     this->ocelia->adjust_past(this->past);
+    this->ocelia->adjust_sigma(this->sigma);
+
+    this->mc->simulate(this->past, 0, this->sigma, prix, prix_std_dev, delta, delta_std_dev);
+    pnl_vect_clone(previous_delta, delta);
     
-    PnlVect* newPastRow = pnl_vect_new();
+    double V = prix - pnl_vect_scalar_prod(delta, share_values);
+    finalPnL = V + pnl_vect_scalar_prod(delta, share_values) - prix;
+
+    double riskFreeRate = exp(rd*this->T/this->nbTimeSteps); // TODO : ne pas supposer l'interval régulier ??
+
+    std::cout << this->historical->dates_[this->past_index] << " : " << prix << ", prix sdt dev : " << prix_std_dev << std::endl;
+    std::cout << "      k : " << 0 <<"  t : " << 0 << std::endl;
+    std::cout << "      share values : ";
+    pnl_vect_print_asrow(share_values);
+    std::cout << "      delta : ";
+    pnl_vect_print_asrow(delta);
+    std::cout << "      delta std dev : ";
+    pnl_vect_print_asrow(delta_std_dev);
+    std::cout << "      V: " << V  <<"  PnL : " << finalPnL << std::endl;
+    std::cout << std::endl;
 
     for(int k = 1; k < this->nbTimeSteps; ++k)
     {
-        pnl_mat_get_row(newPastRow, this->historical->path_, this->past_index+k);
-        this->ocelia->adjust_spot(newPastRow);
-        pnl_mat_add_row(this->past, past->m, newPastRow);
+        double t = k*(this->T/this->nbTimeSteps);
 
         pnl_mat_free(&this->sigma);
-
         this->sigma = compute_sigma(this->historical->path_, this->estimation_start+k, this->estimation_end+k);
+
+        pnl_mat_get_row(share_values, this->historical->path_, this->past_index+k);
+        this->ocelia->adjust_spot(share_values);
+        pnl_mat_add_row(this->past, past->m, share_values);
         
-        this->mc->simulate(this->past, k*(this->T/this->nbTimeSteps), this->sigma, prix, prix_std_dev, delta, delta_std_dev);
+        this->mc->simulate(this->past, t, this->sigma, prix, prix_std_dev, delta, delta_std_dev);
 
-        std::cout << k << std::endl;
-        std::cout << this->historical->dates_[this->past_index+k] << " : " << prix << std::endl;
+        V = V * riskFreeRate;
+        for (int d = 0; d < this->size; ++d)
+        {
+             V -= (GET(delta, d) - GET(previous_delta, d)) * GET(share_values, d);
+        }
+        finalPnL = V + pnl_vect_scalar_prod(delta, share_values) - prix;
+        pnl_vect_clone(previous_delta, delta);
+
+        std::cout << this->historical->dates_[this->past_index+k] << " : " << prix << ", prix sdt dev : " << prix_std_dev << std::endl;
+        std::cout << "      k : " << k <<"  t : " << t << std::endl;
+        std::cout << "      share values : ";
+        pnl_vect_print_asrow(share_values);
+        std::cout << "      delta : ";
+        pnl_vect_print_asrow(delta);
+        std::cout << "      delta std dev : ";
+        pnl_vect_print_asrow(delta_std_dev);
+        std::cout << "      V: " << V  <<"  PnL : " << finalPnL << std::endl;
+        std::cout << std::endl;
     }
-
-    // std::cout << "prix: " << prix << std::endl;
-    // std::cout << "prix_std_dev: " << prix_std_dev << std::endl;
-    // std::cout << "delta: " << std::endl;
-    // pnl_vect_print(delta);
-    // pnl_vect_print(delta_std_dev);
     
     EXPECT_EQ(1, 1);
 
