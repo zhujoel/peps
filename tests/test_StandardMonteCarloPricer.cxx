@@ -31,89 +31,89 @@ class StandardMonteCarloPricerTest: public ::testing::Test{
         int past_index;
 
         virtual void SetUp(){
-            // BLACK-SCHOLES
-            // TODO: mettre fenetre d'estimation
-            this->historical = new HistoricalMarketData("Ocelia", new DateTime(1, 1, 2005), new DateTime(1, 1, 2017));
-            historical->get_data();
+            // // BLACK-SCHOLES
+            // // TODO: mettre fenetre d'estimation
+            // this->historical = new HistoricalMarketData("Ocelia", new DateTime(1, 1, 2005), new DateTime(1, 1, 2017));
+            // historical->get_data();
 
-            // PROCESSING DES DONNEES
-            std::vector<DateTime*> ocelia_dates = from_date_to_date(this->historical->dates_, new DateTime(15, 5, 2008), new DateTime(28, 4, 2016));
-            this->ocelia_path = get_path_from_dates(this->historical->dates_, ocelia_dates, this->historical->path_);
-            std::vector<DateTime*> past_dates = from_date_to_date(this->historical->dates_, new DateTime(15, 5, 2008), new DateTime(15, 5, 2008));
-            this->past = get_path_from_dates(this->historical->dates_, past_dates, this->historical->path_);
-            this->past_index = get_indice_from_date(this->historical->dates_, new DateTime(15, 5, 2008));
+            // // PROCESSING DES DONNEES
+            // std::vector<DateTime*> ocelia_dates = from_date_to_date(this->historical->dates_, new DateTime(15, 5, 2008), new DateTime(28, 4, 2016));
+            // this->ocelia_path = get_path_from_dates(this->historical->dates_, ocelia_dates, this->historical->path_);
+            // std::vector<DateTime*> past_dates = from_date_to_date(this->historical->dates_, new DateTime(15, 5, 2008), new DateTime(15, 5, 2008));
+            // this->past = get_path_from_dates(this->historical->dates_, past_dates, this->historical->path_);
+            // this->past_index = get_indice_from_date(this->historical->dates_, new DateTime(15, 5, 2008));
 
-            // PARAMETERS
-            this->estimation_start = get_indice_from_date(this->historical->dates_, new DateTime(15, 5, 2006));
-            this->estimation_end = get_indice_from_date(this->historical->dates_, new DateTime(15, 5, 2008));
-            this->sigma = compute_sigma(this->historical->path_, this->estimation_start, this->estimation_end);
-            this->size = 7;
-            this->rd = 0.03;
-            this->nbTimeSteps = ocelia_dates.size();
-            this->T = 2920./365.25; // 2920 est le nb de jours entre 15/05/2008 et 13/05/2016
-            this->rng = pnl_rng_create(PNL_RNG_MERSENNE);
-            pnl_rng_sseed(this->rng, std::time(NULL));
-            this->model = new BlackScholesModel(this->size, this->rd);
+            // // PARAMETERS
+            // this->estimation_start = get_indice_from_date(this->historical->dates_, new DateTime(15, 5, 2006));
+            // this->estimation_end = get_indice_from_date(this->historical->dates_, new DateTime(15, 5, 2008));
+            // this->sigma = compute_sigma(this->historical->path_, this->estimation_start, this->estimation_end);
+            // this->size = 7;
+            // this->rd = 0.03;
+            // this->nbTimeSteps = ocelia_dates.size();
+            // this->T = 2920./365.25; // 2920 est le nb de jours entre 15/05/2008 et 13/05/2016
+            // this->rng = pnl_rng_create(PNL_RNG_MERSENNE);
+            // pnl_rng_sseed(this->rng, std::time(NULL));
+            // this->model = new BlackScholesModel(this->size, this->rd);
 
-            // OCELIA
-            this->nb_sous_jacents = 4;
-            this->ocelia = new Ocelia(T, nbTimeSteps, size, nb_sous_jacents, ocelia_dates);
+            // // OCELIA
+            // this->nb_sous_jacents = 4;
+            // this->ocelia = new Ocelia(T, nbTimeSteps, size, nb_sous_jacents, ocelia_dates);
 
-            // MONTE CARLO
-            this->fdStep = 0.05;
-            this->nbSamples = 100;
-            this->mc = new StandardMonteCarloPricer(model, ocelia, rng, fdStep, nbSamples);
+            // // MONTE CARLO
+            // this->fdStep = 0.05;
+            // this->nbSamples = 100;
+            // this->mc = new StandardMonteCarloPricer(model, ocelia, rng, fdStep, nbSamples);
         }
 
         virtual void TearDown(){
-            delete this->historical;
-            pnl_mat_free(&this->sigma);
-            delete this->mc;
-            delete this->ocelia;
-            delete this->model;
-            pnl_rng_free(&this->rng);
+            // delete this->historical;
+            // pnl_mat_free(&this->sigma);
+            // delete this->mc;
+            // delete this->ocelia;
+            // delete this->model;
+            // pnl_rng_free(&this->rng);
         }
 };
 
-TEST_F(StandardMonteCarloPricerTest, simul)
-{
-    double prix = 0.0;
-    double prix_std_dev = 0.0;
-    PnlVect* delta = pnl_vect_create_from_zero(this->size);
-    PnlVect* delta_std_dev = pnl_vect_create_from_zero(this->size);
+// TEST_F(StandardMonteCarloPricerTest, simul)
+// {
+//     double prix = 0.0;
+//     double prix_std_dev = 0.0;
+//     PnlVect* delta = pnl_vect_create_from_zero(this->size);
+//     PnlVect* delta_std_dev = pnl_vect_create_from_zero(this->size);
 
-    this->ocelia->adjust_sigma(this->sigma);
-    this->ocelia->adjust_past(this->past);
+//     this->ocelia->adjust_sigma(this->sigma);
+//     this->ocelia->adjust_past(this->past);
     
-    PnlVect* newPastRow = pnl_vect_new();
+//     PnlVect* newPastRow = pnl_vect_new();
 
-    for(int k = 1; k < this->nbTimeSteps; ++k)
-    {
-        pnl_mat_get_row(newPastRow, this->historical->path_, this->past_index+k);
-        this->ocelia->adjust_spot(newPastRow);
-        pnl_mat_add_row(this->past, past->m, newPastRow);
+//     for(int k = 1; k < this->nbTimeSteps; ++k)
+//     {
+//         pnl_mat_get_row(newPastRow, this->historical->path_, this->past_index+k);
+//         this->ocelia->adjust_spot(newPastRow);
+//         pnl_mat_add_row(this->past, past->m, newPastRow);
 
-        pnl_mat_free(&this->sigma);
+//         pnl_mat_free(&this->sigma);
 
-        this->sigma = compute_sigma(this->historical->path_, this->estimation_start+k, this->estimation_end+k);
+//         this->sigma = compute_sigma(this->historical->path_, this->estimation_start+k, this->estimation_end+k);
         
-        this->mc->simulate(this->past, k*(this->T/this->nbTimeSteps), this->sigma, prix, prix_std_dev, delta, delta_std_dev);
+//         this->mc->simulate(this->past, k*(this->T/this->nbTimeSteps), this->sigma, prix, prix_std_dev, delta, delta_std_dev);
 
-        std::cout << k << std::endl;
-        std::cout << this->historical->dates_[this->past_index+k] << " : " << prix << std::endl;
-    }
+//         std::cout << k << std::endl;
+//         std::cout << this->historical->dates_[this->past_index+k] << " : " << prix << std::endl;
+//     }
 
-    // std::cout << "prix: " << prix << std::endl;
-    // std::cout << "prix_std_dev: " << prix_std_dev << std::endl;
-    // std::cout << "delta: " << std::endl;
-    // pnl_vect_print(delta);
-    // pnl_vect_print(delta_std_dev);
+//     // std::cout << "prix: " << prix << std::endl;
+//     // std::cout << "prix_std_dev: " << prix_std_dev << std::endl;
+//     // std::cout << "delta: " << std::endl;
+//     // pnl_vect_print(delta);
+//     // pnl_vect_print(delta_std_dev);
     
-    EXPECT_EQ(1, 1);
+//     EXPECT_EQ(1, 1);
 
-    pnl_vect_free(&delta);
-    pnl_vect_free(&delta_std_dev);
-}
+//     pnl_vect_free(&delta);
+//     pnl_vect_free(&delta_std_dev);
+// }
 
 
 
