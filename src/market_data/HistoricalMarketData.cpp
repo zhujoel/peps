@@ -3,18 +3,18 @@
 #include "pnl/pnl_matrix.h"
 #include <cstring>
 
-HistoricalMarketData::HistoricalMarketData(std::string name, DateTime *startDate, DateTime *endDate) 
+HistoricalMarketData::HistoricalMarketData(const std::string &name, const DateTime *startDate, const DateTime *endDate) 
     : IMarketData(name, startDate, endDate)
 {
 }
 
-void HistoricalMarketData::get_data()
+void HistoricalMarketData::set_data()
 {
     // ajouter un if qui vérifie l'attribut nom et qui parse en fonction
-    this->get_Ocelia_data();
+    this->set_Ocelia_data();
 }
 
-void HistoricalMarketData::get_Ocelia_data(){
+void HistoricalMarketData::set_Ocelia_data(){
     int size = 7;
     std::string files[] = {
         "../data/market_data/N100.csv",
@@ -29,7 +29,7 @@ void HistoricalMarketData::get_Ocelia_data(){
 
     for(int i = 0; i < size; ++i){
         dataFeeds[i] = new YahooDataFeed(files[i]);
-        dataFeeds[i]->get_data();
+        dataFeeds[i]->set_data();
     }
 
 

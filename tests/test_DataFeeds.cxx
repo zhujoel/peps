@@ -44,7 +44,7 @@ TEST_F(DataFeedsTest, getNumberValidData3)
 TEST_F(DataFeedsTest, getData1)
 {
     IDataFeed *dataFeed = new YahooDataFeed("../tests/test_data/market_data/yahoo1.csv");
-    dataFeed->get_data();
+    dataFeed->set_data();
 
     EXPECT_EQ("3-1-2003", dataFeed->dates_[0]->str());
     EXPECT_EQ(4899.5, GET(dataFeed->prices_, 0));

@@ -9,6 +9,13 @@ DateTime::DateTime(int dd, int mm, int yyyy)
     this->yyyy_ = yyyy;
 }
 
+DateTime::DateTime(const DateTime *date)
+{
+    this->dd_ = date->dd_;
+    this->mm_ = date->mm_;
+    this->yyyy_ = date->yyyy_;
+}
+
 DateTime::~DateTime(){
 
 }

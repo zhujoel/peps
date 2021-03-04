@@ -19,7 +19,7 @@ class BlackScholesModelTest: public ::testing::Test{
 
         virtual void SetUp(){
             this->historical = new HistoricalMarketData("Ocelia", new DateTime(01, 01, 2003), new DateTime(01, 01, 2013));
-            this->historical->get_data();
+            this->historical->set_data();
             this->sigma = pnl_mat_new();
             compute_sigma(this->sigma, this->historical->path_, 0, this->historical->path_->m-1);
             this->volatility = pnl_vect_new();

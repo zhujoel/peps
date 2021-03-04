@@ -34,7 +34,7 @@ class StandardMonteCarloPricerTest: public ::testing::Test{
             // BLACK-SCHOLES
             // TODO: mettre fenetre d'estimation
             this->historical = new HistoricalMarketData("Ocelia", new DateTime(1, 1, 2005), new DateTime(1, 1, 2017));
-            historical->get_data();
+            historical->set_data();
 
             // PROCESSING DES DONNEES
             std::vector<DateTime*> ocelia_dates;

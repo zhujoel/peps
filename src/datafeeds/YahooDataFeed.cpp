@@ -4,9 +4,9 @@
 #include "libs/Utilities.h"
 #include <stdlib.h>
 
-YahooDataFeed::YahooDataFeed(std::string filepath) : IDataFeed(filepath){}
+YahooDataFeed::YahooDataFeed(const std::string &filepath) : IDataFeed(filepath){}
 
-int YahooDataFeed::get_number_valid_data()
+int YahooDataFeed::get_number_valid_data() const
 {
     std::ifstream dataFile(this->filepath_);
     std::string line;
@@ -24,7 +24,7 @@ int YahooDataFeed::get_number_valid_data()
     return count;
 }
 
-void YahooDataFeed::get_data()
+void YahooDataFeed::set_data()
 {
     int nbDates = this->get_number_valid_data();
     pnl_vect_resize(this->prices_, nbDates);
