@@ -2,6 +2,7 @@
 #include "pnl/pnl_mathtools.h"
 #include <iostream>
 
+// TODO:changer l'ordre des prototypes
 void log_returns(const PnlMat *path, PnlMat *log_returns, int start, int end){ // start and end included
     int nbDates = 1+end-start; // +1 to include index end
     pnl_mat_resize(log_returns, nbDates-1, path->n);
@@ -51,7 +52,7 @@ void compute_covariances(const PnlMat *path, PnlMat *covariances, int start, int
     pnl_vect_free(&means_returns);
 }
 
-void compute_sigma(const PnlMat *path, PnlMat *sigma, int start, int end){
+void compute_sigma(PnlMat *sigma, const PnlMat *path, int start, int end){
     compute_covariances(path, sigma, start, end);
     pnl_mat_chol(sigma);
 }

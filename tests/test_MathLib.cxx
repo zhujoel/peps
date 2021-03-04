@@ -71,7 +71,7 @@ TEST_F(MathLibTest, compute_covariances){
 
 TEST_F(MathLibTest, compute_sigma){
     PnlMat *sigma = pnl_mat_new();
-    compute_sigma(this->path, sigma, 0, 2);
+    compute_sigma(sigma, this->path, 0, 2);
 
     EXPECT_NEAR(0.025381, MGET(sigma, 0, 0), 0.000001);
     EXPECT_NEAR(0.054092, MGET(sigma, 0, 1), 0.000001);
@@ -83,7 +83,7 @@ TEST_F(MathLibTest, compute_sigma){
 
 TEST_F(MathLibTest, compute_volatility){
     PnlMat *sigma = pnl_mat_new();
-    compute_sigma(this->path, sigma, 0, 2);
+    compute_sigma(sigma, this->path, 0, 2);
     PnlVect *volatility = pnl_vect_new();
     compute_volatility(sigma, volatility);
 

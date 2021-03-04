@@ -21,7 +21,7 @@ class BlackScholesModelTest: public ::testing::Test{
             this->historical = new HistoricalMarketData("Ocelia", new DateTime(01, 01, 2003), new DateTime(01, 01, 2013));
             this->historical->get_data();
             this->sigma = pnl_mat_new();
-            compute_sigma(this->historical->path_, this->sigma, 0, this->historical->path_->m-1);
+            compute_sigma(this->sigma, this->historical->path_, 0, this->historical->path_->m-1);
             this->volatility = pnl_vect_new();
             compute_volatility(this->sigma, this->volatility);
             this->size = 7;
@@ -46,7 +46,7 @@ TEST_F(BlackScholesModelTest, asset){
     PnlMat *path = pnl_mat_create(this->nbTimeSteps+1, this->size); // TODO: retirer le nbTimeSteps+1 (vu qu'on colle le past dans path, on a plus de spot)
     bs->asset(path, 0, T, nbTimeSteps, rng, this->historical->path_, this->sigma);
     PnlMat *bs_sigma = pnl_mat_new();
-    compute_sigma(path, bs_sigma, 0, path->m-1);
+    compute_sigma(bs_sigma, path, 0, path->m-1);
     PnlVect *bs_volatility = pnl_vect_new();
     compute_volatility(bs_sigma, bs_volatility);
 

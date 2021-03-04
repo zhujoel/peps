@@ -39,15 +39,18 @@ class StandardMonteCarloPricerTest: public ::testing::Test{
             // PROCESSING DES DONNEES
             std::vector<DateTime*> ocelia_dates;
             from_date_to_date(ocelia_dates, this->historical->dates_, new DateTime(15, 5, 2008), new DateTime(28, 4, 2016));
+            this->ocelia_path = pnl_mat_new();
             get_subset_path_from_dates(this->ocelia_path, this->historical->dates_, ocelia_dates, this->historical->path_);
             std::vector<DateTime*> past_dates;
             from_date_to_date(past_dates, this->historical->dates_, new DateTime(15, 5, 2008), new DateTime(15, 5, 2008)); 
+            this->past = pnl_mat_new();
             get_subset_path_from_dates(this->past, this->historical->dates_, past_dates, this->historical->path_);
             this->past_index = get_indice_from_date(this->historical->dates_, new DateTime(15, 5, 2008));
 
             // PARAMETERS
             this->estimation_start = get_indice_from_date(this->historical->dates_, new DateTime(15, 5, 2006));
             this->estimation_end = get_indice_from_date(this->historical->dates_, new DateTime(15, 5, 2008));
+            this->sigma = pnl_mat_new();
             compute_sigma(this->sigma, this->historical->path_, this->estimation_start, this->estimation_end);
             this->size = 7;
             this->rd = 0.03;
@@ -63,7 +66,7 @@ class StandardMonteCarloPricerTest: public ::testing::Test{
 
             // MONTE CARLO
             this->fdStep = 0.00005; // NE PAS CHANGER !!!!!!!! TODO adapter en fonction de la Share Val
-            this->nbSamples = 10000; // TODO METTRE EN ZERO UN TRUC TRES ELEVEE CAR FORT IMPACT SUR LES DELTA EN ZERO
+            this->nbSamples = 100; // TODO METTRE EN ZERO UN TRUC TRES ELEVEE CAR FORT IMPACT SUR LES DELTA EN ZERO
             this->mc = new StandardMonteCarloPricer(model, ocelia, rng, fdStep, nbSamples);
         }
 
