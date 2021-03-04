@@ -12,6 +12,11 @@ StandardMonteCarloPricer::~StandardMonteCarloPricer(){
 
 void StandardMonteCarloPricer::simulate(const PnlMat *past, double t, const PnlMat *sigma, double &prix, double &price_std_dev, PnlVect *delta, PnlVect *delta_std_dev)
 {
+    prix = 0.;
+    price_std_dev = 0.; // On cumule des valeurs donc on initialise a 0 ?
+    pnl_vect_set_zero(delta);
+    pnl_vect_set_zero(delta_std_dev);
+
     double M = this->nbSamples_;
     for(int j = 0; j < M; ++j){
         this->model_->asset(this->path_, t, this->derivative_->T_, this->derivative_->nbTimeSteps_, this->rng_, past, sigma);
@@ -21,12 +26,17 @@ void StandardMonteCarloPricer::simulate(const PnlMat *past, double t, const PnlM
 
     prix /= M;
     price_std_dev /= M;
-    price_std_dev = sqrt(exp(-2)*(price_std_dev - prix * prix)/M);
+    price_std_dev = sqrt(exp(2)*(price_std_dev - prix * prix)/M);
+
     for(int d = 0 ; d < this->derivative_->size_; ++d){
-        LET(delta, d) = GET(delta, d) / this->nbSamples_;
-        LET(delta_std_dev, d) = GET(delta_std_dev, d) / this->nbSamples_;
+        LET(delta, d) = GET(delta, d) / M;
+        LET(delta_std_dev, d) = GET(delta_std_dev, d) / M;
+        
+        double s0 = MGET(past, past->m-1, d);
+        double acc = GET(delta, d) / (2*this->fdStep_*s0);
+        LET(delta_std_dev, d) = sqrt(exp(2)*(GET(delta_std_dev, d) - acc * acc)/(2*M*this->fdStep_*s0));
     }
-    discount_delta(past, t, delta, delta_std_dev);
+    // discount_delta(past, t, delta, delta_std_dev);
 }
 
 void StandardMonteCarloPricer::price(double t, double &prix, double &std_dev)
@@ -74,11 +84,11 @@ void StandardMonteCarloPricer::discount_delta(const PnlMat* past, double t, PnlV
 {
     // double r = this->model_->rd_;
     // double T = this->derivative_->get_annee_payoff();
-    double M = this->nbSamples_;
-    for (int d = 0; d < this->derivative_->size_; ++d)
-    {   
-        double s0 = MGET(past, past->m-1, d); // on récupère le spot
-        double acc = GET(delta, d) / (2*this->fdStep_*s0);
-        LET(std_dev, d) = sqrt(exp(-2)*(GET(std_dev, d) - acc * acc)/(2*M*this->fdStep_*s0));
-    }
+    // double M = this->nbSamples_;
+    // for (int d = 0; d < this->derivative_->size_; ++d)
+    // {   
+    //     double s0 = MGET(past, past->m-1, d); // on récupère le spot
+    //     double acc = GET(delta, d) / (2*this->fdStep_*s0);
+    //     LET(std_dev, d) = sqrt(exp(-2)*(GET(std_dev, d) - acc * acc)/(2*M*this->fdStep_*s0));
+    // }
 }

@@ -65,8 +65,8 @@ class StandardMonteCarloPricerTest: public ::testing::Test{
             this->ocelia = new Ocelia(T, nbTimeSteps, size, nb_sous_jacents, ocelia_dates);
 
             // MONTE CARLO
-            this->fdStep = 0.00005; // NE PAS CHANGER !!!!!!!! TODO adapter en fonction de la Share Val
-            this->nbSamples = 100; // TODO METTRE EN ZERO UN TRUC TRES ELEVEE CAR FORT IMPACT SUR LES DELTA EN ZERO
+            this->fdStep = 0.0005; // 0.0005 NE PAS CHANGER !!!!!!!! TODO adapter en fonction de la Share Val
+            this->nbSamples = 100; // 20000 TODO METTRE EN ZERO UN TRUC TRES ELEVEE CAR FORT IMPACT SUR LES DELTA EN ZERO
             this->mc = new StandardMonteCarloPricer(model, ocelia, rng, fdStep, nbSamples);
         }
 
