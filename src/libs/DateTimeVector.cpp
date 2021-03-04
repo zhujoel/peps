@@ -3,9 +3,8 @@
 #include <sstream>
 #include <string>
 
-std::vector<DateTime*> parse_dates_file(std::string fileName, int nbDates, char delimiter)
+void parse_dates_file(std::vector<DateTime*> &dates, const std::string &fileName, int nbDates, char delimiter)
 {
-    std::vector<DateTime*> dates;
     std::ifstream datesStream(fileName);
     std::string date;
     for (int i = 0; i < nbDates; i++)
@@ -13,12 +12,11 @@ std::vector<DateTime*> parse_dates_file(std::string fileName, int nbDates, char 
         getline(datesStream, date);
         dates.push_back(parse_date_string(date, delimiter));
     }
-    return dates;
 }
 
-PnlVectInt* calcul_indices_dates(std::vector<DateTime*> all_dates, std::vector<DateTime*> dates)
+void calcul_indices_dates(PnlVectInt *indices, const std::vector<DateTime*> &all_dates, const std::vector<DateTime*> &dates)
 {
-    PnlVectInt *indices = pnl_vect_int_create(dates.size());
+    pnl_vect_int_resize(indices, dates.size());
     int cnt = 0;
     for(unsigned int i = 0; i < all_dates.size(); ++i){
         if(all_dates[i]->compare(dates[cnt]) == 0){
@@ -28,10 +26,9 @@ PnlVectInt* calcul_indices_dates(std::vector<DateTime*> all_dates, std::vector<D
             }
         }
     }
-    return indices;
 }
 
-int get_indice_from_date(std::vector<DateTime*> all_dates, DateTime* date) // TODO: à tester
+int get_indice_from_date(const std::vector<DateTime*> &all_dates, const DateTime *date) // TODO: à tester
 {
     for(unsigned int i = 0; i < all_dates.size(); ++i){
         if(all_dates[i]->compare(date) == 0){
@@ -41,19 +38,14 @@ int get_indice_from_date(std::vector<DateTime*> all_dates, DateTime* date) // TO
     return -1;
 }
 
-std::vector<DateTime*> same_dates(std::vector<DateTime*> v1, std::vector<DateTime*> v2)
+void same_dates(std::vector<DateTime*> &same_dates, const std::vector<DateTime*> &v1, const std::vector<DateTime*> &v2)
 {
-    std::vector<DateTime*> result;
-    unsigned int len1 = v1.size();
-    unsigned int len2 = v2.size();
-    unsigned int idx = 0;
     unsigned int idx1 = 0;
     unsigned int idx2 = 0;
-    std::vector<DateTime*> tmp_vect;
-    while(idx < std::max(len1, len2) && idx1 < len1 && idx2 < len2){
+    while(idx1 < v1.size() && idx2 < v2.size()){
         int cmp = v1[idx1]->compare(v2[idx2]);
         if(cmp == 0){
-            result.push_back(v1[idx1]->copy());
+            same_dates.push_back(v1[idx1]->copy());
             idx1++;
             idx2++;
         }
@@ -64,38 +56,35 @@ std::vector<DateTime*> same_dates(std::vector<DateTime*> v1, std::vector<DateTim
             idx1++;
         }
     }
-
-    return result;   
 }
 
-PnlVect* get_prices_from_date(std::vector<DateTime*> allDates, std::vector<DateTime*> subset, PnlVect *allPrices)
+void get_prices_from_date(PnlVect *prices, const std::vector<DateTime*> &allDates, const std::vector<DateTime*> &subset, const PnlVect *allPrices)
 {
-    PnlVectInt* indices = calcul_indices_dates(allDates, subset);
-    PnlVect *prices = pnl_vect_create(indices->size);
+    PnlVectInt* indices = pnl_vect_int_new();
+    calcul_indices_dates(indices, allDates, subset);
+    pnl_vect_resize(prices, indices->size);
     for(int i = 0; i < indices->size; ++i){
         LET(prices, i) = GET(allPrices, GET_INT(indices, i));
     }
     pnl_vect_int_free(&indices);
-    return prices;
 }
 
 // TODO: tester cette fonction
-PnlMat* get_path_from_dates(std::vector<DateTime*> allDates, std::vector<DateTime*> subset, PnlMat *path)
+void get_subset_path_from_dates(PnlMat *subset_path, const std::vector<DateTime*> &allDates, const std::vector<DateTime*> &subset, const PnlMat *path)
 {
-    PnlVectInt* indices = calcul_indices_dates(allDates, subset);
-    PnlMat *newPath = pnl_mat_create(indices->size, path->n);
+    PnlVectInt* indices = pnl_vect_int_new();
+    calcul_indices_dates(indices, allDates, subset);
+    pnl_mat_resize(subset_path, indices->size, path->n);
     for(int i = 0; i < indices->size; ++i){
         for(int j = 0; j < path->n; ++j){
-            MLET(newPath, i, j) = MGET(path, GET_INT(indices, i), j);
+            MLET(subset_path, i, j) = MGET(path, GET_INT(indices, i), j);
         }
     }
     pnl_vect_int_free(&indices);
-    return newPath;
 }
 
-std::vector<DateTime*> from_date_to_date(std::vector<DateTime*> allDates, DateTime *from, DateTime *to) // includes both from and to
+void from_date_to_date(std::vector<DateTime*> &from_to, const std::vector<DateTime*> &allDates, const DateTime *from, const DateTime *to) // includes both from and to
 {
-    std::vector<DateTime*> result;
     unsigned int idx = 0;
     bool hasStarted = false;
 
@@ -106,16 +95,14 @@ std::vector<DateTime*> from_date_to_date(std::vector<DateTime*> allDates, DateTi
             break;
         }
         if(cmpFrom >= 0){
-            result.push_back(allDates[idx]);
+            from_to.push_back(allDates[idx]);
             hasStarted = true;
         }
         idx++;
     }
-
-    return result;
 }
 
-void delete_date_vector(std::vector<DateTime*> list)
+void delete_date_vector(std::vector<DateTime*> &list)
 {
     for( std::vector<DateTime*>::iterator i = list.begin(), endI = list.end(); i != endI; ++i)
     {

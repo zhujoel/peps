@@ -31,16 +31,18 @@ void HistoricalMarketData::get_Ocelia_data(){
         dataFeeds[i]->get_data();
     }
 
-    this->dates_ = from_date_to_date(dataFeeds[0]->dates_, this->startDate_, this->endDate_);
+    std::vector<DateTime*> from_to;
+    from_date_to_date(from_to, dataFeeds[0]->dates_, this->startDate_, this->endDate_);
     
     for(int i = 1; i < size; ++i){
-        this->dates_ = same_dates(this->dates_, dataFeeds[i]->dates_);
+        same_dates(this->dates_, from_to, dataFeeds[i]->dates_);
     }
 
     pnl_mat_resize(this->path_, this->dates_.size(), size);
 
     for(int i = 0; i < size; ++i){
-        PnlVect *prices = get_prices_from_date(dataFeeds[i]->dates_, this->dates_, dataFeeds[i]->prices_);
+        PnlVect *prices = pnl_vect_new();
+        get_prices_from_date(prices, dataFeeds[i]->dates_, this->dates_, dataFeeds[i]->prices_);
         pnl_mat_set_col(this->path_, prices, i);
         pnl_vect_free(&prices);
     }
