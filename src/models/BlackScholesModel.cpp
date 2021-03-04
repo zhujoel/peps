@@ -44,7 +44,7 @@ void BlackScholesModel::asset(PnlMat *path, double t, double T, int nbTimeSteps,
     pnl_vect_free(&volatility);
 }
 
-void BlackScholesModel::shift_asset(PnlMat *shift_path, const PnlMat *path, int d, double h, int startIdx)
+void BlackScholesModel::shift_asset(PnlMat *shift_path, const PnlMat *path, int d, double h, int startIdx) const
 {
     if (h>0)
     {
