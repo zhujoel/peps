@@ -37,16 +37,18 @@ class StandardMonteCarloPricerTest: public ::testing::Test{
             historical->get_data();
 
             // PROCESSING DES DONNEES
-            std::vector<DateTime*> ocelia_dates = from_date_to_date(this->historical->dates_, new DateTime(15, 5, 2008), new DateTime(28, 4, 2016));
-            this->ocelia_path = get_path_from_dates(this->historical->dates_, ocelia_dates, this->historical->path_);
-            std::vector<DateTime*> past_dates = from_date_to_date(this->historical->dates_, new DateTime(15, 5, 2008), new DateTime(15, 5, 2008));
-            this->past = get_path_from_dates(this->historical->dates_, past_dates, this->historical->path_);
+            std::vector<DateTime*> ocelia_dates;
+            from_date_to_date(ocelia_dates, this->historical->dates_, new DateTime(15, 5, 2008), new DateTime(28, 4, 2016));
+            get_subset_path_from_dates(this->ocelia_path, this->historical->dates_, ocelia_dates, this->historical->path_);
+            std::vector<DateTime*> past_dates;
+            from_date_to_date(past_dates, this->historical->dates_, new DateTime(15, 5, 2008), new DateTime(15, 5, 2008)); 
+            get_subset_path_from_dates(this->past, this->historical->dates_, past_dates, this->historical->path_);
             this->past_index = get_indice_from_date(this->historical->dates_, new DateTime(15, 5, 2008));
 
             // PARAMETERS
             this->estimation_start = get_indice_from_date(this->historical->dates_, new DateTime(15, 5, 2006));
             this->estimation_end = get_indice_from_date(this->historical->dates_, new DateTime(15, 5, 2008));
-            this->sigma = compute_sigma(this->historical->path_, this->estimation_start, this->estimation_end);
+            compute_sigma(this->sigma, this->historical->path_, this->estimation_start, this->estimation_end);
             this->size = 7;
             this->rd = 0.03;
             this->nbTimeSteps = ocelia_dates.size();
@@ -112,8 +114,7 @@ TEST_F(StandardMonteCarloPricerTest, simul)
     {
         double t = k*(this->T/this->nbTimeSteps);
 
-        pnl_mat_free(&this->sigma);
-        this->sigma = compute_sigma(this->historical->path_, this->estimation_start+k, this->estimation_end+k);
+        compute_sigma(this->sigma, this->historical->path_, this->estimation_start+k, this->estimation_end+k);
 
         pnl_mat_get_row(share_values, this->historical->path_, this->past_index+k);
         this->ocelia->adjust_spot(share_values);
@@ -140,14 +141,7 @@ TEST_F(StandardMonteCarloPricerTest, simul)
         std::cout << "      V: " << V  <<"  PnL : " << finalPnL << std::endl;
         std::cout << std::endl;
     }
-    
-    EXPECT_EQ(1, 1);
-
-    pnl_vect_free(&delta);
-    pnl_vect_free(&delta_std_dev);
 }
-
-
 
 int main(int argc, char** argv){
     testing::InitGoogleTest(&argc, argv);

@@ -23,7 +23,9 @@ class MathLibTest: public ::testing::Test{
 };
 
 TEST_F(MathLibTest, log_returns){
-    PnlMat *returns = log_returns(this->path, 0, 2);
+
+    PnlMat *returns = pnl_mat_new();
+    log_returns(this->path, returns, 0, 2);
 
     EXPECT_NEAR(0.04879, MGET(returns, 0, 0), 0.000001);
     EXPECT_NEAR(0.04652, MGET(returns, 1, 0), 0.000001);
@@ -34,7 +36,8 @@ TEST_F(MathLibTest, log_returns){
 }
 
 TEST_F(MathLibTest, means){
-    PnlVect *means_path = means(this->path);
+    PnlVect *means_path = pnl_vect_new();
+    means(this->path, means_path);
 
     EXPECT_NEAR(105, GET(means_path, 0), 0.000001);
     EXPECT_NEAR(103.333333, GET(means_path, 1), 0.000001);
@@ -43,8 +46,10 @@ TEST_F(MathLibTest, means){
 }
 
 TEST_F(MathLibTest, compute_covariance_k_l){
-    PnlMat *returns = log_returns(this->path, 0, 2);
-    PnlVect *means_returns = means(returns);
+    PnlMat *returns = pnl_mat_new();
+    log_returns(this->path, returns, 0, 2);
+    PnlVect *means_returns = pnl_vect_new();
+    means(returns, means_returns);
     double covariance_0_0 = compute_covariance(returns, means_returns, 0, 0);
     EXPECT_NEAR(0.0000025764, covariance_0_0, 0.000000001);
 
@@ -52,8 +57,9 @@ TEST_F(MathLibTest, compute_covariance_k_l){
     pnl_vect_free(&means_returns);
 }
 
-TEST_F(MathLibTest, compute_covariance){
-    PnlMat *covariances = compute_covariance(this->path, 0, 2);
+TEST_F(MathLibTest, compute_covariances){
+    PnlMat *covariances = pnl_mat_new();
+    compute_covariances(this->path, covariances, 0, 2);
 
     EXPECT_NEAR(0.0006441, MGET(covariances, 0, 0), 0.000001);
     EXPECT_NEAR(0.054092, MGET(covariances, 0, 1), 0.000001);
@@ -64,7 +70,8 @@ TEST_F(MathLibTest, compute_covariance){
 }
 
 TEST_F(MathLibTest, compute_sigma){
-    PnlMat *sigma = compute_sigma(this->path, 0, 2);
+    PnlMat *sigma = pnl_mat_new();
+    compute_sigma(this->path, sigma, 0, 2);
 
     EXPECT_NEAR(0.025381, MGET(sigma, 0, 0), 0.000001);
     EXPECT_NEAR(0.054092, MGET(sigma, 0, 1), 0.000001);
@@ -75,8 +82,10 @@ TEST_F(MathLibTest, compute_sigma){
 }
 
 TEST_F(MathLibTest, compute_volatility){
-    PnlMat *sigma = compute_sigma(this->path, 0, 2);
-    PnlVect *volatility = compute_volatility(sigma);
+    PnlMat *sigma = pnl_mat_new();
+    compute_sigma(this->path, sigma, 0, 2);
+    PnlVect *volatility = pnl_vect_new();
+    compute_volatility(sigma, volatility);
 
     EXPECT_NEAR(0.059751, GET(volatility, 0), 0.000001);
     EXPECT_NEAR(2.1312, GET(volatility, 1), 0.000001);

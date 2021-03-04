@@ -10,6 +10,7 @@ HistoricalMarketData::HistoricalMarketData(std::string name, DateTime *startDate
 
 void HistoricalMarketData::get_data()
 {
+    // ajouter un if qui vérifie l'attribut nom et qui parse en fonction
     this->get_Ocelia_data();
 }
 
@@ -31,16 +32,21 @@ void HistoricalMarketData::get_Ocelia_data(){
         dataFeeds[i]->get_data();
     }
 
-    this->dates_ = from_date_to_date(dataFeeds[0]->dates_, this->startDate_, this->endDate_);
+
+    from_date_to_date(this->dates_, dataFeeds[0]->dates_, this->startDate_, this->endDate_);
     
     for(int i = 1; i < size; ++i){
-        this->dates_ = same_dates(this->dates_, dataFeeds[i]->dates_);
+        std::vector<DateTime*> input(this->dates_);
+        std::vector<DateTime*> output;
+        same_dates(output, input, dataFeeds[i]->dates_);
+        this->dates_ = output;
     }
 
     pnl_mat_resize(this->path_, this->dates_.size(), size);
 
     for(int i = 0; i < size; ++i){
-        PnlVect *prices = get_prices_from_date(dataFeeds[i]->dates_, this->dates_, dataFeeds[i]->prices_);
+        PnlVect *prices = pnl_vect_new();
+        get_prices_from_date(prices, dataFeeds[i]->dates_, this->dates_, dataFeeds[i]->prices_);
         pnl_mat_set_col(this->path_, prices, i);
         pnl_vect_free(&prices);
     }

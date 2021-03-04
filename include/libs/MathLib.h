@@ -3,9 +3,9 @@
 #include "pnl/pnl_matrix.h"
 #include "pnl/pnl_vector.h"
 
-PnlMat* log_returns(PnlMat *path, int start, int end); // compute la log return entre deux dates (start et end sont des indices)
-PnlVect* means(PnlMat *path);
-double compute_covariance(PnlMat *log_returns, PnlVect *means, int k, int l); // compute covariance between index k and l
-PnlMat* compute_covariance(PnlMat *path, int start, int end); // compute covariance entre deux dates
-PnlMat* compute_sigma(PnlMat *path, int start, int end);
-PnlVect* compute_volatility(const PnlMat *sigma);
+void log_returns(const PnlMat *path, PnlMat *log_returns, int start, int end); // compute la log return entre deux dates (start et end sont des indices)
+void means(const PnlMat *path, PnlVect *means);
+double compute_covariance(const PnlMat *log_returns, const PnlVect *means, int k, int l); // compute covariance between index k and l
+void compute_covariances(const PnlMat *path, PnlMat *covariances, int start, int end); // compute covariance entre deux dates
+void compute_sigma(const PnlMat *path, PnlMat *sigma, int start, int end);
+void compute_volatility(const PnlMat *sigma, PnlVect *volatility);
