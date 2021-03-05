@@ -32,9 +32,10 @@ void StandardMonteCarloPricer::simulate(const PnlMat *past, double t, const PnlM
         LET(delta, d) = GET(delta, d) / M;
         LET(delta_std_dev, d) = GET(delta_std_dev, d) / M;
         
-        double s0 = MGET(past, past->m-1, d);
-        double acc = GET(delta, d) / (2*this->fdStep_*s0);
-        LET(delta_std_dev, d) = sqrt(exp(2)*(GET(delta_std_dev, d) - acc * acc)/(2*M*this->fdStep_*s0));
+        double St = MGET(past, past->m-1, d);
+        double acc = GET(delta, d);
+        LET(delta_std_dev, d) = sqrt(exp(2)*(GET(delta_std_dev, d) - acc * acc)/(2*M*this->fdStep_*St));
+        LET(delta, d) = acc / (2*this->fdStep_*St);
     }
     // discount_delta(past, t, delta, delta_std_dev);
 }

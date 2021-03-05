@@ -66,7 +66,7 @@ class StandardMonteCarloPricerTest: public ::testing::Test{
 
             // MONTE CARLO
             this->fdStep = 0.0005; // 0.0005 NE PAS CHANGER !!!!!!!! TODO adapter en fonction de la Share Val
-            this->nbSamples = 100; // 20000 TODO METTRE EN ZERO UN TRUC TRES ELEVEE CAR FORT IMPACT SUR LES DELTA EN ZERO
+            this->nbSamples = 1000; // 20000 TODO METTRE EN ZERO UN TRUC TRES ELEVEE CAR FORT IMPACT SUR LES DELTA EN ZERO
             this->mc = new StandardMonteCarloPricer(model, ocelia, rng, fdStep, nbSamples);
         }
 
@@ -93,14 +93,17 @@ TEST_F(StandardMonteCarloPricerTest, simul)
     this->ocelia->adjust_spot(share_values);
     this->ocelia->adjust_past(this->past);
     this->ocelia->adjust_sigma(this->sigma);
+    
+    pnl_mat_print(this->ocelia_path);
+    std::cout << this->ocelia->payoff(this->ocelia_path) << std::endl;
 
     this->mc->simulate(this->past, 0, this->sigma, prix, prix_std_dev, delta, delta_std_dev);
     pnl_vect_clone(previous_delta, delta);
     
-    double V = prix - pnl_vect_scalar_prod(delta, share_values);
+    double V = prix - pnl_vect_scalar_prod(delta, share_values); // prix est le fair price de départ, il est à remplacer ici par 100 pour le gérant
     finalPnL = V + pnl_vect_scalar_prod(delta, share_values) - prix;
 
-    double riskFreeRate = exp(rd*this->T/this->nbTimeSteps); // TODO : ne pas supposer l'interval régulier ??
+    double riskFreeRate = exp(rd*this->T/this->nbTimeSteps); // TODO : ne pas supposer l'interval régulier ?? + a mettre dans la boucle en taux non constant
 
     std::cout << this->historical->dates_[this->past_index] << " : " << prix << ", prix sdt dev : " << prix_std_dev << std::endl;
     std::cout << "      k : " << 0 <<"  t : " << 0 << std::endl;
