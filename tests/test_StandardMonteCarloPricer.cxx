@@ -119,7 +119,13 @@ TEST_F(StandardMonteCarloPricerTest, simul)
     this->mc->simulate(this->past, 0, this->sigma, prix, prix_std_dev, delta, delta_std_dev);
     pnl_vect_clone(previous_delta, delta);
     
+
     double val_liquidative_initiale = 100.;
+    HedgingPortfolio *portfolio = new HedgingPortfolio(prix, delta, share_values, this->rd, val_liquidative_initiale);
+
+
+
+
     double marge = val_liquidative_initiale - prix;
     std::cout << "Marge initiale du gérant "<< marge << std::endl;
     if (marge<0) 
