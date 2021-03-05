@@ -4,7 +4,7 @@
 #include <string>
 #include <math.h>
 
-void split(std::string line, char delimiter, std::string *output){
+void split(std::string *output, const std::string &line, char delimiter){
     std::stringstream string_stream(line);
     int i = 0;
     while(string_stream.good())   // loop will continue if string stream is error free
@@ -20,6 +20,6 @@ void trunc(PnlVect* vect, int n){
     }
 }
 
-bool are_all_positive(PnlVect *vect){
+bool are_all_positive(const PnlVect *vect){
     return pnl_vect_min(vect) >= 0;
 }

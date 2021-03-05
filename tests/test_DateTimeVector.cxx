@@ -104,6 +104,50 @@ TEST_F(DateTimeVectorTest, fromDateToDate){
     delete to;
 }
 
+TEST_F(DateTimeVectorTest, get_indice_from_date){
+    std::vector<DateTime*> dates;
+    parse_dates_file(dates, "../tests/test_data/dateTimeVector/dateVector.csv", 16, '-');
+    DateTime *date_indice = new DateTime(15, 5, 2013);
+    int indice = get_indice_from_date(dates, date_indice);
+
+    EXPECT_EQ(9, indice);
+
+    delete_date_vector(dates);
+    delete date_indice;
+}
+
+TEST_F(DateTimeVectorTest, get_subset_path_from_dates){
+    std::vector<DateTime*> dates;
+    parse_dates_file(dates, "../tests/test_data/dateTimeVector/dateVector.csv", 16, '-');
+    std::vector<DateTime*> dates_subset;
+    parse_dates_file(dates_subset, "../tests/test_data/dateTimeVector/dateVectorSubset.csv", 5, '-');
+    PnlMat *path = pnl_mat_create(16, 2);
+    for(int i = 0; i < 16; ++i){
+        for(int j = 0; j < 2; ++j){
+            MLET(path, i, j) = i+j;
+        }
+    }
+
+    PnlMat *subset_path = pnl_mat_new();
+    get_subset_path_from_dates(subset_path, dates, dates_subset, path);
+
+    EXPECT_EQ(0, MGET(subset_path, 0, 0));
+    EXPECT_EQ(1, MGET(subset_path, 0, 1));
+    EXPECT_EQ(7, MGET(subset_path, 1, 0));
+    EXPECT_EQ(8, MGET(subset_path, 1, 1));
+    EXPECT_EQ(10, MGET(subset_path, 2, 0));
+    EXPECT_EQ(11, MGET(subset_path, 2, 1));
+    EXPECT_EQ(14, MGET(subset_path, 3, 0));
+    EXPECT_EQ(15, MGET(subset_path, 3, 1));
+    EXPECT_EQ(15, MGET(subset_path, 4, 0));
+    EXPECT_EQ(16, MGET(subset_path, 4, 1));
+
+    delete_date_vector(dates);
+    delete_date_vector(dates_subset);
+    pnl_mat_free(&path);
+    pnl_mat_free(&subset_path);
+}
+
 
 int main(int argc, char** argv){
     testing::InitGoogleTest(&argc, argv);

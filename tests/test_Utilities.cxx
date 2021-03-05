@@ -15,7 +15,7 @@ class UtilitiesTest: public ::testing::Test{
 TEST_F(UtilitiesTest, split){
     std::string str = "hello,world,?";
     std::string output[3];
-    split(str, ',', output);
+    split(output, str, ',');
 
     EXPECT_EQ("hello", output[0]);
     EXPECT_EQ("world", output[1]);

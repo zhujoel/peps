@@ -4,8 +4,8 @@
 
 class YahooDataFeed : public IDataFeed{
     public:
-        YahooDataFeed(std::string filepath);
+        YahooDataFeed(const std::string &filepath);
         
-        int get_number_valid_data();
-        void get_data();
+        int get_number_valid_data() const;
+        void set_data();
 };

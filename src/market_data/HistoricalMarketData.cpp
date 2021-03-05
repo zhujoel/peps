@@ -3,18 +3,18 @@
 #include "pnl/pnl_matrix.h"
 #include <cstring>
 
-HistoricalMarketData::HistoricalMarketData(std::string name, DateTime *startDate, DateTime *endDate) 
+HistoricalMarketData::HistoricalMarketData(const std::string &name, const DateTime *startDate, const DateTime *endDate) 
     : IMarketData(name, startDate, endDate)
 {
 }
 
-void HistoricalMarketData::get_data()
+void HistoricalMarketData::set_data()
 {
     // ajouter un if qui vérifie l'attribut nom et qui parse en fonction
-    this->get_Ocelia_data();
+    this->set_Ocelia_data();
 }
 
-void HistoricalMarketData::get_Ocelia_data(){
+void HistoricalMarketData::set_Ocelia_data(){
     int size = 7;
     std::string files[] = {
         "../data/market_data/N100.csv",
@@ -25,13 +25,12 @@ void HistoricalMarketData::get_Ocelia_data(){
         "../data/market_data/JPY-EUR.csv",
         "../data/market_data/CHF-EUR.csv"
     };
-    IDataFeed *dataFeeds[size];
+    IDataFeed **dataFeeds = new IDataFeed*[size];
 
     for(int i = 0; i < size; ++i){
         dataFeeds[i] = new YahooDataFeed(files[i]);
-        dataFeeds[i]->get_data();
+        dataFeeds[i]->set_data();
     }
-
 
     from_date_to_date(this->dates_, dataFeeds[0]->dates_, this->startDate_, this->endDate_);
     
@@ -54,4 +53,5 @@ void HistoricalMarketData::get_Ocelia_data(){
     for(int i = 0; i < size; ++i){
         delete dataFeeds[i];
     }
+    delete[] dataFeeds;
 }

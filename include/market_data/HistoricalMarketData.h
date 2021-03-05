@@ -4,8 +4,8 @@
 
 class HistoricalMarketData : public IMarketData{
     public:
-        HistoricalMarketData(std::string name, DateTime *startDate, DateTime *endDate);
+        HistoricalMarketData(const std::string &name, const DateTime *startDate, const DateTime *endDate);
 
-        void get_data();
-        void get_Ocelia_data();
+        void set_data();
+        void set_Ocelia_data();
 };

@@ -12,11 +12,15 @@ class HistoricalMarketDataTest: public ::testing::Test{
 };
 
 TEST_F(HistoricalMarketDataTest, getData){
-    HistoricalMarketData *historical = new HistoricalMarketData("Ocelia", new DateTime(1, 1, 2007), new DateTime(10, 1, 2007));
-    historical->get_data();
+    DateTime *start = new DateTime(1, 1, 2007);
+    DateTime *end = new DateTime(10, 1, 2007);
+    HistoricalMarketData *historical = new HistoricalMarketData("Ocelia", start, end);
+    historical->set_data();
 
     EXPECT_EQ(4, historical->dates_.size());
 
+    delete start;
+    delete end;
     delete historical;
 }
 

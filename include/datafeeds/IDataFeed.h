@@ -1,6 +1,6 @@
 #pragma once
 
-#include "libs/DateTimeVector.h"
+#include "libs/DateTime.h"
 #include "pnl/pnl_vector.h"
 #include <string>
 #include <vector>
@@ -11,9 +11,9 @@ class IDataFeed{
         std::vector<DateTime*> dates_;
         PnlVect *prices_;
 
-        IDataFeed(std::string filepath);
+        IDataFeed(const std::string &filepath);
         virtual ~IDataFeed();
         
-        virtual int get_number_valid_data() = 0; // ignores null-value prices
-        virtual void get_data() = 0;
+        virtual int get_number_valid_data() const = 0; // ignores null-value prices
+        virtual void set_data() = 0;
 };

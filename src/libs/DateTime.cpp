@@ -9,6 +9,13 @@ DateTime::DateTime(int dd, int mm, int yyyy)
     this->yyyy_ = yyyy;
 }
 
+DateTime::DateTime(const DateTime *date)
+{
+    this->dd_ = date->dd_;
+    this->mm_ = date->mm_;
+    this->yyyy_ = date->yyyy_;
+}
+
 DateTime::~DateTime(){
 
 }
@@ -55,6 +62,6 @@ std::ostream &operator<<(std::ostream &output, const DateTime *dt){
 
 DateTime* parse_date_string(const std::string &dateString, char delimiter){
     std::string dateParsed[3];
-    split(dateString, delimiter, dateParsed);
+    split(dateParsed, dateString, delimiter);
     return new DateTime(std::stoi(dateParsed[2].c_str()), std::stoi(dateParsed[1].c_str()), std::stoi(dateParsed[0].c_str())); // c_str(): needs a char* to use atof
 }

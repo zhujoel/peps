@@ -10,8 +10,8 @@ class IMarketData{
         std::vector<DateTime*> dates_; // toutes les dates entre start_date_ et end_date_ ayant un prix
         PnlMat *path_; // tous les prix entre start_date_ et end_date_
         
-        IMarketData(std::string name, DateTime *startDate, DateTime *endDate);
+        IMarketData(const std::string &name, const DateTime *startDate, const DateTime *endDate);
         virtual ~IMarketData();
 
-        virtual void get_data() = 0;
+        virtual void set_data() = 0;
 };

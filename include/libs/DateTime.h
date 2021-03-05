@@ -9,6 +9,7 @@ class DateTime{
         int yyyy_; // number of year
 
         DateTime(int dd_, int mm_, int yyyy_);
+        DateTime(const DateTime *date);
         ~DateTime();
         
         DateTime* copy() const;

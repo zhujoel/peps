@@ -10,15 +10,13 @@ QuantoOption::~QuantoOption(){
 
 }
 
-double QuantoOption::get_annee_payoff(){
-    return this->T_;
-}
+// pas besoin d'ajuster dans quanto
+void QuantoOption::adjust_sigma(PnlMat *sigma) const {}
+void QuantoOption::adjust_past(PnlMat *past) const {}
+void QuantoOption::adjust_spot(PnlVect *spot) const {}
 
-void QuantoOption::adjust_sigma(PnlMat *sigma){ // pas besoin d'ajuster dans quanto
-}
-void QuantoOption::adjust_past(PnlMat *past){ 
-}
-void QuantoOption::adjust_spot(PnlVect *spot){
+double QuantoOption::get_annee_payoff() const {
+    return this->T_;
 }
 
 double QuantoOption::payoff(const PnlMat *path){

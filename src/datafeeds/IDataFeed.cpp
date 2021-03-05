@@ -1,6 +1,7 @@
 #include "datafeeds/IDataFeed.h"
+#include "libs/DateTimeVector.h"
 
-IDataFeed::IDataFeed(std::string filepath){
+IDataFeed::IDataFeed(const std::string &filepath){
     this->filepath_ = filepath;
     this->prices_ = pnl_vect_new();
 }

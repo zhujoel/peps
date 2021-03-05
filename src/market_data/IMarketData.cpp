@@ -1,9 +1,9 @@
 #include "market_data/IMarketData.h"
 
-IMarketData::IMarketData(std::string name, DateTime *startDate, DateTime *endDate){
+IMarketData::IMarketData(const std::string &name, const DateTime *startDate, const DateTime *endDate){
     this->name_ = name;
-    this->startDate_ = startDate;
-    this->endDate_ = endDate;
+    this->startDate_ = new DateTime(startDate);
+    this->endDate_ = new DateTime(endDate);
     this->path_ = pnl_mat_new();
 }
 

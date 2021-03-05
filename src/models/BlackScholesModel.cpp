@@ -26,8 +26,9 @@ void BlackScholesModel::asset(PnlMat *path, double t, double T, int nbTimeSteps,
     // 5: zc jpy
     // 6: zc chf
     PnlVect *volatility = pnl_vect_new();
-    compute_volatility(sigma, volatility);
-    double timestep = T/nbTimeSteps; // TODO: ya peut etre une erreur ici
+    compute_volatility(volatility, sigma);
+    // TODO: ya peut etre une erreur sur timestep ?
+    double timestep = T/nbTimeSteps;
     pnl_mat_set_subblock(path, past, 0, 0);
 
     for (int k = past->m; k < path->m; ++k)
@@ -44,7 +45,7 @@ void BlackScholesModel::asset(PnlMat *path, double t, double T, int nbTimeSteps,
     pnl_vect_free(&volatility);
 }
 
-void BlackScholesModel::shift_asset(PnlMat *shift_path, const PnlMat *path, int d, double h, int startIdx)
+void BlackScholesModel::shift_asset(PnlMat *shift_path, const PnlMat *path, int d, double h, int startIdx) const
 {
     if (h>0)
     {
