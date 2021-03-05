@@ -60,10 +60,10 @@ TEST_F(MathLibTest, compute_covariances){
     PnlMat *covariances = pnl_mat_new();
     compute_covariances(covariances, this->path, 0, 2);
 
-    EXPECT_NEAR(0.0006441, MGET(covariances, 0, 0), 0.000001);
-    EXPECT_NEAR(0.054092, MGET(covariances, 0, 1), 0.000001);
-    EXPECT_NEAR(0.054092, MGET(covariances, 1, 0), 0.000001);
-    EXPECT_NEAR(4.5420152, MGET(covariances, 1, 1), 0.000001);
+    EXPECT_NEAR(0.0006698, MGET(covariances, 0, 0), 0.000001);
+    EXPECT_NEAR(0.0562556, MGET(covariances, 0, 1), 0.000001);
+    EXPECT_NEAR(0.0562556, MGET(covariances, 1, 0), 0.000001);
+    EXPECT_NEAR(4.7236958, MGET(covariances, 1, 1), 0.000001);
 
     pnl_mat_free(&covariances);
 }
@@ -71,10 +71,9 @@ TEST_F(MathLibTest, compute_covariances){
 TEST_F(MathLibTest, compute_sigma){
     PnlMat *sigma = pnl_mat_new();
     compute_sigma(sigma, this->path, 0, 2);
-
-    EXPECT_NEAR(0.025381, MGET(sigma, 0, 0), 0.000001);
-    EXPECT_NEAR(0.054092, MGET(sigma, 0, 1), 0.000001);
-    EXPECT_NEAR(2.1312, MGET(sigma, 1, 0), 0.000001);
+    EXPECT_NEAR(0.025884, MGET(sigma, 0, 0), 0.000001);
+    EXPECT_NEAR(0.056256, MGET(sigma, 0, 1), 0.000001);
+    EXPECT_NEAR(2.173406, MGET(sigma, 1, 0), 0.000001);
     EXPECT_NEAR(0, MGET(sigma, 1, 1), 0.000001);
 
     pnl_mat_free(&sigma);
@@ -86,8 +85,8 @@ TEST_F(MathLibTest, compute_volatility){
     PnlVect *volatility = pnl_vect_new();
     compute_volatility(volatility, sigma);
 
-    EXPECT_NEAR(0.059751, GET(volatility, 0), 0.000001);
-    EXPECT_NEAR(2.1312, GET(volatility, 1), 0.000001);
+    EXPECT_NEAR(0.061925, GET(volatility, 0), 0.000001);
+    EXPECT_NEAR(2.173406, GET(volatility, 1), 0.000001);
 
     pnl_mat_free(&sigma);
     pnl_vect_free(&volatility);

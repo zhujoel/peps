@@ -1,6 +1,5 @@
 #include "libs/MathLib.h"
 #include "pnl/pnl_mathtools.h"
-#include <iostream>
 
 void log_returns(PnlMat *log_returns, const PnlMat *path, int start, int end){ // start and end included
     int nbDates = 1+end-start; // +1 to include index end
@@ -66,6 +65,5 @@ void compute_volatility(PnlVect *volatility, const PnlMat *sigma){
         pnl_mat_get_row(tmp, sigma, i);
         LET(volatility, i) = pnl_vect_norm_two(tmp);
     }
-
     pnl_vect_free(&tmp);
 }
