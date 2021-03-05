@@ -45,9 +45,9 @@ void compute_covariances(PnlMat *covariances, const PnlMat *path, int start, int
         }
     }
 
-    // 250: nb de jours ouvrés en une année
+    // 260: nb de jours ouvrés en une année
     // TODO: changer pour mettre un taux variable basé sur les dim de market data
-    pnl_mat_mult_scalar(covariances, 250);
+    pnl_mat_mult_scalar(covariances, 260);
 
     pnl_mat_free(&returns);
     pnl_vect_free(&means_returns);
