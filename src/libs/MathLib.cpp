@@ -11,11 +11,10 @@ void log_returns(PnlMat *log_returns, const PnlMat *path, int start, int end){ /
     }
 }
 
-void means(PnlVect *means, const PnlMat *path, int start, int end){
+void means(PnlVect *means, const PnlMat *path){
     pnl_vect_resize(means, path->n);
-    PnlMat sub_path = pnl_mat_wrap_mat_rows(path, start, end);
-    pnl_mat_sum_vect(means, &sub_path, 'r');
-    pnl_vect_div_scalar(means, 1+end-start);
+    pnl_mat_sum_vect(means, path, 'r');
+    pnl_vect_div_scalar(means, path->m);
 }
 
 double compute_covariance(const PnlMat *log_returns, const PnlVect *means, int k, int l){
@@ -32,7 +31,7 @@ void compute_covariances(PnlMat *covariances, const PnlMat *path, int start, int
     PnlMat *returns = pnl_mat_new();
     PnlVect *means_returns = pnl_vect_new();
     log_returns(returns, path, start, end);
-    means(means_returns, returns, start, end-1);
+    means(means_returns, returns);
     int n = path->n;
     pnl_mat_resize(covariances, n, n);
 

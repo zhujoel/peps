@@ -26,4 +26,4 @@ add_executable(test_BlackScholesModel test_BlackScholesModel.cxx)
 target_link_libraries(test_BlackScholesModel gtest BlackScholesModel IModel MathLib HistoricalMarketData IMarketData YahooDataFeed IDataFeed DateTimeVector DateTime Utilities ${PNL_LIBRARIES})
 
 add_executable(test_StandardMonteCarloPricer test_StandardMonteCarloPricer.cxx)
-target_link_libraries(test_StandardMonteCarloPricer gtest StandardMonteCarloPricer IPricer Ocelia IDerivative BlackScholesModel IModel MathLib HistoricalMarketData IMarketData YahooDataFeed IDataFeed DateTimeVector DateTime Utilities ${PNL_LIBRARIES})
+target_link_libraries(test_StandardMonteCarloPricer gtest StandardMonteCarloPricer IPricer Ocelia IDerivative BlackScholesModel IModel MathLib HistoricalMarketData IMarketData YahooDataFeed IDataFeed DateTimeVector DateTime Utilities HedgingPortfolio ${PNL_LIBRARIES})

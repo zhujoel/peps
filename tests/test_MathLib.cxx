@@ -36,7 +36,7 @@ TEST_F(MathLibTest, log_returns){
 
 TEST_F(MathLibTest, means){
     PnlVect *means_path = pnl_vect_new();
-    means(means_path, this->path, 0, 2);
+    means(means_path, this->path);
 
     EXPECT_NEAR(105, GET(means_path, 0), 0.000001);
     EXPECT_NEAR(103.333333, GET(means_path, 1), 0.000001);
@@ -48,7 +48,7 @@ TEST_F(MathLibTest, compute_covariance_k_l){
     PnlMat *returns = pnl_mat_new();
     log_returns(returns, this->path, 0, 2);
     PnlVect *means_returns = pnl_vect_new();
-    means(means_returns, returns, 0, 1);
+    means(means_returns, returns);
     double covariance_0_0 = compute_covariance(returns, means_returns, 0, 0);
     EXPECT_NEAR(0.0000025764, covariance_0_0, 0.000000001);
 

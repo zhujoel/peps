@@ -5,6 +5,7 @@
 #include "models/BlackScholesModel.h"
 #include "market_data/HistoricalMarketData.h"
 #include "derivatives/Ocelia.h"
+#include "libs/HedgingPortfolio.h"
 #include "pricers/StandardMonteCarloPricer.h"
 
 class StandardMonteCarloPricerTest: public ::testing::Test{

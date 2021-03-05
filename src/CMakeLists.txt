@@ -7,6 +7,7 @@ add_library(Utilities STATIC libs/Utilities.cpp) # On lie la librarie au cpp
 add_library(DateTime STATIC libs/DateTime.cpp)
 add_library(DateTimeVector STATIC libs/DateTimeVector.cpp)
 add_library(MathLib STATIC libs/MathLib.cpp)
+add_library(HedgingPortfolio STATIC libs/HedgingPortfolio.cpp)
 add_library(IDataFeed STATIC datafeeds/IDataFeed.cpp)
 add_library(YahooDataFeed STATIC datafeeds/YahooDataFeed.cpp)
 add_library(IMarketData STATIC market_data/IMarketData.cpp)
