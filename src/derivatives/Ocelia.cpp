@@ -147,15 +147,13 @@ double Ocelia::compute_flux_n_ans(const PnlMat *path, int N) const{
 
 double Ocelia::payoff(const PnlMat *path)
 {
-    double val_liquidative_initiale = 100.0;
+    double val_liquidative_initiale = 100.;
     compute_nouveau_depart(path);
     
     for(int n = 4 ; n <= 8; ++n){
         compute_perfs_n_ans(this->perfs_, path, n);
         if(are_all_positive(this->perfs_) || n == 8){
-            double flux_n = compute_flux_n_ans(path, n);
             this->annee_payoff_ = n;
-            return val_liquidative_initiale*flux_n;
             return val_liquidative_initiale*compute_flux_n_ans(path, n);
         }
     }

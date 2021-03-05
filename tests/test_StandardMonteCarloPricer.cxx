@@ -64,8 +64,8 @@ class StandardMonteCarloPricerTest: public ::testing::Test{
             this->ocelia = new Ocelia(T, nbTimeSteps, size, nb_sous_jacents, ocelia_dates);
 
             // MONTE CARLO
-            this->fdStep = 0.0005; // 0.0005 NE PAS CHANGER !!!!!!!! TODO adapter en fonction de la Share Val
-            this->nbSamples = 1000; // 20000 TODO METTRE EN ZERO UN TRUC TRES ELEVEE CAR FORT IMPACT SUR LES DELTA EN ZERO
+            this->fdStep = 0.05; // 0.0005 NE PAS CHANGER !!!!!!!! TODO adapter en fonction de la Share Val ???
+            this->nbSamples = 10; // 20000 TODO METTRE EN ZERO UN TRUC TRES ELEVEE CAR FORT IMPACT SUR LES DELTA EN ZERO ???
             this->mc = new StandardMonteCarloPricer(model, ocelia, rng, fdStep, nbSamples);
         }
 
@@ -81,6 +81,28 @@ class StandardMonteCarloPricerTest: public ::testing::Test{
 
 TEST_F(StandardMonteCarloPricerTest, simul)
 {
+    // PAYOFF EFFECTIVEMENT VERSE
+    this->ocelia->adjust_past(this->ocelia_path);
+    double real_payoff = this->ocelia->payoff(this->ocelia_path);
+    double real_date_payoff = this->ocelia->get_annee_payoff(); 
+    DateTime* real_datetime_payoff;
+    if(real_date_payoff == 4){ // par rapport à la date de début : 15/05/2008
+        real_datetime_payoff = new DateTime(11, 5, 2012);
+    }
+    else if(real_date_payoff == 5){
+        real_datetime_payoff = new DateTime(13, 5, 2013);
+    }
+    else if(real_date_payoff == 6){
+        real_datetime_payoff = new DateTime(13, 5, 2014);
+    }
+    else if(real_date_payoff == 7){
+        real_datetime_payoff = new DateTime(13, 5, 2015);
+    }
+    else if(real_date_payoff == 8){
+        real_datetime_payoff = new DateTime(13, 5, 2016);
+    }
+
+    // PRICING & HEADGING en 0
     double prix = 0.;
     double prix_std_dev = 0.;
     double finalPnL = 0.;
@@ -92,14 +114,13 @@ TEST_F(StandardMonteCarloPricerTest, simul)
     this->ocelia->adjust_spot(share_values);
     this->ocelia->adjust_past(this->past);
     this->ocelia->adjust_sigma(this->sigma);
-    
-    pnl_mat_print(this->ocelia_path);
-    std::cout << this->ocelia->payoff(this->ocelia_path) << std::endl; // TODO : le payoff final est de 100 or on trouve 150 a la fin, pourquoi ?
 
     this->mc->simulate(this->past, 0, this->sigma, prix, prix_std_dev, delta, delta_std_dev);
     pnl_vect_clone(previous_delta, delta);
     
-    double V = prix - pnl_vect_scalar_prod(delta, share_values); // prix est le fair price de départ, il est à remplacer ici par 100 pour le gérant
+    double val_liquidative_initiale = 100.;
+    double marge = val_liquidative_initiale - prix;
+    double V = prix - pnl_vect_scalar_prod(delta, share_values); // prix est le fair price de départ, il est à remplacer ici par 100 pour le gérant OU BIEN ajouter marge -> poser la question au prof !!!
     finalPnL = V + pnl_vect_scalar_prod(delta, share_values) - prix;
 
     double riskFreeRate = exp(rd*this->T/this->nbTimeSteps); // TODO : ne pas supposer l'interval régulier ?? + a mettre dans la boucle en taux non constant
@@ -112,13 +133,19 @@ TEST_F(StandardMonteCarloPricerTest, simul)
     pnl_vect_print_asrow(delta);
     std::cout << "      delta std dev : ";
     pnl_vect_print_asrow(delta_std_dev);
-    std::cout << "      V: " << V  <<"  PnL : " << finalPnL << std::endl;
+    std::cout << "      V : " << V << ",  Pf de couverture : " << V + pnl_vect_scalar_prod(delta, share_values) << ",  PnL : " << finalPnL << std::endl;
     std::cout << std::endl;
 
+    // PRICING & HEADGING en t
     for(int k = 1; k < this->nbTimeSteps; ++k)
     {
-        double t = k*(this->T/this->nbTimeSteps);
+        if (((this->historical->dates_[this->past_index+k])->compare(real_datetime_payoff))==1) {
+            std::cout << "Traking error finale" << finalPnL << std::endl << std::endl;
+            std::cout << "Un payoff de " << real_payoff << " à été versé au client le " << real_datetime_payoff << std::endl;
+            break;
+        }
 
+        double t = k*(this->T/this->nbTimeSteps);
         compute_sigma(this->sigma, this->historical->path_, this->estimation_start+k, this->estimation_end+k);
 
         pnl_mat_get_row(share_values, this->historical->path_, this->past_index+k);
@@ -143,7 +170,7 @@ TEST_F(StandardMonteCarloPricerTest, simul)
         pnl_vect_print_asrow(delta);
         std::cout << "      delta std dev : ";
         pnl_vect_print_asrow(delta_std_dev);
-        std::cout << "      V: " << V  <<"  PnL : " << finalPnL << std::endl;
+        std::cout << "      V : " << V << ",  Pf de couverture : " << V + pnl_vect_scalar_prod(delta, share_values) << ",  PnL : " << finalPnL << std::endl;
         std::cout << std::endl;
     }
 }
