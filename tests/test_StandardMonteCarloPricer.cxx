@@ -94,7 +94,7 @@ TEST_F(StandardMonteCarloPricerTest, simul)
     this->ocelia->adjust_sigma(this->sigma);
     
     pnl_mat_print(this->ocelia_path);
-    std::cout << this->ocelia->payoff(this->ocelia_path) << std::endl;
+    std::cout << this->ocelia->payoff(this->ocelia_path) << std::endl; // TODO : le payoff final est de 100 or on trouve 150 a la fin, pourquoi ?
 
     this->mc->simulate(this->past, 0, this->sigma, prix, prix_std_dev, delta, delta_std_dev);
     pnl_vect_clone(previous_delta, delta);

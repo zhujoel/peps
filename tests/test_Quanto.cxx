@@ -26,9 +26,9 @@ class QuantoTest: public ::testing::Test{
         double sigma_actif = 0.1;
         double spot_actif_sans_risque = 1;
         double spot_actif_risque = 100;
-        double nbSimul = 100;
+        double nbSimul = 10000;
         double spot_taux_change_initial = 1.2;
-        double rho = 0.2; // corrélation entre zc et actif risqué étranger
+        double rho = 0.2; // corrélation entre le taux de change et actif risqué étranger
         double h = 0.01;
 
         virtual void SetUp(){
@@ -66,11 +66,11 @@ class QuantoTest: public ::testing::Test{
 
 TEST_F(QuantoTest, price){
     // prix théorique avec pnl
-    double prix2 = 0.0;
-    double delta2 = 0.0;
+    double prix_theorique = 0.0;
+    double delta_theorique = 0.0;
     double sigma_actif_converti = sqrt(sigma_tx_change*sigma_tx_change+sigma_actif*sigma_actif+2*rho*sigma_tx_change*sigma_actif);
-    pnl_cf_call_bs(spot_taux_change_initial*spot_actif_risque, K, T, rd, 0, sigma_actif_converti, &prix2, &delta2);
-    std::cout << "prix théorique : " << prix2 << " delta théorique : " << delta2<< std::endl;
+    pnl_cf_call_bs(spot_taux_change_initial*spot_actif_risque, K, T, rd, 0, sigma_actif_converti, &prix_theorique, &delta_theorique);
+    // std::cout << "prix théorique : " << prix_theorique << " delta théorique : " << delta_theorique << std::endl << std::endl;
 
     // simulation
     double prix = 0.0;
@@ -78,17 +78,15 @@ TEST_F(QuantoTest, price){
     PnlVect* delta = pnl_vect_create_from_zero(this->quanto->size_);
     PnlVect* delta_std_dev = pnl_vect_create_from_zero(this->quanto->size_);
     pricer->simulate(this->spot, 0, this->sigma, prix, prix_std_dev, delta, delta_std_dev);
-    std::cout << "prix simulé : " << prix << " std dev : " << prix_std_dev << std::endl;
-    std::cout << "price est dedans : " << (abs(prix2 - prix) <= 1.96*prix_std_dev) << std::endl;
 
-    std::cout << "delta simulé : " << std::endl;
-    pnl_vect_print(delta);
-    pnl_vect_print(delta_std_dev);
-    std::cout << "delta est dedans : " << (abs(GET(delta, 1) - delta2) <= 1.96*GET(delta_std_dev, 1)) << std::endl;
+    // std::cout << "prix simulé : " << prix << " std dev : " << prix_std_dev << std::endl;
+    // std::cout << "prix théorique dans l'intervalle de confiance (95%) ? : " << (abs(prix_theorique - prix) <= 1.96*prix_std_dev) << std::endl << std::endl;
 
-    double delta_zc_sans_risque = spot_actif_risque*delta2 * exp(-rf*0);
-    std::cout << "delta sous-jacent théorique : " << delta_zc_sans_risque << std::endl;
+    // std::cout << "delta simulé : " << GET(delta, 1) << " std dev : " << GET(delta_std_dev, 1) << std::endl;
+    // std::cout << "delta théorique dans l'intervalle de confiance (95%) ? : " << (abs(GET(delta, 1) - delta_theorique) <= 1.96*GET(delta_std_dev, 1)) << std::endl << std::endl;
 
+    EXPECT_EQ(1,(abs(prix_theorique - prix) <= 1.96*prix_std_dev));
+    EXPECT_EQ(1,(abs(GET(delta, 1) - delta_theorique) <= 1.96*GET(delta_std_dev, 1)));
     pnl_vect_free(&delta);
     pnl_vect_free(&delta_std_dev);
 }
