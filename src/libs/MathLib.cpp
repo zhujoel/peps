@@ -11,10 +11,11 @@ void log_returns(PnlMat *log_returns, const PnlMat *path, int start, int end){ /
     }
 }
 
-void means(PnlVect *means, const PnlMat *path){
+void means(PnlVect *means, const PnlMat *path, int start, int end){
     pnl_vect_resize(means, path->n);
-    pnl_mat_sum_vect(means, path, 'r');
-    pnl_vect_div_scalar(means, path->m);
+    PnlMat sub_path = pnl_mat_wrap_mat_rows(path, start, end);
+    pnl_mat_sum_vect(means, &sub_path, 'r');
+    pnl_vect_div_scalar(means, 1+end-start);
 }
 
 double compute_covariance(const PnlMat *log_returns, const PnlVect *means, int k, int l){
@@ -31,7 +32,7 @@ void compute_covariances(PnlMat *covariances, const PnlMat *path, int start, int
     PnlMat *returns = pnl_mat_new();
     PnlVect *means_returns = pnl_vect_new();
     log_returns(returns, path, start, end);
-    means(means_returns, returns);
+    means(means_returns, returns, start, end-1);
     int n = path->n;
     pnl_mat_resize(covariances, n, n);
 
@@ -45,7 +46,6 @@ void compute_covariances(PnlMat *covariances, const PnlMat *path, int start, int
     }
 
     // 260: nb de jours ouvrés en une année
-    // TODO: changer pour mettre un taux variable basé sur les dim de market data
     pnl_mat_mult_scalar(covariances, 260);
 
     pnl_mat_free(&returns);
