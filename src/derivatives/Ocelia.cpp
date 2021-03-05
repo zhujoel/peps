@@ -157,6 +157,5 @@ double Ocelia::payoff(const PnlMat *path)
             return val_liquidative_initiale*compute_flux_n_ans(path, n);
         }
     }
-
     return -1;
 }
