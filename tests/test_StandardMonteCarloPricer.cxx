@@ -52,7 +52,7 @@ class StandardMonteCarloPricerTest: public ::testing::Test{
             this->sigma = pnl_mat_new();
             compute_sigma(this->sigma, this->historical->path_, this->estimation_start, this->estimation_end);
             this->size = 7;
-            this->rd = 0.02; // taux limite pour avoir une marge positive
+            this->rd = 0.03;
             this->nbTimeSteps = ocelia_dates.size();
             this->T = 2920./365.25; // 2920 est le nb de jours entre 15/05/2008 et 13/05/2016
             this->rng = pnl_rng_create(PNL_RNG_MERSENNE);
@@ -64,8 +64,8 @@ class StandardMonteCarloPricerTest: public ::testing::Test{
             this->ocelia = new Ocelia(T, nbTimeSteps, size, nb_sous_jacents, ocelia_dates);
 
             // MONTE CARLO
-            this->fdStep = 0.05; // 0.0005 NE PAS CHANGER !!!!!!!! TODO adapter en fonction de la Share Val ???
-            this->nbSamples = 1000; // 20000 TODO METTRE EN ZERO UN TRUC TRES ELEVEE CAR FORT IMPACT SUR LES DELTA EN ZERO ???
+            this->fdStep = 0.1;
+            this->nbSamples = 20000;
             this->mc = new StandardMonteCarloPricer(model, ocelia, rng, fdStep, nbSamples);
         }
 
@@ -127,7 +127,7 @@ TEST_F(StandardMonteCarloPricerTest, simul)
         throw std::runtime_error("Initial domestic interest rate is too low");
     }
 
-    double V = prix - pnl_vect_scalar_prod(delta, share_values); // prix est le fair price de départ, il est à remplacer ici par 100 pour le gérant OU BIEN ajouter marge -> poser la question au prof !!!
+    double V = prix - pnl_vect_scalar_prod(delta, share_values); // prix est le fair price de départ, il est peut etre à remplacer ici par 100 pour le gérant OU BIEN ajouter marge -> poser la question au prof !!!
     finalPnL = V + pnl_vect_scalar_prod(delta, share_values) - prix;
 
     double riskFreeRate = exp(rd*this->T/this->nbTimeSteps); // TODO : ne pas supposer l'interval régulier ?? + a mettre dans la boucle en taux non constant
