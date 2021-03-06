@@ -1,5 +1,5 @@
 #include "market_data/HistoricalMarketData.h"
-#include "datafeeds/YahooDataFeed.h"
+#include "datafeeds/MarketDataFeed.h"
 #include "pnl/pnl_matrix.h"
 #include <cstring>
 
@@ -15,43 +15,15 @@ void HistoricalMarketData::set_data()
 }
 
 void HistoricalMarketData::set_Ocelia_data(){
-    int size = 7;
+    int nb_files = 2;
+    PnlMat *mkt_data = pnl_mat_create(0, 7);
+    PnlMat *mkt_rate = pnl_mat_create(0, 4);
+    PnlMat *ocelia_real = pnl_mat_create(0, 1);
+
     std::string files[] = {
-        "../data/market_data/N100.csv",
-        "../data/market_data/N225.csv",
-        "../data/market_data/SSMI.csv",
-        "../data/market_data/FTSE80.csv",
-        "../data/market_data/GBP-EUR.csv",
-        "../data/market_data/JPY-EUR.csv",
-        "../data/market_data/CHF-EUR.csv"
+        "../data/market_data/Indices.csv",
+        "../data/market_data/Taux_de_change.csv",
+        "../data/market_data/Interest_rates.csv",
+        "../data/market_data/Valeur_Liquidative_Ocelia.csv",
     };
-    IDataFeed **dataFeeds = new IDataFeed*[size];
-
-    for(int i = 0; i < size; ++i){
-        dataFeeds[i] = new YahooDataFeed(files[i]);
-        dataFeeds[i]->set_data();
-    }
-
-    from_date_to_date(this->dates_, dataFeeds[0]->dates_, this->startDate_, this->endDate_);
-    
-    for(int i = 1; i < size; ++i){
-        std::vector<DateTime*> input(this->dates_);
-        std::vector<DateTime*> output;
-        same_dates(output, input, dataFeeds[i]->dates_);
-        this->dates_ = output;
-    }
-
-    pnl_mat_resize(this->path_, this->dates_.size(), size);
-
-    for(int i = 0; i < size; ++i){
-        PnlVect *prices = pnl_vect_new();
-        get_prices_from_date(prices, dataFeeds[i]->dates_, this->dates_, dataFeeds[i]->prices_);
-        pnl_mat_set_col(this->path_, prices, i);
-        pnl_vect_free(&prices);
-    }
-
-    for(int i = 0; i < size; ++i){
-        delete dataFeeds[i];
-    }
-    delete[] dataFeeds;
 }

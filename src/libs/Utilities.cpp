@@ -23,3 +23,12 @@ void trunc(PnlVect* vect, int n){
 bool are_all_positive(const PnlVect *vect){
     return pnl_vect_min(vect) >= 0;
 }
+
+bool has_no_index_value_null(const std::string *array, const PnlVectInt *indexes){
+    for(int i = 0; i < indexes->size; ++i){
+        if(array[GET_INT(indexes, i)] == "null"){
+            return false;
+        }
+    }
+    return true;
+}
