@@ -119,7 +119,7 @@ TEST_F(StandardMonteCarloPricerTest, simul)
     double val_liquidative_initiale = 100.;
     HedgingPortfolio *portfolio = new HedgingPortfolio(prix, delta, share_values, this->rd, val_liquidative_initiale);
 
-    std::cout << this->historical->dates_[this->past_index] << " : " << prix << ", prix sdt dev : " << prix_std_dev << std::endl;
+    std::cout << this->historical->dates_[this->past_index] << " prix : " << prix << ", prix sdt dev : " << prix_std_dev << std::endl;
     std::cout << "      k : " << 0 <<"  t : " << 0 << std::endl;
     std::cout << "      share values : ";
     pnl_vect_print_asrow(share_values);

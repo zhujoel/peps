@@ -1,6 +1,5 @@
 #include "models/BlackScholesModel.h"
 #include "libs/MathLib.h"
-#include <iostream>
 
 BlackScholesModel::BlackScholesModel(int size, double rd) : IModel(size, rd)
 {

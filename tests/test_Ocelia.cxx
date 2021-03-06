@@ -3,7 +3,6 @@
 #include "market_data/IMarketData.h"
 #include "pnl/pnl_matrix.h"
 #include <fstream>
-#include <iostream>
 #include <vector>
 
 class OceliaTest: public ::testing::Test{

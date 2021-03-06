@@ -2,7 +2,6 @@
 #include "datafeeds/MarketDataFeed.h"
 #include "pnl/pnl_matrix.h"
 #include <cstring>
-#include <iostream>
 
 HistoricalMarketData::HistoricalMarketData(const std::string &name, const DateTime *startDate, const DateTime *endDate) 
     : IMarketData(name, startDate, endDate)
@@ -85,8 +84,6 @@ void HistoricalMarketData::set_Ocelia_data(){
     pnl_mat_resize(this->path_, indices->m, indices->n + tx_change->n);
     pnl_mat_set_subblock(this->path_, indices, 0, 0);
     pnl_mat_set_subblock(this->path_, tx_change, 0, indices->n);
-
-
 
     for(int i = 0; i < size; ++i){
         delete dataFeeds[i];
