@@ -17,7 +17,7 @@ TEST_F(HistoricalMarketDataTest, getData){
     HistoricalMarketData *historical = new HistoricalMarketData("Ocelia", start, end);
     historical->set_data();
 
-    EXPECT_EQ(4, historical->dates_.size());
+    EXPECT_EQ(8, historical->dates_.size());
 
     delete start;
     delete end;
