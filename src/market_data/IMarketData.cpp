@@ -15,4 +15,3 @@ IMarketData::~IMarketData(){
     pnl_mat_free(&this->interest_path_);
     delete_date_vector(this->dates_);
 }
-
