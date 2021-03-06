@@ -9,21 +9,20 @@ StandardMonteCarloPricer::~StandardMonteCarloPricer(){
     
 }
 
-void StandardMonteCarloPricer::simulate(const PnlMat *past, double t, const PnlMat *sigma, double &prix, double &price_std_dev, PnlVect *delta, PnlVect *delta_std_dev)
+void StandardMonteCarloPricer::price_and_delta(const PnlMat *past, double t, const PnlMat *sigma, double &prix, double &price_std_dev, PnlVect *delta, PnlVect *delta_std_dev)
 {
     prix = 0.;
-    price_std_dev = 0.; // On cumule des valeurs donc on initialise a 0 ?
+    price_std_dev = 0.;
     pnl_vect_set_zero(delta);
     pnl_vect_set_zero(delta_std_dev);
 
     double M = this->nbSamples_;
     for(int j = 0; j < M; ++j){
         this->model_->asset(this->path_, t, this->derivative_->T_, this->derivative_->nbTimeSteps_, this->rng_, past, sigma);
-        this->price(t, prix, price_std_dev);
-        this->delta(t, past->m, delta, delta_std_dev);
+        this->add_price(t, prix, price_std_dev);
+        this->add_delta(t, past->m, delta, delta_std_dev);
     }
 
-    // price
     prix /= M;
     price_std_dev /= M;
     price_std_dev = sqrt(exp(2)*(price_std_dev - prix * prix)/M);
@@ -39,7 +38,23 @@ void StandardMonteCarloPricer::simulate(const PnlMat *past, double t, const PnlM
     }
 }
 
-void StandardMonteCarloPricer::price(double t, double &prix, double &std_dev)
+void StandardMonteCarloPricer::price(const PnlMat *past, double t, const PnlMat *sigma, double &prix, double &price_std_dev)
+{
+    prix = 0.;
+    price_std_dev = 0.;
+
+    double M = this->nbSamples_;
+    for(int j = 0; j < M; ++j){
+        this->model_->asset(this->path_, t, this->derivative_->T_, this->derivative_->nbTimeSteps_, this->rng_, past, sigma);
+        this->add_price(t, prix, price_std_dev);
+    }
+
+    prix /= M;
+    price_std_dev /= M;
+    price_std_dev = sqrt(exp(2)*(price_std_dev - prix * prix)/M);
+}
+
+void StandardMonteCarloPricer::add_price(double t, double &prix, double &std_dev)
 {
     double r = this->model_->rd_;
     double T = this->derivative_->get_annee_payoff();
@@ -50,7 +65,7 @@ void StandardMonteCarloPricer::price(double t, double &prix, double &std_dev)
     std_dev += price * price;
 }
 
-void StandardMonteCarloPricer::delta(double t, int pastSize, PnlVect *delta, PnlVect *std_dev)
+void StandardMonteCarloPricer::add_delta(double t, int pastSize, PnlVect *delta, PnlVect *std_dev)
 {
     double r = this->model_->rd_;
     for (int d = 0; d < this->derivative_->size_; ++d)

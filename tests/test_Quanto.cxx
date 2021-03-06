@@ -26,7 +26,7 @@ class QuantoTest: public ::testing::Test{
         double sigma_actif = 0.1;
         double spot_actif_sans_risque = 1;
         double spot_actif_risque = 100;
-        double nbSimul = 10000;
+        double nbSimul = 1000;
         double spot_taux_change_initial = 1.2;
         double rho = 0.2; // corrélation entre le taux de change et actif risqué étranger
         double h = 0.01;
@@ -77,7 +77,7 @@ TEST_F(QuantoTest, price){
     double prix_std_dev = 0.0;
     PnlVect* delta = pnl_vect_create_from_zero(this->quanto->size_);
     PnlVect* delta_std_dev = pnl_vect_create_from_zero(this->quanto->size_);
-    pricer->simulate(this->spot, 0, this->sigma, prix, prix_std_dev, delta, delta_std_dev);
+    pricer->price_and_delta(this->spot, 0, this->sigma, prix, prix_std_dev, delta, delta_std_dev);
 
     // std::cout << "prix simulé : " << prix << " std dev : " << prix_std_dev << std::endl;
     // std::cout << "prix théorique dans l'intervalle de confiance (95%) ? : " << (abs(prix_theorique - prix) <= 1.96*prix_std_dev) << std::endl << std::endl;

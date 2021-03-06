@@ -2,8 +2,7 @@
 
 /**
  * 4. taux d'intéret étrangers
- * 7. mettre output du montecarlo en t dans un fichier
- * 8. input
+ * 7. output/input montecarlo en t
  */
 
 int main(){

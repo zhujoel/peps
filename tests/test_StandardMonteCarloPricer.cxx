@@ -114,7 +114,7 @@ TEST_F(StandardMonteCarloPricerTest, simul)
     this->ocelia->adjust_past(this->past);
     this->ocelia->adjust_sigma(this->sigma);
 
-    this->mc->simulate(this->past, 0, this->sigma, prix, prix_std_dev, delta, delta_std_dev);
+    this->mc->price_and_delta(this->past, 0, this->sigma, prix, prix_std_dev, delta, delta_std_dev);
     
     double val_liquidative_initiale = 100.;
     HedgingPortfolio *portfolio = new HedgingPortfolio(prix, delta, share_values, this->rd, val_liquidative_initiale);
@@ -131,6 +131,9 @@ TEST_F(StandardMonteCarloPricerTest, simul)
     std::cout << "      V2 : " << portfolio->V2_ << ",  Valeur liquidative : " << portfolio->get_valeur_liquidative(0, share_values) << ",  PnL : " << portfolio->get_FinalPnL(0, prix, share_values) << std::endl;
     std::cout << std::endl;
 
+    // TODO: faire un vrai truc pour les dates de rebalancement
+    int rebalance_counter = 0;
+
     // PRICING & HEADGING en t
     for(int k = 1; k < this->nbTimeSteps; ++k)
     {
@@ -146,9 +149,14 @@ TEST_F(StandardMonteCarloPricerTest, simul)
         this->ocelia->adjust_spot(share_values);
         pnl_mat_add_row(this->past, past->m, share_values);
         
-        this->mc->simulate(this->past, t, this->sigma, prix, prix_std_dev, delta, delta_std_dev);
+        if(rebalance_counter == 1){
+            this->mc->price_and_delta(this->past, t, this->sigma, prix, prix_std_dev, delta, delta_std_dev);
+            rebalance_counter = 0;
+            portfolio->rebalancing(t, delta, share_values);
+        }
 
-        portfolio->rebalancing(t, delta, share_values);
+        this->mc->price(this->past, t, this->sigma, prix, prix_std_dev);
+        rebalance_counter++;
 
         std::cout << this->historical->dates_[this->past_index+k] << " : " << prix << ", prix sdt dev : " << prix_std_dev << std::endl;
         std::cout << "      k : " << k <<"  t : " << t << std::endl;
