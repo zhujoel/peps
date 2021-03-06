@@ -1,6 +1,7 @@
 
 #include <stdexcept>
 #include "libs/HedgingPortfolio.h"
+#include "pnl/pnl_mathtools.h"
 
 HedgingPortfolio::HedgingPortfolio(double prix, const PnlVect* delta, const PnlVect* share_values, double rd, double val_liquidative_initiale)
 {

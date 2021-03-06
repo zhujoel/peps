@@ -2,8 +2,8 @@
 
 /**
  * 4. taux d'intéret étrangers
- * 6. tracking error
  * 7. mettre output du montecarlo en t dans un fichier
+ * 8. input
  */
 
 int main(){
