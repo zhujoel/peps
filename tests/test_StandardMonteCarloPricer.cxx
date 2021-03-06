@@ -148,6 +148,7 @@ TEST_F(StandardMonteCarloPricerTest, simul)
     std::cout << "      delta std dev : ";
     pnl_vect_print_asrow(delta_std_dev);
     std::cout << "      V : " << V << ",  Pf de couverture : " << V + pnl_vect_scalar_prod(delta, share_values) << ",  PnL : " << finalPnL << std::endl;
+    std::cout << "      V : " << portfolio->V1_ << ",  Pf de couverture : " << portfolio->get_portfolio_value(0, share_values) << ",  PnL : " << portfolio->get_tracking_error(0, prix, share_values) << std::endl;
     std::cout << std::endl;
 
     // PRICING & HEADGING en t
@@ -168,6 +169,7 @@ TEST_F(StandardMonteCarloPricerTest, simul)
         
         this->mc->simulate(this->past, t, this->sigma, prix, prix_std_dev, delta, delta_std_dev);
 
+        portfolio->rebalancing(t, delta, share_values);
         V = V * riskFreeRate;
         for (int d = 0; d < this->size; ++d)
         {
@@ -185,6 +187,7 @@ TEST_F(StandardMonteCarloPricerTest, simul)
         std::cout << "      delta std dev : ";
         pnl_vect_print_asrow(delta_std_dev);
         std::cout << "      V : " << V << ",  Pf de couverture : " << V + pnl_vect_scalar_prod(delta, share_values) << ",  PnL : " << finalPnL << std::endl;
+        std::cout << "      V : " << portfolio->V1_ << ",  Pf de couverture : " << portfolio->get_portfolio_value(t, share_values) << ",  PnL : " << portfolio->get_tracking_error(t, prix, share_values) << std::endl;
         std::cout << std::endl;
     }
 }
