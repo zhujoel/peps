@@ -106,9 +106,7 @@ TEST_F(StandardMonteCarloPricerTest, simul)
     // PRICING & HEADGING en 0
     double prix = 0.;
     double prix_std_dev = 0.;
-    double finalPnL = 0.;
     PnlVect* delta = pnl_vect_create_from_zero(this->size);
-    PnlVect* previous_delta = pnl_vect_create_from_zero(this->size);
     PnlVect* delta_std_dev = pnl_vect_create_from_zero(this->size);
     PnlVect* share_values = pnl_vect_new();
     pnl_mat_get_row(share_values, this->historical->path_, 0);
@@ -117,27 +115,9 @@ TEST_F(StandardMonteCarloPricerTest, simul)
     this->ocelia->adjust_sigma(this->sigma);
 
     this->mc->simulate(this->past, 0, this->sigma, prix, prix_std_dev, delta, delta_std_dev);
-    pnl_vect_clone(previous_delta, delta);
     
-
     double val_liquidative_initiale = 100.;
     HedgingPortfolio *portfolio = new HedgingPortfolio(prix, delta, share_values, this->rd, val_liquidative_initiale);
-
-
-
-
-    double marge = val_liquidative_initiale - prix;
-    std::cout << "Marge initiale du gérant "<< marge << std::endl;
-    if (marge<0) 
-    {
-        std::cout << prix << std::endl;
-        throw std::runtime_error("Initial domestic interest rate is too low");
-    }
-
-    double V = prix - pnl_vect_scalar_prod(delta, share_values); // prix est le fair price de départ, il est peut etre à remplacer ici par 100 pour le gérant OU BIEN ajouter marge -> poser la question au prof !!!
-    finalPnL = V + pnl_vect_scalar_prod(delta, share_values) - prix;
-
-    double riskFreeRate = exp(rd*this->T/this->nbTimeSteps); // TODO : ne pas supposer l'interval régulier ?? + a mettre dans la boucle en taux non constant
 
     std::cout << this->historical->dates_[this->past_index] << " : " << prix << ", prix sdt dev : " << prix_std_dev << std::endl;
     std::cout << "      k : " << 0 <<"  t : " << 0 << std::endl;
@@ -147,15 +127,14 @@ TEST_F(StandardMonteCarloPricerTest, simul)
     pnl_vect_print_asrow(delta);
     std::cout << "      delta std dev : ";
     pnl_vect_print_asrow(delta_std_dev);
-    std::cout << "      V : " << V << ",  Pf de couverture : " << V + pnl_vect_scalar_prod(delta, share_values) << ",  PnL : " << finalPnL << std::endl;
-    std::cout << "      V : " << portfolio->V1_ << ",  Pf de couverture : " << portfolio->get_portfolio_value(0, share_values) << ",  PnL : " << portfolio->get_tracking_error(0, prix, share_values) << std::endl;
+    std::cout << "      V1 : " << portfolio->V1_ << ",  Pf de couverture : " << portfolio->get_portfolio_value(0, share_values) << ",  PnL : " << portfolio->get_tracking_error(0, prix, share_values) << std::endl;
+    std::cout << "      V2 : " << portfolio->V2_ << ",  Valeur liquidative : " << portfolio->get_valeur_liquidative(0, share_values) << ",  PnL : " << portfolio->get_FinalPnL(0, prix, share_values) << std::endl;
     std::cout << std::endl;
 
     // PRICING & HEADGING en t
     for(int k = 1; k < this->nbTimeSteps; ++k)
     {
         if (((this->historical->dates_[this->past_index+k])->compare(real_datetime_payoff))==1) {
-            std::cout << "Traking error finale" << finalPnL << std::endl << std::endl;
             std::cout << "Un payoff de " << real_payoff << " à été versé au client le " << real_datetime_payoff << std::endl;
             break;
         }
@@ -170,13 +149,6 @@ TEST_F(StandardMonteCarloPricerTest, simul)
         this->mc->simulate(this->past, t, this->sigma, prix, prix_std_dev, delta, delta_std_dev);
 
         portfolio->rebalancing(t, delta, share_values);
-        V = V * riskFreeRate;
-        for (int d = 0; d < this->size; ++d)
-        {
-             V -= (GET(delta, d) - GET(previous_delta, d)) * GET(share_values, d);
-        }
-        finalPnL = V + pnl_vect_scalar_prod(delta, share_values) - prix;
-        pnl_vect_clone(previous_delta, delta);
 
         std::cout << this->historical->dates_[this->past_index+k] << " : " << prix << ", prix sdt dev : " << prix_std_dev << std::endl;
         std::cout << "      k : " << k <<"  t : " << t << std::endl;
@@ -186,8 +158,8 @@ TEST_F(StandardMonteCarloPricerTest, simul)
         pnl_vect_print_asrow(delta);
         std::cout << "      delta std dev : ";
         pnl_vect_print_asrow(delta_std_dev);
-        std::cout << "      V : " << V << ",  Pf de couverture : " << V + pnl_vect_scalar_prod(delta, share_values) << ",  PnL : " << finalPnL << std::endl;
-        std::cout << "      V : " << portfolio->V1_ << ",  Pf de couverture : " << portfolio->get_portfolio_value(t, share_values) << ",  PnL : " << portfolio->get_tracking_error(t, prix, share_values) << std::endl;
+        std::cout << "      V1 : " << portfolio->V1_ << ",  Pf de couverture : " << portfolio->get_portfolio_value(t, share_values) << ",  Tracking error : " << portfolio->get_tracking_error(t, prix, share_values) << std::endl;
+        std::cout << "      V2 : " << portfolio->V2_ << ",  Valeur liquidative : " << portfolio->get_valeur_liquidative(t, share_values) << ",  PnL : " << portfolio->get_FinalPnL(t, prix, share_values) << std::endl;
         std::cout << std::endl;
     }
 }
