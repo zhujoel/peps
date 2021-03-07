@@ -2,6 +2,7 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <stdexcept>
 
 void parse_dates_file(std::vector<DateTime*> &dates, const std::string &fileName, int nbDates, char delimiter)
 {
@@ -25,6 +26,9 @@ void calcul_indices_dates(PnlVectInt *indices, const std::vector<DateTime*> &all
                 break;
             }
         }
+    }
+    if(cnt != indices->size){
+        throw std::logic_error("dates_subset is not a subset of all_dates!");
     }
 }
 

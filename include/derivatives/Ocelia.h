@@ -16,13 +16,14 @@ class Ocelia : public IDerivative{
         PnlVect *nouveau_depart_; // valeurs de l'effet nouveau départ
         PnlVect *perfs_; // perfs à l'année n
 
-        Ocelia(double T, int size, int nb_sous_jacents, const std::vector<DateTime*> &all_dates);
+        Ocelia(double T, int size, int nb_sous_jacents);
         ~Ocelia();
 
         void adjust_sigma(PnlMat *sigma) const; // adjust computed sigma en fonction du nombre de produit dans la matrix path et de comment ils sont organisés
         void adjust_past(PnlMat *past) const;
         void adjust_spot(PnlVect *spot) const;
         double get_annee_payoff() const;
+        void init_indices(const std::vector<DateTime*> &all_dates, const std::vector<DateTime*> &dates_semestrielles, const std::vector<DateTime*> &dates_valeurs_n_ans);
 
         double get_foreign_index_market_value(const PnlMat* path, int date_idx, int idx) const;
         double compute_perf_moyenne_panier(const PnlMat *path) const;

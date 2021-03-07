@@ -48,7 +48,12 @@ int main(){
     // OCELIA
     double T = 2920./365.25; // 2920 est le nb de jours entre 15/05/2008 et 13/05/2016
     int nb_sous_jacents = 4;
-    IDerivative *ocelia = new Ocelia(T, size, nb_sous_jacents, ocelia_dates);
+    Ocelia *ocelia = new Ocelia(T, size, nb_sous_jacents);
+    std::vector<DateTime*> dates_semestrielles;
+    std::vector<DateTime*> dates_valeurs_n_ans;
+    parse_dates_file(dates_semestrielles, "../tests/test_data/ocelia/dates_semest.csv", 16, '-');
+    parse_dates_file(dates_valeurs_n_ans, "../tests/test_data/ocelia/dates_valeurs_n.csv", 35, '-');
+    ocelia->init_indices(ocelia_dates, dates_semestrielles, dates_valeurs_n_ans);
 
     // MONTE CARLO
     double fdStep = 0.1;

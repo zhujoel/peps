@@ -4,7 +4,7 @@
 #include "pnl/pnl_mathtools.h"
 #include "libs/Utilities.h"
 
-Ocelia::Ocelia(double T, int size, int nb_sous_jacents, const std::vector<DateTime*> &all_dates) : IDerivative(T, size)
+Ocelia::Ocelia(double T, int size, int nb_sous_jacents) : IDerivative(T, size)
 {
     this->annee_payoff_ = 0;    
     this->nb_sous_jacents_ = nb_sous_jacents;
@@ -12,28 +12,22 @@ Ocelia::Ocelia(double T, int size, int nb_sous_jacents, const std::vector<DateTi
     this->valeurs_initiales_ = pnl_vect_create_from_zero(this->nb_sous_jacents_);
     this->nouveau_depart_ = pnl_vect_create_from_zero(this->nb_sous_jacents_);
     this->perfs_ = pnl_vect_create_from_zero(this->nb_sous_jacents_);
-    
-    std::vector<DateTime*> dates_semestrielles;
-    parse_dates_file(dates_semestrielles, "../data/dates/dates_semest.csv", 16, '-');
-    std::vector<DateTime*> dates_valeurs_n_ans;
-    parse_dates_file(dates_valeurs_n_ans, "../data/dates/dates_valeurs_n.csv", 35, '-');
-
     this->indices_dates_semestrielles_ = pnl_vect_int_new();
-    calcul_indices_dates(this->indices_dates_semestrielles_, all_dates, dates_semestrielles);
     this->indices_dates_valeurs_n_ans_ = pnl_vect_int_new();
-    calcul_indices_dates(this->indices_dates_valeurs_n_ans_, all_dates, dates_valeurs_n_ans);
-
-    delete_date_vector(dates_semestrielles);
-    delete_date_vector(dates_valeurs_n_ans);
 }
 
 Ocelia::~Ocelia(){
-    pnl_vect_int_free(&this->indices_dates_semestrielles_);
-    pnl_vect_int_free(&this->indices_dates_valeurs_n_ans_);
     pnl_vect_free(&this->valeurs_n_ans_);
     pnl_vect_free(&this->valeurs_initiales_);
     pnl_vect_free(&this->nouveau_depart_);
     pnl_vect_free(&this->perfs_);
+    pnl_vect_int_free(&this->indices_dates_semestrielles_);
+    pnl_vect_int_free(&this->indices_dates_valeurs_n_ans_);
+}
+
+void Ocelia::init_indices(const std::vector<DateTime*> &all_dates, const std::vector<DateTime*> &dates_semestrielles, const std::vector<DateTime*> &dates_valeurs_n_ans){
+    calcul_indices_dates(this->indices_dates_semestrielles_, all_dates, dates_semestrielles);
+    calcul_indices_dates(this->indices_dates_valeurs_n_ans_, all_dates, dates_valeurs_n_ans);
 }
 
 void Ocelia::adjust_sigma(PnlMat *sigma) const {

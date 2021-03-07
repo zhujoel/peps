@@ -10,9 +10,11 @@ class OceliaTest: public ::testing::Test{
         Ocelia *ocelia;
         std::vector<DateTime*> all_dates;
         PnlMat *path;
+        std::vector<DateTime*> dates_semestrielles;
+        std::vector<DateTime*> dates_valeurs_n_ans;
 
         virtual void SetUp(){
-            parse_dates_file(this->all_dates, "../data/dates/all_dates_constatation.csv", 49, '-');
+            parse_dates_file(this->all_dates, "../tests/test_data/ocelia/all_dates_constatation.csv", 49, '-');
             this->path = pnl_mat_create(49, 7);
             for(int i = 0; i < 49; ++i){
                 MLET(path, i, 0) = 100+i;
@@ -24,13 +26,18 @@ class OceliaTest: public ::testing::Test{
                 MLET(path, i, 6) = 1;
             }
 
-            this->ocelia = new Ocelia(1, 7, 4, all_dates);
+            this->ocelia = new Ocelia(1, 7, 4);
+            parse_dates_file(this->dates_semestrielles, "../tests/test_data/ocelia/dates_semest.csv", 16, '-');
+            parse_dates_file(this->dates_valeurs_n_ans, "../tests/test_data/ocelia/dates_valeurs_n.csv", 35, '-');
+            this->ocelia->init_indices(this->all_dates, this->dates_semestrielles, this->dates_valeurs_n_ans);
         }
 
         virtual void TearDown(){
             delete this->ocelia;
             delete_date_vector(this->all_dates);
             pnl_mat_free(&this->path);
+            delete_date_vector(this->dates_semestrielles);
+            delete_date_vector(this->dates_valeurs_n_ans);
         }
 };
 
@@ -40,6 +47,23 @@ TEST_F(OceliaTest, constructor_size){
 
 TEST_F(OceliaTest, constructor_Maturity){
     EXPECT_EQ(1, this->ocelia->T_);
+}
+
+TEST_F(OceliaTest, constructor_date_error){
+    
+    std::vector<DateTime*> wrong_dates;
+    parse_dates_file(wrong_dates, "../tests/test_data/ocelia/wrong_dates.csv", 48, '-');
+    Ocelia *der = new Ocelia(1, 7, 4);
+
+    try{
+        der->init_indices(wrong_dates, this->dates_semestrielles, this->dates_valeurs_n_ans);
+    }
+    catch(std::logic_error const &err){
+        EXPECT_EQ(err.what(), std::string("dates_subset is not a subset of all_dates!"));
+    }
+    
+    delete der;
+    delete_date_vector(wrong_dates);
 }
 
 TEST_F(OceliaTest, indices_semestrielles_size){
