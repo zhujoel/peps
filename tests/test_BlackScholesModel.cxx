@@ -22,7 +22,7 @@ class BlackScholesModelTest: public ::testing::Test{
             this->historical->set_data();
             this->sigma = pnl_mat_new();
             compute_sigma(this->sigma, this->historical->path_, 0, this->historical->path_->m-1);
-            this->volatility = pnl_vect_new();
+            this->volatility = pnl_vect_create(this->sigma->m);
             compute_volatility(this->volatility, this->sigma);
             this->size = 7;
             this->rd = 0;
@@ -47,7 +47,7 @@ TEST_F(BlackScholesModelTest, asset){
     bs->asset(path, 0, T, rng, this->historical->path_, this->sigma);
     PnlMat *bs_sigma = pnl_mat_new();
     compute_sigma(bs_sigma, path, 0, path->m-1);
-    PnlVect *bs_volatility = pnl_vect_new();
+    PnlVect *bs_volatility = pnl_vect_create(bs_sigma->m);
     compute_volatility(bs_volatility, bs_sigma);
 
     for(int i = 0; i < this->size; ++i){

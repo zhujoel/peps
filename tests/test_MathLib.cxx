@@ -82,7 +82,7 @@ TEST_F(MathLibTest, compute_sigma){
 TEST_F(MathLibTest, compute_volatility){
     PnlMat *sigma = pnl_mat_new();
     compute_sigma(sigma, this->path, 0, 2);
-    PnlVect *volatility = pnl_vect_new();
+    PnlVect *volatility = pnl_vect_create(sigma->m);
     compute_volatility(volatility, sigma);
 
     EXPECT_NEAR(0.061925, GET(volatility, 0), 0.000001);
