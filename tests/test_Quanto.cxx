@@ -49,8 +49,8 @@ class QuantoTest: public ::testing::Test{
             MLET(this->spot, 0, 0) = spot_actif_sans_risque*spot_taux_change_initial;
             MLET(this->spot, 0, 1) = spot_actif_risque*spot_taux_change_initial;
 
-            this->quanto = new QuantoOption(T, nbTimeSteps, nbProduits, rf, K) ;
-            this->model = new BlackScholesModel(nbProduits, rd);
+            this->quanto = new QuantoOption(T, nbProduits, rf, K) ;
+            this->model = new BlackScholesModel(nbProduits, nbTimeSteps, rd);
             this->pricer = new StandardMonteCarloPricer(this->model, this->quanto, rng, h, nbSimul);
         }
 

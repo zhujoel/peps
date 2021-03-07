@@ -5,10 +5,9 @@
 class IDerivative {
   public:
       double T_;        // maturité finale du produit
-      int nbTimeSteps_; // nb de pas de temps de discrétisation
       int size_; // nombre de sous-jacents dans le payoff du produit
 
-      IDerivative(double T, int nbTimeSteps, int size);
+      IDerivative(double T, int size);
       virtual ~IDerivative();
 
       // sert à ajuster des sous-jacents étranger avec le zéro coupon

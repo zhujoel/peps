@@ -6,8 +6,8 @@ IPricer::IPricer(IModel *model, IDerivative *derivative, PnlRng *rng, double fdS
     this->rng_ = rng;
     this->fdStep_ = fdStep;
     this->nbSamples_ = nbSamples;
-    this->path_ = pnl_mat_create(derivative->nbTimeSteps_+1, derivative->size_);
-    this->shift_path_ = pnl_mat_create(derivative->nbTimeSteps_+1, derivative->size_);
+    this->path_ = pnl_mat_create(model->nbTimeSteps_+1, derivative->size_);
+    this->shift_path_ = pnl_mat_create(model->nbTimeSteps_+1, derivative->size_);
 }
 
 IPricer::~IPricer(){

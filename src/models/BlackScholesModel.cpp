@@ -1,7 +1,7 @@
 #include "models/BlackScholesModel.h"
 #include "libs/MathLib.h"
 
-BlackScholesModel::BlackScholesModel(int size, double rd) : IModel(size, rd)
+BlackScholesModel::BlackScholesModel(int size, int nbTimeSteps, double rd) : IModel(size, nbTimeSteps, rd)
 {
     this->G_ = pnl_vect_create(this->size_); 
     this->B_ = pnl_vect_create(this->size_);
@@ -13,7 +13,7 @@ BlackScholesModel::~BlackScholesModel()
     pnl_vect_free(&this->B_);
 }
 
-void BlackScholesModel::asset(PnlMat *path, double t, double T, int nbTimeSteps, PnlRng *rng, const PnlMat *past, const PnlMat *sigma)
+void BlackScholesModel::asset(PnlMat *path, double t, double T, PnlRng *rng, const PnlMat *past, const PnlMat *sigma)
 {
     // path c'est 4 sous-jacent + 3 zc
     // path, size: 4 + 3 (actif sans risque étrangers en domestique)
@@ -27,7 +27,7 @@ void BlackScholesModel::asset(PnlMat *path, double t, double T, int nbTimeSteps,
     PnlVect *volatility = pnl_vect_new();
     compute_volatility(volatility, sigma);
     // TODO: ya peut etre une erreur sur timestep ?
-    double timestep = T/nbTimeSteps;
+    double timestep = T/this->nbTimeSteps_;
     pnl_mat_set_subblock(path, past, 0, 0);
 
     for (int k = past->m; k < path->m; ++k)

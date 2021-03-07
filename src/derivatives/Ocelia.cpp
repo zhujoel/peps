@@ -4,12 +4,8 @@
 #include "pnl/pnl_mathtools.h"
 #include "libs/Utilities.h"
 
-Ocelia::Ocelia(double T, int nbTimeSteps, int size, int nb_sous_jacents, const std::vector<DateTime*> &all_dates) : IDerivative(T, nbTimeSteps, size)
+Ocelia::Ocelia(double T, int size, int nb_sous_jacents, const std::vector<DateTime*> &all_dates) : IDerivative(T, size)
 {
-    if(nbTimeSteps != all_dates.size()){
-        throw std::invalid_argument("nbTimeSteps must be equal to the size of all_dates!");
-    }
-
     this->annee_payoff_ = 0;    
     this->nb_sous_jacents_ = nb_sous_jacents;
     this->valeurs_n_ans_ = pnl_vect_create_from_zero(this->nb_sous_jacents_);

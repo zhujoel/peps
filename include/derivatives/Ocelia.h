@@ -16,7 +16,7 @@ class Ocelia : public IDerivative{
         PnlVect *nouveau_depart_; // valeurs de l'effet nouveau départ
         PnlVect *perfs_; // perfs à l'année n
 
-        Ocelia(double T, int nbTimeSteps, int size, int nb_sous_jacents, const std::vector<DateTime*> &all_dates);
+        Ocelia(double T, int size, int nb_sous_jacents, const std::vector<DateTime*> &all_dates);
         ~Ocelia();
 
         void adjust_sigma(PnlMat *sigma) const; // adjust computed sigma en fonction du nombre de produit dans la matrix path et de comment ils sont organisés

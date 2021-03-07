@@ -1,7 +1,7 @@
 #include "derivatives/QuantoOption.h"
 #include "pnl/pnl_mathtools.h"
 
-QuantoOption::QuantoOption(double T, int nbTimeSteps, int size, double rf, double K) : IDerivative(T, nbTimeSteps, size){
+QuantoOption::QuantoOption(double T, int size, double rf, double K) : IDerivative(T, size){
     this->rf_ = rf;
     this->K_ = K;
 }
@@ -20,6 +20,6 @@ double QuantoOption::get_annee_payoff() const {
 }
 
 double QuantoOption::payoff(const PnlMat *path){
-    double S_T = MGET(path, this->nbTimeSteps_, 1); // valeur finale de l'actif risqué converti
+    double S_T = MGET(path, path->m-1, 1); // valeur finale de l'actif risqué converti
     return MAX(S_T - this->K_, 0);   
 }

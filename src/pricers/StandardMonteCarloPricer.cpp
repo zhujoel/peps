@@ -18,7 +18,7 @@ void StandardMonteCarloPricer::price_and_delta(const PnlMat *past, double t, con
 
     double M = this->nbSamples_;
     for(int j = 0; j < M; ++j){
-        this->model_->asset(this->path_, t, this->derivative_->T_, this->derivative_->nbTimeSteps_, this->rng_, past, sigma);
+        this->model_->asset(this->path_, t, this->derivative_->T_, this->rng_, past, sigma);
         this->add_price(t, prix, price_std_dev);
         this->add_delta(t, past->m, delta, delta_std_dev);
     }
@@ -45,7 +45,7 @@ void StandardMonteCarloPricer::price(const PnlMat *past, double t, const PnlMat 
 
     double M = this->nbSamples_;
     for(int j = 0; j < M; ++j){
-        this->model_->asset(this->path_, t, this->derivative_->T_, this->derivative_->nbTimeSteps_, this->rng_, past, sigma);
+        this->model_->asset(this->path_, t, this->derivative_->T_, this->rng_, past, sigma);
         this->add_price(t, prix, price_std_dev);
     }
 

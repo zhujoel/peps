@@ -24,7 +24,7 @@ class OceliaTest: public ::testing::Test{
                 MLET(path, i, 6) = 1;
             }
 
-            this->ocelia = new Ocelia(1, 49, 7, 4, all_dates);
+            this->ocelia = new Ocelia(1, 7, 4, all_dates);
         }
 
         virtual void TearDown(){
@@ -36,10 +36,6 @@ class OceliaTest: public ::testing::Test{
 
 TEST_F(OceliaTest, constructor_size){
     EXPECT_EQ(7, this->ocelia->size_);
-}
-
-TEST_F(OceliaTest, constructor_NbTimeSteps){
-    EXPECT_EQ(49, this->ocelia->nbTimeSteps_);
 }
 
 TEST_F(OceliaTest, constructor_Maturity){

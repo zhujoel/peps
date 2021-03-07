@@ -58,11 +58,11 @@ class StandardMonteCarloPricerTest: public ::testing::Test{
             this->T = 2920./365.25; // 2920 est le nb de jours entre 15/05/2008 et 13/05/2016
             this->rng = pnl_rng_create(PNL_RNG_MERSENNE);
             pnl_rng_sseed(this->rng, std::time(NULL));
-            this->model = new BlackScholesModel(this->size, this->rd);
+            this->model = new BlackScholesModel(this->size, nbTimeSteps, this->rd);
 
             // OCELIA
             this->nb_sous_jacents = 4;
-            this->ocelia = new Ocelia(T, nbTimeSteps, size, nb_sous_jacents, ocelia_dates);
+            this->ocelia = new Ocelia(T, size, nb_sous_jacents, ocelia_dates);
 
             // MONTE CARLO
             this->fdStep = 0.1;
