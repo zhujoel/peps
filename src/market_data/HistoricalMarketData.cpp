@@ -64,14 +64,15 @@ void HistoricalMarketData::set_Ocelia_data(){
         dataFeeds[i]->set_data();
     }
 
+
     from_date_to_date(this->dates_, dataFeeds[0]->dates_, this->startDate_, this->endDate_);
     
+    std::vector<DateTime*> tmp_input;
     for(int i = 1; i < size; ++i){
-        std::vector<DateTime*> input(this->dates_);
-        std::vector<DateTime*> output;
-        same_dates(output, input, dataFeeds[i]->dates_);
-        this->dates_ = output;
+        tmp_input = this->dates_;
+        this->dates_ = same_dates(tmp_input, dataFeeds[i]->dates_);
     }
+    delete_date_vector(tmp_input);
 
     PnlMat *indices = pnl_mat_new();
     PnlMat *tx_change = pnl_mat_new();

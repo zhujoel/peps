@@ -49,8 +49,7 @@ TEST_F(DateTimeVectorTest, sameDates){
     parse_dates_file(dates1, "../tests/test_data/dateTimeVector/dateVector.csv", 16, '-');
     std::vector<DateTime*> dates2;
     parse_dates_file(dates2, "../tests/test_data/dateTimeVector/sameDates.csv", 6, '-');
-    std::vector<DateTime*> same;
-    same_dates(same, dates1, dates2);
+    std::vector<DateTime*> same = same_dates(dates1, dates2);
 
     EXPECT_EQ(3, same.size());
     EXPECT_EQ("14-11-2008", same[0]->str());

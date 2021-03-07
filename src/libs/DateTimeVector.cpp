@@ -42,10 +42,11 @@ int get_indice_from_date(const std::vector<DateTime*> &all_dates, const DateTime
     return -1;
 }
 
-void same_dates(std::vector<DateTime*> &same_dates, const std::vector<DateTime*> &v1, const std::vector<DateTime*> &v2)
+std::vector<DateTime*> same_dates(const std::vector<DateTime*> &v1, const std::vector<DateTime*> &v2)
 {
     unsigned int idx1 = 0;
     unsigned int idx2 = 0;
+    std::vector<DateTime*> same_dates;
     while(idx1 < v1.size() && idx2 < v2.size()){
         int cmp = v1[idx1]->compare(v2[idx2]);
         if(cmp == 0){
@@ -60,6 +61,7 @@ void same_dates(std::vector<DateTime*> &same_dates, const std::vector<DateTime*>
             idx1++;
         }
     }
+    return same_dates;
 }
 
 void get_prices_from_date(PnlVect *prices, const std::vector<DateTime*> &allDates, const std::vector<DateTime*> &subset, const PnlVect *allPrices)
