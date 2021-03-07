@@ -149,7 +149,7 @@ TEST_F(StandardMonteCarloPricerTest, simul)
         this->ocelia->adjust_spot(share_values);
         pnl_mat_add_row(this->past, past->m, share_values);
         
-        if(rebalance_counter == 1){
+        if(rebalance_counter == 30){
             this->mc->price_and_delta(this->past, t, this->sigma, prix, prix_std_dev, delta, delta_std_dev);
             rebalance_counter = 0;
             portfolio->rebalancing(t, delta, share_values);

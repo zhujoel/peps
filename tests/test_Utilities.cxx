@@ -64,6 +64,24 @@ TEST_F(UtilitiesTest, are_all_positive_true){
     pnl_vect_free(&vect);
 }
 
+TEST_F(UtilitiesTest, has_no_index_value_null1){
+    PnlVectInt *vect = pnl_vect_int_create(2);
+    std::string arr[5] = {"null", "hello", "hello2", "hello3", "hello4"};
+    LET_INT(vect, 0) = 2;
+    LET_INT(vect, 1) = 0;
+    EXPECT_FALSE(has_no_index_value_null(arr, vect));
+
+    pnl_vect_int_free(&vect);
+}
+
+TEST_F(UtilitiesTest, has_no_index_value_null2){
+    PnlVectInt *vect = pnl_vect_int_create(0);
+    std::string arr[5] = {"null", "hello"};
+    EXPECT_TRUE(has_no_index_value_null(arr, vect));
+
+    pnl_vect_int_free(&vect);
+}
+
 int main(int argc, char** argv){
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
