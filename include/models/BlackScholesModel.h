@@ -5,6 +5,7 @@
 
 class BlackScholesModel : public IModel{
     public:
+        PnlVect *volatility_;
         PnlVect *G_; /// Vecteur Gaussien
         PnlVect *B_; // Brownien (produit matriciel L * G);
 

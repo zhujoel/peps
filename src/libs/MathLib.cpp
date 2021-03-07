@@ -58,7 +58,6 @@ void compute_sigma(PnlMat *sigma, const PnlMat *path, int start, int end){
 
 void compute_volatility(PnlVect *volatility, const PnlMat *sigma){
     int size = sigma->n;
-    pnl_vect_resize(volatility, size);
     PnlVect *tmp = pnl_vect_create(size);
     for(int i = 0; i < size; ++i){
         pnl_mat_get_row(tmp, sigma, i);
