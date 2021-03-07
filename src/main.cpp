@@ -11,6 +11,7 @@
 #include "libs/HedgingPortfolio.h"
 
 /**
+ * TODO:
  * 4. taux d'intéret étrangers
  * 7. output/input montecarlo en t
  */
