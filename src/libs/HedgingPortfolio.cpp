@@ -8,7 +8,7 @@ HedgingPortfolio::HedgingPortfolio(double prix, const PnlVect* delta, const PnlV
     double marge_initiale = val_liquidative_initiale - prix;
     if (marge_initiale<0) 
     {
-        throw std::runtime_error("Initial domestic interest rate is too low");
+        throw std::runtime_error("La marge (val_liquidative_initiale - prix) ne peut pas être négative !");
     } 
     this->val_liquidative_initiale_ = val_liquidative_initiale;
     this->last_rebalancing_t_ = 0;
