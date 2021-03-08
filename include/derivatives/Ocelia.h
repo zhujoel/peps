@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../derivatives/IDerivative.h"
-#include "../libs/DateTimeVector.h"
+#include "derivatives/IDerivative.h"
+#include "libs/DateTimeVector.h"
 #include "pnl/pnl_matrix.h"
 #include <vector>
 

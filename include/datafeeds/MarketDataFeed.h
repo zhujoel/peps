@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../datafeeds/IDataFeed.h"
+#include "datafeeds/IDataFeed.h"
 
 // parse les fichiers de données du prof
 class MarketDataFeed : public IDataFeed{
