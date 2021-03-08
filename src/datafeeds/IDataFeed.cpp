@@ -1,4 +1,4 @@
-#include "datafeeds/IDataFeed.h"
+#include "IDataFeed.h"
 #include "libs/DateTimeVector.h"
 
 IDataFeed::IDataFeed(PnlVectInt *relevant_columns, unsigned int date_column, unsigned int nb_columns, const std::string &filepath){
