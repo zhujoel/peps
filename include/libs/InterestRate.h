@@ -14,7 +14,8 @@ class InterestRate{
         InterestRate(double t, DateTime *current_date, std::vector<DateTime*> all_dates, PnlMat *interest_path);
         ~InterestRate();
 
+        void set_current_date(double t, DateTime *current_date);
         // double actif_sans_risque_etranger();
-        // double taux_overnight();
+        double get_domestic_rate();
         // double integrate();
 };

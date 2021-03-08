@@ -7,6 +7,7 @@
 #include "pnl/pnl_matrix.h"
 #include "pnl/pnl_finance.h"
 #include <fstream>
+#include <vector>
 
 class QuantoTest: public ::testing::Test{
     protected:
@@ -16,12 +17,13 @@ class QuantoTest: public ::testing::Test{
         PnlRng *rng;
         PnlMat *sigma;
         PnlMat *spot;
+        InterestRate* rates;
         double T = 1;
         double nbTimeSteps = 365;
         double rf = 0.05;
         double K = 90.0;
         double nbProduits = 2;
-        double rd = 0.03; // taux constants pour l'instant
+        double rd = 0.03; // taux constant
         double sigma_tx_change = 0.05;
         double sigma_actif = 0.1;
         double spot_actif_sans_risque = 1;
@@ -49,8 +51,14 @@ class QuantoTest: public ::testing::Test{
             MLET(this->spot, 0, 0) = spot_actif_sans_risque*spot_taux_change_initial;
             MLET(this->spot, 0, 1) = spot_actif_risque*spot_taux_change_initial;
 
+            PnlMat* interest_path = pnl_mat_create_from_scalar(1, 4, rd);
+            DateTime* curent_date = new DateTime(1, 1, 2010);
+            std::vector<DateTime*> all_dates;
+            all_dates.push_back(curent_date);
+            this->rates = new InterestRate(0, curent_date, all_dates, interest_path);
+
             this->quanto = new QuantoOption(T, nbProduits, rf, K) ;
-            this->model = new BlackScholesModel(nbProduits, nbTimeSteps, rd);
+            this->model = new BlackScholesModel(nbProduits, nbTimeSteps, this->rates);
             this->pricer = new StandardMonteCarloPricer(this->model, this->quanto, rng, h, nbSimul);
         }
 

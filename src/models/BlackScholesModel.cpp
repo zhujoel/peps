@@ -1,7 +1,7 @@
 #include "models/BlackScholesModel.h"
 #include "libs/MathLib.h"
 
-BlackScholesModel::BlackScholesModel(int size, int nbTimeSteps, double rd) : IModel(size, nbTimeSteps, rd)
+BlackScholesModel::BlackScholesModel(int size, int nbTimeSteps, InterestRate* rates) : IModel(size, nbTimeSteps, rates)
 {
     this->volatility_ = pnl_vect_create(this->size_);
     this->G_ = pnl_vect_create(this->size_); 
@@ -38,7 +38,7 @@ void BlackScholesModel::asset(PnlMat *path, double t, double T, PnlRng *rng, con
         for (int d = 0; d < this->size_; ++d)
         {
             double sigma_d = GET(volatility_, d);
-            MLET(path, k, d) = MGET(path, k-1, d) * exp( (this->rd_ - (sigma_d*sigma_d)/2 ) * timestep + sqrt(timestep) * GET(this->B_, d));
+            MLET(path, k, d) = MGET(path, k-1, d) * exp( (this->rates_->get_domestic_rate() - (sigma_d*sigma_d)/2 ) * timestep + sqrt(timestep) * GET(this->B_, d));
         }
     }
 }

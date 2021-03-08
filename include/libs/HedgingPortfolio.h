@@ -1,17 +1,18 @@
 #pragma once
 
+#include "libs/InterestRate.h"
 #include "pnl/pnl_vector.h"
 
 class HedgingPortfolio{
     public:
         double val_liquidative_initiale_;
         double last_rebalancing_t_;
-        double rd_; // TODO pointeur vers les taux ??
         double V1_; // Montant investi au taux sans risque pour la traking error
         double V2_; // Montant investi au taux sans risque pour la valeur liquidative
         PnlVect* delta_;
+        InterestRate* rates_;
 
-        HedgingPortfolio(double prix, const PnlVect* delta, const PnlVect* share_values, double rd, double val_liquidative_initiale);
+        HedgingPortfolio(double prix, const PnlVect* delta, const PnlVect* share_values, InterestRate* rates, double val_liquidative_initiale);
         ~HedgingPortfolio();
 
         void rebalancing(double t, const PnlVect* delta, const PnlVect* share_values);
