@@ -151,7 +151,7 @@ int main(int argc, char* argv[])
         if(k%30==0){
             mc->price_and_delta(past, t, sigma, prix, prix_std_dev, delta, delta_std_dev);
             portfolio->rebalancing(t, delta, share_values);
-            delta_stream << historical->dates_[past_index] << "," << k << "," << delta << "," << delta_std_dev << std::endl;
+            delta_stream << historical->dates_[past_index+k] << "," << k << "," << delta << "," << delta_std_dev << std::endl;
 
         }
 

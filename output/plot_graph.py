@@ -2,11 +2,11 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import sys
 
-df = pd.read_csv('output', index_col=0)
 
 if len(sys.argv) > 1:
-    for i in range(len(sys.argv)-1):
-        df.loc[:, sys.argv[i+1]].plot(figsize=(16,8), title="plot")
+    df = pd.read_csv(sys.argv[1], index_col=0)
+    for i in range(len(sys.argv)-2):
+        df.loc[:, sys.argv[i+2]].plot(figsize=(16,8), title="plot")
     plt.legend()
     plt.show()
 else:
