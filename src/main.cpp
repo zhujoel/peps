@@ -58,7 +58,7 @@ int main(){
 
     // MONTE CARLO
     double fdStep = 0.1;
-    int nbSamples = 10;
+    int nbSamples = 1000;
     PnlRng *rng = pnl_rng_create(PNL_RNG_MERSENNE);
     pnl_rng_sseed(rng, std::time(NULL));
     IPricer *mc = new StandardMonteCarloPricer(model, ocelia, rng, fdStep, nbSamples);
@@ -118,7 +118,6 @@ int main(){
     std::cout << std::endl;
 
     // TODO: faire un vrai truc pour les dates de rebalancement
-    int rebalance_counter = 0;
 
     // PRICING & HEADGING en t
     for(int k = 1; k < nbTimeSteps; ++k)
@@ -135,23 +134,23 @@ int main(){
         ocelia->adjust_spot(share_values);
         pnl_mat_add_row(past, past->m, share_values);
         
-        if(rebalance_counter == 30){
+        if(k%30==0){
             mc->price_and_delta(past, t, sigma, prix, prix_std_dev, delta, delta_std_dev);
-            rebalance_counter = 0;
             portfolio->rebalancing(t, delta, share_values);
         }
 
         mc->price(past, t, sigma, prix, prix_std_dev);
-        rebalance_counter++;
 
-        std::cout << historical->dates_[past_index+k] << " : " << prix << ", prix sdt dev : " << prix_std_dev << std::endl;
+        std::cout << historical->dates_[past_index+k] << " prix : " << prix << ", prix sdt dev : " << prix_std_dev << std::endl;
         std::cout << "      k : " << k <<"  t : " << t << std::endl;
-        std::cout << "      share values : ";
+        std::cout << "      share values : "; 
         pnl_vect_print_asrow(share_values);
-        std::cout << "      delta : ";
-        pnl_vect_print_asrow(delta);
-        std::cout << "      delta std dev : ";
-        pnl_vect_print_asrow(delta_std_dev);
+        if(k%30==0){
+            std::cout << "      delta : ";
+            pnl_vect_print_asrow(delta);
+            std::cout << "      delta std dev : ";
+            pnl_vect_print_asrow(delta_std_dev);
+        }
         std::cout << "      V1 : " << portfolio->V1_ << ",  Pf de couverture : " << portfolio->get_portfolio_value(t, share_values) << ",  Tracking error : " << portfolio->get_tracking_error(t, prix, share_values) << std::endl;
         std::cout << "      V2 : " << portfolio->V2_ << ",  Valeur liquidative : " << portfolio->get_valeur_liquidative(t, share_values) << ",  PnL : " << portfolio->get_FinalPnL(t, prix, share_values) << std::endl;
         std::cout << std::endl;
