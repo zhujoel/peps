@@ -1,7 +1,7 @@
 #include "datafeeds/IDataFeed.h"
 #include "libs/DateTimeVector.h"
 
-IDataFeed::IDataFeed(PnlVectInt *relevant_columns, unsigned int date_column, unsigned int nb_columns, const std::string &filepath){
+IDataFeed::IDataFeed(PnlVectInt * const relevant_columns, unsigned int date_column, unsigned int nb_columns, const std::string &filepath){
     this->relevant_columns_ = relevant_columns;
     this->date_column_ = date_column;
     this->nb_columns_ = nb_columns;

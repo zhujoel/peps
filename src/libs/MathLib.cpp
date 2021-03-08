@@ -1,7 +1,7 @@
 #include "libs/MathLib.h"
 #include "pnl/pnl_mathtools.h"
 
-void log_returns(PnlMat *log_returns, const PnlMat *path, int start, int end){ // start and end included
+void log_returns(PnlMat * const log_returns, const PnlMat * const path, int start, int end){ // start and end included
     int nbDates = 1+end-start; // +1 to include index end
     pnl_mat_resize(log_returns, nbDates-1, path->n);
     for(int i = 0; i < nbDates-1; ++i){
@@ -11,13 +11,13 @@ void log_returns(PnlMat *log_returns, const PnlMat *path, int start, int end){ /
     }
 }
 
-void means(PnlVect *means, const PnlMat *path){
+void means(PnlVect * const means, const PnlMat * const path){
     pnl_vect_resize(means, path->n);
     pnl_mat_sum_vect(means, path, 'r');
     pnl_vect_div_scalar(means, path->m);
 }
 
-double compute_covariance(const PnlMat *log_returns, const PnlVect *means, int k, int l){
+double compute_covariance(const PnlMat * const log_returns, const PnlVect * const means, int k, int l){
     double sum = 0;
     double mean_k = GET(means, k);
     double mean_l = GET(means, l);
@@ -27,7 +27,7 @@ double compute_covariance(const PnlMat *log_returns, const PnlVect *means, int k
     return sum / (log_returns->m-1);
 }
 
-void compute_covariances(PnlMat *covariances, const PnlMat *path, int start, int end){
+void compute_covariances(PnlMat * const covariances, const PnlMat * const path, int start, int end){
     PnlMat *returns = pnl_mat_new();
     PnlVect *means_returns = pnl_vect_new();
     log_returns(returns, path, start, end);
@@ -51,12 +51,12 @@ void compute_covariances(PnlMat *covariances, const PnlMat *path, int start, int
     pnl_vect_free(&means_returns);
 }
 
-void compute_sigma(PnlMat *sigma, const PnlMat *path, int start, int end){
+void compute_sigma(PnlMat * const sigma, const PnlMat * const path, int start, int end){
     compute_covariances(sigma, path, start, end);
     pnl_mat_chol(sigma);
 }
 
-void compute_volatility(PnlVect *volatility, const PnlMat *sigma){
+void compute_volatility(PnlVect * const volatility, const PnlMat * const sigma){
     int size = sigma->n;
     PnlVect *tmp = pnl_vect_create(size);
     for(int i = 0; i < size; ++i){

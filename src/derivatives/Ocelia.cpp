@@ -30,7 +30,7 @@ void Ocelia::init_indices(const std::vector<DateTime*> &all_dates, const std::ve
     calcul_indices_dates(this->indices_dates_valeurs_n_ans_, all_dates, dates_valeurs_n_ans);
 }
 
-void Ocelia::adjust_sigma(PnlMat *sigma) const {
+void Ocelia::adjust_sigma(PnlMat * const sigma) const {
     for(int i = 0; i < 3; ++i){
         for(int j = 0; j < sigma->n; ++j){
             MLET(sigma, i, j) += MGET(sigma, i+4, j);
@@ -38,14 +38,14 @@ void Ocelia::adjust_sigma(PnlMat *sigma) const {
     }
 }
 
-void Ocelia::adjust_past(PnlMat *past) const {
+void Ocelia::adjust_past(PnlMat * const past) const {
     for(int i = 0; i < past->m; ++i){
         for(int j = 0; j < 3; ++j){
             MLET(past, i, j) = MGET(past, i, j)*MGET(past, i, j+4);
         }
     }
 }
-void Ocelia::adjust_spot(PnlVect *spot) const {
+void Ocelia::adjust_spot(PnlVect * const spot) const {
     for(int j = 0; j < 3; ++j){
         LET(spot, j) = GET(spot, j)*GET(spot, j+4);
     }

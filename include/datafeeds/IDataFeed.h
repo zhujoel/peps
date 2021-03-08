@@ -15,7 +15,7 @@ class IDataFeed{
         unsigned int date_column_;
         unsigned int nb_columns_;
 
-        IDataFeed(PnlVectInt *relevant_columns, unsigned int date_column, unsigned int nb_columns, const std::string &filepath);
+        IDataFeed(PnlVectInt * const relevant_columns, unsigned int date_column, unsigned int nb_columns, const std::string &filepath);
         virtual ~IDataFeed();
         
         virtual int get_number_valid_data() const = 0; // ignores null-value prices

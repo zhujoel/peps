@@ -5,7 +5,7 @@
 #include <math.h>
 #include <iostream>
 
-void split(std::string *output, const std::string &line, char delimiter){
+void split(std::string * const output, const std::string &line, char delimiter){
     std::stringstream string_stream(line);
     int i = 0;
     while(string_stream.good())   // loop will continue if string stream is error free
@@ -14,18 +14,18 @@ void split(std::string *output, const std::string &line, char delimiter){
     }
 }
 
-void trunc(PnlVect* vect, int n){
+void trunc(PnlVect * const vect, int n){
     int ten = pow(10, n);
     for(int i = 0; i < vect->size; ++i){
         LET(vect, i) = roundl(GET(vect, i)*ten)/ten;
     }
 }
 
-bool are_all_positive(const PnlVect *vect){
+bool are_all_positive(const PnlVect * const vect){
     return pnl_vect_min(vect) >= 0;
 }
 
-bool has_no_index_value_null(const std::string *array, const PnlVectInt *indexes){
+bool has_no_index_value_null(const std::string * const array, const PnlVectInt * const indexes){
     for(int i = 0; i < indexes->size; ++i){
         if(array[GET_INT(indexes, i)] == "null"){
             return false;

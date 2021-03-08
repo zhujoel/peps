@@ -1,6 +1,6 @@
 #include "market_data/IMarketData.h"
 
-IMarketData::IMarketData(const std::string &name, const DateTime *startDate, const DateTime *endDate){
+IMarketData::IMarketData(const std::string &name, const DateTime * const startDate, const DateTime * const endDate){
     this->name_ = name;
     this->startDate_ = new DateTime(startDate);
     this->endDate_ = new DateTime(endDate);

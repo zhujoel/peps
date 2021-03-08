@@ -1,6 +1,6 @@
 #include "pricers/StandardMonteCarloPricer.h"
 
-StandardMonteCarloPricer::StandardMonteCarloPricer(IModel *model, IDerivative *derivative, PnlRng *rng, double fdStep, int nbSamples)
+StandardMonteCarloPricer::StandardMonteCarloPricer(IModel * const model, IDerivative * const derivative, PnlRng * const rng, double fdStep, int nbSamples)
 : IPricer(model, derivative, rng, fdStep, nbSamples){
 
 }
@@ -9,7 +9,7 @@ StandardMonteCarloPricer::~StandardMonteCarloPricer(){
     
 }
 
-void StandardMonteCarloPricer::price_and_delta(const PnlMat *past, double t, const PnlMat *sigma, double &prix, double &price_std_dev, PnlVect *delta, PnlVect *delta_std_dev)
+void StandardMonteCarloPricer::price_and_delta(const PnlMat * const past, double t, const PnlMat * const sigma, double &prix, double &price_std_dev, PnlVect * const delta, PnlVect * const delta_std_dev)
 {
     prix = 0.;
     price_std_dev = 0.;
@@ -38,7 +38,7 @@ void StandardMonteCarloPricer::price_and_delta(const PnlMat *past, double t, con
     }
 }
 
-void StandardMonteCarloPricer::price(const PnlMat *past, double t, const PnlMat *sigma, double &prix, double &price_std_dev)
+void StandardMonteCarloPricer::price(const PnlMat * const past, double t, const PnlMat * const sigma, double &prix, double &price_std_dev)
 {
     prix = 0.;
     price_std_dev = 0.;
@@ -65,7 +65,7 @@ void StandardMonteCarloPricer::add_price(double t, double &prix, double &std_dev
     std_dev += price * price;
 }
 
-void StandardMonteCarloPricer::add_delta(double t, int pastSize, PnlVect *delta, PnlVect *std_dev)
+void StandardMonteCarloPricer::add_delta(double t, int pastSize, PnlVect * const delta, PnlVect * const std_dev)
 {
     double r = this->model_->rates_->get_domestic_rate();
     for (int d = 0; d < this->derivative_->size_; ++d)

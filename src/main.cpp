@@ -20,7 +20,7 @@
  * 10. dates de rebalancement (philippe)
  */
 
-void set_stream_from_filename(std::ostream &stream, std::fstream &file, char* filename){
+void set_stream_from_filename(std::ostream &stream, std::fstream &file, const char* const filename){
     file.open(filename, std::ios::out | std::ios::trunc);
     if(!file.is_open()){
         std::cout << "unable to open file.";
@@ -157,7 +157,7 @@ int main(int argc, char* argv[])
 
         // price
         mc->price(past, t, sigma, prix, prix_std_dev);
-        output_stream << historical->dates_[past_index] << "," << k << "," << t << "," << prix << "," << prix_std_dev << ",";
+        output_stream << historical->dates_[past_index+k] << "," << k << "," << t << "," << prix << "," << prix_std_dev << ",";
         output_stream << portfolio->V1_ << "," << portfolio->V2_ << "," << portfolio->get_portfolio_value(t, share_values) << ",";
         output_stream << portfolio->get_FinalPnL(t, prix, share_values) << "," << portfolio->get_valeur_liquidative(t, share_values) << ",";
         output_stream << portfolio->get_tracking_error(t, prix, share_values) << std::endl;

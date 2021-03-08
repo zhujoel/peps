@@ -3,7 +3,7 @@
 #include "pnl/pnl_matrix.h"
 #include <cstring>
 
-HistoricalMarketData::HistoricalMarketData(const std::string &name, const DateTime *startDate, const DateTime *endDate) 
+HistoricalMarketData::HistoricalMarketData(const std::string &name, const DateTime * const startDate, const DateTime * const endDate) 
     : IMarketData(name, startDate, endDate)
 {
     this->derivative_path_ = pnl_mat_new();

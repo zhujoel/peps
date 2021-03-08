@@ -1,6 +1,6 @@
 #include "pricers/IPricer.h"
 
-IPricer::IPricer(IModel *model, IDerivative *derivative, PnlRng *rng, double fdStep, int nbSamples){
+IPricer::IPricer(IModel * const model, IDerivative * const derivative, PnlRng * const rng, double fdStep, int nbSamples){
     this->model_ = model;
     this->derivative_ = derivative;
     this->rng_ = rng;

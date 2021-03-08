@@ -6,7 +6,7 @@ class HistoricalMarketData : public IMarketData{
     public:
         PnlMat *derivative_path_;
 
-        HistoricalMarketData(const std::string &name, const DateTime *startDate, const DateTime *endDate);
+        HistoricalMarketData(const std::string &name, const DateTime * const startDate, const DateTime * const endDate);
         ~HistoricalMarketData();
         
         void set_data();

@@ -10,8 +10,8 @@ class IModel{
         int nbTimeSteps_;
         InterestRate* rates_;
 
-        IModel(int size, int nbTimeSteps, InterestRate* rates);
+        IModel(int size, int nbTimeSteps, InterestRate * const rates);
         virtual ~IModel();
-        virtual void asset(PnlMat *path, double t, double T, PnlRng *rng, const PnlMat *past, const PnlMat *sigma) = 0;
-        virtual void shift_asset(PnlMat *shift_path, const PnlMat *path, int d, double h, int startIndex) const = 0;
+        virtual void asset(PnlMat * const path, double t, double T, PnlRng * const rng, const PnlMat * const past, const PnlMat * const sigma) = 0;
+        virtual void shift_asset(PnlMat * const shift_path, const PnlMat * const path, int d, double h, int startIndex) const = 0;
 };

@@ -4,7 +4,7 @@
 #include <fstream>
 #include <sstream>
 
-MarketDataFeed::MarketDataFeed(PnlVectInt *relevant_columns, unsigned int date_column, unsigned int nb_columns, const std::string &filepath)
+MarketDataFeed::MarketDataFeed(PnlVectInt * const relevant_columns, unsigned int date_column, unsigned int nb_columns, const std::string &filepath)
     : IDataFeed(relevant_columns, date_column, nb_columns, filepath) {}
 
 int MarketDataFeed::get_number_valid_data() const

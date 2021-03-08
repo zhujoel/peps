@@ -9,7 +9,7 @@ DateTime::DateTime(int dd, int mm, int yyyy)
     this->yyyy_ = yyyy;
 }
 
-DateTime::DateTime(const DateTime *date)
+DateTime::DateTime(const DateTime * const date)
 {
     this->dd_ = date->dd_;
     this->mm_ = date->mm_;
@@ -20,7 +20,7 @@ DateTime::~DateTime(){
 
 }
 
-int DateTime::compare(const DateTime *dt) const{
+int DateTime::compare(const DateTime * const dt) const{
     if(this->yyyy_ < dt->yyyy_){
         return -1;
     }
@@ -54,7 +54,7 @@ DateTime* DateTime::copy() const{
     return new DateTime(this->dd_, this->mm_, this->yyyy_);
 }
 
-std::ostream &operator<<(std::ostream &output, const DateTime *dt){
+std::ostream &operator<<(std::ostream &output, const DateTime * const dt){
     output << dt->dd_ << "/" << dt->mm_ << "/" << dt->yyyy_;
     return output;
 }

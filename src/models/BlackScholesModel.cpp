@@ -1,7 +1,7 @@
 #include "models/BlackScholesModel.h"
 #include "libs/MathLib.h"
 
-BlackScholesModel::BlackScholesModel(int size, int nbTimeSteps, InterestRate* rates) : IModel(size, nbTimeSteps, rates)
+BlackScholesModel::BlackScholesModel(int size, int nbTimeSteps, InterestRate * const rates) : IModel(size, nbTimeSteps, rates)
 {
     this->volatility_ = pnl_vect_create(this->size_);
     this->G_ = pnl_vect_create(this->size_); 
@@ -15,7 +15,7 @@ BlackScholesModel::~BlackScholesModel()
     pnl_vect_free(&this->B_);
 }
 
-void BlackScholesModel::asset(PnlMat *path, double t, double T, PnlRng *rng, const PnlMat *past, const PnlMat *sigma)
+void BlackScholesModel::asset(PnlMat * const path, double t, double T, PnlRng * const rng, const PnlMat * const past, const PnlMat * const sigma)
 {
     // path c'est 4 sous-jacent + 3 zc
     // path, size: 4 + 3 (actif sans risque étrangers en domestique)
@@ -44,7 +44,7 @@ void BlackScholesModel::asset(PnlMat *path, double t, double T, PnlRng *rng, con
     }
 }
 
-void BlackScholesModel::shift_asset(PnlMat *shift_path, const PnlMat *path, int d, double h, int startIdx) const
+void BlackScholesModel::shift_asset(PnlMat * const shift_path, const PnlMat * const path, int d, double h, int startIdx) const
 {
     if (h>0)
     {

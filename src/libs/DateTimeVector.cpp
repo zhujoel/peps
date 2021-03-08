@@ -15,7 +15,7 @@ void parse_dates_file(std::vector<DateTime*> &dates, const std::string &fileName
     }
 }
 
-void calcul_indices_dates(PnlVectInt *indices, const std::vector<DateTime*> &all_dates, const std::vector<DateTime*> &dates_subset)
+void calcul_indices_dates(PnlVectInt * const indices, const std::vector<DateTime*> &all_dates, const std::vector<DateTime*> &dates_subset)
 {
     pnl_vect_int_resize(indices, dates_subset.size());
     int cnt = 0;
@@ -32,7 +32,7 @@ void calcul_indices_dates(PnlVectInt *indices, const std::vector<DateTime*> &all
     }
 }
 
-int get_indice_from_date(const std::vector<DateTime*> &all_dates, const DateTime *date)
+int get_indice_from_date(const std::vector<DateTime*> &all_dates, const DateTime * const date)
 {
     for(unsigned int i = 0; i < all_dates.size(); ++i){
         if(all_dates[i]->compare(date) == 0){
@@ -64,7 +64,7 @@ std::vector<DateTime*> same_dates(const std::vector<DateTime*> &v1, const std::v
     return same_dates;
 }
 
-void get_prices_from_date(PnlVect *prices, const std::vector<DateTime*> &allDates, const std::vector<DateTime*> &subset, const PnlVect *allPrices)
+void get_prices_from_date(PnlVect * const prices, const std::vector<DateTime*> &allDates, const std::vector<DateTime*> &subset, const PnlVect * const allPrices)
 {
     PnlVectInt* indices = pnl_vect_int_new();
     calcul_indices_dates(indices, allDates, subset);
@@ -76,7 +76,7 @@ void get_prices_from_date(PnlVect *prices, const std::vector<DateTime*> &allDate
     pnl_vect_int_free(&indices);
 }
 
-void get_prices_from_date(PnlMat *prices, const std::vector<DateTime*> &allDates, const std::vector<DateTime*> &subset, const PnlMat *allPrices)
+void get_prices_from_date(PnlMat * const prices, const std::vector<DateTime*> &allDates, const std::vector<DateTime*> &subset, const PnlMat * const allPrices)
 {
     PnlVectInt* indices = pnl_vect_int_new();
     calcul_indices_dates(indices, allDates, subset);
@@ -90,7 +90,7 @@ void get_prices_from_date(PnlMat *prices, const std::vector<DateTime*> &allDates
     pnl_vect_int_free(&indices);
 }
 
-void get_subset_path_from_dates(PnlMat *subset_path, const std::vector<DateTime*> &allDates, const std::vector<DateTime*> &subset, const PnlMat *path)
+void get_subset_path_from_dates(PnlMat * const subset_path, const std::vector<DateTime*> &allDates, const std::vector<DateTime*> &subset, const PnlMat * const path)
 {
     PnlVectInt* indices = pnl_vect_int_new();
     calcul_indices_dates(indices, allDates, subset);
@@ -103,7 +103,7 @@ void get_subset_path_from_dates(PnlMat *subset_path, const std::vector<DateTime*
     pnl_vect_int_free(&indices);
 }
 
-void from_date_to_date(std::vector<DateTime*> &from_to, const std::vector<DateTime*> &allDates, const DateTime *from, const DateTime *to) // includes both from and to
+void from_date_to_date(std::vector<DateTime*> &from_to, const std::vector<DateTime*> &allDates, const DateTime * const from, const DateTime * const to) // includes both from and to
 {
     unsigned int idx = 0;
     bool hasStarted = false;
