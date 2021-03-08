@@ -20,7 +20,7 @@
  * 10. dates de rebalancement (philippe)
  */
 
-void set_stream_from_argv(std::ostream &stream, std::fstream &file, char* filename){
+void set_stream_from_filename(std::ostream &stream, std::fstream &file, char* filename){
     file.open(filename, std::ios::out | std::ios::trunc);
     if(!file.is_open()){
         std::cout << "unable to open file.";
@@ -70,7 +70,7 @@ int main(int argc, char* argv[])
 
     // MONTE CARLO
     double fdStep = 0.1;
-    int nbSamples = 100;
+    int nbSamples = 1;
     PnlRng *rng = pnl_rng_create(PNL_RNG_MERSENNE);
     pnl_rng_sseed(rng, std::time(NULL));
     IPricer *mc = new StandardMonteCarloPricer(model, ocelia, rng, fdStep, nbSamples);
@@ -79,27 +79,16 @@ int main(int argc, char* argv[])
      * ********* SIMULATION *********
      */
 
-
     // PAYOFF EFFECTIVEMENT VERSE
     ocelia->adjust_past(ocelia_path);
     double real_payoff = ocelia->payoff(ocelia_path);
     double real_date_payoff = ocelia->get_annee_payoff(); 
-    DateTime* real_datetime_payoff;
-    if(real_date_payoff == 4){ // par rapport à la date de début : 15/05/2008
-        real_datetime_payoff = new DateTime(11, 5, 2012);
-    }
-    else if(real_date_payoff == 5){
-        real_datetime_payoff = new DateTime(13, 5, 2013);
-    }
-    else if(real_date_payoff == 6){
-        real_datetime_payoff = new DateTime(13, 5, 2014);
-    }
-    else if(real_date_payoff == 7){
-        real_datetime_payoff = new DateTime(13, 5, 2015);
-    }
-    else if(real_date_payoff == 8){
-        real_datetime_payoff = new DateTime(13, 5, 2016);
-    }
+    DateTime* real_datetime_payoff; // par rapport à la date de début : 15/05/2008
+    if(real_date_payoff == 4) real_datetime_payoff = new DateTime(11, 5, 2012);
+    else if(real_date_payoff == 5) real_datetime_payoff = new DateTime(13, 5, 2013);
+    else if(real_date_payoff == 6) real_datetime_payoff = new DateTime(13, 5, 2014);
+    else if(real_date_payoff == 7) real_datetime_payoff = new DateTime(13, 5, 2015);
+    else if(real_date_payoff == 8) real_datetime_payoff = new DateTime(13, 5, 2016);
 
     // PRICING & HEADGING en 0
     double prix = 0.;
@@ -124,8 +113,8 @@ int main(int argc, char* argv[])
     std::fstream delta_file;
 
     if(argc > 1){
-        set_stream_from_argv(output_stream, output_file, argv[1]);
-        if(argc > 2) set_stream_from_argv(delta_stream, delta_file, argv[2]);
+        set_stream_from_filename(output_stream, output_file, argv[1]);
+        if(argc > 2) set_stream_from_filename(delta_stream, delta_file, argv[2]);
         else delta_stream.rdbuf(std::cout.rdbuf());
     }
     else output_stream.rdbuf(std::cout.rdbuf());
@@ -142,47 +131,58 @@ int main(int argc, char* argv[])
     // PRICING & HEADGING en t
     for(int k = 1; k < nbTimeSteps; ++k)
     {
+        // TODO: mettre >= 0 plutot ?
         if (((historical->dates_[past_index+k])->compare(real_datetime_payoff))==1) {
             std::cout << "Un payoff de " << real_payoff << " à été versé au client le " << real_datetime_payoff << std::endl;
             break;
         }
 
         double t = k*(T/nbTimeSteps);
+
+        // update the sigma to take into account changes in real life
         compute_sigma(sigma, historical->path_, estimation_start+k, estimation_end+k);
 
+        // add historical values to past
         pnl_mat_get_row(share_values, historical->path_, past_index+k);
         ocelia->adjust_spot(share_values);
         pnl_mat_add_row(past, past->m, share_values);
         
+        // rebalance
         if(k%30==0){
             mc->price_and_delta(past, t, sigma, prix, prix_std_dev, delta, delta_std_dev);
             portfolio->rebalancing(t, delta, share_values);
+            delta_stream << historical->dates_[past_index] << "," << k << "," << delta << "," << delta_std_dev << std::endl;
+
         }
 
+        // price
         mc->price(past, t, sigma, prix, prix_std_dev);
-
-        // PRINT
         output_stream << historical->dates_[past_index] << "," << k << "," << t << "," << prix << "," << prix_std_dev << ",";
         output_stream << portfolio->V1_ << "," << portfolio->V2_ << "," << portfolio->get_portfolio_value(t, share_values) << ",";
         output_stream << portfolio->get_FinalPnL(t, prix, share_values) << "," << portfolio->get_valeur_liquidative(t, share_values) << ",";
         output_stream << portfolio->get_tracking_error(t, prix, share_values) << std::endl;
-    
-        if(k%30==0){
-            delta_stream << historical->dates_[past_index] << "," << k << "," << delta << "," << delta_std_dev << std::endl;
-        }
     }
 
 
-    if(argc > 1){
-        output_file.close();
-        if(argc > 2){
-            delta_file.close();
-        }
-    }
+    // DELETE
     delete historical;
+    pnl_mat_free(&ocelia_path);
+    pnl_mat_free(&past);
     pnl_mat_free(&sigma);
-    delete mc;
-    delete ocelia;
+    delete rates;
     delete model;
+    delete ocelia;
+    delete_date_vector(dates_semestrielles);
+    delete_date_vector(dates_valeurs_n_ans);
     pnl_rng_free(&rng);
+    delete mc;
+    delete real_datetime_payoff;
+    pnl_vect_free(&delta);
+    pnl_vect_free(&delta_std_dev);
+    pnl_vect_free(&share_values);
+    delete portfolio;
+    if(argc == 1){
+        output_file.close();
+        if(argc > 2) delta_file.close();
+    }
 }

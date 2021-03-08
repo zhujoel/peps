@@ -29,6 +29,7 @@ void BlackScholesModel::asset(PnlMat *path, double t, double T, PnlRng *rng, con
     compute_volatility(this->volatility_, sigma);
     // TODO: ya peut etre une erreur sur timestep ?
     double timestep = T/this->nbTimeSteps_;
+    // TODO: possible d'opti le copie de past
     pnl_mat_set_subblock(path, past, 0, 0);
 
     for (int k = past->m; k < path->m; ++k)
