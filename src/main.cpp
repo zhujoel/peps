@@ -64,13 +64,13 @@ int main(int argc, char* argv[])
     Ocelia *ocelia = new Ocelia(T, size, nb_sous_jacents);
     std::vector<DateTime*> dates_semestrielles;
     std::vector<DateTime*> dates_valeurs_n_ans;
-    parse_dates_file(dates_semestrielles, "../tests/test_data/ocelia/dates_semest.csv", 16, '-');
-    parse_dates_file(dates_valeurs_n_ans, "../tests/test_data/ocelia/dates_valeurs_n.csv", 35, '-');
+    parse_dates_file(dates_semestrielles, "../data/dates/dates_semest.csv", 16, '-');
+    parse_dates_file(dates_valeurs_n_ans, "../data/dates/dates_valeurs_n.csv", 35, '-');
     ocelia->init_indices(ocelia_dates, dates_semestrielles, dates_valeurs_n_ans);
 
     // MONTE CARLO
     double fdStep = 0.1;
-    int nbSamples = 1;
+    int nbSamples = 100;
     PnlRng *rng = pnl_rng_create(PNL_RNG_MERSENNE);
     pnl_rng_sseed(rng, std::time(NULL));
     IPricer *mc = new StandardMonteCarloPricer(model, ocelia, rng, fdStep, nbSamples);
