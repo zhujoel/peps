@@ -11,7 +11,7 @@ class IMarketData{
         PnlMat *path_; // tous les prix entre start_date_ et end_date_
         PnlMat *interest_path_; // taux d'intérets des devises utilisées
         
-        IMarketData(const std::string &name, const DateTime * const tartDate, const DateTime * const endDate);
+        IMarketData(const std::string &name, const DateTime * const startDate, const DateTime * const endDate);
         virtual ~IMarketData();
 
         virtual void set_data() = 0;
