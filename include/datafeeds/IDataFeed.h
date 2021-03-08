@@ -1,11 +1,11 @@
 #pragma once
 
-#include "libs/DateTime.h"
+#include "../libs/DateTime.h"
 #include "pnl/pnl_matrix.h"
 #include <string>
 #include <vector>
 
-class IDataFeed{
+class __declspec(dllexport) IDataFeed{
     public:
         std::string filepath_;
         std::vector<DateTime*> dates_;
