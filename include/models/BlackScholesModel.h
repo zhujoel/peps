@@ -9,7 +9,7 @@ class BlackScholesModel : public IModel{
         PnlVect *G_; /// Vecteur Gaussien
         PnlVect *B_; // Brownien (produit matriciel L * G);
 
-        BlackScholesModel(int size, int nbTimeSteps, double rd);
+        BlackScholesModel(int size, int nbTimeSteps, InterestRate* rates);
         ~BlackScholesModel();
         
         void asset(PnlMat *path, double t, double T, PnlRng *rng, const PnlMat *past, const PnlMat *sigma);

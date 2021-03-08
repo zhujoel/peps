@@ -42,9 +42,9 @@ int main(){
 
     // BLACK-SCHOLES
     int size = 7;
-    double rd = 0.03;
+    InterestRate* rates = new InterestRate(0, new DateTime(15, 5, 2008), historical->dates_, historical->interest_path_);
     int nbTimeSteps = ocelia_dates.size();
-    IModel *model = new BlackScholesModel(size, nbTimeSteps, rd);
+    IModel *model = new BlackScholesModel(size, nbTimeSteps, rates);
 
     // OCELIA
     double T = 2920./365.25; // 2920 est le nb de jours entre 15/05/2008 et 13/05/2016
@@ -103,7 +103,7 @@ int main(){
     mc->price_and_delta(past, 0, sigma, prix, prix_std_dev, delta, delta_std_dev);
     
     double val_liquidative_initiale = 100.;
-    HedgingPortfolio *portfolio = new HedgingPortfolio(prix, delta, share_values, rd, val_liquidative_initiale);
+    HedgingPortfolio *portfolio = new HedgingPortfolio(prix, delta, share_values, rates, val_liquidative_initiale);
 
     std::cout << historical->dates_[past_index] << " prix : " << prix << ", prix sdt dev : " << prix_std_dev << std::endl;
     std::cout << "      k : " << 0 <<"  t : " << 0 << std::endl;

@@ -3,7 +3,7 @@
 #include "libs/HedgingPortfolio.h"
 #include "pnl/pnl_mathtools.h"
 
-HedgingPortfolio::HedgingPortfolio(double prix, const PnlVect* delta, const PnlVect* share_values, double rd, double val_liquidative_initiale)
+HedgingPortfolio::HedgingPortfolio(double prix, const PnlVect* delta, const PnlVect* share_values, InterestRate* rates, double val_liquidative_initiale)
 {
     double marge_initiale = val_liquidative_initiale - prix;
     if (marge_initiale<0) 
@@ -12,7 +12,7 @@ HedgingPortfolio::HedgingPortfolio(double prix, const PnlVect* delta, const PnlV
     } 
     this->val_liquidative_initiale_ = val_liquidative_initiale;
     this->last_rebalancing_t_ = 0;
-    this->rd_ = rd;
+    this->rates_ = rates;
     this->delta_ = pnl_vect_new();
     pnl_vect_clone(this->delta_, delta);
     this->V1_ = prix - pnl_vect_scalar_prod(delta, share_values);
@@ -26,8 +26,8 @@ HedgingPortfolio::~HedgingPortfolio()
 
 void HedgingPortfolio::rebalancing(double t, const PnlVect* delta, const PnlVect* share_values)
 {
-    this->V1_ *= exp(this->rd_*(t-this->last_rebalancing_t_)); 
-    this->V2_ *= exp(this->rd_*(t-this->last_rebalancing_t_));
+    this->V1_ *= exp(this->rates_->get_domestic_rate()*(t-this->last_rebalancing_t_)); 
+    this->V2_ *= exp(this->rates_->get_domestic_rate()*(t-this->last_rebalancing_t_));
 
     double risk_variation = 0.;
     for (int d = 0; d < delta->size; ++d)
@@ -43,7 +43,7 @@ void HedgingPortfolio::rebalancing(double t, const PnlVect* delta, const PnlVect
 
 double HedgingPortfolio::get_portfolio_value(double t, const PnlVect* share_values) const
 {
-    return exp(this->rd_*(t-this->last_rebalancing_t_))*this->V1_ + pnl_vect_scalar_prod(this->delta_, share_values);
+    return exp(this->rates_->get_domestic_rate()*(t-this->last_rebalancing_t_))*this->V1_ + pnl_vect_scalar_prod(this->delta_, share_values);
 }
 
 double HedgingPortfolio::get_tracking_error(double t, double prix, const PnlVect* share_values) const
@@ -53,7 +53,7 @@ double HedgingPortfolio::get_tracking_error(double t, double prix, const PnlVect
 
 double HedgingPortfolio::get_valeur_liquidative(double t, const PnlVect* share_values) const
 {
-    return exp(this->rd_*(t-this->last_rebalancing_t_))*this->V2_ + pnl_vect_scalar_prod(this->delta_, share_values);
+    return exp(this->rates_->get_domestic_rate()*(t-this->last_rebalancing_t_))*this->V2_ + pnl_vect_scalar_prod(this->delta_, share_values);
 }
 
 double HedgingPortfolio::get_FinalPnL(double t, double payoff, const PnlVect* share_values) const

@@ -11,7 +11,7 @@ class BlackScholesModelTest: public ::testing::Test{
         PnlMat *sigma;
         PnlVect *volatility;
         int size;
-        double rd;
+        InterestRate* rates;
         int nbTimeSteps;
         double T;
         PnlRng *rng;
@@ -25,12 +25,12 @@ class BlackScholesModelTest: public ::testing::Test{
             this->volatility = pnl_vect_create(this->sigma->m);
             compute_volatility(this->volatility, this->sigma);
             this->size = 7;
-            this->rd = 0;
+            rates = new InterestRate(0, new DateTime(28, 05, 2008), this->historical->dates_, this->historical->interest_path_);
             this->nbTimeSteps = this->historical->path_->m + 100;
             this->T = this->nbTimeSteps/250;
             this->rng = pnl_rng_create(PNL_RNG_MERSENNE);
             pnl_rng_sseed(this->rng, std::time(NULL));
-            this->bs = new BlackScholesModel(this->size, this->nbTimeSteps, this->rd);
+            this->bs = new BlackScholesModel(this->size, this->nbTimeSteps, this->rates);
         }
 
         virtual void TearDown(){

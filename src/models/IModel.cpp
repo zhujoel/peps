@@ -1,8 +1,8 @@
 #include "models/IModel.h"
 
-IModel::IModel(int size, int nbTimeSteps, double rd){
+IModel::IModel(int size, int nbTimeSteps, InterestRate* rates){
     this->size_ = size;
-    this->rd_ = rd;
+    this->rates_ = rates;
     this->nbTimeSteps_ = nbTimeSteps;
 }
 
