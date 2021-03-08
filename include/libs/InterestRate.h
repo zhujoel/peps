@@ -11,7 +11,7 @@ class InterestRate{
         std::vector<DateTime*> all_dates_;
         PnlMat *interest_path_;
 
-        InterestRate(double t, DateTime * const current_date, std::vector<DateTime*> all_dates, PnlMat * const interest_path);
+        InterestRate(double t, DateTime * const current_date, const std::vector<DateTime*> &all_dates, PnlMat * const interest_path);
         ~InterestRate();
 
         void set_current_date(double t, DateTime * const current_date);

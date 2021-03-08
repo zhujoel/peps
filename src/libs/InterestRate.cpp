@@ -1,6 +1,6 @@
 #include "libs/InterestRate.h"
 
-InterestRate::InterestRate(double t, DateTime * const current_date, std::vector<DateTime*> all_dates, PnlMat * const interest_path){
+InterestRate::InterestRate(double t, DateTime * const current_date, const std::vector<DateTime*> &all_dates, PnlMat * const interest_path){
     this->t_ = t;
     this->current_date_ = current_date;
     this->all_dates_ = all_dates;
