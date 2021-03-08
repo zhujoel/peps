@@ -1,8 +1,10 @@
 #include <iostream>
+#include <fstream>
 #include <vector>
 #include <ctime>
 #include "pnl/pnl_matrix.h"
 #include "pnl/pnl_random.h"
+#include "libs/Utilities.h"
 #include "libs/MathLib.h"
 #include "derivatives/Ocelia.h"
 #include "models/BlackScholesModel.h"
@@ -14,10 +16,21 @@
  * TODO:
  * 4. taux d'intéret étrangers
  * 7. output/input montecarlo en t
+ * 9. récupérer les vrais valeur de océlia
+ * 10. dates de rebalancement (philippe)
  */
 
-int main(){
+void set_stream_from_argv(std::ostream &stream, std::fstream &file, char* filename){
+    file.open(filename, std::ios::out | std::ios::trunc);
+    if(!file.is_open()){
+        std::cout << "unable to open file.";
+        exit(EXIT_FAILURE);
+    }
+    stream.rdbuf(file.rdbuf());
+}
 
+int main(int argc, char* argv[])
+{
     // PROCESSING MARKET DATA
     IMarketData *historical = new HistoricalMarketData("Ocelia", new DateTime(1, 1, 2005), new DateTime(1, 1, 2017));
     historical->set_data();
@@ -39,7 +52,6 @@ int main(){
     PnlMat *sigma = pnl_mat_new();
     compute_sigma(sigma, historical->path_, estimation_start, estimation_end);
     
-
     // BLACK-SCHOLES
     int size = 7;
     InterestRate* rates = new InterestRate(0, new DateTime(15, 5, 2008), historical->dates_, historical->interest_path_);
@@ -58,7 +70,7 @@ int main(){
 
     // MONTE CARLO
     double fdStep = 0.1;
-    int nbSamples = 1000;
+    int nbSamples = 100;
     PnlRng *rng = pnl_rng_create(PNL_RNG_MERSENNE);
     pnl_rng_sseed(rng, std::time(NULL));
     IPricer *mc = new StandardMonteCarloPricer(model, ocelia, rng, fdStep, nbSamples);
@@ -102,22 +114,30 @@ int main(){
 
     mc->price_and_delta(past, 0, sigma, prix, prix_std_dev, delta, delta_std_dev);
     
-    double val_liquidative_initiale = 100.;
+    double val_liquidative_initiale = 100.; // TODO: a facto car c'est codé en dur dans océlia aussi
     HedgingPortfolio *portfolio = new HedgingPortfolio(prix, delta, share_values, rates, val_liquidative_initiale);
 
-    std::cout << historical->dates_[past_index] << " prix : " << prix << ", prix sdt dev : " << prix_std_dev << std::endl;
-    std::cout << "      k : " << 0 <<"  t : " << 0 << std::endl;
-    std::cout << "      share values : ";
-    pnl_vect_print_asrow(share_values);
-    std::cout << "      delta : ";
-    pnl_vect_print_asrow(delta);
-    std::cout << "      delta std dev : ";
-    pnl_vect_print_asrow(delta_std_dev);
-    std::cout << "      V1 : " << portfolio->V1_ << ",  Pf de couverture : " << portfolio->get_portfolio_value(0, share_values) << ",  PnL : " << portfolio->get_tracking_error(0, prix, share_values) << std::endl;
-    std::cout << "      V2 : " << portfolio->V2_ << ",  Valeur liquidative : " << portfolio->get_valeur_liquidative(0, share_values) << ",  PnL : " << portfolio->get_FinalPnL(0, prix, share_values) << std::endl;
-    std::cout << std::endl;
+    // PRINT 
+    std::ostream output_stream(nullptr);
+    std::ostream delta_stream(nullptr);
+    std::fstream output_file;
+    std::fstream delta_file;
 
-    // TODO: faire un vrai truc pour les dates de rebalancement
+    if(argc > 1){
+        set_stream_from_argv(output_stream, output_file, argv[1]);
+        if(argc > 2) set_stream_from_argv(delta_stream, delta_file, argv[2]);
+        else delta_stream.rdbuf(std::cout.rdbuf());
+    }
+    else output_stream.rdbuf(std::cout.rdbuf());
+
+    output_stream << "Date,k,t,prix,prix_std_dev,V1,V2,Pf_couverture,Pnl,Valeur_liquidative,Tracking_error" << std::endl;
+    delta_stream << "Date,k,delta,delta_std_dev" << std::endl;
+
+    output_stream << historical->dates_[past_index] << "," << 0 << "," << 0 << "," << prix << "," << prix_std_dev << ",";
+    output_stream << portfolio->V1_ << "," << portfolio->V2_ << "," << portfolio->get_portfolio_value(0, share_values) << ",";
+    output_stream << portfolio->get_FinalPnL(0, prix, share_values) << "," << portfolio->get_valeur_liquidative(0, share_values) << ",";
+    output_stream << portfolio->get_tracking_error(0, prix, share_values) << std::endl;
+    delta_stream << historical->dates_[past_index] << "," << 0 << "," << delta << "," << delta_std_dev << std::endl;
 
     // PRICING & HEADGING en t
     for(int k = 1; k < nbTimeSteps; ++k)
@@ -141,21 +161,24 @@ int main(){
 
         mc->price(past, t, sigma, prix, prix_std_dev);
 
-        std::cout << historical->dates_[past_index+k] << " prix : " << prix << ", prix sdt dev : " << prix_std_dev << std::endl;
-        std::cout << "      k : " << k <<"  t : " << t << std::endl;
-        std::cout << "      share values : "; 
-        pnl_vect_print_asrow(share_values);
+        // PRINT
+        output_stream << historical->dates_[past_index] << "," << k << "," << t << "," << prix << "," << prix_std_dev << ",";
+        output_stream << portfolio->V1_ << "," << portfolio->V2_ << "," << portfolio->get_portfolio_value(t, share_values) << ",";
+        output_stream << portfolio->get_FinalPnL(t, prix, share_values) << "," << portfolio->get_valeur_liquidative(t, share_values) << ",";
+        output_stream << portfolio->get_tracking_error(t, prix, share_values) << std::endl;
+    
         if(k%30==0){
-            std::cout << "      delta : ";
-            pnl_vect_print_asrow(delta);
-            std::cout << "      delta std dev : ";
-            pnl_vect_print_asrow(delta_std_dev);
+            delta_stream << historical->dates_[past_index] << "," << k << "," << delta << "," << delta_std_dev << std::endl;
         }
-        std::cout << "      V1 : " << portfolio->V1_ << ",  Pf de couverture : " << portfolio->get_portfolio_value(t, share_values) << ",  Tracking error : " << portfolio->get_tracking_error(t, prix, share_values) << std::endl;
-        std::cout << "      V2 : " << portfolio->V2_ << ",  Valeur liquidative : " << portfolio->get_valeur_liquidative(t, share_values) << ",  PnL : " << portfolio->get_FinalPnL(t, prix, share_values) << std::endl;
-        std::cout << std::endl;
     }
 
+
+    if(argc > 1){
+        output_file.close();
+        if(argc > 2){
+            delta_file.close();
+        }
+    }
     delete historical;
     pnl_mat_free(&sigma);
     delete mc;

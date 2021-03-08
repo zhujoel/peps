@@ -3,6 +3,7 @@
 #include <sstream>
 #include <string>
 #include <math.h>
+#include <iostream>
 
 void split(std::string *output, const std::string &line, char delimiter){
     std::stringstream string_stream(line);
@@ -31,4 +32,17 @@ bool has_no_index_value_null(const std::string *array, const PnlVectInt *indexes
         }
     }
     return true;
+}
+
+
+std::ostream& operator<<(std::ostream &stm, const PnlVect * const vect)
+{
+    int length = vect->size;
+    if(length == 0) return stm;
+    for (int i = 0; i < length - 1; i++)
+    {
+        stm << GET(vect, i) << " ";
+    }
+    stm << GET(vect, length - 1);
+    return stm;
 }
