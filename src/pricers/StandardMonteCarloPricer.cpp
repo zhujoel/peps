@@ -19,7 +19,6 @@ void StandardMonteCarloPricer::price_and_delta(const PnlMat * const past, const 
 
     double rd = this->model_->rates_->get_domestic_rate();
 
-
     // compute sigma and volatility
     compute_sigma(this->model_->sigma_, &estimation_window, 0, estimation_window.m-1);
     this->derivative_->adjust_sigma(this->model_->sigma_);
@@ -31,8 +30,8 @@ void StandardMonteCarloPricer::price_and_delta(const PnlMat * const past, const 
     double M = this->nbSamples_;
     for(int j = 0; j < M; ++j){
         this->model_->asset(this->path_, t, this->derivative_->T_, this->rng_, rd, past->m);
-        this->add_price(t, prix, price_std_dev);
-        this->add_delta(t, past->m, delta, delta_std_dev);
+        this->add_price(t, rd, prix, price_std_dev);
+        this->add_delta(t, rd, past->m, delta, delta_std_dev);
     }
 
     // actualisation
@@ -68,7 +67,7 @@ void StandardMonteCarloPricer::price(const PnlMat * const past, const PnlMat est
     double M = this->nbSamples_;
     for(int j = 0; j < M; ++j){
         this->model_->asset(this->path_, t, this->derivative_->T_, this->rng_, rd, past->m);
-        this->add_price(t, prix, price_std_dev);
+        this->add_price(t, rd, prix, price_std_dev);
     }
 
     // actualisation
@@ -77,20 +76,18 @@ void StandardMonteCarloPricer::price(const PnlMat * const past, const PnlMat est
     price_std_dev = sqrt(exp(2)*(price_std_dev - prix * prix)/M);
 }
 
-void StandardMonteCarloPricer::add_price(double t, double &prix, double &std_dev)
+void StandardMonteCarloPricer::add_price(double t, double rd, double &prix, double &std_dev)
 {
-    double r = this->model_->rates_->get_domestic_rate();
     double T = this->derivative_->get_annee_payoff();
     double price = this->derivative_->payoff(this->path_);
-    price = exp(-r*(T-t))*price;
+    price = exp(-rd*(T-t))*price;
     
     prix += price;
     std_dev += price * price;
 }
 
-void StandardMonteCarloPricer::add_delta(double t, int pastSize, PnlVect * const delta, PnlVect * const std_dev)
+void StandardMonteCarloPricer::add_delta(double t, double rd, int pastSize, PnlVect * const delta, PnlVect * const std_dev)
 {
-    double r = this->model_->rates_->get_domestic_rate();
     for (int d = 0; d < this->derivative_->size_; ++d)
     {
         double T = this->derivative_->get_annee_payoff();
@@ -99,7 +96,7 @@ void StandardMonteCarloPricer::add_delta(double t, int pastSize, PnlVect * const
         this->model_->shift_asset(this->shift_path_, this->path_, d, -this->fdStep_, pastSize);
         double payoff_2 = this->derivative_->payoff(this->shift_path_);
         double diff = payoff_1 - payoff_2;
-        diff = exp(-r*(T-t))*diff;
+        diff = exp(-rd*(T-t))*diff;
 
         LET(delta, d) += diff;
         LET(std_dev, d) += diff * diff;

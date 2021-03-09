@@ -15,7 +15,6 @@ void InterestRate::set_current_date(double t, DateTime * const current_date){
 }
 
 double InterestRate::get_domestic_rate(){
-    // idx = get_indice_from_date(this->all_dates, this->current_date_);
-    // return MGET(this->interest_path_, idx, 3);
-    return 0.03;
+    int idx = get_indice_from_date(this->all_dates_, this->current_date_);
+    return MGET(this->interest_path_, idx, this->interest_path_->m-1);
 }

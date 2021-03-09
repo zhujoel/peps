@@ -19,6 +19,6 @@ class IPricer{
         
         virtual void price_and_delta(const PnlMat * const past, const PnlMat estimation_window, double t, double &prix, double &price_std_dev, PnlVect * const delta, PnlVect * const delta_std_dev) = 0;
         virtual void price(const PnlMat * const past, const PnlMat estimation_window, double t, double &prix, double &price_std_dev) = 0;
-        virtual void add_price(double t, double &prix, double &std_dev) = 0;
-        virtual void add_delta(double t, int pastSize, PnlVect * const delta, PnlVect * const std_dev) = 0;
+        virtual void add_price(double t, double rd, double &prix, double &std_dev) = 0;
+        virtual void add_delta(double t, double rd, int pastSize, PnlVect * const delta, PnlVect * const std_dev) = 0;
 };
