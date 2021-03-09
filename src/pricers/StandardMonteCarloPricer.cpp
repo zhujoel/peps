@@ -10,13 +10,18 @@ StandardMonteCarloPricer::~StandardMonteCarloPricer(){
     
 }
 
-void StandardMonteCarloPricer::price_and_delta(const PnlMat * const past, double t, double &prix, double &price_std_dev, PnlVect * const delta, PnlVect * const delta_std_dev)
+void StandardMonteCarloPricer::price_and_delta(const PnlMat * const past, const PnlMat estimation_window, double t, double &prix, double &price_std_dev, PnlVect * const delta, PnlVect * const delta_std_dev)
 {
     prix = 0.;
     price_std_dev = 0.;
     pnl_vect_set_zero(delta);
     pnl_vect_set_zero(delta_std_dev);
     double rd = this->model_->rates_->get_domestic_rate();
+
+    // update the sigma to take into account changes in real life
+    compute_sigma(this->model_->sigma_, &estimation_window, 0, estimation_window.m-1);
+    this->derivative_->adjust_sigma(this->model_->sigma_);
+    compute_volatility(this->model_->volatility_, this->model_->sigma_);
 
     pnl_mat_set_subblock(this->path_, past, 0, 0);
 
@@ -42,7 +47,7 @@ void StandardMonteCarloPricer::price_and_delta(const PnlMat * const past, double
     }
 }
 
-void StandardMonteCarloPricer::price(const PnlMat * const past, double t, double &prix, double &price_std_dev)
+void StandardMonteCarloPricer::price(const PnlMat * const past, const PnlMat estimation_window, double t, double &prix, double &price_std_dev)
 {
     prix = 0.;
     price_std_dev = 0.;

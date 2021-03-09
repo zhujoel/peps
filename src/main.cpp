@@ -54,8 +54,6 @@ int main(int argc, char* argv[])
     InterestRate* rates = new InterestRate(0, new DateTime(15, 5, 2008), historical->dates_, historical->interest_path_);
     int nbTimeSteps = ocelia_dates.size();
     IModel *model = new BlackScholesModel(size, nbTimeSteps, rates);
-    compute_sigma(model->sigma_, historical->path_, estimation_start, estimation_end);
-
 
     // OCELIA
     double T = 2920./365.25; // 2920 est le nb de jours entre 15/05/2008 et 13/05/2016
@@ -69,7 +67,7 @@ int main(int argc, char* argv[])
 
     // MONTE CARLO
     double fdStep = 0.1;
-    int nbSamples = 100;
+    int nbSamples = 10;
     PnlRng *rng = pnl_rng_create(PNL_RNG_MERSENNE);
     pnl_rng_sseed(rng, std::time(NULL));
     IPricer *mc = new StandardMonteCarloPricer(model, ocelia, rng, fdStep, nbSamples);
@@ -98,10 +96,8 @@ int main(int argc, char* argv[])
     pnl_mat_get_row(share_values, historical->path_, 0);
     ocelia->adjust_spot(share_values);
     ocelia->adjust_past(past);
-    ocelia->adjust_sigma(model->sigma_);
-    compute_volatility(model->volatility_, model->sigma_);
-
-    mc->price_and_delta(past, 0, prix, prix_std_dev, delta, delta_std_dev);
+    PnlMat estimation_window = pnl_mat_wrap_mat_rows(historical->path_, estimation_start, estimation_end);  
+    mc->price_and_delta(past, estimation_window, 0, prix, prix_std_dev, delta, delta_std_dev);
     
     double val_liquidative_initiale = 100.; // TODO: a facto car c'est codé en dur dans océlia aussi
     HedgingPortfolio *portfolio = new HedgingPortfolio(prix, delta, share_values, rates, val_liquidative_initiale);
@@ -131,7 +127,6 @@ int main(int argc, char* argv[])
     // PRICING & HEADGING en t
     for(int k = 1; k < nbTimeSteps; ++k)
     {
-        // TODO: mettre >= 0 plutot ?
         if (((historical->dates_[past_index+k])->compare(real_datetime_payoff))==1) {
             std::cout << "Un payoff de " << real_payoff << " à été versé au client le " << real_datetime_payoff << std::endl;
             break;
@@ -139,10 +134,7 @@ int main(int argc, char* argv[])
 
         double t = k*(T/nbTimeSteps);
 
-        // update the sigma to take into account changes in real life
-        compute_sigma(model->sigma_, historical->path_, estimation_start+k, estimation_end+k);
-        ocelia->adjust_sigma(model->sigma_);
-        compute_volatility(model->volatility_, model->sigma_);
+        estimation_window = pnl_mat_wrap_mat_rows(historical->path_, estimation_start+k, estimation_end+k);  
 
         // add historical values to past
         pnl_mat_get_row(share_values, historical->path_, past_index+k);
@@ -151,14 +143,14 @@ int main(int argc, char* argv[])
         
         // rebalance
         if(k%30==0){
-            mc->price_and_delta(past, t, prix, prix_std_dev, delta, delta_std_dev);
+            mc->price_and_delta(past, estimation_window, t, prix, prix_std_dev, delta, delta_std_dev);
             portfolio->rebalancing(t, delta, share_values);
             delta_stream << historical->dates_[past_index+k] << "," << k << "," << delta << "," << delta_std_dev << std::endl;
 
         }
 
         // price
-        mc->price(past, t, prix, prix_std_dev);
+        mc->price(past, estimation_window, t, prix, prix_std_dev);
         output_stream << historical->dates_[past_index+k] << "," << k << "," << t << "," << prix << "," << prix_std_dev << ",";
         output_stream << portfolio->V1_ << "," << portfolio->V2_ << "," << portfolio->get_portfolio_value(t, share_values) << ",";
         output_stream << portfolio->get_FinalPnL(t, prix, share_values) << "," << portfolio->get_valeur_liquidative(t, share_values) << ",";
