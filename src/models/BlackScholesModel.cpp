@@ -3,19 +3,17 @@
 
 BlackScholesModel::BlackScholesModel(int size, int nbTimeSteps, InterestRate * const rates) : IModel(size, nbTimeSteps, rates)
 {
-    this->volatility_ = pnl_vect_create(this->size_);
     this->G_ = pnl_vect_create(this->size_); 
     this->B_ = pnl_vect_create(this->size_);
 }
 
 BlackScholesModel::~BlackScholesModel()
 {
-    pnl_vect_free(&this->volatility_);
     pnl_vect_free(&this->G_);
     pnl_vect_free(&this->B_);
 }
 
-void BlackScholesModel::asset(PnlMat * const path, double t, double T, PnlRng * const rng, const PnlMat * const past, const PnlMat * const sigma)
+void BlackScholesModel::asset(PnlMat * const path, double t, double T, PnlRng * const rng, int startIdx, double rd, const PnlMat * const sigma)
 {
     // path c'est 4 sous-jacent + 3 zc
     // path, size: 4 + 3 (actif sans risque étrangers en domestique)
@@ -26,13 +24,10 @@ void BlackScholesModel::asset(PnlMat * const path, double t, double T, PnlRng * 
     // 4: zc gbp
     // 5: zc jpy
     // 6: zc chf
-    compute_volatility(this->volatility_, sigma);
     // TODO: ya peut etre une erreur sur timestep ?
     double timestep = T/this->nbTimeSteps_;
-    // TODO: possible d'opti le copie de past
-    pnl_mat_set_subblock(path, past, 0, 0);
 
-    for (int k = past->m; k < path->m; ++k)
+    for (int k = startIdx; k < path->m; ++k)
     {
         pnl_vect_rng_normal(this->G_, this->size_, rng); // G Vecteur gaussien
         pnl_mat_mult_vect_inplace(this->B_, sigma, this->G_);

@@ -12,7 +12,7 @@ class IPricer{
         double fdStep_; // pas de constatation des produits
         int nbSamples_; // nombre de tirages de Monte-Carlo
         PnlMat *path_; // trajectoires des sous-jacents du modele
-        PnlMat *shift_path_; /*! espace mémoire d'une trajectoire shiftée par (1+h) */
+        PnlMat *shift_path_; // espace mémoire d'une trajectoire shiftée par (1+h)
 
         IPricer(IModel * const model, IDerivative * const derivative, PnlRng * const rng, double fdStep, int nbSamples);
         virtual ~IPricer();

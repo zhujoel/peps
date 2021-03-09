@@ -44,7 +44,8 @@ class BlackScholesModelTest: public ::testing::Test{
 
 TEST_F(BlackScholesModelTest, asset){
     PnlMat *path = pnl_mat_create(this->nbTimeSteps, this->size);
-    bs->asset(path, 0, T, rng, this->historical->path_, this->sigma);
+    double rd = 0.;
+    bs->asset(path, 0, T, rng, this->historical->path_->m, rd, this->sigma);
     PnlMat *bs_sigma = pnl_mat_new();
     compute_sigma(bs_sigma, path, 0, path->m-1);
     PnlVect *bs_volatility = pnl_vect_create(bs_sigma->m);

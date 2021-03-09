@@ -1,4 +1,5 @@
 #include "pricers/StandardMonteCarloPricer.h"
+#include "libs/MathLib.h"
 
 StandardMonteCarloPricer::StandardMonteCarloPricer(IModel * const model, IDerivative * const derivative, PnlRng * const rng, double fdStep, int nbSamples)
 : IPricer(model, derivative, rng, fdStep, nbSamples){
@@ -15,10 +16,14 @@ void StandardMonteCarloPricer::price_and_delta(const PnlMat * const past, double
     price_std_dev = 0.;
     pnl_vect_set_zero(delta);
     pnl_vect_set_zero(delta_std_dev);
+    double rd = 0.;
+
+    compute_volatility(this->model_->volatility_, sigma);
+    pnl_mat_set_subblock(this->path_, past, 0, 0);
 
     double M = this->nbSamples_;
     for(int j = 0; j < M; ++j){
-        this->model_->asset(this->path_, t, this->derivative_->T_, this->rng_, past, sigma);
+        this->model_->asset(this->path_, t, this->derivative_->T_, this->rng_, past->m, rd, sigma);
         this->add_price(t, prix, price_std_dev);
         this->add_delta(t, past->m, delta, delta_std_dev);
     }
@@ -43,9 +48,13 @@ void StandardMonteCarloPricer::price(const PnlMat * const past, double t, const 
     prix = 0.;
     price_std_dev = 0.;
 
+    double rd = 0.;
+    compute_volatility(this->model_->volatility_, sigma);
+    pnl_mat_set_subblock(this->path_, past, 0, 0);
+
     double M = this->nbSamples_;
     for(int j = 0; j < M; ++j){
-        this->model_->asset(this->path_, t, this->derivative_->T_, this->rng_, past, sigma);
+        this->model_->asset(this->path_, t, this->derivative_->T_, this->rng_, past->m, rd, sigma);
         this->add_price(t, prix, price_std_dev);
     }
 
