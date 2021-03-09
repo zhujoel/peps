@@ -32,7 +32,7 @@ void set_stream_from_filename(std::ostream &stream, std::fstream &file, const ch
 int main(int argc, char* argv[])
 {
     // PROCESSING MARKET DATA
-    IMarketData *historical = new HistoricalMarketData("Ocelia", new DateTime(1, 1, 2005), new DateTime(1, 1, 2017));
+    HistoricalMarketData *historical = new HistoricalMarketData("Ocelia", new DateTime(1, 1, 2005), new DateTime(1, 1, 2017));
     historical->set_data();
 
     std::vector<DateTime*> ocelia_dates;
@@ -115,13 +115,13 @@ int main(int argc, char* argv[])
     }
     else output_stream.rdbuf(std::cout.rdbuf());
 
-    output_stream << "Date,k,t,prix,prix_std_dev,V1,V2,Pf_couverture,Pnl,Valeur_liquidative,Tracking_error" << std::endl;
+    output_stream << "Date,k,t,prix,prix_std_dev,V1,V2,Pf_couverture,Pnl,Valeur_liquidative,Tracking_error,Ocelia_Valeur_liquidative" << std::endl;
     delta_stream << "Date,k,delta,delta_std_dev" << std::endl;
 
     output_stream << historical->dates_[past_index] << "," << 0 << "," << 0 << "," << prix << "," << prix_std_dev << ",";
     output_stream << portfolio->V1_ << "," << portfolio->V2_ << "," << portfolio->get_portfolio_value(0, share_values) << ",";
     output_stream << portfolio->get_FinalPnL(0, prix, share_values) << "," << portfolio->get_valeur_liquidative(0, share_values) << ",";
-    output_stream << portfolio->get_tracking_error(0, prix, share_values) << std::endl;
+    output_stream << portfolio->get_tracking_error(0, prix, share_values) << "," << MGET(historical->derivative_path_, past_index, 0) << std::endl;
     delta_stream << historical->dates_[past_index] << "," << 0 << "," << delta << "," << delta_std_dev << std::endl;
 
     // PRICING & HEADGING en t
@@ -155,7 +155,7 @@ int main(int argc, char* argv[])
         output_stream << historical->dates_[past_index+k] << "," << k << "," << t << "," << prix << "," << prix_std_dev << ",";
         output_stream << portfolio->V1_ << "," << portfolio->V2_ << "," << portfolio->get_portfolio_value(t, share_values) << ",";
         output_stream << portfolio->get_FinalPnL(t, prix, share_values) << "," << portfolio->get_valeur_liquidative(t, share_values) << ",";
-        output_stream << portfolio->get_tracking_error(t, prix, share_values) << std::endl;
+        output_stream << portfolio->get_tracking_error(t, prix, share_values) << "," << MGET(historical->derivative_path_, past_index+k, 0) << std::endl;
     }
 
 
