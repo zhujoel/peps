@@ -67,7 +67,7 @@ int main(int argc, char* argv[])
 
     // MONTE CARLO
     double fdStep = 0.1;
-    int nbSamples = 1000;
+    int nbSamples = 1;
     PnlRng *rng = pnl_rng_create(PNL_RNG_MERSENNE);
     pnl_rng_sseed(rng, std::time(NULL));
     IPricer *mc = new StandardMonteCarloPricer(model, ocelia, rng, fdStep, nbSamples);
@@ -133,6 +133,7 @@ int main(int argc, char* argv[])
         }
 
         double t = k*(T/nbTimeSteps);
+        rates->set_current_date(t, historical->dates_[past_index+k]);
 
         estimation_window = pnl_mat_wrap_mat_rows(historical->path_, estimation_start+k, estimation_end+k);  
 
