@@ -10,5 +10,5 @@ class StandardMonteCarloPricer : public IPricer{
         void price_and_delta(const PnlMat * const past, const PnlMat estimation_window, double t, double &prix, double &price_std_dev, PnlVect * const delta, PnlVect * const delta_std_dev);
         void price(const PnlMat * const past, const PnlMat estimation_window, double t, double &prix, double &price_std_dev);
         void add_price(double t, double rd, double &prix, double &std_dev);
-        void add_delta(double t, double rd, int pastSize, PnlVect * const delta, PnlVect * const std_dev);
+        void add_delta(double t, double rd, PnlVect * const delta, PnlVect * const std_dev);
 };

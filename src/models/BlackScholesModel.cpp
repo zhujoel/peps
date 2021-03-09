@@ -13,7 +13,7 @@ BlackScholesModel::~BlackScholesModel()
     pnl_vect_free(&this->B_);
 }
 
-void BlackScholesModel::asset(PnlMat * const path, double t, double T, PnlRng * const rng, double rd, int startIndex)
+void BlackScholesModel::asset(PnlMat * const path, double t, double timestep, PnlRng * const rng, double rd)
 {
     // path c'est 4 sous-jacent + 3 zc
     // path, size: 4 + 3 (actif sans risque étrangers en domestique)
@@ -25,7 +25,7 @@ void BlackScholesModel::asset(PnlMat * const path, double t, double T, PnlRng * 
     // 5: zc jpy
     // 6: zc chf
     // TODO: ya peut etre une erreur sur timestep ?
-    double timestep = T/this->nbTimeSteps_;
+    double startIndex = pnl_iround(t/timestep+1);
 
     for (int k = startIndex; k < path->m; ++k)
     {
@@ -39,8 +39,9 @@ void BlackScholesModel::asset(PnlMat * const path, double t, double T, PnlRng * 
     }
 }
 
-void BlackScholesModel::shift_asset(PnlMat * const shift_path, const PnlMat * const path, int d, double h, int startIndex) const
+void BlackScholesModel::shift_asset(PnlMat * const shift_path, double t, double timestep, const PnlMat * const path, int d, double h) const
 {
+    double startIndex = pnl_iround(t/timestep+1);
     if (h>0)
     {
         pnl_mat_clone(shift_path, path);

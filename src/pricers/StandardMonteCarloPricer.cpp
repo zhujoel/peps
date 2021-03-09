@@ -18,6 +18,7 @@ void StandardMonteCarloPricer::price_and_delta(const PnlMat * const past, const 
     pnl_vect_set_zero(delta_std_dev);
 
     double rd = this->model_->rates_->get_domestic_rate();
+    double timestep = this->derivative_->T_/this->model_->nbTimeSteps_;
 
     // compute sigma and volatility
     compute_sigma(this->model_->sigma_, &estimation_window, 0, estimation_window.m-1);
@@ -29,9 +30,9 @@ void StandardMonteCarloPricer::price_and_delta(const PnlMat * const past, const 
     // simulations
     double M = this->nbSamples_;
     for(int j = 0; j < M; ++j){
-        this->model_->asset(this->path_, t, this->derivative_->T_, this->rng_, rd, past->m);
+        this->model_->asset(this->path_, t, timestep, this->rng_, rd);
         this->add_price(t, rd, prix, price_std_dev);
-        this->add_delta(t, rd, past->m, delta, delta_std_dev);
+        this->add_delta(t, rd, delta, delta_std_dev);
     }
 
     // actualisation
@@ -56,6 +57,7 @@ void StandardMonteCarloPricer::price(const PnlMat * const past, const PnlMat est
     price_std_dev = 0.;
 
     double rd = this->model_->rates_->get_domestic_rate();
+    double timestep = this->derivative_->T_/this->model_->nbTimeSteps_;
 
     // compute sigma and volatility
     compute_sigma(this->model_->sigma_, &estimation_window, 0, estimation_window.m-1);
@@ -66,7 +68,7 @@ void StandardMonteCarloPricer::price(const PnlMat * const past, const PnlMat est
     // simulations
     double M = this->nbSamples_;
     for(int j = 0; j < M; ++j){
-        this->model_->asset(this->path_, t, this->derivative_->T_, this->rng_, rd, past->m);
+        this->model_->asset(this->path_, t, timestep, this->rng_, rd);
         this->add_price(t, rd, prix, price_std_dev);
     }
 
@@ -86,14 +88,15 @@ void StandardMonteCarloPricer::add_price(double t, double rd, double &prix, doub
     std_dev += price * price;
 }
 
-void StandardMonteCarloPricer::add_delta(double t, double rd, int pastSize, PnlVect * const delta, PnlVect * const std_dev)
+void StandardMonteCarloPricer::add_delta(double t, double rd, PnlVect * const delta, PnlVect * const std_dev)
 {
+    double timestep = this->derivative_->T_/this->model_->nbTimeSteps_;
     for (int d = 0; d < this->derivative_->size_; ++d)
     {
         double T = this->derivative_->get_annee_payoff();
-        this->model_->shift_asset(this->shift_path_, this->path_, d, this->fdStep_, pastSize);
+        this->model_->shift_asset(this->shift_path_, t, timestep, this->path_, d, this->fdStep_);
         double payoff_1 = this->derivative_->payoff(this->shift_path_);
-        this->model_->shift_asset(this->shift_path_, this->path_, d, -this->fdStep_, pastSize);
+        this->model_->shift_asset(this->shift_path_, t, timestep, this->path_, d, -this->fdStep_);
         double payoff_2 = this->derivative_->payoff(this->shift_path_);
         double diff = payoff_1 - payoff_2;
         diff = exp(-rd*(T-t))*diff;

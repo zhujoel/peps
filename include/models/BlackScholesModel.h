@@ -11,6 +11,6 @@ class BlackScholesModel : public IModel{
         BlackScholesModel(int size, int nbTimeSteps, InterestRate * const rates);
         ~BlackScholesModel();
         
-        void asset(PnlMat * const path, double t, double T, PnlRng * const rng, double rd, int startIndex);
-        void shift_asset(PnlMat * const shift_path, const PnlMat * const path, int d, double h, int startIndex) const;
+        void asset(PnlMat * const path, double t, double timestep, PnlRng * const rng, double rd);
+        void shift_asset(PnlMat * const shift_path, double t, double timestep, const PnlMat * const path, int d, double h) const;
 };
