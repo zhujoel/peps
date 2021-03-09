@@ -1,6 +1,5 @@
 #include "models/BlackScholesModel.h"
 #include "libs/MathLib.h"
-#include <iostream>
 
 BlackScholesModel::BlackScholesModel(int size, int nbTimeSteps, InterestRate * const rates) : IModel(size, nbTimeSteps, rates)
 {

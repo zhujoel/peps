@@ -16,15 +16,18 @@ void StandardMonteCarloPricer::price_and_delta(const PnlMat * const past, const 
     price_std_dev = 0.;
     pnl_vect_set_zero(delta);
     pnl_vect_set_zero(delta_std_dev);
+
     double rd = this->model_->rates_->get_domestic_rate();
 
-    // update the sigma to take into account changes in real life
+
+    // compute sigma and volatility
     compute_sigma(this->model_->sigma_, &estimation_window, 0, estimation_window.m-1);
     this->derivative_->adjust_sigma(this->model_->sigma_);
     compute_volatility(this->model_->volatility_, this->model_->sigma_);
 
     pnl_mat_set_subblock(this->path_, past, 0, 0);
 
+    // simulations
     double M = this->nbSamples_;
     for(int j = 0; j < M; ++j){
         this->model_->asset(this->path_, t, this->derivative_->T_, this->rng_, rd, past->m);
@@ -32,6 +35,7 @@ void StandardMonteCarloPricer::price_and_delta(const PnlMat * const past, const 
         this->add_delta(t, past->m, delta, delta_std_dev);
     }
 
+    // actualisation
     prix /= M;
     price_std_dev /= M;
     price_std_dev = sqrt(exp(2)*(price_std_dev - prix * prix)/M);
@@ -53,14 +57,21 @@ void StandardMonteCarloPricer::price(const PnlMat * const past, const PnlMat est
     price_std_dev = 0.;
 
     double rd = this->model_->rates_->get_domestic_rate();
+
+    // compute sigma and volatility
+    compute_sigma(this->model_->sigma_, &estimation_window, 0, estimation_window.m-1);
+    this->derivative_->adjust_sigma(this->model_->sigma_);
+    compute_volatility(this->model_->volatility_, this->model_->sigma_);
     pnl_mat_set_subblock(this->path_, past, 0, 0);
 
+    // simulations
     double M = this->nbSamples_;
     for(int j = 0; j < M; ++j){
         this->model_->asset(this->path_, t, this->derivative_->T_, this->rng_, rd, past->m);
         this->add_price(t, prix, price_std_dev);
     }
 
+    // actualisation
     prix /= M;
     price_std_dev /= M;
     price_std_dev = sqrt(exp(2)*(price_std_dev - prix * prix)/M);
