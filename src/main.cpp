@@ -56,9 +56,10 @@ int main(int argc, char* argv[])
     IModel *model = new BlackScholesModel(size, nbTimeSteps, rates);
 
     // OCELIA
+    double val_liquidative_initiale = 100.;
     double T = 2920./365.25; // 2920 est le nb de jours entre 15/05/2008 et 13/05/2016
     int nb_sous_jacents = 4;
-    Ocelia *ocelia = new Ocelia(T, size, nb_sous_jacents);
+    Ocelia *ocelia = new Ocelia(T, size, nb_sous_jacents, val_liquidative_initiale);
     std::vector<DateTime*> dates_semestrielles;
     std::vector<DateTime*> dates_valeurs_n_ans;
     parse_dates_file(dates_semestrielles, "../data/dates/dates_semest.csv", 16, '-');
@@ -99,7 +100,6 @@ int main(int argc, char* argv[])
     PnlMat estimation_window = pnl_mat_wrap_mat_rows(historical->path_, estimation_start, estimation_end);  
     mc->price_and_delta(past, estimation_window, 0, prix, prix_std_dev, delta, delta_std_dev);
     
-    double val_liquidative_initiale = 100.; // TODO: a facto car c'est codé en dur dans océlia aussi
     HedgingPortfolio *portfolio = new HedgingPortfolio(prix, delta, share_values, rates, val_liquidative_initiale);
 
     // PRINT 

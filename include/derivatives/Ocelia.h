@@ -7,6 +7,7 @@
 
 class Ocelia : public IDerivative{
     public:
+        double valeur_liquidative_initiale_;
         int annee_payoff_;
         int nb_sous_jacents_;
         PnlVectInt *indices_dates_semestrielles_; // indices des dates de constatation dans le path 
@@ -16,7 +17,7 @@ class Ocelia : public IDerivative{
         PnlVect *nouveau_depart_; // valeurs de l'effet nouveau départ
         PnlVect *perfs_; // perfs à l'année n
 
-        Ocelia(double T, int size, int nb_sous_jacents);
+        Ocelia(double T, int size, int nb_sous_jacents, double valeur_liquidative_initiale);
         ~Ocelia();
 
         void adjust_sigma(PnlMat * const sigma) const; // adjust computed sigma en fonction du nombre de produit dans la matrix path et de comment ils sont organisés

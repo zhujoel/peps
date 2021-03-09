@@ -26,7 +26,7 @@ class OceliaTest: public ::testing::Test{
                 MLET(path, i, 6) = 1;
             }
 
-            this->ocelia = new Ocelia(1, 7, 4);
+            this->ocelia = new Ocelia(1, 7, 4, 100);
             parse_dates_file(this->dates_semestrielles, "../tests/test_data/ocelia/dates_semest.csv", 16, '-');
             parse_dates_file(this->dates_valeurs_n_ans, "../tests/test_data/ocelia/dates_valeurs_n.csv", 35, '-');
             this->ocelia->init_indices(this->all_dates, this->dates_semestrielles, this->dates_valeurs_n_ans);
@@ -53,7 +53,7 @@ TEST_F(OceliaTest, constructor_date_error){
     
     std::vector<DateTime*> wrong_dates;
     parse_dates_file(wrong_dates, "../tests/test_data/ocelia/wrong_dates.csv", 48, '-');
-    Ocelia *der = new Ocelia(1, 7, 4);
+    Ocelia *der = new Ocelia(1, 7, 4, 100);
 
     try{
         der->init_indices(wrong_dates, this->dates_semestrielles, this->dates_valeurs_n_ans);

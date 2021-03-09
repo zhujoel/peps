@@ -4,8 +4,9 @@
 #include "pnl/pnl_mathtools.h"
 #include "libs/Utilities.h"
 
-Ocelia::Ocelia(double T, int size, int nb_sous_jacents) : IDerivative(T, size)
+Ocelia::Ocelia(double T, int size, int nb_sous_jacents, double valeur_liquidative_initiale) : IDerivative(T, size)
 {
+    this->valeur_liquidative_initiale_ = valeur_liquidative_initiale;
     this->annee_payoff_ = 0;    
     this->nb_sous_jacents_ = nb_sous_jacents;
     this->valeurs_n_ans_ = pnl_vect_create_from_zero(this->nb_sous_jacents_);
@@ -137,14 +138,12 @@ double Ocelia::compute_flux_n_ans(const PnlMat *path, int N) const{
 
 double Ocelia::payoff(const PnlMat *path)
 {
-    double val_liquidative_initiale = 100.;
     compute_nouveau_depart(path);
-    
     for(int n = 4 ; n <= 8; ++n){
         compute_perfs_n_ans(this->perfs_, path, n);
         if(are_all_positive(this->perfs_) || n == 8){
             this->annee_payoff_ = n;
-            return val_liquidative_initiale*compute_flux_n_ans(path, n);
+            return this->valeur_liquidative_initiale_*compute_flux_n_ans(path, n);
         }
     }
     return -1;
