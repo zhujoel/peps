@@ -1,5 +1,6 @@
 #include "models/BlackScholesModel.h"
 #include "libs/MathLib.h"
+#include <iostream>
 
 BlackScholesModel::BlackScholesModel(int size, int nbTimeSteps, InterestRate * const rates) : IModel(size, nbTimeSteps, rates)
 {
@@ -13,7 +14,7 @@ BlackScholesModel::~BlackScholesModel()
     pnl_vect_free(&this->B_);
 }
 
-void BlackScholesModel::asset(PnlMat * const path, double t, double T, PnlRng * const rng, int startIdx, double rd, const PnlMat * const sigma)
+void BlackScholesModel::asset(PnlMat * const path, double t, double T, PnlRng * const rng, double rd, int startIdx)
 {
     // path c'est 4 sous-jacent + 3 zc
     // path, size: 4 + 3 (actif sans risque étrangers en domestique)
@@ -30,11 +31,11 @@ void BlackScholesModel::asset(PnlMat * const path, double t, double T, PnlRng * 
     for (int k = startIdx; k < path->m; ++k)
     {
         pnl_vect_rng_normal(this->G_, this->size_, rng); // G Vecteur gaussien
-        pnl_mat_mult_vect_inplace(this->B_, sigma, this->G_);
+        pnl_mat_mult_vect_inplace(this->B_, this->sigma_, this->G_);
         for (int d = 0; d < this->size_; ++d)
         {
-            double sigma_d = GET(volatility_, d);
-            MLET(path, k, d) = MGET(path, k-1, d) * exp( (this->rates_->get_domestic_rate() - (sigma_d*sigma_d)/2 ) * timestep + sqrt(timestep) * GET(this->B_, d));
+            double sigma_d = GET(this->volatility_, d);
+            MLET(path, k, d) = MGET(path, k-1, d) * exp( (rd - (sigma_d*sigma_d)/2 ) * timestep + sqrt(timestep) * GET(this->B_, d));
         }
     }
 }

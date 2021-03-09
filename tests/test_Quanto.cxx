@@ -59,6 +59,16 @@ class QuantoTest: public ::testing::Test{
 
             this->quanto = new QuantoOption(T, nbProduits, rf, K) ;
             this->model = new BlackScholesModel(nbProduits, nbTimeSteps, this->rates);
+            MLET(this->model->sigma_, 0, 0) = sigma_tx_change * sigma_tx_change;
+            MLET(this->model->sigma_, 1, 1) = sigma_actif * sigma_actif;
+            MLET(this->model->sigma_, 0, 1) = sigma_tx_change * sigma_actif * rho;
+            MLET(this->model->sigma_, 1, 0) = sigma_tx_change * sigma_actif * rho;
+            pnl_mat_chol(this->model->sigma_);
+            MLET(this->model->sigma_, 1, 0) += MGET(this->model->sigma_, 0, 0); // ce calcul dépend de où ce trouve dans la matrice les actifs risqués et non risqués
+            MLET(this->model->sigma_, 1, 1) += MGET(this->model->sigma_, 0, 1);
+
+            LET(this->model->volatility_, 0) = MGET(this->model->sigma_, 0, 0);
+            LET(this->model->volatility_, 1) = MGET(this->model->sigma_, 1, 1);
             this->pricer = new StandardMonteCarloPricer(this->model, this->quanto, rng, h, nbSimul);
         }
 
@@ -85,13 +95,7 @@ TEST_F(QuantoTest, price){
     double prix_std_dev = 0.0;
     PnlVect* delta = pnl_vect_create_from_zero(this->quanto->size_);
     PnlVect* delta_std_dev = pnl_vect_create_from_zero(this->quanto->size_);
-    pricer->price_and_delta(this->spot, 0, this->sigma, prix, prix_std_dev, delta, delta_std_dev);
-
-    // std::cout << "prix simulé : " << prix << " std dev : " << prix_std_dev << std::endl;
-    // std::cout << "prix théorique dans l'intervalle de confiance (95%) ? : " << (abs(prix_theorique - prix) <= 1.96*prix_std_dev) << std::endl << std::endl;
-
-    // std::cout << "delta simulé : " << GET(delta, 1) << " std dev : " << GET(delta_std_dev, 1) << std::endl;
-    // std::cout << "delta théorique dans l'intervalle de confiance (95%) ? : " << (abs(GET(delta, 1) - delta_theorique) <= 1.96*GET(delta_std_dev, 1)) << std::endl << std::endl;
+    pricer->price_and_delta(this->spot, 0, prix, prix_std_dev, delta, delta_std_dev);
 
     EXPECT_EQ(1,(abs(prix_theorique - prix) <= 1.96*prix_std_dev));
     EXPECT_EQ(1,(abs(GET(delta, 1) - delta_theorique) <= 1.96*GET(delta_std_dev, 1)));

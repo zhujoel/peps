@@ -10,20 +10,19 @@ StandardMonteCarloPricer::~StandardMonteCarloPricer(){
     
 }
 
-void StandardMonteCarloPricer::price_and_delta(const PnlMat * const past, double t, const PnlMat * const sigma, double &prix, double &price_std_dev, PnlVect * const delta, PnlVect * const delta_std_dev)
+void StandardMonteCarloPricer::price_and_delta(const PnlMat * const past, double t, double &prix, double &price_std_dev, PnlVect * const delta, PnlVect * const delta_std_dev)
 {
     prix = 0.;
     price_std_dev = 0.;
     pnl_vect_set_zero(delta);
     pnl_vect_set_zero(delta_std_dev);
-    double rd = 0.;
+    double rd = this->model_->rates_->get_domestic_rate();
 
-    compute_volatility(this->model_->volatility_, sigma);
     pnl_mat_set_subblock(this->path_, past, 0, 0);
 
     double M = this->nbSamples_;
     for(int j = 0; j < M; ++j){
-        this->model_->asset(this->path_, t, this->derivative_->T_, this->rng_, past->m, rd, sigma);
+        this->model_->asset(this->path_, t, this->derivative_->T_, this->rng_, rd, past->m);
         this->add_price(t, prix, price_std_dev);
         this->add_delta(t, past->m, delta, delta_std_dev);
     }
@@ -43,18 +42,17 @@ void StandardMonteCarloPricer::price_and_delta(const PnlMat * const past, double
     }
 }
 
-void StandardMonteCarloPricer::price(const PnlMat * const past, double t, const PnlMat * const sigma, double &prix, double &price_std_dev)
+void StandardMonteCarloPricer::price(const PnlMat * const past, double t, double &prix, double &price_std_dev)
 {
     prix = 0.;
     price_std_dev = 0.;
 
-    double rd = 0.;
-    compute_volatility(this->model_->volatility_, sigma);
+    double rd = this->model_->rates_->get_domestic_rate();
     pnl_mat_set_subblock(this->path_, past, 0, 0);
 
     double M = this->nbSamples_;
     for(int j = 0; j < M; ++j){
-        this->model_->asset(this->path_, t, this->derivative_->T_, this->rng_, past->m, rd, sigma);
+        this->model_->asset(this->path_, t, this->derivative_->T_, this->rng_, rd, past->m);
         this->add_price(t, prix, price_std_dev);
     }
 

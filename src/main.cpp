@@ -49,14 +49,13 @@ int main(int argc, char* argv[])
     int estimation_start = get_indice_from_date(historical->dates_, new DateTime(15, 5, 2006));
     int estimation_end = get_indice_from_date(historical->dates_, new DateTime(15, 5, 2008));
     
-    PnlMat *sigma = pnl_mat_new();
-    compute_sigma(sigma, historical->path_, estimation_start, estimation_end);
-    
     // BLACK-SCHOLES
     int size = 7;
     InterestRate* rates = new InterestRate(0, new DateTime(15, 5, 2008), historical->dates_, historical->interest_path_);
     int nbTimeSteps = ocelia_dates.size();
     IModel *model = new BlackScholesModel(size, nbTimeSteps, rates);
+    compute_sigma(model->sigma_, historical->path_, estimation_start, estimation_end);
+
 
     // OCELIA
     double T = 2920./365.25; // 2920 est le nb de jours entre 15/05/2008 et 13/05/2016
@@ -99,9 +98,10 @@ int main(int argc, char* argv[])
     pnl_mat_get_row(share_values, historical->path_, 0);
     ocelia->adjust_spot(share_values);
     ocelia->adjust_past(past);
-    ocelia->adjust_sigma(sigma);
+    ocelia->adjust_sigma(model->sigma_);
+    compute_volatility(model->volatility_, model->sigma_);
 
-    mc->price_and_delta(past, 0, sigma, prix, prix_std_dev, delta, delta_std_dev);
+    mc->price_and_delta(past, 0, prix, prix_std_dev, delta, delta_std_dev);
     
     double val_liquidative_initiale = 100.; // TODO: a facto car c'est codé en dur dans océlia aussi
     HedgingPortfolio *portfolio = new HedgingPortfolio(prix, delta, share_values, rates, val_liquidative_initiale);
@@ -140,7 +140,9 @@ int main(int argc, char* argv[])
         double t = k*(T/nbTimeSteps);
 
         // update the sigma to take into account changes in real life
-        compute_sigma(sigma, historical->path_, estimation_start+k, estimation_end+k);
+        compute_sigma(model->sigma_, historical->path_, estimation_start+k, estimation_end+k);
+        ocelia->adjust_sigma(model->sigma_);
+        compute_volatility(model->volatility_, model->sigma_);
 
         // add historical values to past
         pnl_mat_get_row(share_values, historical->path_, past_index+k);
@@ -149,14 +151,14 @@ int main(int argc, char* argv[])
         
         // rebalance
         if(k%30==0){
-            mc->price_and_delta(past, t, sigma, prix, prix_std_dev, delta, delta_std_dev);
+            mc->price_and_delta(past, t, prix, prix_std_dev, delta, delta_std_dev);
             portfolio->rebalancing(t, delta, share_values);
             delta_stream << historical->dates_[past_index+k] << "," << k << "," << delta << "," << delta_std_dev << std::endl;
 
         }
 
         // price
-        mc->price(past, t, sigma, prix, prix_std_dev);
+        mc->price(past, t, prix, prix_std_dev);
         output_stream << historical->dates_[past_index+k] << "," << k << "," << t << "," << prix << "," << prix_std_dev << ",";
         output_stream << portfolio->V1_ << "," << portfolio->V2_ << "," << portfolio->get_portfolio_value(t, share_values) << ",";
         output_stream << portfolio->get_FinalPnL(t, prix, share_values) << "," << portfolio->get_valeur_liquidative(t, share_values) << ",";
@@ -168,7 +170,6 @@ int main(int argc, char* argv[])
     delete historical;
     pnl_mat_free(&ocelia_path);
     pnl_mat_free(&past);
-    pnl_mat_free(&sigma);
     delete rates;
     delete model;
     delete ocelia;
