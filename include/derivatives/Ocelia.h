@@ -4,9 +4,11 @@
 #include "libs/DateTimeVector.h"
 #include "pnl/pnl_matrix.h"
 #include <vector>
+#include "libs/InterestRate.h"
 
 class Ocelia : public IDerivative{
     public:
+        InterestRate *rates_;
         double valeur_liquidative_initiale_;
         int annee_payoff_;
         int nb_sous_jacents_;
@@ -17,7 +19,7 @@ class Ocelia : public IDerivative{
         PnlVect *nouveau_depart_; // valeurs de l'effet nouveau départ
         PnlVect *perfs_; // perfs à l'année n
 
-        Ocelia(double T, int size, int nb_sous_jacents, double valeur_liquidative_initiale);
+        Ocelia(double T, int size, int nb_sous_jacents, double valeur_liquidative_initiale, InterestRate * const rates);
         ~Ocelia();
 
         void adjust_sigma(PnlMat * const sigma) const; // adjust computed sigma en fonction du nombre de produit dans la matrix path et de comment ils sont organisés

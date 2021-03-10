@@ -11,7 +11,7 @@ add_executable(test_Utilities test_Utilities.cxx)
 target_link_libraries(test_Utilities gtest Utilities ${PNL_LIBRARIES})
 
 add_executable(test_Ocelia test_Ocelia.cxx)
-target_link_libraries(test_Ocelia gtest Ocelia IMarketData IDerivative DateTimeVector DateTime Utilities ${PNL_LIBRARIES})
+target_link_libraries(test_Ocelia gtest Ocelia IMarketData IDerivative InterestRate DateTimeVector DateTime Utilities ${PNL_LIBRARIES})
 
 add_executable(test_Quanto test_Quanto.cxx)
 target_link_libraries(test_Quanto gtest QuantoOption BlackScholesModel StandardMonteCarloPricer MathLib IPricer IModel IDerivative InterestRate DateTimeVector DateTime Utilities ${PNL_LIBRARIES})
@@ -24,6 +24,3 @@ target_link_libraries(test_HistoricalMarketData gtest HistoricalMarketData IMark
 
 add_executable(test_BlackScholesModel test_BlackScholesModel.cxx)
 target_link_libraries(test_BlackScholesModel gtest BlackScholesModel IModel MathLib HistoricalMarketData IMarketData MarketDataFeed IDataFeed InterestRate DateTimeVector DateTime Utilities ${PNL_LIBRARIES})
-
-add_executable(test_InterestRate test_InterestRate.cxx)
-target_link_libraries(test_InterestRate gtest InterestRate MathLib HistoricalMarketData IMarketData MarketDataFeed IDataFeed DateTimeVector DateTime Utilities ${PNL_LIBRARIES})

@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.0)
 
 project(Demo)
 
-set(CMAKE_CXX_FLAGS "-g -Wall")
+set(CMAKE_CXX_FLAGS "-g -pg -Wall")
 
 include_directories(include)
 
@@ -59,6 +59,5 @@ add_test (NAME test_HistoricalMarketData COMMAND test_HistoricalMarketData)
 add_test (NAME test_DataFeeds COMMAND test_DataFeeds)
 add_test (NAME test_BlackScholesModel COMMAND test_BlackScholesModel)
 add_test (NAME test_Utilities COMMAND test_Utilities)
-add_test (NAME test_InterestRate COMMAND test_InterestRate)
 
 pnl_add_postbuild(run_unit_tests)

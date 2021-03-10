@@ -26,8 +26,8 @@ HedgingPortfolio::~HedgingPortfolio()
 
 void HedgingPortfolio::rebalancing(double t, const PnlVect * const delta, const PnlVect * const share_values)
 {
-    this->V1_ *= exp(this->rates_->get_domestic_rate()*(t-this->last_rebalancing_t_)); 
-    this->V2_ *= exp(this->rates_->get_domestic_rate()*(t-this->last_rebalancing_t_));
+    this->V1_ *= this->rates_->compute_domestic_risk_free_asset(this->last_rebalancing_t_, t);
+    this->V2_ *= this->rates_->compute_domestic_risk_free_asset(this->last_rebalancing_t_, t); 
 
     double risk_variation = 0.;
     for (int d = 0; d < delta->size; ++d)
@@ -43,7 +43,7 @@ void HedgingPortfolio::rebalancing(double t, const PnlVect * const delta, const 
 
 double HedgingPortfolio::get_portfolio_value(double t, const PnlVect * const share_values) const
 {
-    return exp(this->rates_->get_domestic_rate()*(t-this->last_rebalancing_t_))*this->V1_ + pnl_vect_scalar_prod(this->delta_, share_values);
+    return this->rates_->compute_domestic_risk_free_asset(this->last_rebalancing_t_, t)*this->V1_ + pnl_vect_scalar_prod(this->delta_, share_values);
 }
 
 double HedgingPortfolio::get_tracking_error(double t, double prix, const PnlVect * const share_values) const
@@ -53,7 +53,7 @@ double HedgingPortfolio::get_tracking_error(double t, double prix, const PnlVect
 
 double HedgingPortfolio::get_valeur_liquidative(double t, const PnlVect * const share_values) const
 {
-    return exp(this->rates_->get_domestic_rate()*(t-this->last_rebalancing_t_))*this->V2_ + pnl_vect_scalar_prod(this->delta_, share_values);
+    return this->rates_->compute_domestic_risk_free_asset(this->last_rebalancing_t_, t)*this->V2_ + pnl_vect_scalar_prod(this->delta_, share_values);
 }
 
 double HedgingPortfolio::get_FinalPnL(double t, double payoff, const PnlVect * const share_values) const

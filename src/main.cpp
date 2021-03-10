@@ -14,10 +14,9 @@
 
 /**
  * TODO:
- * 4. taux d'intéret étrangers
  * 7. output/input montecarlo en t
- * 9. récupérer les vrais valeur de océlia
  * 10. dates de rebalancement (philippe)
+ * 11. estimation start/end
  */
 
 void set_stream_from_filename(std::ostream &stream, std::fstream &file, const char* const filename){
@@ -55,11 +54,12 @@ int main(int argc, char* argv[])
     int nbTimeSteps = ocelia_dates.size();
     IModel *model = new BlackScholesModel(size, nbTimeSteps, rates);
 
+    pnl_vect_print(rates->rates_);
     // OCELIA
     double val_liquidative_initiale = 100.;
     double T = 2920./365.25; // 2920 est le nb de jours entre 15/05/2008 et 13/05/2016
     int nb_sous_jacents = 4;
-    Ocelia *ocelia = new Ocelia(T, size, nb_sous_jacents, val_liquidative_initiale);
+    Ocelia *ocelia = new Ocelia(T, size, nb_sous_jacents, val_liquidative_initiale, rates);
     std::vector<DateTime*> dates_semestrielles;
     std::vector<DateTime*> dates_valeurs_n_ans;
     parse_dates_file(dates_semestrielles, "../data/dates/dates_semest.csv", 16, '-');
@@ -68,7 +68,7 @@ int main(int argc, char* argv[])
 
     // MONTE CARLO
     double fdStep = 0.1;
-    int nbSamples = 10;
+    int nbSamples = 100;
     PnlRng *rng = pnl_rng_create(PNL_RNG_MERSENNE);
     pnl_rng_sseed(rng, std::time(NULL));
     IPricer *mc = new StandardMonteCarloPricer(model, ocelia, rng, fdStep, nbSamples);
@@ -133,7 +133,6 @@ int main(int argc, char* argv[])
         }
 
         double t = k*(T/nbTimeSteps);
-        rates->set_current_date(t, historical->dates_[past_index+k]);
 
         estimation_window = pnl_mat_wrap_mat_rows(historical->path_, estimation_start+k, estimation_end+k);  
 
@@ -157,7 +156,6 @@ int main(int argc, char* argv[])
         output_stream << portfolio->get_FinalPnL(t, prix, share_values) << "," << portfolio->get_valeur_liquidative(t, share_values) << ",";
         output_stream << portfolio->get_tracking_error(t, prix, share_values) << "," << MGET(historical->derivative_path_, past_index+k, 0) << std::endl;
     }
-
 
     // DELETE
     delete historical;

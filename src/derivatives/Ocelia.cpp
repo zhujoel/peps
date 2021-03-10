@@ -4,8 +4,10 @@
 #include "pnl/pnl_mathtools.h"
 #include "libs/Utilities.h"
 
-Ocelia::Ocelia(double T, int size, int nb_sous_jacents, double valeur_liquidative_initiale) : IDerivative(T, size)
-{
+Ocelia::Ocelia(double T, int size, int nb_sous_jacents, double valeur_liquidative_initiale, InterestRate * const rates)
+    : IDerivative(T, size)
+ {
+    this->rates_ = rates;
     this->valeur_liquidative_initiale_ = valeur_liquidative_initiale;
     this->annee_payoff_ = 0;    
     this->nb_sous_jacents_ = nb_sous_jacents;
@@ -61,9 +63,8 @@ double Ocelia::get_foreign_index_market_value(const PnlMat* path, int date_idx, 
     
     double S_T = MGET(path, date_idx, idx);
     if(idx == 3) return S_T;
-    // TODO: ajouter un T qui représente le temps écoulé entre 0 et actuellement aussi
-    // TODO: exp(0) devrait etre l'actif sans risque étranger à la place
-    return S_T/MGET(path, date_idx, idx+this->nb_sous_jacents_)*exp(0);
+    double t1 = idx * (this->T_ / path->m);
+    return S_T/MGET(path, date_idx, idx+this->nb_sous_jacents_)*this->rates_->compute_foreign_risk_free_asset(0, t1, idx);
 }
 
 double Ocelia::compute_perf_moyenne_panier(const PnlMat *path) const

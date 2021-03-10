@@ -12,6 +12,7 @@ class OceliaTest: public ::testing::Test{
         PnlMat *path;
         std::vector<DateTime*> dates_semestrielles;
         std::vector<DateTime*> dates_valeurs_n_ans;
+        InterestRate *rates;
 
         virtual void SetUp(){
             parse_dates_file(this->all_dates, "../tests/test_data/ocelia/all_dates_constatation.csv", 49, '-');
@@ -25,8 +26,16 @@ class OceliaTest: public ::testing::Test{
                 MLET(path, i, 5) = 1;
                 MLET(path, i, 6) = 1;
             }
+            
+            double rd = 0.03;
+            PnlMat* interest_path = pnl_mat_create_from_zero(1, 4);
+            MLET(interest_path, 0, 3) = rd;
+            DateTime* curent_date = new DateTime(1, 1, 2010);
+            std::vector<DateTime*> all_dates;
+            all_dates.push_back(curent_date);
+            this->rates = new InterestRate(0, curent_date, all_dates, interest_path);
 
-            this->ocelia = new Ocelia(1, 7, 4, 100);
+            this->ocelia = new Ocelia(1, 7, 4, 100, this->rates);
             parse_dates_file(this->dates_semestrielles, "../tests/test_data/ocelia/dates_semest.csv", 16, '-');
             parse_dates_file(this->dates_valeurs_n_ans, "../tests/test_data/ocelia/dates_valeurs_n.csv", 35, '-');
             this->ocelia->init_indices(this->all_dates, this->dates_semestrielles, this->dates_valeurs_n_ans);
@@ -38,6 +47,7 @@ class OceliaTest: public ::testing::Test{
             pnl_mat_free(&this->path);
             delete_date_vector(this->dates_semestrielles);
             delete_date_vector(this->dates_valeurs_n_ans);
+            delete this->rates;
         }
 };
 
@@ -53,7 +63,7 @@ TEST_F(OceliaTest, constructor_date_error){
     
     std::vector<DateTime*> wrong_dates;
     parse_dates_file(wrong_dates, "../tests/test_data/ocelia/wrong_dates.csv", 48, '-');
-    Ocelia *der = new Ocelia(1, 7, 4, 100);
+    Ocelia *der = new Ocelia(1, 7, 4, 100, this->rates);
 
     try{
         der->init_indices(wrong_dates, this->dates_semestrielles, this->dates_valeurs_n_ans);

@@ -24,9 +24,7 @@ void BlackScholesModel::asset(PnlMat * const path, double t, double timestep, Pn
     // 4: zc gbp
     // 5: zc jpy
     // 6: zc chf
-    // TODO: ya peut etre une erreur sur timestep ?
     double startIndex = pnl_iround(t/timestep+1);
-
     for (int k = startIndex; k < path->m; ++k)
     {
         pnl_vect_rng_normal(this->G_, this->size_, rng); // G Vecteur gaussien
