@@ -50,13 +50,13 @@ std::string get_last_line(std::fstream &fin)
 }
 
 
-// OUTPUT STREAMS
+// STREAMS
 std::ostream output_stream(nullptr);
 std::ostream delta_stream(nullptr);
 std::fstream output_file;
 std::fstream delta_file;
 
-// HISTORICAL
+// MARKET DATA
 HistoricalMarketData *historical;
 PnlMat *ocelia_path = pnl_mat_new();
 std::vector<DateTime*> ocelia_dates;
@@ -101,8 +101,8 @@ PnlVect *delta_std_dev;
 PnlVect *share_values;
 PnlMat estimation_window;
 
+// REBALANCING PORTFOLIO
 HedgingPortfolio *portfolio;
-
 int rebalancement_horizon;
 
 void simulate_all()
@@ -150,24 +150,39 @@ void simulate_all()
 }
 
 
-// TOOD: fix
+// TODO: fix
 void simulate_next()
 {
     // PARSE LAST LINE
-    std::string last_line = get_last_line(output_file);
-    int line_size = 12;
-    std::string last_line_split[line_size];
-    split(last_line_split, last_line, ',');
+    // output
+    std::string output_last_line = get_last_line(output_file);
+    int output_size = 12;
+    std::string output_last_line_split[output_size];
+    split(output_last_line_split, output_last_line, ',');
+    // delta
+    std::string delta_last_line = get_last_line(delta_file);
+    int delta_size = 4;
+    std::string delta_last_line_split[delta_size];
+    split(delta_last_line_split, delta_last_line, ',');
+
+    std::string delta_split[size];
+    std::string delta_std_dev_split[size];
+    split(delta_split, delta_last_line_split[2], ' ');
+    split(delta_std_dev_split, delta_last_line_split[3], ' ');
+    for(int i = 0; i < size; ++i){
+        LET(delta, i) = std::stod(delta_split[i]);
+        LET(delta_std_dev, i) = std::stod(delta_std_dev_split[i]);
+        LET(portfolio->delta_, i) = std::stod(delta_split[i]);
+    }
 
     // SET DATA TO PAST DATA
-    int k = std::stoi(last_line_split[1])+1;
+    int k = std::stoi(output_last_line_split[1])+1;
     double t = k*timestep;
-    prix = std::stod(last_line_split[3]);
-    prix_std_dev = std::stod(last_line_split[4]);
-    portfolio->V1_ = std::stod(last_line_split[5]);
-    portfolio->V2_ = std::stod(last_line_split[6]);
-    portfolio->last_rebalancing_t_ = k - (k%rebalancement_horizon);
-
+    prix = std::stod(output_last_line_split[3]);
+    prix_std_dev = std::stod(output_last_line_split[4]);
+    portfolio->V1_ = std::stod(output_last_line_split[5]);
+    portfolio->V2_ = std::stod(output_last_line_split[6]);
+    portfolio->last_rebalancing_t_ = std::stod(delta_last_line_split[1])*timestep;
 
     estimation_window = pnl_mat_wrap_mat_rows(historical->path_, estimation_start+k, estimation_end+k);  
 
@@ -258,17 +273,15 @@ int main(int argc, char* argv[])
     ocelia->adjust_past(past, timestep);
     estimation_window = pnl_mat_wrap_mat_rows(historical->path_, estimation_start, estimation_end);  
     mc->price_and_delta(past, estimation_window, 0, prix, prix_std_dev, delta, delta_std_dev);
-    
+
+    // REBALANCING PORTFOLIO
     portfolio = new HedgingPortfolio(prix, delta, share_values, rates, val_liquidative_initiale);
-
     rebalancement_horizon = 30;
-
 
     // ONLY THING TO CHANGE
     simulate_next();
 
-
-    // DELETE
+    // DELETES
     delete historical;
     pnl_mat_free(&ocelia_path);
     pnl_mat_free(&past);
