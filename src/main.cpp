@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <cstring>
 #include <ctime>
 #include "pnl/pnl_matrix.h"
 #include "pnl/pnl_random.h"
@@ -211,9 +212,9 @@ void simulate_next()
 int main(int argc, char* argv[])
 {
     // STREAMS
-    if(argc > 1){
-        set_stream_from_filename(output_stream, output_file, argv[1]);
-        if(argc > 2) set_stream_from_filename(delta_stream, delta_file, argv[2]);
+    if(argc > 2){
+        set_stream_from_filename(output_stream, output_file, argv[2]);
+        if(argc > 3) set_stream_from_filename(delta_stream, delta_file, argv[3]);
         else delta_stream.rdbuf(std::cout.rdbuf());
     }
     else output_stream.rdbuf(std::cout.rdbuf());
@@ -257,8 +258,7 @@ int main(int argc, char* argv[])
     ocelia->adjust_past(ocelia_path, timestep);
     real_payoff = ocelia->payoff(ocelia_path);
     real_date_payoff = ocelia->get_annee_payoff(); 
-    real_datetime_payoff; // par rapport à la date de début : 15/05/2008
-    if(real_date_payoff == 4) real_datetime_payoff = new DateTime(11, 5, 2012);
+    if(real_date_payoff == 4) real_datetime_payoff = new DateTime(11, 5, 2012); // par rapport à la date de début : 15/05/2008
     else if(real_date_payoff == 5) real_datetime_payoff = new DateTime(13, 5, 2013);
     else if(real_date_payoff == 6) real_datetime_payoff = new DateTime(13, 5, 2014);
     else if(real_date_payoff == 7) real_datetime_payoff = new DateTime(13, 5, 2015);
@@ -281,7 +281,15 @@ int main(int argc, char* argv[])
     rebalancement_horizon = 30;
 
     // ONLY THING TO CHANGE
-    simulate_next();
+    if(strcmp(argv[1], "all") == 0){
+        simulate_all();
+    }
+    else if(strcmp(argv[1], "next") == 0){
+        simulate_next();
+    }
+    else{
+        exit(EXIT_FAILURE);
+    }
 
     // DELETES
     delete historical;
@@ -299,8 +307,8 @@ int main(int argc, char* argv[])
     pnl_vect_free(&delta_std_dev);
     pnl_vect_free(&share_values);
     delete portfolio;
-    if(argc == 1){
+    if(argc == 2){
         output_file.close();
-        if(argc > 2) delta_file.close();
+        if(argc > 3) delta_file.close();
     }
 }
