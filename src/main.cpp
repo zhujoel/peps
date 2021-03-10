@@ -68,7 +68,7 @@ int main(int argc, char* argv[])
 
     // MONTE CARLO
     double fdStep = 0.1;
-    int nbSamples = 1;
+    int nbSamples = 10;
     PnlRng *rng = pnl_rng_create(PNL_RNG_MERSENNE);
     pnl_rng_sseed(rng, std::time(NULL));
     IPricer *mc = new StandardMonteCarloPricer(model, ocelia, rng, fdStep, nbSamples);

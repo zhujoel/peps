@@ -34,10 +34,16 @@ void calcul_indices_dates(PnlVectInt * const indices, const std::vector<DateTime
 
 int get_indice_from_date(const std::vector<DateTime*> &all_dates, const DateTime * const date)
 {
-    for(unsigned int i = 0; i < all_dates.size(); ++i){
-        if(all_dates[i]->compare(date) == 0){
-            return i;
-        }
+    return get_indices_from_date_dichotomic(all_dates, date, 0, all_dates.size());
+}
+
+int get_indices_from_date_dichotomic(const std::vector<DateTime*> &all_dates, const DateTime * const date, int start, int end){
+    if(start <= end){
+        int mid = start + (end - start) / 2;
+        int cmp = all_dates[mid]->compare(date);
+        if(cmp == 0) return mid;
+        else if(cmp == 1) return get_indices_from_date_dichotomic(all_dates, date, start, mid-1);
+        else return get_indices_from_date_dichotomic(all_dates, date, mid+1, end);
     }
     return -1;
 }
