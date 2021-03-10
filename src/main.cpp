@@ -149,11 +149,10 @@ void simulate_all()
     }
 }
 
-
-// TODO: fix
+// Does not work if no file are indicated
 void simulate_next()
 {
-    // PARSE LAST LINE
+    // PARSE LAST LINE OF FILES
     // output
     std::string output_last_line = get_last_line(output_file);
     int output_size = 12;
