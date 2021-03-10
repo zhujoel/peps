@@ -164,6 +164,7 @@ void simulate_next()
     std::string delta_last_line_split[delta_size];
     split(delta_last_line_split, delta_last_line, ',');
 
+    // SET VARIABLAES TO PREVIOUS DATA TO SIMULATE NEXT STEP
     std::string delta_split[size];
     std::string delta_std_dev_split[size];
     split(delta_split, delta_last_line_split[2], ' ');
@@ -174,8 +175,7 @@ void simulate_next()
         LET(portfolio->delta_, i) = std::stod(delta_split[i]);
     }
 
-    // SET DATA TO PAST DATA
-    int k = std::stoi(output_last_line_split[1])+1;
+    int k = std::stoi(output_last_line_split[1])+1; // +1 pour incrémenter la date
     double t = k*timestep;
     prix = std::stod(output_last_line_split[3]);
     prix_std_dev = std::stod(output_last_line_split[4]);
@@ -186,11 +186,14 @@ void simulate_next()
     estimation_window = pnl_mat_wrap_mat_rows(historical->path_, estimation_start+k, estimation_end+k);  
 
     // add historical values to past
-    pnl_mat_get_row(share_values, historical->path_, past_index+k);
-    ocelia->adjust_spot(share_values, t);
-    pnl_mat_add_row(past, past->m, share_values);
-        
-    // rebalance
+    for(int i = 0; i < k; ++i){
+        double t_temporaire = i*timestep;
+        pnl_mat_get_row(share_values, historical->path_, past_index+i);
+        ocelia->adjust_spot(share_values, t_temporaire);
+        pnl_mat_add_row(past, past->m, share_values);      
+    }
+
+    // rebalance if needed
     if(k%rebalancement_horizon==0){
         mc->price_and_delta(past, estimation_window, t, prix, prix_std_dev, delta, delta_std_dev);
         portfolio->rebalancing(t, delta, share_values);
