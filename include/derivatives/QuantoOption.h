@@ -14,8 +14,8 @@ class QuantoOption : public IDerivative {
     ~QuantoOption();
     
     void adjust_sigma(PnlMat * const sigma) const; // adjust computed sigma en fonction du nombre de produit dans la matrix path et de comment ils sont organisés
-    void adjust_past(PnlMat * const past) const;
-    void adjust_spot(PnlVect * const spot) const;
+    void adjust_past(PnlMat * const past, double timestep) const;
+    void adjust_spot(PnlVect * const spot, double t) const;
     double get_annee_payoff() const;
     
     double payoff(const PnlMat *path);

@@ -23,8 +23,8 @@ class Ocelia : public IDerivative{
         ~Ocelia();
 
         void adjust_sigma(PnlMat * const sigma) const; // adjust computed sigma en fonction du nombre de produit dans la matrix path et de comment ils sont organisés
-        void adjust_past(PnlMat * const past) const;
-        void adjust_spot(PnlVect * const spot) const;
+        void adjust_past(PnlMat * const past, double timestep) const;
+        void adjust_spot(PnlVect * const spot, double t) const;
         double get_annee_payoff() const;
         void init_indices(const std::vector<DateTime*> &all_dates, const std::vector<DateTime*> &dates_semestrielles, const std::vector<DateTime*> &dates_valeurs_n_ans);
 

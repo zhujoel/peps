@@ -8,8 +8,9 @@ InterestRate::InterestRate(double t, DateTime * const current_date, const std::v
     this->all_dates_ = all_dates;
     this->interest_path_ = interest_path;
     int idx = get_indice_from_date(this->all_dates_, this->current_date_);
-    this->rates_ = pnl_vect_create(this->interest_path_->n);
-    pnl_mat_get_row(this->rates_, this->interest_path_, idx);
+    this->rates_ = pnl_vect_create_from_zero(this->interest_path_->n);
+    // pnl_mat_get_row(this->rates_, this->interest_path_, idx);
+    LET(this->rates_, 3) = 0.03;
 }
 
 InterestRate::~InterestRate(){

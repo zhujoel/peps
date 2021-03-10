@@ -41,16 +41,22 @@ void Ocelia::adjust_sigma(PnlMat * const sigma) const {
     }
 }
 
-void Ocelia::adjust_past(PnlMat * const past) const {
+void Ocelia::adjust_past(PnlMat * const past, double timestep) const {
     for(int i = 0; i < past->m; ++i){
         for(int j = 0; j < 3; ++j){
-            MLET(past, i, j) = MGET(past, i, j)*MGET(past, i, j+4);
+            MLET(past, i, j) *= MGET(past, i, j+4);
+        }
+        for(int j = 4; j < past->n; ++j){
+            MLET(past, i, j) *= this->rates_->compute_foreign_risk_free_asset(0, i*timestep, j-4);
         }
     }
 }
-void Ocelia::adjust_spot(PnlVect * const spot) const {
+void Ocelia::adjust_spot(PnlVect * const spot, double t) const {
     for(int j = 0; j < 3; ++j){
-        LET(spot, j) = GET(spot, j)*GET(spot, j+4);
+        LET(spot, j) *= GET(spot, j+4);
+    }
+    for(int j = 4; j < spot->size; ++j){
+        LET(spot, j) *= this->rates_->compute_foreign_risk_free_asset(0, t, j-4);
     }
 }
 

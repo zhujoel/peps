@@ -12,8 +12,8 @@ class IDerivative {
 
       // sert à ajuster des sous-jacents étranger avec le zéro coupon
       virtual void adjust_sigma(PnlMat * const sigma) const = 0; // adjust computed sigma en fonction du nombre de produit dans la matrix path et de comment ils sont organisés
-      virtual void adjust_past(PnlMat * const past) const = 0; 
-      virtual void adjust_spot(PnlVect * const spot) const = 0;
+      virtual void adjust_past(PnlMat * const past, double timestep) const = 0; 
+      virtual void adjust_spot(PnlVect * const spot, double t) const = 0;
       virtual double get_annee_payoff() const = 0; // la date de maturité du produit, i.e. quand il paie
       
       virtual double payoff(const PnlMat *path) = 0;

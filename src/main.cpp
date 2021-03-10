@@ -13,10 +13,7 @@
 #include "libs/HedgingPortfolio.h"
 
 /**
- * TODO:
- * 7. output/input montecarlo en t
- * 10. dates de rebalancement (philippe)
- * 11. estimation start/end
+ * TODO: output/input montecarlo en t
  */
 
 void set_stream_from_filename(std::ostream &stream, std::fstream &file, const char* const filename){
@@ -45,8 +42,9 @@ int main(int argc, char* argv[])
     get_subset_path_from_dates(past, historical->dates_, past_dates, historical->path_);
     
     int past_index = get_indice_from_date(historical->dates_, new DateTime(15, 5, 2008));
-    int estimation_start = get_indice_from_date(historical->dates_, new DateTime(15, 5, 2006));
+    int horizon_estimation = 500;
     int estimation_end = get_indice_from_date(historical->dates_, new DateTime(15, 5, 2008));
+    int estimation_start = estimation_end - horizon_estimation;
     
     // BLACK-SCHOLES
     int size = 7;
@@ -54,7 +52,6 @@ int main(int argc, char* argv[])
     int nbTimeSteps = ocelia_dates.size();
     IModel *model = new BlackScholesModel(size, nbTimeSteps, rates);
 
-    pnl_vect_print(rates->rates_);
     // OCELIA
     double val_liquidative_initiale = 100.;
     double T = 2920./365.25; // 2920 est le nb de jours entre 15/05/2008 et 13/05/2016
@@ -67,6 +64,7 @@ int main(int argc, char* argv[])
     ocelia->init_indices(ocelia_dates, dates_semestrielles, dates_valeurs_n_ans);
 
     // MONTE CARLO
+    double timestep = T/nbTimeSteps;
     double fdStep = 0.1;
     int nbSamples = 100;
     PnlRng *rng = pnl_rng_create(PNL_RNG_MERSENNE);
@@ -78,7 +76,7 @@ int main(int argc, char* argv[])
      */
 
     // PAYOFF EFFECTIVEMENT VERSE
-    ocelia->adjust_past(ocelia_path);
+    ocelia->adjust_past(ocelia_path, timestep);
     double real_payoff = ocelia->payoff(ocelia_path);
     double real_date_payoff = ocelia->get_annee_payoff(); 
     DateTime* real_datetime_payoff; // par rapport à la date de début : 15/05/2008
@@ -95,8 +93,8 @@ int main(int argc, char* argv[])
     PnlVect* delta_std_dev = pnl_vect_create_from_zero(size);
     PnlVect* share_values = pnl_vect_new();
     pnl_mat_get_row(share_values, historical->path_, 0);
-    ocelia->adjust_spot(share_values);
-    ocelia->adjust_past(past);
+    ocelia->adjust_spot(share_values, 0);
+    ocelia->adjust_past(past, timestep);
     PnlMat estimation_window = pnl_mat_wrap_mat_rows(historical->path_, estimation_start, estimation_end);  
     mc->price_and_delta(past, estimation_window, 0, prix, prix_std_dev, delta, delta_std_dev);
     
@@ -124,6 +122,7 @@ int main(int argc, char* argv[])
     output_stream << portfolio->get_tracking_error(0, prix, share_values) << "," << MGET(historical->derivative_path_, past_index, 0) << std::endl;
     delta_stream << historical->dates_[past_index] << "," << 0 << "," << delta << "," << delta_std_dev << std::endl;
 
+    int rebalancement_horizon = 30;
     // PRICING & HEADGING en t
     for(int k = 1; k < nbTimeSteps; ++k)
     {
@@ -132,17 +131,17 @@ int main(int argc, char* argv[])
             break;
         }
 
-        double t = k*(T/nbTimeSteps);
+        double t = k*timestep;
 
         estimation_window = pnl_mat_wrap_mat_rows(historical->path_, estimation_start+k, estimation_end+k);  
 
         // add historical values to past
         pnl_mat_get_row(share_values, historical->path_, past_index+k);
-        ocelia->adjust_spot(share_values);
+        ocelia->adjust_spot(share_values, t);
         pnl_mat_add_row(past, past->m, share_values);
         
         // rebalance
-        if(k%30==0){
+        if(k%rebalancement_horizon==0){
             mc->price_and_delta(past, estimation_window, t, prix, prix_std_dev, delta, delta_std_dev);
             portfolio->rebalancing(t, delta, share_values);
             delta_stream << historical->dates_[past_index+k] << "," << k << "," << delta << "," << delta_std_dev << std::endl;
