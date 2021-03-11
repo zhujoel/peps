@@ -249,7 +249,7 @@ int main(int argc, char* argv[])
     // MONTE CARLO
     timestep = T/nbTimeSteps;
     fdStep = 0.1;
-    nbSamples = 100;
+    nbSamples = 5000;
     rng = pnl_rng_create(PNL_RNG_MERSENNE);
     pnl_rng_sseed(rng, std::time(NULL));
     mc = new StandardMonteCarloPricer(model, ocelia, rng, fdStep, nbSamples);
