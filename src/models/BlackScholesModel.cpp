@@ -41,7 +41,6 @@ void BlackScholesModel::asset(PnlMat * const path, double t, PnlRng * const rng,
             MLET(path, k, d) = MGET(path, k-1, d) * exp( (this->rates_->get_domestic_rate() - (sigma_d*sigma_d)/2 ) * timestep + sqrt(timestep) * GET(this->B_, d));
         }
     }
-
 }
 
 void BlackScholesModel::shift_asset(PnlMat * const shift_path, double t, const PnlMat * const path, int d, double h) const

@@ -4,11 +4,10 @@
 StandardMonteCarloPricer::StandardMonteCarloPricer(IModel * const model, IDerivative * const derivative, PnlRng * const rng, double fdStep, int nbSamples)
     : IPricer(model, derivative, rng, fdStep, nbSamples)
 {
-
 }
 
-StandardMonteCarloPricer::~StandardMonteCarloPricer(){
-    
+StandardMonteCarloPricer::~StandardMonteCarloPricer()
+{
 }
 
 void StandardMonteCarloPricer::price_and_delta(const PnlVect * const spot, double t, double &prix, double &price_std_dev, PnlVect * const delta, PnlVect * const delta_std_dev)
@@ -77,12 +76,12 @@ void StandardMonteCarloPricer::add_delta(double t, PnlVect * const delta, PnlVec
     double rd = 0.03;
     for (int d = 0; d < this->derivative_->size_; ++d)
     {
-        double T = this->derivative_->get_annee_payoff();
         this->model_->shift_asset(this->shift_path_, t, this->path_, d, this->fdStep_);
         double payoff_1 = this->derivative_->payoff(this->shift_path_);
         this->model_->shift_asset(this->shift_path_, t, this->path_, d, -this->fdStep_);
         double payoff_2 = this->derivative_->payoff(this->shift_path_);
         double diff = payoff_1 - payoff_2;
+        double T = this->derivative_->get_annee_payoff();
         diff = exp(-rd*(T-t))*diff;
 
         LET(delta, d) += diff;
