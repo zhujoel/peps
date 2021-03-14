@@ -59,8 +59,11 @@ std::fstream delta_file;
 
 // MARKET DATA
 HistoricalMarketData *historical;
-std::vector<DateTime*> ocelia_dates;
-PnlMat *ocelia_path = pnl_mat_new();
+std::vector<DateTime*> ocelia_dates; // tous les jours ouvrés d'océlia du début à la fin
+std::vector<DateTime*> all_relevant_dates; // concaténation de dates_semestrielles et dates_valeurs_n_ans
+std::vector<DateTime*> dates_semestrielles;
+std::vector<DateTime*> dates_valeurs_n_ans;
+PnlMat *ocelia_path = pnl_mat_new(); // les prix d'océlia lors des dates de constatation seulement
 int past_index;
 int horizon_estimation = 500;
 int estimation_end;
@@ -72,16 +75,13 @@ InterestRate *rates;
 // OCELIA
 double val_liquidative_initiale = 100.;
 double T = 8.;
+int size = 7;
 int nb_sous_jacents = 4;
 Ocelia *ocelia;
-std::vector<DateTime*> all_relevant_dates; // concaténation de dates_semestrielles et dates_valeurs_n_ans
-std::vector<DateTime*> dates_semestrielles;
-std::vector<DateTime*> dates_valeurs_n_ans;
 
 // BLACK-SCHOLES
 int nb_jours_ouvres;
-double timestep;
-int size = 7;
+double regular_timestep;
 int nbTimeSteps;
 PnlVect *computed_t_;
 IModel *model;
@@ -127,29 +127,30 @@ void simulate_all()
     //         break;
     //     }
 
+
     //     double t = k*timestep;
 
-    //     estimation_window = pnl_mat_wrap_mat_rows(historical->path_, estimation_start+k, estimation_end+k);  
+    //     // estimation_window = pnl_mat_wrap_mat_rows(historical->path_, estimation_start+k, estimation_end+k);  
 
-    //     // add historical values to past
-    //     pnl_mat_get_row(share_values, historical->path_, past_index+k);
-    //     ocelia->adjust_spot(share_values, t);
-    //     pnl_mat_add_row(past, past->m, share_values);
+    //     // // add historical values to past
+    //     // pnl_mat_get_row(share_values, historical->path_, past_index+k);
+    //     // ocelia->adjust_spot(share_values, t);
+    //     // pnl_mat_add_row(past, past->m, share_values);
         
-    //     // rebalance
-    //     if(k%rebalancement_horizon==0){
-    //         mc->price_and_delta(past, estimation_window, t, prix, prix_std_dev, delta, delta_std_dev);
-    //         portfolio->rebalancing(t, delta, share_values);
-    //         delta_stream << historical->dates_[past_index+k] << "," << k << "," << delta << "," << delta_std_dev << std::endl;
+    //     // // rebalance
+    //     // if(k%rebalancement_horizon==0){
+    //     //     mc->price_and_delta(past, estimation_window, t, prix, prix_std_dev, delta, delta_std_dev);
+    //     //     portfolio->rebalancing(t, delta, share_values);
+    //     //     delta_stream << historical->dates_[past_index+k] << "," << k << "," << delta << "," << delta_std_dev << std::endl;
 
-    //     }
+    //     // }
 
-    //     // price
-    //     mc->price(past, estimation_window, t, prix, prix_std_dev);
-    //     output_stream << historical->dates_[past_index+k] << "," << k << "," << t << "," << prix << "," << prix_std_dev << ",";
-    //     output_stream << portfolio->V1_ << "," << portfolio->V2_ << "," << portfolio->get_portfolio_value(t, spot) << ",";
-    //     output_stream << portfolio->get_FinalPnL(t, prix, spot) << "," << portfolio->get_valeur_liquidative(t, spot) << ",";
-    //     output_stream << portfolio->get_tracking_error(t, prix, spot) << "," << MGET(historical->derivative_path_, past_index+k, 0) << std::endl;
+    //     // // price
+    //     // mc->price(past, estimation_window, t, prix, prix_std_dev);
+    //     // output_stream << historical->dates_[past_index+k] << "," << k << "," << t << "," << prix << "," << prix_std_dev << ",";
+    //     // output_stream << portfolio->V1_ << "," << portfolio->V2_ << "," << portfolio->get_portfolio_value(t, spot) << ",";
+    //     // output_stream << portfolio->get_FinalPnL(t, prix, spot) << "," << portfolio->get_valeur_liquidative(t, spot) << ",";
+    //     // output_stream << portfolio->get_tracking_error(t, prix, spot) << "," << MGET(historical->derivative_path_, past_index+k, 0) << std::endl;
     // }
 }
 
@@ -227,7 +228,10 @@ int main(int argc, char* argv[])
     historical->set_data();
     // GET DATE AND PRICES
     from_date_to_date(ocelia_dates, historical->dates_, new DateTime(15, 5, 2008), new DateTime(28, 4, 2016));
-    get_subset_path_from_dates(ocelia_path, historical->dates_, ocelia_dates, historical->path_);
+    parse_dates_file(all_relevant_dates, "../data/dates/all_dates_constatation.csv", 49, '-');
+    parse_dates_file(dates_semestrielles, "../data/dates/dates_semest.csv", 16, '-');
+    parse_dates_file(dates_valeurs_n_ans, "../data/dates/dates_valeurs_n.csv", 35, '-');
+    get_subset_path_from_dates(ocelia_path, historical->dates_, all_relevant_dates, historical->path_);
     // GET INDEXES
     past_index = get_indice_from_date(historical->dates_, new DateTime(15, 5, 2008));
     estimation_end = get_indice_from_date(historical->dates_, new DateTime(15, 5, 2008));
@@ -238,21 +242,28 @@ int main(int argc, char* argv[])
 
     /** OCELIA **/
     ocelia = new Ocelia(T, size, nb_sous_jacents, val_liquidative_initiale, rates);
-    parse_dates_file(all_relevant_dates, "../data/dates/all_dates_constatation.csv", 49, '-');
-    parse_dates_file(dates_semestrielles, "../data/dates/dates_semest.csv", 16, '-');
-    parse_dates_file(dates_valeurs_n_ans, "../data/dates/dates_valeurs_n.csv", 35, '-');
     ocelia->init_indices(all_relevant_dates, dates_semestrielles, dates_valeurs_n_ans);
 
+    /** CALCUL DU PAYOFF VERSÉ DANS LA VRAIE VIE **/
+    ocelia->adjust_past(ocelia_path, regular_timestep);
+    real_payoff = ocelia->payoff(ocelia_path);
+    real_date_payoff = ocelia->get_annee_payoff(); 
+    if(real_date_payoff == 4) real_datetime_payoff = new DateTime(11, 5, 2012); // par rapport à la date de début : 15/05/2008
+    else if(real_date_payoff == 5) real_datetime_payoff = new DateTime(13, 5, 2013);
+    else if(real_date_payoff == 6) real_datetime_payoff = new DateTime(13, 5, 2014);
+    else if(real_date_payoff == 7) real_datetime_payoff = new DateTime(13, 5, 2015);
+    else if(real_date_payoff == 8) real_datetime_payoff = new DateTime(13, 5, 2016);
+    
     /** BLACK-SCHOLES **/
     nb_jours_ouvres = ocelia_dates.size();
-    timestep = T/nb_jours_ouvres;
+    regular_timestep = T/nb_jours_ouvres;
     nbTimeSteps = all_relevant_dates.size();
     // CALCUL DES t_{i}
     PnlVectInt *all_relevant_dates_indices = pnl_vect_int_new();
     calcul_indices_dates(all_relevant_dates_indices, ocelia_dates, all_relevant_dates);
     computed_t_ = pnl_vect_create(nbTimeSteps);
-    for(int i = 0; i < nbTimeSteps; ++i){
-        LET(computed_t_, i) = GET_INT(all_relevant_dates_indices, i)*timestep;
+    for(int i = 0; i < computed_t_->size; ++i){
+        LET(computed_t_, i) = GET_INT(all_relevant_dates_indices, i)*regular_timestep;
     }
     pnl_vect_int_free(&all_relevant_dates_indices);
     model = new BlackScholesModel(size, nbTimeSteps, rates, computed_t_);
@@ -261,16 +272,6 @@ int main(int argc, char* argv[])
     rng = pnl_rng_create(PNL_RNG_MERSENNE);
     pnl_rng_sseed(rng, std::time(NULL));
     mc = new StandardMonteCarloPricer(model, ocelia, rng, fdStep, nbSamples);
-
-    /** CALCUL DU PAYOFF VERSÉ DANS LA VRAIE VIE **/
-    ocelia->adjust_past(ocelia_path, timestep);
-    real_payoff = ocelia->payoff(ocelia_path);
-    real_date_payoff = ocelia->get_annee_payoff(); 
-    if(real_date_payoff == 4) real_datetime_payoff = new DateTime(11, 5, 2012); // par rapport à la date de début : 15/05/2008
-    else if(real_date_payoff == 5) real_datetime_payoff = new DateTime(13, 5, 2013);
-    else if(real_date_payoff == 6) real_datetime_payoff = new DateTime(13, 5, 2014);
-    else if(real_date_payoff == 7) real_datetime_payoff = new DateTime(13, 5, 2015);
-    else if(real_date_payoff == 8) real_datetime_payoff = new DateTime(13, 5, 2016);
 
     /** PRICING & HEDGING en 0 **/
     delta = pnl_vect_create_from_zero(size);
@@ -311,14 +312,14 @@ int main(int argc, char* argv[])
     }
     // MARKET DATA
     delete historical;
+    delete_date_vector(all_relevant_dates);
+    delete_date_vector(dates_semestrielles);
+    delete_date_vector(dates_valeurs_n_ans);
     pnl_mat_free(&ocelia_path);
     // INTEREST RATES
     delete rates;
     // OCELIA
     delete ocelia;
-    delete_date_vector(all_relevant_dates);
-    delete_date_vector(dates_semestrielles);
-    delete_date_vector(dates_valeurs_n_ans);
     // BLACK-SCHOLES
     pnl_vect_free(&computed_t_);
     delete model;
