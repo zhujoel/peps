@@ -88,7 +88,7 @@ IModel *model;
 
 // MONTE-CARLO
 double fdStep = 0.1;
-int nbSamples = 100;
+int nbSamples = 1000;
 PnlRng *rng;
 IPricer *mc;
 
@@ -107,20 +107,20 @@ PnlMat estimation_window;
 
 // REBALANCING PORTFOLIO
 HedgingPortfolio *portfolio;
-int rebalancement_horizon;
+int rebalancement_horizon = 30;
 
 void simulate_all()
 {
-    // output_stream << "Date,k,t,prix,prix_std_dev,V1,V2,Pf_couverture,Pnl,Valeur_liquidative,Tracking_error,Ocelia_Valeur_liquidative" << std::endl;
-    // delta_stream << "Date,k,delta,delta_std_dev" << std::endl;
-    // output_stream << historical->dates_[past_index] << "," << 0 << "," << 0 << "," << prix << "," << prix_std_dev << ",";
-    // output_stream << portfolio->V1_ << "," << portfolio->V2_ << "," << portfolio->get_portfolio_value(0, share_values) << ",";
-    // output_stream << portfolio->get_FinalPnL(0, prix, share_values) << "," << portfolio->get_valeur_liquidative(0, share_values) << ",";
-    // output_stream << portfolio->get_tracking_error(0, prix, share_values) << "," << MGET(historical->derivative_path_, past_index, 0) << std::endl;
-    // delta_stream << historical->dates_[past_index] << "," << 0 << "," << delta << "," << delta_std_dev << std::endl;
+    output_stream << "Date,k,t,prix,prix_std_dev,V1,V2,Pf_couverture,Pnl,Valeur_liquidative,Tracking_error,Ocelia_Valeur_liquidative" << std::endl;
+    delta_stream << "Date,k,delta,delta_std_dev" << std::endl;
+    output_stream << historical->dates_[past_index] << "," << 0 << "," << 0 << "," << prix << "," << prix_std_dev << ",";
+    output_stream << portfolio->V1_ << "," << portfolio->V2_ << "," << portfolio->get_portfolio_value(0, spot) << ",";
+    output_stream << portfolio->get_FinalPnL(0, prix, spot) << "," << portfolio->get_valeur_liquidative(0, spot) << ",";
+    output_stream << portfolio->get_tracking_error(0, prix, spot) << "," << MGET(historical->derivative_path_, past_index, 0) << std::endl;
+    delta_stream << historical->dates_[past_index] << "," << 0 << "," << delta << "," << delta_std_dev << std::endl;
 
     // // PRICING & HEADGING en t
-    // for(int k = 1; k < nbTimeSteps; ++k)
+    // for(int k = 1; k < nb_jours_ouvres; ++k)
     // {
     //     if (((historical->dates_[past_index+k])->compare(real_datetime_payoff))==1) {
     //         std::cout << "Un payoff de " << real_payoff << " à été versé au client le " << real_datetime_payoff << std::endl;
@@ -147,9 +147,9 @@ void simulate_all()
     //     // price
     //     mc->price(past, estimation_window, t, prix, prix_std_dev);
     //     output_stream << historical->dates_[past_index+k] << "," << k << "," << t << "," << prix << "," << prix_std_dev << ",";
-    //     output_stream << portfolio->V1_ << "," << portfolio->V2_ << "," << portfolio->get_portfolio_value(t, share_values) << ",";
-    //     output_stream << portfolio->get_FinalPnL(t, prix, share_values) << "," << portfolio->get_valeur_liquidative(t, share_values) << ",";
-    //     output_stream << portfolio->get_tracking_error(t, prix, share_values) << "," << MGET(historical->derivative_path_, past_index+k, 0) << std::endl;
+    //     output_stream << portfolio->V1_ << "," << portfolio->V2_ << "," << portfolio->get_portfolio_value(t, spot) << ",";
+    //     output_stream << portfolio->get_FinalPnL(t, prix, spot) << "," << portfolio->get_valeur_liquidative(t, spot) << ",";
+    //     output_stream << portfolio->get_tracking_error(t, prix, spot) << "," << MGET(historical->derivative_path_, past_index+k, 0) << std::endl;
     // }
 }
 
@@ -214,7 +214,7 @@ void simulate_next()
 
 int main(int argc, char* argv[])
 {
-    // STREAMS
+    /** STREAMS **/
     if(argc > 2){
         set_stream_from_filename(output_stream, output_file, argv[2]);
         if(argc > 3) set_stream_from_filename(delta_stream, delta_file, argv[3]);
@@ -285,20 +285,23 @@ int main(int argc, char* argv[])
     compute_volatility(model->volatility_, model->sigma_);
     mc->price_and_delta(spot, 0, prix, prix_std_dev, delta, delta_std_dev);
 
-    // // REBALANCING PORTFOLIO
-    // portfolio = new HedgingPortfolio(prix, delta, share_values, rates, val_liquidative_initiale);
-    // rebalancement_horizon = 30;
+    /** REBALANCING PORTFOLIO **/
+    portfolio = new HedgingPortfolio(prix, delta, spot, rates, val_liquidative_initiale);
 
-    // // ONLY THING TO CHANGE
-    // if(strcmp(argv[1], "all") == 0){
-    //     simulate_all();
-    // }
-    // else if(strcmp(argv[1], "next") == 0){
-    //     simulate_next();
-    // }
-    // else{
-    //     exit(EXIT_FAILURE);
-    // }
+    /** PARSE INPUT **/
+    if(argc == 1){
+        std::cout << "ERROR: command is: ./main (all | next) [output_filepath] [delta_filepath]" << std::endl;
+        exit(EXIT_FAILURE);
+    }
+    if(strcmp(argv[1], "all") == 0){
+        simulate_all();
+    }
+    else if(strcmp(argv[1], "next") == 0){
+        simulate_next();
+    }
+    else{
+        exit(EXIT_FAILURE);
+    }
 
     /** DELETES **/
     // STREAMS
