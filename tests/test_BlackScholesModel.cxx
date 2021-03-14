@@ -3,7 +3,6 @@
 #include "pnl/pnl_matrix.h"
 #include "models/BlackScholesModel.h"
 #include "market_data/HistoricalMarketData.h"
-#include <iostream>
 
 class BlackScholesModelTest: public ::testing::Test{
     protected:

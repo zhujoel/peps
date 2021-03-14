@@ -1,7 +1,6 @@
 #include "models/BlackScholesModel.h"
 #include "libs/MathLib.h"
 #include "libs/Utilities.h"
-#include <iostream>
 
 BlackScholesModel::BlackScholesModel(int size, int nbTimeSteps, InterestRate * const rates, PnlVect * const computed_ti) 
     : IModel(size, nbTimeSteps, rates, computed_ti)
