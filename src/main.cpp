@@ -286,8 +286,8 @@ int main(int argc, char* argv[])
     mc = new StandardMonteCarloPricer(model, ocelia, rng, fdStep, nbSamples);
 
     /** PRICING & HEDGING en 0 **/
-    delta = pnl_vect_create_from_zero(size);
-    delta_std_dev = pnl_vect_create_from_zero(size);
+    delta = pnl_vect_create(size);
+    delta_std_dev = pnl_vect_create(size);
     // GET AND ADJUST SPOT
     pnl_mat_get_row(spot, ocelia_path, 0);
     ocelia->adjust_spot(spot, 0);
@@ -298,25 +298,24 @@ int main(int argc, char* argv[])
     compute_volatility(model->volatility_, model->sigma_);
     mc->price_and_delta(spot, 0, prix, prix_std_dev, delta, delta_std_dev);
     pnl_mat_set_row(mc->path_, spot, 0); // on fixe le spot dans le path car on a plus besoin de le calculer
-    pnl_vect_print(delta);
 
     /** REBALANCING PORTFOLIO **/
     portfolio = new HedgingPortfolio(prix, delta, spot, rates, val_liquidative_initiale);
 
-    // /** PARSE INPUT **/
-    // if(argc == 1){
-    //     std::cout << "ERROR: command is: ./main (all | next) [output_filepath] [delta_filepath]" << std::endl;
-    //     exit(EXIT_FAILURE);
-    // }
-    // if(strcmp(argv[1], "all") == 0){
-    //     simulate_all();
-    // }
-    // else if(strcmp(argv[1], "next") == 0){
-    //     simulate_next();
-    // }
-    // else{
-    //     exit(EXIT_FAILURE);
-    // }
+    /** PARSE INPUT **/
+    if(argc == 1){
+        std::cout << "ERROR: command is: ./main (all | next) [output_filepath] [delta_filepath]" << std::endl;
+        exit(EXIT_FAILURE);
+    }
+    if(strcmp(argv[1], "all") == 0){
+        simulate_all();
+    }
+    else if(strcmp(argv[1], "next") == 0){
+        simulate_next();
+    }
+    else{
+        exit(EXIT_FAILURE);
+    }
 
     /** DELETES **/
     // STREAMS
