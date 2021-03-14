@@ -12,6 +12,8 @@ class OceliaTest: public ::testing::Test{
         PnlMat *path;
         std::vector<DateTime*> dates_semestrielles;
         std::vector<DateTime*> dates_valeurs_n_ans;
+        double rd = 0.03;
+        PnlMat *interest_path;
         InterestRate *rates;
 
         virtual void SetUp(){
@@ -27,13 +29,11 @@ class OceliaTest: public ::testing::Test{
                 MLET(path, i, 6) = 1;
             }
             
-            double rd = 0.03;
-            PnlMat* interest_path = pnl_mat_create_from_zero(1, 4);
-            MLET(interest_path, 0, 3) = rd;
-            DateTime* curent_date = new DateTime(1, 1, 2010);
-            std::vector<DateTime*> all_dates;
-            all_dates.push_back(curent_date);
-            this->rates = new InterestRate(0, curent_date, all_dates, interest_path);
+            // RATES
+            this->interest_path = pnl_mat_create_from_scalar(1, 4, rd);
+            DateTime *current_date = new DateTime(1, 1, 2010);
+            all_dates.push_back(current_date);
+            this->rates = new InterestRate(0, current_date, all_dates, interest_path);
 
             this->ocelia = new Ocelia(1, 7, 4, 100, this->rates);
             parse_dates_file(this->dates_semestrielles, "../tests/test_data/ocelia/dates_semest.csv", 16, '-');
@@ -47,6 +47,7 @@ class OceliaTest: public ::testing::Test{
             pnl_mat_free(&this->path);
             delete_date_vector(this->dates_semestrielles);
             delete_date_vector(this->dates_valeurs_n_ans);
+            pnl_mat_free(&this->interest_path);
             delete this->rates;
         }
 };
