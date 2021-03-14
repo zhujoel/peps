@@ -108,105 +108,105 @@ int rebalancement_horizon;
 
 void simulate_all()
 {
-    output_stream << "Date,k,t,prix,prix_std_dev,V1,V2,Pf_couverture,Pnl,Valeur_liquidative,Tracking_error,Ocelia_Valeur_liquidative" << std::endl;
-    delta_stream << "Date,k,delta,delta_std_dev" << std::endl;
-    output_stream << historical->dates_[past_index] << "," << 0 << "," << 0 << "," << prix << "," << prix_std_dev << ",";
-    output_stream << portfolio->V1_ << "," << portfolio->V2_ << "," << portfolio->get_portfolio_value(0, share_values) << ",";
-    output_stream << portfolio->get_FinalPnL(0, prix, share_values) << "," << portfolio->get_valeur_liquidative(0, share_values) << ",";
-    output_stream << portfolio->get_tracking_error(0, prix, share_values) << "," << MGET(historical->derivative_path_, past_index, 0) << std::endl;
-    delta_stream << historical->dates_[past_index] << "," << 0 << "," << delta << "," << delta_std_dev << std::endl;
+    // output_stream << "Date,k,t,prix,prix_std_dev,V1,V2,Pf_couverture,Pnl,Valeur_liquidative,Tracking_error,Ocelia_Valeur_liquidative" << std::endl;
+    // delta_stream << "Date,k,delta,delta_std_dev" << std::endl;
+    // output_stream << historical->dates_[past_index] << "," << 0 << "," << 0 << "," << prix << "," << prix_std_dev << ",";
+    // output_stream << portfolio->V1_ << "," << portfolio->V2_ << "," << portfolio->get_portfolio_value(0, share_values) << ",";
+    // output_stream << portfolio->get_FinalPnL(0, prix, share_values) << "," << portfolio->get_valeur_liquidative(0, share_values) << ",";
+    // output_stream << portfolio->get_tracking_error(0, prix, share_values) << "," << MGET(historical->derivative_path_, past_index, 0) << std::endl;
+    // delta_stream << historical->dates_[past_index] << "," << 0 << "," << delta << "," << delta_std_dev << std::endl;
 
-    // PRICING & HEADGING en t
-    for(int k = 1; k < nbTimeSteps; ++k)
-    {
-        if (((historical->dates_[past_index+k])->compare(real_datetime_payoff))==1) {
-            std::cout << "Un payoff de " << real_payoff << " à été versé au client le " << real_datetime_payoff << std::endl;
-            break;
-        }
+    // // PRICING & HEADGING en t
+    // for(int k = 1; k < nbTimeSteps; ++k)
+    // {
+    //     if (((historical->dates_[past_index+k])->compare(real_datetime_payoff))==1) {
+    //         std::cout << "Un payoff de " << real_payoff << " à été versé au client le " << real_datetime_payoff << std::endl;
+    //         break;
+    //     }
 
-        double t = k*timestep;
+    //     double t = k*timestep;
 
-        estimation_window = pnl_mat_wrap_mat_rows(historical->path_, estimation_start+k, estimation_end+k);  
+    //     estimation_window = pnl_mat_wrap_mat_rows(historical->path_, estimation_start+k, estimation_end+k);  
 
-        // add historical values to past
-        pnl_mat_get_row(share_values, historical->path_, past_index+k);
-        ocelia->adjust_spot(share_values, t);
-        pnl_mat_add_row(past, past->m, share_values);
+    //     // add historical values to past
+    //     pnl_mat_get_row(share_values, historical->path_, past_index+k);
+    //     ocelia->adjust_spot(share_values, t);
+    //     pnl_mat_add_row(past, past->m, share_values);
         
-        // rebalance
-        if(k%rebalancement_horizon==0){
-            mc->price_and_delta(past, estimation_window, t, prix, prix_std_dev, delta, delta_std_dev);
-            portfolio->rebalancing(t, delta, share_values);
-            delta_stream << historical->dates_[past_index+k] << "," << k << "," << delta << "," << delta_std_dev << std::endl;
+    //     // rebalance
+    //     if(k%rebalancement_horizon==0){
+    //         mc->price_and_delta(past, estimation_window, t, prix, prix_std_dev, delta, delta_std_dev);
+    //         portfolio->rebalancing(t, delta, share_values);
+    //         delta_stream << historical->dates_[past_index+k] << "," << k << "," << delta << "," << delta_std_dev << std::endl;
 
-        }
+    //     }
 
-        // price
-        mc->price(past, estimation_window, t, prix, prix_std_dev);
-        output_stream << historical->dates_[past_index+k] << "," << k << "," << t << "," << prix << "," << prix_std_dev << ",";
-        output_stream << portfolio->V1_ << "," << portfolio->V2_ << "," << portfolio->get_portfolio_value(t, share_values) << ",";
-        output_stream << portfolio->get_FinalPnL(t, prix, share_values) << "," << portfolio->get_valeur_liquidative(t, share_values) << ",";
-        output_stream << portfolio->get_tracking_error(t, prix, share_values) << "," << MGET(historical->derivative_path_, past_index+k, 0) << std::endl;
-    }
+    //     // price
+    //     mc->price(past, estimation_window, t, prix, prix_std_dev);
+    //     output_stream << historical->dates_[past_index+k] << "," << k << "," << t << "," << prix << "," << prix_std_dev << ",";
+    //     output_stream << portfolio->V1_ << "," << portfolio->V2_ << "," << portfolio->get_portfolio_value(t, share_values) << ",";
+    //     output_stream << portfolio->get_FinalPnL(t, prix, share_values) << "," << portfolio->get_valeur_liquidative(t, share_values) << ",";
+    //     output_stream << portfolio->get_tracking_error(t, prix, share_values) << "," << MGET(historical->derivative_path_, past_index+k, 0) << std::endl;
+    // }
 }
 
 // Does not work if no file are indicated
 void simulate_next()
 {
-    // PARSE LAST LINE OF FILES
-    // output
-    std::string output_last_line = get_last_line(output_file);
-    int output_size = 12;
-    std::string output_last_line_split[output_size];
-    split(output_last_line_split, output_last_line, ',');
-    // delta
-    std::string delta_last_line = get_last_line(delta_file);
-    int delta_size = 4;
-    std::string delta_last_line_split[delta_size];
-    split(delta_last_line_split, delta_last_line, ',');
+    // // PARSE LAST LINE OF FILES
+    // // output
+    // std::string output_last_line = get_last_line(output_file);
+    // int output_size = 12;
+    // std::string output_last_line_split[output_size];
+    // split(output_last_line_split, output_last_line, ',');
+    // // delta
+    // std::string delta_last_line = get_last_line(delta_file);
+    // int delta_size = 4;
+    // std::string delta_last_line_split[delta_size];
+    // split(delta_last_line_split, delta_last_line, ',');
 
-    // SET VARIABLAES TO PREVIOUS DATA TO SIMULATE NEXT STEP
-    std::string delta_split[size];
-    std::string delta_std_dev_split[size];
-    split(delta_split, delta_last_line_split[2], ' ');
-    split(delta_std_dev_split, delta_last_line_split[3], ' ');
-    for(int i = 0; i < size; ++i){
-        LET(delta, i) = std::stod(delta_split[i]);
-        LET(delta_std_dev, i) = std::stod(delta_std_dev_split[i]);
-        LET(portfolio->delta_, i) = std::stod(delta_split[i]);
-    }
+    // // SET VARIABLAES TO PREVIOUS DATA TO SIMULATE NEXT STEP
+    // std::string delta_split[size];
+    // std::string delta_std_dev_split[size];
+    // split(delta_split, delta_last_line_split[2], ' ');
+    // split(delta_std_dev_split, delta_last_line_split[3], ' ');
+    // for(int i = 0; i < size; ++i){
+    //     LET(delta, i) = std::stod(delta_split[i]);
+    //     LET(delta_std_dev, i) = std::stod(delta_std_dev_split[i]);
+    //     LET(portfolio->delta_, i) = std::stod(delta_split[i]);
+    // }
 
-    int k = std::stoi(output_last_line_split[1])+1; // +1 pour incrémenter la date
-    double t = k*timestep;
-    prix = std::stod(output_last_line_split[3]);
-    prix_std_dev = std::stod(output_last_line_split[4]);
-    portfolio->V1_ = std::stod(output_last_line_split[5]);
-    portfolio->V2_ = std::stod(output_last_line_split[6]);
-    portfolio->last_rebalancing_t_ = std::stod(delta_last_line_split[1])*timestep;
+    // int k = std::stoi(output_last_line_split[1])+1; // +1 pour incrémenter la date
+    // double t = k*timestep;
+    // prix = std::stod(output_last_line_split[3]);
+    // prix_std_dev = std::stod(output_last_line_split[4]);
+    // portfolio->V1_ = std::stod(output_last_line_split[5]);
+    // portfolio->V2_ = std::stod(output_last_line_split[6]);
+    // portfolio->last_rebalancing_t_ = std::stod(delta_last_line_split[1])*timestep;
 
-    estimation_window = pnl_mat_wrap_mat_rows(historical->path_, estimation_start+k, estimation_end+k);  
+    // estimation_window = pnl_mat_wrap_mat_rows(historical->path_, estimation_start+k, estimation_end+k);  
 
-    // add historical values to past
-    for(int i = 0; i < k; ++i){
-        double t_temporaire = i*timestep;
-        pnl_mat_get_row(share_values, historical->path_, past_index+i);
-        ocelia->adjust_spot(share_values, t_temporaire);
-        pnl_mat_add_row(past, past->m, share_values);      
-    }
+    // // add historical values to past
+    // for(int i = 0; i < k; ++i){
+    //     double t_temporaire = i*timestep;
+    //     pnl_mat_get_row(share_values, historical->path_, past_index+i);
+    //     ocelia->adjust_spot(share_values, t_temporaire);
+    //     pnl_mat_add_row(past, past->m, share_values);      
+    // }
 
-    // rebalance if needed
-    if(k%rebalancement_horizon==0){
-        mc->price_and_delta(past, estimation_window, t, prix, prix_std_dev, delta, delta_std_dev);
-        portfolio->rebalancing(t, delta, share_values);
-        delta_stream << historical->dates_[past_index+k] << "," << k << "," << delta << "," << delta_std_dev << std::endl;
-    }
+    // // rebalance if needed
+    // if(k%rebalancement_horizon==0){
+    //     mc->price_and_delta(past, estimation_window, t, prix, prix_std_dev, delta, delta_std_dev);
+    //     portfolio->rebalancing(t, delta, share_values);
+    //     delta_stream << historical->dates_[past_index+k] << "," << k << "," << delta << "," << delta_std_dev << std::endl;
+    // }
 
-    // price
-    mc->price(past, estimation_window, t, prix, prix_std_dev);
-    output_stream << historical->dates_[past_index+k] << "," << k << "," << t << "," << prix << "," << prix_std_dev << ",";
-    output_stream << portfolio->V1_ << "," << portfolio->V2_ << "," << portfolio->get_portfolio_value(t, share_values) << ",";
-    output_stream << portfolio->get_FinalPnL(t, prix, share_values) << "," << portfolio->get_valeur_liquidative(t, share_values) << ",";
-    output_stream << portfolio->get_tracking_error(t, prix, share_values) << "," << MGET(historical->derivative_path_, past_index+k, 0) << std::endl;
+    // // price
+    // mc->price(past, estimation_window, t, prix, prix_std_dev);
+    // output_stream << historical->dates_[past_index+k] << "," << k << "," << t << "," << prix << "," << prix_std_dev << ",";
+    // output_stream << portfolio->V1_ << "," << portfolio->V2_ << "," << portfolio->get_portfolio_value(t, share_values) << ",";
+    // output_stream << portfolio->get_FinalPnL(t, prix, share_values) << "," << portfolio->get_valeur_liquidative(t, share_values) << ",";
+    // output_stream << portfolio->get_tracking_error(t, prix, share_values) << "," << MGET(historical->derivative_path_, past_index+k, 0) << std::endl;
 }
 
 int main(int argc, char* argv[])
@@ -231,65 +231,80 @@ int main(int argc, char* argv[])
     estimation_end = get_indice_from_date(historical->dates_, new DateTime(15, 5, 2008));
     estimation_start = estimation_end - horizon_estimation;
     
-    // BLACK-SCHOLES
-    size = 7;
-    rates = new InterestRate(0, new DateTime(15, 5, 2008), historical->dates_, historical->interest_path_);
-    nbTimeSteps = ocelia_dates.size();
-    model = new BlackScholesModel(size, nbTimeSteps, rates);
+    // // BLACK-SCHOLES
+    // size = 7;
+    // rates = new InterestRate(0, new DateTime(15, 5, 2008), historical->dates_, historical->interest_path_);
+    // nbTimeSteps = ocelia_dates.size();
+    // model = new BlackScholesModel(size, nbTimeSteps, rates);
     
-    // OCELIA
-    val_liquidative_initiale = 100.;
-    T = 2920./365.25; // 2920 est le nb de jours entre 15/05/2008 et 13/05/2016
-    nb_sous_jacents = 4;
-    ocelia = new Ocelia(T, size, nb_sous_jacents, val_liquidative_initiale, rates);
-    parse_dates_file(dates_semestrielles, "../data/dates/dates_semest.csv", 16, '-');
-    parse_dates_file(dates_valeurs_n_ans, "../data/dates/dates_valeurs_n.csv", 35, '-');
-    ocelia->init_indices(ocelia_dates, dates_semestrielles, dates_valeurs_n_ans);
+    // // OCELIA
+    // val_liquidative_initiale = 100.;
+    // T = 2920./365.25; // 2920 est le nb de jours entre 15/05/2008 et 13/05/2016
+    // nb_sous_jacents = 4;
+    // ocelia = new Ocelia(T, size, nb_sous_jacents, val_liquidative_initiale, rates);
+    // parse_dates_file(dates_semestrielles, "../data/dates/dates_semest.csv", 16, '-');
+    // parse_dates_file(dates_valeurs_n_ans, "../data/dates/dates_valeurs_n.csv", 35, '-');
+    // ocelia->init_indices(ocelia_dates, dates_semestrielles, dates_valeurs_n_ans);
 
-    // MONTE CARLO
-    timestep = T/nbTimeSteps;
-    fdStep = 0.1;
-    nbSamples = 5000;
-    rng = pnl_rng_create(PNL_RNG_MERSENNE);
-    pnl_rng_sseed(rng, std::time(NULL));
-    mc = new StandardMonteCarloPricer(model, ocelia, rng, fdStep, nbSamples);
+    // // MONTE CARLO
+    // timestep = T/nbTimeSteps;
+    // fdStep = 0.1;
+    // nbSamples = 5000;
+    // rng = pnl_rng_create(PNL_RNG_MERSENNE);
+    // pnl_rng_sseed(rng, std::time(NULL));
+    // mc = new StandardMonteCarloPricer(model, ocelia, rng, fdStep, nbSamples);
 
-    // PAYOFF EFFECTIVEMENT VERSE
-    ocelia->adjust_past(ocelia_path, timestep);
-    real_payoff = ocelia->payoff(ocelia_path);
-    real_date_payoff = ocelia->get_annee_payoff(); 
-    if(real_date_payoff == 4) real_datetime_payoff = new DateTime(11, 5, 2012); // par rapport à la date de début : 15/05/2008
-    else if(real_date_payoff == 5) real_datetime_payoff = new DateTime(13, 5, 2013);
-    else if(real_date_payoff == 6) real_datetime_payoff = new DateTime(13, 5, 2014);
-    else if(real_date_payoff == 7) real_datetime_payoff = new DateTime(13, 5, 2015);
-    else if(real_date_payoff == 8) real_datetime_payoff = new DateTime(13, 5, 2016);
+    // // PAYOFF EFFECTIVEMENT VERSE
+    // ocelia->adjust_past(ocelia_path, timestep);
+    // real_payoff = ocelia->payoff(ocelia_path);
+    // real_date_payoff = ocelia->get_annee_payoff(); 
+    // if(real_date_payoff == 4) real_datetime_payoff = new DateTime(11, 5, 2012); // par rapport à la date de début : 15/05/2008
+    // else if(real_date_payoff == 5) real_datetime_payoff = new DateTime(13, 5, 2013);
+    // else if(real_date_payoff == 6) real_datetime_payoff = new DateTime(13, 5, 2014);
+    // else if(real_date_payoff == 7) real_datetime_payoff = new DateTime(13, 5, 2015);
+    // else if(real_date_payoff == 8) real_datetime_payoff = new DateTime(13, 5, 2016);
 
-    // PRICING & HEADGING en 0
-    prix = 0.;
-    prix_std_dev = 0.;
-    delta = pnl_vect_create_from_zero(size);
-    delta_std_dev = pnl_vect_create_from_zero(size);
-    share_values = pnl_vect_new();
-    pnl_mat_get_row(share_values, historical->path_, 0);
-    ocelia->adjust_spot(share_values, 0);
-    ocelia->adjust_past(past, timestep);
-    estimation_window = pnl_mat_wrap_mat_rows(historical->path_, estimation_start, estimation_end);  
-    mc->price_and_delta(past, estimation_window, 0, prix, prix_std_dev, delta, delta_std_dev);
+    // // PRICING & HEADGING en 0
+    // prix = 0.;
+    // prix_std_dev = 0.;
+    // delta = pnl_vect_create_from_zero(size);
+    // delta_std_dev = pnl_vect_create_from_zero(size);
+    // share_values = pnl_vect_new();
+    // pnl_mat_get_row(share_values, historical->path_, 0);
+    // ocelia->adjust_spot(share_values, 0);
+    // ocelia->adjust_past(past, timestep);
+    // estimation_window = pnl_mat_wrap_mat_rows(historical->path_, estimation_start, estimation_end);  
+    // mc->price_and_delta(past, estimation_window, 0, prix, prix_std_dev, delta, delta_std_dev);
 
-    // REBALANCING PORTFOLIO
-    portfolio = new HedgingPortfolio(prix, delta, share_values, rates, val_liquidative_initiale);
-    rebalancement_horizon = 30;
+    // // REBALANCING PORTFOLIO
+    // portfolio = new HedgingPortfolio(prix, delta, share_values, rates, val_liquidative_initiale);
+    // rebalancement_horizon = 30;
 
-    // ONLY THING TO CHANGE
-    if(strcmp(argv[1], "all") == 0){
-        simulate_all();
+    // // ONLY THING TO CHANGE
+    // if(strcmp(argv[1], "all") == 0){
+    //     simulate_all();
+    // }
+    // else if(strcmp(argv[1], "next") == 0){
+    //     simulate_next();
+    // }
+    // else{
+    //     exit(EXIT_FAILURE);
+    // }
+
+    // TODO: remove
+    PnlVectInt *indices_test = pnl_vect_int_new();
+    std::vector<DateTime*> all_relevant_dates;
+    parse_dates_file(all_relevant_dates, "../data/dates/all_dates_constatation.csv", 49, '-');
+    calcul_indices_dates(indices_test, ocelia_dates, all_relevant_dates);
+
+    pnl_vect_int_print(indices_test);
+
+    PnlVect *computed_t_ = pnl_vect_create(49);
+    for(int i = 0; i < indices_test->size; ++i){
+        LET(computed_t_, i) = GET_INT(indices_test, i)*timestep;
     }
-    else if(strcmp(argv[1], "next") == 0){
-        simulate_next();
-    }
-    else{
-        exit(EXIT_FAILURE);
-    }
+
+    pnl_vect_print(computed_t_);
 
     // DELETES
     delete historical;

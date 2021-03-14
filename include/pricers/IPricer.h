@@ -11,14 +11,16 @@ class IPricer{
         PnlRng *rng_; // pointeur sur le rng
         double fdStep_; // pas de constatation des produits
         int nbSamples_; // nombre de tirages de Monte-Carlo
+
         PnlMat *path_; // trajectoires des sous-jacents du modele
         PnlMat *shift_path_; // espace mémoire d'une trajectoire shiftée par (1+h)
 
         IPricer(IModel * const model, IDerivative * const derivative, PnlRng * const rng, double fdStep, int nbSamples);
         virtual ~IPricer();
         
-        virtual void price_and_delta(const PnlMat * const past, const PnlMat estimation_window, double t, double &prix, double &price_std_dev, PnlVect * const delta, PnlVect * const delta_std_dev) = 0;
-        virtual void price(const PnlMat * const past, const PnlMat estimation_window, double t, double &prix, double &price_std_dev) = 0;
-        virtual void add_price(double t, double rd, double &prix, double &std_dev) = 0;
-        virtual void add_delta(double t, double rd, PnlVect * const delta, PnlVect * const std_dev) = 0;
+        // TODO: voir ce que ça fait niveau opti de passer estimation_window sans pointeur
+        virtual void price_and_delta(const PnlVect * const spot, double t, double &prix, double &price_std_dev, PnlVect * const delta, PnlVect * const delta_std_dev) = 0;
+        virtual void price(const PnlVect * const spot, double t, double &prix, double &price_std_dev) = 0;
+        virtual void add_price(double t, double &prix, double &std_dev) = 0;
+        virtual void add_delta(double t, PnlVect * const delta, PnlVect * const std_dev) = 0;
 };

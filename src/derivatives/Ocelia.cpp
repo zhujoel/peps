@@ -145,6 +145,14 @@ double Ocelia::compute_flux_n_ans(const PnlMat *path, int N) const{
 
 double Ocelia::payoff(const PnlMat *path)
 {
+    // path, size: 4 + 3 (actif sans risque étrangers en domestique)
+    // 0: ss-jct gbp
+    // 1: ss-jct jpy
+    // 2: ss-jct chf
+    // 3: ss-jct euro
+    // 4: zc gbp
+    // 5: zc jpy
+    // 6: zc chf
     compute_nouveau_depart(path);
     for(int n = 4 ; n <= 8; ++n){
         compute_perfs_n_ans(this->perfs_, path, n);

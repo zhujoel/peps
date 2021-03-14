@@ -34,6 +34,12 @@ bool has_no_index_value_null(const std::string * const array, const PnlVectInt *
     return true;
 }
 
+int first_index_gte(const PnlVect * const vect, double value){
+    for(int i = 0; i < vect->size; ++i){
+        if(GET(vect, i) >= value) return i;
+    }
+    return vect->size;
+}
 
 std::ostream& operator<<(std::ostream &stm, const PnlVect * const vect)
 {
