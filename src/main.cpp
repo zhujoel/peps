@@ -89,7 +89,7 @@ IModel *model;
 
 // MONTE-CARLO
 double fdStep = 0.1;
-int nbSamples = 1000;
+int nbSamples = 10000;
 PnlRng *rng;
 IPricer *mc;
 
