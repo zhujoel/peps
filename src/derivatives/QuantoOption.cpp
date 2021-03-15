@@ -12,7 +12,7 @@ QuantoOption::~QuantoOption(){
 
 // pas besoin d'ajuster dans quanto
 void QuantoOption::adjust_sigma(PnlMat * const sigma) const {}
-void QuantoOption::adjust_past(PnlMat * const past, double timestep) const {}
+void QuantoOption::adjust_past(PnlMat * const past) const {}
 void QuantoOption::adjust_spot(PnlVect * const spot, double t) const {}
 
 double QuantoOption::get_annee_payoff() const {

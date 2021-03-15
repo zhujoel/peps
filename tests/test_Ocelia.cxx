@@ -15,11 +15,14 @@ class OceliaTest: public ::testing::Test{
         double rd = 0.03;
         PnlMat *interest_path;
         InterestRate *rates;
+        int nbTimeSteps = 49;
+        PnlVect * computed_t_;
+        double T = 8;
 
         virtual void SetUp(){
             parse_dates_file(this->all_dates, "../tests/test_data/ocelia/all_dates_constatation.csv", 49, '-');
-            this->path = pnl_mat_create(49, 7);
-            for(int i = 0; i < 49; ++i){
+            this->path = pnl_mat_create(nbTimeSteps, 7);
+            for(int i = 0; i < nbTimeSteps; ++i){
                 MLET(path, i, 0) = 100+i;
                 MLET(path, i, 1) = 200+i;
                 MLET(path, i, 2) = 300+i;
@@ -28,6 +31,13 @@ class OceliaTest: public ::testing::Test{
                 MLET(path, i, 5) = 1;
                 MLET(path, i, 6) = 1;
             }
+
+            double timestep = T/nbTimeSteps;
+            // CALCUL DES t_{i}
+            computed_t_ = pnl_vect_create(nbTimeSteps);
+            for(int i = 0; i < nbTimeSteps; ++i){
+                LET(computed_t_, i) = timestep*i;
+            }
             
             // RATES
             this->interest_path = pnl_mat_create_from_scalar(1, 4, rd);
@@ -35,7 +45,7 @@ class OceliaTest: public ::testing::Test{
             all_dates.push_back(current_date);
             this->rates = new InterestRate(0, current_date, all_dates, interest_path);
 
-            this->ocelia = new Ocelia(1, 7, 4, 100, this->rates);
+            this->ocelia = new Ocelia(1, 7, 4, 100, this->computed_t_, this->rates);
             parse_dates_file(this->dates_semestrielles, "../tests/test_data/ocelia/dates_semest.csv", 16, '-');
             parse_dates_file(this->dates_valeurs_n_ans, "../tests/test_data/ocelia/dates_valeurs_n.csv", 35, '-');
             this->ocelia->init_indices(this->all_dates, this->dates_semestrielles, this->dates_valeurs_n_ans);
@@ -64,7 +74,7 @@ TEST_F(OceliaTest, constructor_date_error){
     
     std::vector<DateTime*> wrong_dates;
     parse_dates_file(wrong_dates, "../tests/test_data/ocelia/wrong_dates.csv", 48, '-');
-    Ocelia *der = new Ocelia(1, 7, 4, 100, this->rates);
+    Ocelia *der = new Ocelia(1, 7, 4, 100, this->computed_t_, this->rates);
 
     try{
         der->init_indices(wrong_dates, this->dates_semestrielles, this->dates_valeurs_n_ans);

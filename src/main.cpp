@@ -253,12 +253,8 @@ int main(int argc, char* argv[])
     /** INTEREST RATES **/
     rates = new InterestRate(0, new DateTime(15, 5, 2008), historical->dates_, historical->interest_path_);
 
-    /** OCELIA **/
-    ocelia = new Ocelia(T, size, nb_sous_jacents, val_liquidative_initiale, rates);
-    ocelia->init_indices(all_relevant_dates, dates_semestrielles, dates_valeurs_n_ans);
-
     /** CALCUL DU PAYOFF VERSÉ DANS LA VRAIE VIE **/
-    ocelia->adjust_past(ocelia_path, regular_timestep);
+    ocelia->adjust_past(ocelia_path);
     real_payoff = ocelia->payoff(ocelia_path);
     real_date_payoff = ocelia->get_annee_payoff(); 
     if(real_date_payoff == 4) real_datetime_payoff = new DateTime(11, 5, 2012); // par rapport à la date de début : 15/05/2008
@@ -279,6 +275,9 @@ int main(int argc, char* argv[])
     }
     model = new BlackScholesModel(size, nbTimeSteps, rates, computed_t_);
 
+    /** OCELIA **/
+    ocelia = new Ocelia(T, size, nb_sous_jacents, val_liquidative_initiale, computed_t_, rates);
+    ocelia->init_indices(all_relevant_dates, dates_semestrielles, dates_valeurs_n_ans);
 
     /** MONTE CARLO **/
     rng = pnl_rng_create(PNL_RNG_MERSENNE);

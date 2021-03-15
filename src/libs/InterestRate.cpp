@@ -17,7 +17,6 @@ InterestRate::~InterestRate(){
     pnl_vect_free(&this->rates_);
 }
 
-
 double InterestRate::get_domestic_rate(){
     return GET(this->rates_, this->rates_->size-1);
 }

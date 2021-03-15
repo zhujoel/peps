@@ -4,11 +4,12 @@
 #include "pnl/pnl_mathtools.h"
 #include "libs/Utilities.h"
 
-Ocelia::Ocelia(double T, int size, int nb_sous_jacents, double valeur_liquidative_initiale, InterestRate * const rates)
+Ocelia::Ocelia(double T, int size, int nb_sous_jacents, double valeur_liquidative_initiale, PnlVect * const computed_ti_, InterestRate * const rates)
     : IDerivative(T, size)
  {
-    this->rates_ = rates;
     this->valeur_liquidative_initiale_ = valeur_liquidative_initiale;
+    this->computed_ti_ = computed_ti_;
+    this->rates_ = rates;
     this->annee_payoff_ = 0;    
     this->nb_sous_jacents_ = nb_sous_jacents;
     this->valeurs_n_ans_ = pnl_vect_create_from_zero(this->nb_sous_jacents_);
@@ -41,13 +42,13 @@ void Ocelia::adjust_sigma(PnlMat * const sigma) const {
     }
 }
 
-void Ocelia::adjust_past(PnlMat * const past, double timestep) const {
+void Ocelia::adjust_past(PnlMat * const past) const {
     for(int i = 0; i < past->m; ++i){
         for(int j = 0; j < 3; ++j){
             MLET(past, i, j) *= MGET(past, i, j+4);
         }
         for(int j = 4; j < past->n; ++j){
-            MLET(past, i, j) *= this->rates_->compute_foreign_risk_free_asset(0, i*timestep, j-4);
+            MLET(past, i, j) *= this->rates_->compute_foreign_risk_free_asset(0, GET(this->computed_ti_, i), j-4);
         }
     }
 }
@@ -70,7 +71,7 @@ double Ocelia::get_foreign_index_market_value(const PnlMat* path, int date_idx, 
     double S_T = MGET(path, date_idx, idx);
     if(idx == 3) return S_T;
     double t1 = idx * (this->T_ / path->m);
-    return S_T/MGET(path, date_idx, idx+this->nb_sous_jacents_)*this->rates_->compute_foreign_risk_free_asset(0, t1, idx);
+    return S_T/MGET(path, date_idx, idx+this->nb_sous_jacents_)*this->rates_->compute_foreign_risk_free_asset(0, GET(this->computed_ti_, date_idx), idx);
 }
 
 double Ocelia::compute_perf_moyenne_panier(const PnlMat *path) const
