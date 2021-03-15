@@ -63,7 +63,7 @@ void StandardMonteCarloPricer::add_price(double t, double &prix, double &std_dev
 {
     double T = this->derivative_->get_annee_payoff();
     double price = this->derivative_->payoff(this->path_);
-    double rd = 0.03;
+    double rd = this->model_->rates_->get_domestic_rate();
     price = exp(-rd*(T-t))*price;
     
     prix += price;
@@ -72,7 +72,7 @@ void StandardMonteCarloPricer::add_price(double t, double &prix, double &std_dev
 
 void StandardMonteCarloPricer::add_delta(double t, PnlVect * const delta, PnlVect * const std_dev)
 {
-    double rd = 0.03;
+    double rd = this->model_->rates_->get_domestic_rate();
     for (int d = 0; d < this->derivative_->size_; ++d)
     {
         this->model_->shift_asset(this->shift_path_, t, this->path_, d, this->fdStep_);

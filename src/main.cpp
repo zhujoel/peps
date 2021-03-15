@@ -287,7 +287,8 @@ int main(int argc, char* argv[])
     delta = pnl_vect_create(size);
     delta_std_dev = pnl_vect_create(size);
     // GET AND ADJUST SPOT
-    pnl_mat_get_row(spot, ocelia_path, 0);
+    pnl_mat_get_row(spot, historical->path_, past_index);
+    ocelia->adjust_spot(spot, 0.);
     // COMPUTE SIGMA AND VOLATILITY
     estimation_window = pnl_mat_wrap_mat_rows(historical->path_, estimation_start, estimation_end);
     compute_sigma(model->sigma_, &estimation_window, 0, estimation_window.m-1);
