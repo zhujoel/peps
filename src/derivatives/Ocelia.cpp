@@ -70,7 +70,6 @@ double Ocelia::get_foreign_index_market_value(const PnlMat* path, int date_idx, 
     
     double S_T = MGET(path, date_idx, idx);
     if(idx == 3) return S_T;
-    double t1 = idx * (this->T_ / path->m);
     return S_T/MGET(path, date_idx, idx+this->nb_sous_jacents_)*this->rates_->compute_foreign_risk_free_asset(0, GET(this->computed_ti_, date_idx), idx);
 }
 
