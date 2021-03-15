@@ -89,7 +89,7 @@ IModel *model;
 
 // MONTE-CARLO
 double fdStep = 0.1;
-int nbSamples = 5000;
+int nbSamples = 1000;
 PnlRng *rng;
 IPricer *mc;
 
@@ -235,7 +235,6 @@ int main(int argc, char* argv[])
         delta_stream.rdbuf(std::cout.rdbuf());
     }
 
-
     /** PROCESSING MARKET DATA **/
     historical = new HistoricalMarketData("Ocelia", new DateTime(1, 1, 2005), new DateTime(1, 1, 2017));
     historical->set_data();
@@ -252,16 +251,6 @@ int main(int argc, char* argv[])
     
     /** INTEREST RATES **/
     rates = new InterestRate(0, new DateTime(15, 5, 2008), historical->dates_, historical->interest_path_);
-
-    /** CALCUL DU PAYOFF VERSÉ DANS LA VRAIE VIE **/
-    ocelia->adjust_past(ocelia_path);
-    real_payoff = ocelia->payoff(ocelia_path);
-    real_date_payoff = ocelia->get_annee_payoff(); 
-    if(real_date_payoff == 4) real_datetime_payoff = new DateTime(11, 5, 2012); // par rapport à la date de début : 15/05/2008
-    else if(real_date_payoff == 5) real_datetime_payoff = new DateTime(13, 5, 2013);
-    else if(real_date_payoff == 6) real_datetime_payoff = new DateTime(13, 5, 2014);
-    else if(real_date_payoff == 7) real_datetime_payoff = new DateTime(13, 5, 2015);
-    else if(real_date_payoff == 8) real_datetime_payoff = new DateTime(13, 5, 2016);
     
     /** BLACK-SCHOLES **/
     nb_jours_ouvres = ocelia_dates.size();
@@ -278,6 +267,16 @@ int main(int argc, char* argv[])
     /** OCELIA **/
     ocelia = new Ocelia(T, size, nb_sous_jacents, val_liquidative_initiale, computed_t_, rates);
     ocelia->init_indices(all_relevant_dates, dates_semestrielles, dates_valeurs_n_ans);
+
+    /** CALCUL DU PAYOFF VERSÉ DANS LA VRAIE VIE **/
+    ocelia->adjust_past(ocelia_path);
+    real_payoff = ocelia->payoff(ocelia_path);
+    real_date_payoff = ocelia->get_annee_payoff(); 
+    if(real_date_payoff == 4) real_datetime_payoff = new DateTime(11, 5, 2012); // par rapport à la date de début : 15/05/2008
+    else if(real_date_payoff == 5) real_datetime_payoff = new DateTime(13, 5, 2013);
+    else if(real_date_payoff == 6) real_datetime_payoff = new DateTime(13, 5, 2014);
+    else if(real_date_payoff == 7) real_datetime_payoff = new DateTime(13, 5, 2015);
+    else if(real_date_payoff == 8) real_datetime_payoff = new DateTime(13, 5, 2016);
 
     /** MONTE CARLO **/
     rng = pnl_rng_create(PNL_RNG_MERSENNE);

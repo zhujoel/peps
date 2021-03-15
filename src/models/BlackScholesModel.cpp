@@ -46,7 +46,7 @@ void BlackScholesModel::asset(PnlMat * const path, double t, PnlRng * const rng,
 void BlackScholesModel::shift_asset(PnlMat * const shift_path, double t, const PnlMat * const path, int d, double h) const
 {
     double startIndex = first_index_gte(this->computed_ti_, t);
-    if(GET(this->computed_ti_, startIndex) == t){ // si on est une date de constatation, on n'a pas besoin de shift le spot
+    if(GET(this->computed_ti_, startIndex) == t){ // si on est une date de constatation, on ne doit pas shift le spot
         startIndex += 1;
     }
     if (h>0)
