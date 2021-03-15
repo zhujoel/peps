@@ -45,7 +45,7 @@ void BlackScholesModel::asset(PnlMat * const path, double t, PnlRng * const rng,
 
 void BlackScholesModel::shift_asset(PnlMat * const shift_path, double t, const PnlMat * const path, int d, double h) const
 {
-    double startIndex = first_index_gte(this->computed_ti_, t); // TODO: on peut peut-etre opti en faisant un calcul direct
+    double startIndex = first_index_gte(this->computed_ti_, t) + 1; // TODO: on peut peut-etre opti en faisant un calcul direct
     if (h>0)
     {
         pnl_mat_clone(shift_path, path);
