@@ -18,7 +18,6 @@ class IPricer{
         IPricer(IModel * const model, IDerivative * const derivative, PnlRng * const rng, double fdStep, int nbSamples);
         virtual ~IPricer();
         
-        // TODO: voir ce que ça fait niveau opti de passer estimation_window sans pointeur
         virtual void price_and_delta(const PnlVect * const spot, double t, double &prix, double &price_std_dev, PnlVect * const delta, PnlVect * const delta_std_dev) = 0;
         virtual void price(const PnlVect * const spot, double t, double &prix, double &price_std_dev) = 0;
         virtual void add_price(double t, double &prix, double &std_dev) = 0;

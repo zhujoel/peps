@@ -59,7 +59,6 @@ void StandardMonteCarloPricer::price(const PnlVect * const spot, double t, doubl
     price_std_dev = sqrt(exp(2)*(price_std_dev - prix * prix)/M);
 }
 
-// TODO: voir comment gérer les rd
 void StandardMonteCarloPricer::add_price(double t, double &prix, double &std_dev)
 {
     double T = this->derivative_->get_annee_payoff();
