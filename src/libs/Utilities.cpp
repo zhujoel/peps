@@ -9,7 +9,7 @@ void split(std::string * const output, const std::string &line, char delimiter){
     int i = 0;
     while(string_stream.good())   // loop will continue if string stream is error free
     {
-        getline(string_stream, output[i++], delimiter );
+        getline(string_stream, output[i++], delimiter);
     }
 }
 

@@ -64,7 +64,6 @@ void HistoricalMarketData::set_Ocelia_data(){
         dataFeeds[i]->set_data();
     }
 
-
     from_date_to_date(this->dates_, dataFeeds[0]->dates_, this->startDate_, this->endDate_);
     
     std::vector<DateTime*> tmp_input;

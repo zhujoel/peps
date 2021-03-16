@@ -60,7 +60,7 @@ std::fstream delta_file;
 // MARKET DATA
 HistoricalMarketData *historical;
 std::vector<DateTime*> ocelia_dates; // tous les jours ouvrés d'océlia du début à la fin
-std::vector<DateTime*> all_relevant_dates; // concaténation de dates_semestrielles et dates_valeurs_n_ans
+std::vector<DateTime*> all_relevant_dates; // rassemblement de dates_semestrielles et dates_valeurs_n_ans
 std::vector<DateTime*> dates_semestrielles;
 std::vector<DateTime*> dates_valeurs_n_ans;
 PnlMat *ocelia_path = pnl_mat_new(); // les prix d'océlia lors des dates de constatation seulement

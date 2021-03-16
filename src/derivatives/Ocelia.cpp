@@ -150,9 +150,9 @@ double Ocelia::payoff(const PnlMat *path)
     // 1: ss-jct jpy
     // 2: ss-jct chf
     // 3: ss-jct euro
-    // 4: zc gbp
-    // 5: zc jpy
-    // 6: zc chf
+    // 4: actif sans risque gbp
+    // 5: actif sans risque jpy
+    // 6: actif sans risque chf
     compute_nouveau_depart(path);
     for(int n = 4 ; n <= 8; ++n){
         compute_perfs_n_ans(this->perfs_, path, n);
