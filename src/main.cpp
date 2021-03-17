@@ -64,10 +64,6 @@ std::vector<DateTime*> all_relevant_dates; // concaténation de dates_semestriel
 std::vector<DateTime*> dates_semestrielles;
 std::vector<DateTime*> dates_valeurs_n_ans;
 PnlMat *ocelia_path = pnl_mat_new(); // les prix d'océlia lors des dates de constatation seulement
-int past_index;
-int horizon_estimation = 500;
-int estimation_end;
-int estimation_start;
 
 // INTEREST RATES
 InterestRate *rates;
@@ -89,7 +85,6 @@ IModel *model;
 
 // MONTE-CARLO
 double fdStep = 0.1;
-int nbSamples = 10000;
 PnlRng *rng;
 IPricer *mc;
 
@@ -108,7 +103,15 @@ PnlMat estimation_window;
 
 // REBALANCING PORTFOLIO
 HedgingPortfolio *portfolio;
+
+// SIMULATION PARAMETERS
+int past_index;
+int horizon_estimation = 500;
+int nbSamples = 100;
 int rebalancement_horizon = 30;
+int estimation_end;
+int estimation_start;
+int nb_dates_a_simuler = 200;
 
 void simulate_all()
 {
@@ -122,7 +125,7 @@ void simulate_all()
 
     int constatation_cnt = 1;
     // PRICING & HEADGING en t
-    for(int k = 1; k < nb_jours_ouvres; ++k)
+    for(int k = 1; k < nb_dates_a_simuler+1; ++k)
     {
         if (((historical->dates_[past_index+k])->compare(real_datetime_payoff))==1) {
             std::cout << "Un payoff de " << real_payoff << " à été versé au client le " << real_datetime_payoff << std::endl;
@@ -250,7 +253,7 @@ int main(int argc, char* argv[])
     estimation_start = estimation_end - horizon_estimation;
     
     /** INTEREST RATES **/
-    rates = new InterestRate(0, new DateTime(15, 5, 2008), historical->dates_, historical->interest_path_);
+    rates = new InterestRate(new DateTime(15, 5, 2008), historical->dates_, historical->interest_path_);
     
     /** BLACK-SCHOLES **/
     nb_jours_ouvres = ocelia_dates.size();

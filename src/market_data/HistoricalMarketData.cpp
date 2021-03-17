@@ -15,7 +15,7 @@ HistoricalMarketData::~HistoricalMarketData(){
 
 void HistoricalMarketData::set_data()
 {
-    // ajouter un if qui vérifie l'attribut nom et qui parse en fonction
+    // TODO: ajouter un if qui vérifie l'attribut nom et qui parse en fonction
     this->set_Ocelia_data();
 }
 

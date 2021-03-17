@@ -48,7 +48,7 @@ class QuantoTest: public ::testing::Test{
             this->interest_path = pnl_mat_create_from_scalar(1, 4, rd);
             DateTime *current_date = new DateTime(1, 1, 2010);
             all_dates.push_back(current_date);
-            this->rates = new InterestRate(0, current_date, all_dates, interest_path);
+            this->rates = new InterestRate(current_date, all_dates, interest_path);
 
             // // QUANTO
             this->quanto = new QuantoOption(T, nbProduits, rf, K) ;

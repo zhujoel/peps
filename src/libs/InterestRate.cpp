@@ -2,8 +2,7 @@
 #include "libs/DateTimeVector.h"
 #include "pnl/pnl_mathtools.h"
 
-InterestRate::InterestRate(double t, DateTime * const current_date, const std::vector<DateTime*> &all_dates, PnlMat * const interest_path){
-    this->t_ = t;
+InterestRate::InterestRate(DateTime * const current_date, const std::vector<DateTime*> &all_dates, PnlMat * const interest_path){
     this->current_date_ = current_date;
     this->all_dates_ = all_dates;
     this->interest_path_ = interest_path;

@@ -22,7 +22,7 @@ class BlackScholesModelTest: public ::testing::Test{
             this->historical->set_data();
             
             // PARAMETERS
-            rates = new InterestRate(0, new DateTime(28, 05, 2008), this->historical->dates_, this->historical->interest_path_);
+            rates = new InterestRate(new DateTime(28, 05, 2008), this->historical->dates_, this->historical->interest_path_);
             this->nb_jours_ouvres = this->historical->path_->m;
             this->timestep = this->T/this->nb_jours_ouvres;
             this->rng = pnl_rng_create(PNL_RNG_MERSENNE);

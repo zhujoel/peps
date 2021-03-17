@@ -43,7 +43,7 @@ class OceliaTest: public ::testing::Test{
             this->interest_path = pnl_mat_create_from_scalar(1, 4, rd);
             DateTime *current_date = new DateTime(1, 1, 2010);
             all_dates.push_back(current_date);
-            this->rates = new InterestRate(0, current_date, all_dates, interest_path);
+            this->rates = new InterestRate(current_date, all_dates, interest_path);
 
             this->ocelia = new Ocelia(1, 7, 4, 100, this->computed_t_, this->rates);
             parse_dates_file(this->dates_semestrielles, "../tests/test_data/ocelia/dates_semest.csv", 16, '-');
