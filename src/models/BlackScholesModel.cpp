@@ -19,17 +19,17 @@ void BlackScholesModel::asset(PnlMat * const path, double t, PnlRng * const rng,
 {
     double startIndex = first_index_gte(this->computed_ti_, t); 
     double timestep = GET(this->computed_ti_, startIndex) - t;
-
-    // calcule 1 prix par rapport au spot
+    double rd = this->rates_->get_domestic_rate();
+    // calcule un pas par rapport au spot
     pnl_vect_rng_normal(this->G_, this->size_, rng); // G Vecteur gaussien
     pnl_mat_mult_vect_inplace(this->B_, this->sigma_, this->G_);
     for (int d = 0; d < this->size_; ++d)
     {
         double sigma_d = GET(this->volatility_, d);
-        MLET(path, startIndex, d) = GET(spot, d) * exp( (this->rates_->get_domestic_rate() - (sigma_d*sigma_d)/2 ) * timestep + sqrt(timestep) * GET(this->B_, d));
+        MLET(path, startIndex, d) = GET(spot, d) * exp((rd - (sigma_d*sigma_d)/2 ) * timestep + sqrt(timestep) * GET(this->B_, d));
     }
 
-    // calcule reste de la trajectoire 
+    // calcule le reste de la trajectoire 
     for (int k = startIndex+1; k < this->computed_ti_->size; ++k)
     {
         pnl_vect_rng_normal(this->G_, this->size_, rng); // G Vecteur gaussien
@@ -38,7 +38,7 @@ void BlackScholesModel::asset(PnlMat * const path, double t, PnlRng * const rng,
         for (int d = 0; d < this->size_; ++d)
         {
             double sigma_d = GET(this->volatility_, d);
-            MLET(path, k, d) = MGET(path, k-1, d) * exp( (this->rates_->get_domestic_rate() - (sigma_d*sigma_d)/2 ) * timestep + sqrt(timestep) * GET(this->B_, d));
+            MLET(path, k, d) = MGET(path, k-1, d) * exp((rd - (sigma_d*sigma_d)/2 ) * timestep + sqrt(timestep) * GET(this->B_, d));
         }
     }
 }

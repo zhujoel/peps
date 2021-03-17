@@ -65,7 +65,7 @@ class QuantoTest: public ::testing::Test{
             MLET(this->model->sigma_, 0, 1) = sigma_tx_change * sigma_actif * rho;
             MLET(this->model->sigma_, 1, 0) = sigma_tx_change * sigma_actif * rho;
             pnl_mat_chol(this->model->sigma_);
-            MLET(this->model->sigma_, 1, 0) += MGET(this->model->sigma_, 0, 0); // ce calcul dépend de où ce trouve dans la matrice les actifs risqués et non risqués
+            MLET(this->model->sigma_, 1, 0) += MGET(this->model->sigma_, 0, 0); // ce calcul dépend de où se trouve dans la matrice les actifs risqués et non risqués
             MLET(this->model->sigma_, 1, 1) += MGET(this->model->sigma_, 0, 1);
 
             LET(this->model->volatility_, 0) = MGET(this->model->sigma_, 0, 0);
