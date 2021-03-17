@@ -64,6 +64,9 @@ std::vector<DateTime*> all_relevant_dates; // rassemblement de dates_semestriell
 std::vector<DateTime*> dates_semestrielles;
 std::vector<DateTime*> dates_valeurs_n_ans;
 PnlMat *ocelia_path = pnl_mat_new(); // les prix d'océlia lors des dates de constatation seulement
+int past_index;
+int estimation_end;
+int estimation_start;
 
 // INTEREST RATES
 InterestRate *rates;
@@ -105,12 +108,9 @@ PnlMat estimation_window;
 HedgingPortfolio *portfolio;
 
 // SIMULATION PARAMETERS
-int past_index;
 int horizon_estimation = 500;
 int nbSamples = 100;
 int rebalancement_horizon = 30;
-int estimation_end;
-int estimation_start;
 int nb_dates_a_simuler = 200;
 
 void simulate_all()
