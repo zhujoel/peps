@@ -125,7 +125,7 @@ void simulate_all()
 
     int constatation_cnt = 1;
     // PRICING & HEADGING en t
-    for(int k = 1; k < nb_dates_a_simuler+1; ++k)
+    for(int k = 1; k <= nb_dates_a_simuler; ++k)
     {
         if (((historical->dates_[past_index+k])->compare(real_datetime_payoff))==1) {
             std::cout << "Un payoff de " << real_payoff << " à été versé au client le " << real_datetime_payoff << std::endl;
@@ -182,9 +182,7 @@ void simulate_next()
 
     /** SET VARIABLES TO PREVIOUS DATE TO SIMULATE NEXT STEP **/
     // PARSE OUTPUT DATA
-    int k = std::stoi(output_last_line_split[1])+1; // +1 pour incrémenter la date
-    double previous_t_ = std::stod(output_last_line_split[2]);
-    double curr_t_ = previous_t_ + regular_timestep;
+    int previous_k = std::stoi(output_last_line_split[1]);
     prix = std::stod(output_last_line_split[3]);
     prix_std_dev = std::stod(output_last_line_split[4]);
     portfolio->V1_ = std::stod(output_last_line_split[5]);
@@ -201,29 +199,54 @@ void simulate_next()
     }
     portfolio->last_rebalancing_t_ = std::stod(delta_last_line_split[1])*regular_timestep;
 
-    // SIGMA AND VOLATILITY
-    estimation_window = pnl_mat_wrap_mat_rows(historical->path_, estimation_start+k, estimation_end+k);  
-    compute_sigma(model->sigma_, &estimation_window, 0, estimation_window.m-1);
-    ocelia->adjust_sigma(model->sigma_);
-    compute_volatility(model->volatility_, model->sigma_);
-
-    // SPOT
-    pnl_mat_get_row(spot, historical->path_, past_index+k);
-    ocelia->adjust_spot(spot, curr_t_);
-
-    // rebalance if needed
-    if(k%rebalancement_horizon==0){
-        mc->price_and_delta(spot, curr_t_, prix, prix_std_dev, delta, delta_std_dev);
-        portfolio->rebalancing(curr_t_, delta, spot);
-        delta_stream << historical->dates_[past_index+k] << "," << k << "," << delta << "," << delta_std_dev << std::endl;
+    int constatation_cnt = first_index_gte(computed_t_, previous_k*regular_timestep);
+    int path_cnt = 0;
+    // ADDS ALL CONSTATATION DATA INTO PATH
+    for(int i = 0; i < constatation_cnt; ++i){
+        pnl_mat_get_row(spot, historical->path_, past_index+GET_INT(all_relevant_dates_indices, i));
+        ocelia->adjust_spot(spot, GET_INT(all_relevant_dates_indices, i)*regular_timestep);
+        pnl_mat_set_row(mc->path_, spot, path_cnt++);
     }
 
-    // price
-    mc->price(spot, curr_t_, prix, prix_std_dev);
-    output_stream << historical->dates_[past_index+k] << "," << k << "," << curr_t_ << "," << prix << "," << prix_std_dev << ",";
-    output_stream << portfolio->V1_ << "," << portfolio->V2_ << "," << portfolio->get_portfolio_value(curr_t_, spot) << ",";
-    output_stream << portfolio->get_FinalPnL(curr_t_, prix, spot) << "," << portfolio->get_valeur_liquidative(curr_t_, spot) << ",";
-    output_stream << portfolio->get_tracking_error(curr_t_, prix, spot) << "," << MGET(historical->derivative_path_, past_index+k, 0) << std::endl;
+    // PRICING & HEADGING en t
+    for(int k = previous_k+1; k <= previous_k+nb_dates_a_simuler; ++k)
+    {
+        if (((historical->dates_[past_index+k])->compare(real_datetime_payoff))==1) {
+            std::cout << "Un payoff de " << real_payoff << " à été versé au client le " << real_datetime_payoff << std::endl;
+            break;
+        }
+
+        double t = k*regular_timestep;
+
+        // compute sigma and volatility
+        estimation_window = pnl_mat_wrap_mat_rows(historical->path_, estimation_start+k, estimation_end+k);  
+        compute_sigma(model->sigma_, &estimation_window, 0, estimation_window.m-1);
+        ocelia->adjust_sigma(model->sigma_);
+        compute_volatility(model->volatility_, model->sigma_);
+
+        // compute spot
+        pnl_mat_get_row(spot, historical->path_, past_index+k);
+        ocelia->adjust_spot(spot, t);
+
+        // rebalance
+        if(k%rebalancement_horizon==0){
+            mc->price_and_delta(spot, t, prix, prix_std_dev, delta, delta_std_dev);
+            portfolio->rebalancing(t, delta, spot);
+            delta_stream << historical->dates_[past_index+k] << "," << k << "," << delta << "," << delta_std_dev << std::endl;
+        }
+
+        // price
+        mc->price(spot, t, prix, prix_std_dev);
+        output_stream << historical->dates_[past_index+k] << "," << k << "," << t << "," << prix << "," << prix_std_dev << ",";
+        output_stream << portfolio->V1_ << "," << portfolio->V2_ << "," << portfolio->get_portfolio_value(t, spot) << ",";
+        output_stream << portfolio->get_FinalPnL(t, prix, spot) << "," << portfolio->get_valeur_liquidative(t, spot) << ",";
+        output_stream << portfolio->get_tracking_error(t, prix, spot) << "," << MGET(historical->derivative_path_, past_index+k, 0) << std::endl;
+
+        // si on est a une date de constatation, on ajoute le vrai prix à path de façon définitive pour les prochaines simulations
+        if(k == GET_INT(all_relevant_dates_indices, constatation_cnt)){
+            pnl_mat_set_row(mc->path_, spot, constatation_cnt++);
+        }
+    }
 }
 
 int main(int argc, char* argv[])
