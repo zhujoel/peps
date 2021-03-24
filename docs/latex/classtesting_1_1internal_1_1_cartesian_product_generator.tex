@@ -1,0 +1,107 @@
+\hypertarget{classtesting_1_1internal_1_1_cartesian_product_generator}{}\doxysection{testing\+::internal\+::Cartesian\+Product\+Generator$<$ T $>$ Class Template Reference}
+\label{classtesting_1_1internal_1_1_cartesian_product_generator}\index{testing::internal::CartesianProductGenerator$<$ T $>$@{testing::internal::CartesianProductGenerator$<$ T $>$}}
+
+
+{\ttfamily \#include $<$gtest-\/param-\/util.\+h$>$}
+
+Inheritance diagram for testing\+::internal\+::Cartesian\+Product\+Generator$<$ T $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classtesting_1_1internal_1_1_cartesian_product_generator}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef \+::std\+::tuple$<$ T... $>$ \mbox{\hyperlink{classtesting_1_1internal_1_1_cartesian_product_generator_af27131157a9347f0c82420ca081ee7dd}{Param\+Type}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classtesting_1_1internal_1_1_cartesian_product_generator_af89630ce27d49f999f323e6c3d2867af}{Cartesian\+Product\+Generator}} (const std\+::tuple$<$ \mbox{\hyperlink{classtesting_1_1internal_1_1_param_generator}{Param\+Generator}}$<$ \mbox{\hyperlink{main_8cpp_ac94a6e5794c2d7b59588b14025cfba20}{T}} $>$... $>$ \&g)
+\item 
+\mbox{\hyperlink{classtesting_1_1internal_1_1_cartesian_product_generator_a19fb6a9435f038520cef7643fdf6da71}{$\sim$\+Cartesian\+Product\+Generator}} () override
+\item 
+\mbox{\hyperlink{classtesting_1_1internal_1_1_param_iterator_interface}{Param\+Iterator\+Interface}}$<$ \mbox{\hyperlink{classtesting_1_1internal_1_1_cartesian_product_generator_af27131157a9347f0c82420ca081ee7dd}{Param\+Type}} $>$ $\ast$ \mbox{\hyperlink{classtesting_1_1internal_1_1_cartesian_product_generator_ad2f1bc6289b6dd7e4b5f4fecbfdf2883}{Begin}} () const override
+\item 
+\mbox{\hyperlink{classtesting_1_1internal_1_1_param_iterator_interface}{Param\+Iterator\+Interface}}$<$ \mbox{\hyperlink{classtesting_1_1internal_1_1_cartesian_product_generator_af27131157a9347f0c82420ca081ee7dd}{Param\+Type}} $>$ $\ast$ \mbox{\hyperlink{classtesting_1_1internal_1_1_cartesian_product_generator_ae072dcf8400ac9dd5692e417262a664b}{End}} () const override
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename... T$>$\newline
+class testing\+::internal\+::\+Cartesian\+Product\+Generator$<$ T $>$}
+
+
+
+Definition at line 815 of file gtest-\/param-\/util.\+h.
+
+
+
+\doxysubsection{Member Typedef Documentation}
+\mbox{\Hypertarget{classtesting_1_1internal_1_1_cartesian_product_generator_af27131157a9347f0c82420ca081ee7dd}\label{classtesting_1_1internal_1_1_cartesian_product_generator_af27131157a9347f0c82420ca081ee7dd}} 
+\index{testing::internal::CartesianProductGenerator$<$ T $>$@{testing::internal::CartesianProductGenerator$<$ T $>$}!ParamType@{ParamType}}
+\index{ParamType@{ParamType}!testing::internal::CartesianProductGenerator$<$ T $>$@{testing::internal::CartesianProductGenerator$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{ParamType}{ParamType}}
+{\footnotesize\ttfamily template$<$typename... T$>$ \\
+typedef \+::std\+::tuple$<$T...$>$ \mbox{\hyperlink{classtesting_1_1internal_1_1_cartesian_product_generator}{testing\+::internal\+::\+Cartesian\+Product\+Generator}}$<$ \mbox{\hyperlink{main_8cpp_ac94a6e5794c2d7b59588b14025cfba20}{T}} $>$\+::\mbox{\hyperlink{classtesting_1_1internal_1_1_cartesian_product_generator_af27131157a9347f0c82420ca081ee7dd}{Param\+Type}}}
+
+
+
+Definition at line 818 of file gtest-\/param-\/util.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classtesting_1_1internal_1_1_cartesian_product_generator_af89630ce27d49f999f323e6c3d2867af}\label{classtesting_1_1internal_1_1_cartesian_product_generator_af89630ce27d49f999f323e6c3d2867af}} 
+\index{testing::internal::CartesianProductGenerator$<$ T $>$@{testing::internal::CartesianProductGenerator$<$ T $>$}!CartesianProductGenerator@{CartesianProductGenerator}}
+\index{CartesianProductGenerator@{CartesianProductGenerator}!testing::internal::CartesianProductGenerator$<$ T $>$@{testing::internal::CartesianProductGenerator$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{CartesianProductGenerator()}{CartesianProductGenerator()}}
+{\footnotesize\ttfamily template$<$typename... T$>$ \\
+\mbox{\hyperlink{classtesting_1_1internal_1_1_cartesian_product_generator}{testing\+::internal\+::\+Cartesian\+Product\+Generator}}$<$ \mbox{\hyperlink{main_8cpp_ac94a6e5794c2d7b59588b14025cfba20}{T}} $>$\+::\mbox{\hyperlink{classtesting_1_1internal_1_1_cartesian_product_generator}{Cartesian\+Product\+Generator}} (\begin{DoxyParamCaption}\item[{const std\+::tuple$<$ \mbox{\hyperlink{classtesting_1_1internal_1_1_param_generator}{Param\+Generator}}$<$ \mbox{\hyperlink{main_8cpp_ac94a6e5794c2d7b59588b14025cfba20}{T}} $>$... $>$ \&}]{g }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 820 of file gtest-\/param-\/util.\+h.
+
+\mbox{\Hypertarget{classtesting_1_1internal_1_1_cartesian_product_generator_a19fb6a9435f038520cef7643fdf6da71}\label{classtesting_1_1internal_1_1_cartesian_product_generator_a19fb6a9435f038520cef7643fdf6da71}} 
+\index{testing::internal::CartesianProductGenerator$<$ T $>$@{testing::internal::CartesianProductGenerator$<$ T $>$}!````~CartesianProductGenerator@{$\sim$CartesianProductGenerator}}
+\index{````~CartesianProductGenerator@{$\sim$CartesianProductGenerator}!testing::internal::CartesianProductGenerator$<$ T $>$@{testing::internal::CartesianProductGenerator$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{$\sim$CartesianProductGenerator()}{~CartesianProductGenerator()}}
+{\footnotesize\ttfamily template$<$typename... T$>$ \\
+\mbox{\hyperlink{classtesting_1_1internal_1_1_cartesian_product_generator}{testing\+::internal\+::\+Cartesian\+Product\+Generator}}$<$ \mbox{\hyperlink{main_8cpp_ac94a6e5794c2d7b59588b14025cfba20}{T}} $>$\+::$\sim$\mbox{\hyperlink{classtesting_1_1internal_1_1_cartesian_product_generator}{Cartesian\+Product\+Generator}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}}
+
+
+
+Definition at line 822 of file gtest-\/param-\/util.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classtesting_1_1internal_1_1_cartesian_product_generator_ad2f1bc6289b6dd7e4b5f4fecbfdf2883}\label{classtesting_1_1internal_1_1_cartesian_product_generator_ad2f1bc6289b6dd7e4b5f4fecbfdf2883}} 
+\index{testing::internal::CartesianProductGenerator$<$ T $>$@{testing::internal::CartesianProductGenerator$<$ T $>$}!Begin@{Begin}}
+\index{Begin@{Begin}!testing::internal::CartesianProductGenerator$<$ T $>$@{testing::internal::CartesianProductGenerator$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Begin()}{Begin()}}
+{\footnotesize\ttfamily template$<$typename... T$>$ \\
+\mbox{\hyperlink{classtesting_1_1internal_1_1_param_iterator_interface}{Param\+Iterator\+Interface}}$<$\mbox{\hyperlink{classtesting_1_1internal_1_1_cartesian_product_generator_af27131157a9347f0c82420ca081ee7dd}{Param\+Type}}$>$$\ast$ \mbox{\hyperlink{classtesting_1_1internal_1_1_cartesian_product_generator}{testing\+::internal\+::\+Cartesian\+Product\+Generator}}$<$ \mbox{\hyperlink{main_8cpp_ac94a6e5794c2d7b59588b14025cfba20}{T}} $>$\+::Begin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}}
+
+
+
+Definition at line 824 of file gtest-\/param-\/util.\+h.
+
+\mbox{\Hypertarget{classtesting_1_1internal_1_1_cartesian_product_generator_ae072dcf8400ac9dd5692e417262a664b}\label{classtesting_1_1internal_1_1_cartesian_product_generator_ae072dcf8400ac9dd5692e417262a664b}} 
+\index{testing::internal::CartesianProductGenerator$<$ T $>$@{testing::internal::CartesianProductGenerator$<$ T $>$}!End@{End}}
+\index{End@{End}!testing::internal::CartesianProductGenerator$<$ T $>$@{testing::internal::CartesianProductGenerator$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{End()}{End()}}
+{\footnotesize\ttfamily template$<$typename... T$>$ \\
+\mbox{\hyperlink{classtesting_1_1internal_1_1_param_iterator_interface}{Param\+Iterator\+Interface}}$<$\mbox{\hyperlink{classtesting_1_1internal_1_1_cartesian_product_generator_af27131157a9347f0c82420ca081ee7dd}{Param\+Type}}$>$$\ast$ \mbox{\hyperlink{classtesting_1_1internal_1_1_cartesian_product_generator}{testing\+::internal\+::\+Cartesian\+Product\+Generator}}$<$ \mbox{\hyperlink{main_8cpp_ac94a6e5794c2d7b59588b14025cfba20}{T}} $>$\+::End (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}}
+
+
+
+Definition at line 827 of file gtest-\/param-\/util.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{gtest-param-util_8h}{gtest-\/param-\/util.\+h}}\end{DoxyCompactItemize}

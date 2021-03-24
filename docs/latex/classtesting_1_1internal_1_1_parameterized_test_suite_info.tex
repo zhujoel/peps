@@ -1,0 +1,168 @@
+\hypertarget{classtesting_1_1internal_1_1_parameterized_test_suite_info}{}\doxysection{testing\+::internal\+::Parameterized\+Test\+Suite\+Info$<$ Test\+Suite $>$ Class Template Reference}
+\label{classtesting_1_1internal_1_1_parameterized_test_suite_info}\index{testing::internal::ParameterizedTestSuiteInfo$<$ TestSuite $>$@{testing::internal::ParameterizedTestSuiteInfo$<$ TestSuite $>$}}
+
+
+{\ttfamily \#include $<$gtest-\/param-\/util.\+h$>$}
+
+Inheritance diagram for testing\+::internal\+::Parameterized\+Test\+Suite\+Info$<$ Test\+Suite $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classtesting_1_1internal_1_1_parameterized_test_suite_info}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{classtesting_1_1internal_1_1_parameterized_test_suite_info_a10761bd750a6820a8d8d2c654b10fe54}{Param\+Type}} = typename Test\+Suite\+::\+Param\+Type
+\item 
+using \mbox{\hyperlink{classtesting_1_1internal_1_1_parameterized_test_suite_info_a3b4f232b7d6d3df941bb8e81b6b534a4}{Param\+Name\+Generator\+Func}} = std\+::string(const \mbox{\hyperlink{structtesting_1_1_test_param_info}{Test\+Param\+Info}}$<$ \mbox{\hyperlink{classtesting_1_1internal_1_1_parameterized_test_suite_info_a10761bd750a6820a8d8d2c654b10fe54}{Param\+Type}} $>$ \&)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+typedef \mbox{\hyperlink{classtesting_1_1internal_1_1_parameterized_test_suite_info_ac6230057c507d74e373233edbf0410c2}{Param\+Generator}} (Generator\+Creation\+Func)()
+\item 
+\mbox{\hyperlink{classtesting_1_1internal_1_1_parameterized_test_suite_info_a56fc02ddec2cf2101332d1125e4c75a9}{Parameterized\+Test\+Suite\+Info}} (const char $\ast$name, \mbox{\hyperlink{structtesting_1_1internal_1_1_code_location}{Code\+Location}} code\+\_\+location)
+\item 
+const std\+::string \& \mbox{\hyperlink{classtesting_1_1internal_1_1_parameterized_test_suite_info_a4a5ddc2cd0404438c2b4d405cd0e706c}{Get\+Test\+Suite\+Name}} () const override
+\item 
+\mbox{\hyperlink{namespacetesting_1_1internal_a9dc04025a94b7e583402d324e64ba085}{Type\+Id}} \mbox{\hyperlink{classtesting_1_1internal_1_1_parameterized_test_suite_info_af488d1d7c1889a250acff2ea6eba4c84}{Get\+Test\+Suite\+Type\+Id}} () const override
+\item 
+void \mbox{\hyperlink{classtesting_1_1internal_1_1_parameterized_test_suite_info_a9d57a40601784b785e9a057b42f3336d}{Add\+Test\+Pattern}} (const char $\ast$test\+\_\+suite\+\_\+name, const char $\ast$test\+\_\+base\+\_\+name, \mbox{\hyperlink{classtesting_1_1internal_1_1_test_meta_factory_base}{Test\+Meta\+Factory\+Base}}$<$ \mbox{\hyperlink{classtesting_1_1internal_1_1_parameterized_test_suite_info_a10761bd750a6820a8d8d2c654b10fe54}{Param\+Type}} $>$ $\ast$meta\+\_\+factory, \mbox{\hyperlink{structtesting_1_1internal_1_1_code_location}{Code\+Location}} code\+\_\+location)
+\item 
+int \mbox{\hyperlink{classtesting_1_1internal_1_1_parameterized_test_suite_info_a174f164f38e522a3935da911a9c1e450}{Add\+Test\+Suite\+Instantiation}} (const std\+::string \&instantiation\+\_\+name, Generator\+Creation\+Func $\ast$func, \mbox{\hyperlink{classtesting_1_1internal_1_1_parameterized_test_suite_info_a3b4f232b7d6d3df941bb8e81b6b534a4}{Param\+Name\+Generator\+Func}} $\ast$name\+\_\+func, const char $\ast$file, int line)
+\item 
+void \mbox{\hyperlink{classtesting_1_1internal_1_1_parameterized_test_suite_info_a8c0af866d3c291a63d3f4581ccd452d1}{Register\+Tests}} () override
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class Test\+Suite$>$\newline
+class testing\+::internal\+::\+Parameterized\+Test\+Suite\+Info$<$ Test\+Suite $>$}
+
+
+
+Definition at line 496 of file gtest-\/param-\/util.\+h.
+
+
+
+\doxysubsection{Member Typedef Documentation}
+\mbox{\Hypertarget{classtesting_1_1internal_1_1_parameterized_test_suite_info_a3b4f232b7d6d3df941bb8e81b6b534a4}\label{classtesting_1_1internal_1_1_parameterized_test_suite_info_a3b4f232b7d6d3df941bb8e81b6b534a4}} 
+\index{testing::internal::ParameterizedTestSuiteInfo$<$ TestSuite $>$@{testing::internal::ParameterizedTestSuiteInfo$<$ TestSuite $>$}!ParamNameGeneratorFunc@{ParamNameGeneratorFunc}}
+\index{ParamNameGeneratorFunc@{ParamNameGeneratorFunc}!testing::internal::ParameterizedTestSuiteInfo$<$ TestSuite $>$@{testing::internal::ParameterizedTestSuiteInfo$<$ TestSuite $>$}}
+\doxysubsubsection{\texorpdfstring{ParamNameGeneratorFunc}{ParamNameGeneratorFunc}}
+{\footnotesize\ttfamily template$<$class Test\+Suite $>$ \\
+using \mbox{\hyperlink{classtesting_1_1internal_1_1_parameterized_test_suite_info}{testing\+::internal\+::\+Parameterized\+Test\+Suite\+Info}}$<$ \mbox{\hyperlink{classtesting_1_1_test_suite}{Test\+Suite}} $>$\+::\mbox{\hyperlink{classtesting_1_1internal_1_1_parameterized_test_suite_info_a3b4f232b7d6d3df941bb8e81b6b534a4}{Param\+Name\+Generator\+Func}} =  std\+::string(const \mbox{\hyperlink{structtesting_1_1_test_param_info}{Test\+Param\+Info}}$<$\mbox{\hyperlink{classtesting_1_1internal_1_1_parameterized_test_suite_info_a10761bd750a6820a8d8d2c654b10fe54}{Param\+Type}}$>$\&)}
+
+
+
+Definition at line 504 of file gtest-\/param-\/util.\+h.
+
+\mbox{\Hypertarget{classtesting_1_1internal_1_1_parameterized_test_suite_info_a10761bd750a6820a8d8d2c654b10fe54}\label{classtesting_1_1internal_1_1_parameterized_test_suite_info_a10761bd750a6820a8d8d2c654b10fe54}} 
+\index{testing::internal::ParameterizedTestSuiteInfo$<$ TestSuite $>$@{testing::internal::ParameterizedTestSuiteInfo$<$ TestSuite $>$}!ParamType@{ParamType}}
+\index{ParamType@{ParamType}!testing::internal::ParameterizedTestSuiteInfo$<$ TestSuite $>$@{testing::internal::ParameterizedTestSuiteInfo$<$ TestSuite $>$}}
+\doxysubsubsection{\texorpdfstring{ParamType}{ParamType}}
+{\footnotesize\ttfamily template$<$class Test\+Suite $>$ \\
+using \mbox{\hyperlink{classtesting_1_1internal_1_1_parameterized_test_suite_info}{testing\+::internal\+::\+Parameterized\+Test\+Suite\+Info}}$<$ \mbox{\hyperlink{classtesting_1_1_test_suite}{Test\+Suite}} $>$\+::\mbox{\hyperlink{classtesting_1_1internal_1_1_parameterized_test_suite_info_a10761bd750a6820a8d8d2c654b10fe54}{Param\+Type}} =  typename Test\+Suite\+::\+Param\+Type}
+
+
+
+Definition at line 501 of file gtest-\/param-\/util.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classtesting_1_1internal_1_1_parameterized_test_suite_info_a56fc02ddec2cf2101332d1125e4c75a9}\label{classtesting_1_1internal_1_1_parameterized_test_suite_info_a56fc02ddec2cf2101332d1125e4c75a9}} 
+\index{testing::internal::ParameterizedTestSuiteInfo$<$ TestSuite $>$@{testing::internal::ParameterizedTestSuiteInfo$<$ TestSuite $>$}!ParameterizedTestSuiteInfo@{ParameterizedTestSuiteInfo}}
+\index{ParameterizedTestSuiteInfo@{ParameterizedTestSuiteInfo}!testing::internal::ParameterizedTestSuiteInfo$<$ TestSuite $>$@{testing::internal::ParameterizedTestSuiteInfo$<$ TestSuite $>$}}
+\doxysubsubsection{\texorpdfstring{ParameterizedTestSuiteInfo()}{ParameterizedTestSuiteInfo()}}
+{\footnotesize\ttfamily template$<$class Test\+Suite $>$ \\
+\mbox{\hyperlink{classtesting_1_1internal_1_1_parameterized_test_suite_info}{testing\+::internal\+::\+Parameterized\+Test\+Suite\+Info}}$<$ \mbox{\hyperlink{classtesting_1_1_test_suite}{Test\+Suite}} $>$\+::\mbox{\hyperlink{classtesting_1_1internal_1_1_parameterized_test_suite_info}{Parameterized\+Test\+Suite\+Info}} (\begin{DoxyParamCaption}\item[{const char $\ast$}]{name,  }\item[{\mbox{\hyperlink{structtesting_1_1internal_1_1_code_location}{Code\+Location}}}]{code\+\_\+location }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Definition at line 506 of file gtest-\/param-\/util.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classtesting_1_1internal_1_1_parameterized_test_suite_info_a9d57a40601784b785e9a057b42f3336d}\label{classtesting_1_1internal_1_1_parameterized_test_suite_info_a9d57a40601784b785e9a057b42f3336d}} 
+\index{testing::internal::ParameterizedTestSuiteInfo$<$ TestSuite $>$@{testing::internal::ParameterizedTestSuiteInfo$<$ TestSuite $>$}!AddTestPattern@{AddTestPattern}}
+\index{AddTestPattern@{AddTestPattern}!testing::internal::ParameterizedTestSuiteInfo$<$ TestSuite $>$@{testing::internal::ParameterizedTestSuiteInfo$<$ TestSuite $>$}}
+\doxysubsubsection{\texorpdfstring{AddTestPattern()}{AddTestPattern()}}
+{\footnotesize\ttfamily template$<$class Test\+Suite $>$ \\
+void \mbox{\hyperlink{classtesting_1_1internal_1_1_parameterized_test_suite_info}{testing\+::internal\+::\+Parameterized\+Test\+Suite\+Info}}$<$ \mbox{\hyperlink{classtesting_1_1_test_suite}{Test\+Suite}} $>$\+::Add\+Test\+Pattern (\begin{DoxyParamCaption}\item[{const char $\ast$}]{test\+\_\+suite\+\_\+name,  }\item[{const char $\ast$}]{test\+\_\+base\+\_\+name,  }\item[{\mbox{\hyperlink{classtesting_1_1internal_1_1_test_meta_factory_base}{Test\+Meta\+Factory\+Base}}$<$ \mbox{\hyperlink{classtesting_1_1internal_1_1_parameterized_test_suite_info_a10761bd750a6820a8d8d2c654b10fe54}{Param\+Type}} $>$ $\ast$}]{meta\+\_\+factory,  }\item[{\mbox{\hyperlink{structtesting_1_1internal_1_1_code_location}{Code\+Location}}}]{code\+\_\+location }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 522 of file gtest-\/param-\/util.\+h.
+
+\mbox{\Hypertarget{classtesting_1_1internal_1_1_parameterized_test_suite_info_a174f164f38e522a3935da911a9c1e450}\label{classtesting_1_1internal_1_1_parameterized_test_suite_info_a174f164f38e522a3935da911a9c1e450}} 
+\index{testing::internal::ParameterizedTestSuiteInfo$<$ TestSuite $>$@{testing::internal::ParameterizedTestSuiteInfo$<$ TestSuite $>$}!AddTestSuiteInstantiation@{AddTestSuiteInstantiation}}
+\index{AddTestSuiteInstantiation@{AddTestSuiteInstantiation}!testing::internal::ParameterizedTestSuiteInfo$<$ TestSuite $>$@{testing::internal::ParameterizedTestSuiteInfo$<$ TestSuite $>$}}
+\doxysubsubsection{\texorpdfstring{AddTestSuiteInstantiation()}{AddTestSuiteInstantiation()}}
+{\footnotesize\ttfamily template$<$class Test\+Suite $>$ \\
+int \mbox{\hyperlink{classtesting_1_1internal_1_1_parameterized_test_suite_info}{testing\+::internal\+::\+Parameterized\+Test\+Suite\+Info}}$<$ \mbox{\hyperlink{classtesting_1_1_test_suite}{Test\+Suite}} $>$\+::Add\+Test\+Suite\+Instantiation (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{instantiation\+\_\+name,  }\item[{Generator\+Creation\+Func $\ast$}]{func,  }\item[{\mbox{\hyperlink{classtesting_1_1internal_1_1_parameterized_test_suite_info_a3b4f232b7d6d3df941bb8e81b6b534a4}{Param\+Name\+Generator\+Func}} $\ast$}]{name\+\_\+func,  }\item[{const char $\ast$}]{file,  }\item[{int}]{line }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 530 of file gtest-\/param-\/util.\+h.
+
+\mbox{\Hypertarget{classtesting_1_1internal_1_1_parameterized_test_suite_info_a4a5ddc2cd0404438c2b4d405cd0e706c}\label{classtesting_1_1internal_1_1_parameterized_test_suite_info_a4a5ddc2cd0404438c2b4d405cd0e706c}} 
+\index{testing::internal::ParameterizedTestSuiteInfo$<$ TestSuite $>$@{testing::internal::ParameterizedTestSuiteInfo$<$ TestSuite $>$}!GetTestSuiteName@{GetTestSuiteName}}
+\index{GetTestSuiteName@{GetTestSuiteName}!testing::internal::ParameterizedTestSuiteInfo$<$ TestSuite $>$@{testing::internal::ParameterizedTestSuiteInfo$<$ TestSuite $>$}}
+\doxysubsubsection{\texorpdfstring{GetTestSuiteName()}{GetTestSuiteName()}}
+{\footnotesize\ttfamily template$<$class Test\+Suite $>$ \\
+const std\+::string\& \mbox{\hyperlink{classtesting_1_1internal_1_1_parameterized_test_suite_info}{testing\+::internal\+::\+Parameterized\+Test\+Suite\+Info}}$<$ \mbox{\hyperlink{classtesting_1_1_test_suite}{Test\+Suite}} $>$\+::Get\+Test\+Suite\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classtesting_1_1internal_1_1_parameterized_test_suite_info_base_aa6e36241431dc72c251ecee9b637b4d3}{testing\+::internal\+::\+Parameterized\+Test\+Suite\+Info\+Base}}.
+
+
+
+Definition at line 511 of file gtest-\/param-\/util.\+h.
+
+\mbox{\Hypertarget{classtesting_1_1internal_1_1_parameterized_test_suite_info_af488d1d7c1889a250acff2ea6eba4c84}\label{classtesting_1_1internal_1_1_parameterized_test_suite_info_af488d1d7c1889a250acff2ea6eba4c84}} 
+\index{testing::internal::ParameterizedTestSuiteInfo$<$ TestSuite $>$@{testing::internal::ParameterizedTestSuiteInfo$<$ TestSuite $>$}!GetTestSuiteTypeId@{GetTestSuiteTypeId}}
+\index{GetTestSuiteTypeId@{GetTestSuiteTypeId}!testing::internal::ParameterizedTestSuiteInfo$<$ TestSuite $>$@{testing::internal::ParameterizedTestSuiteInfo$<$ TestSuite $>$}}
+\doxysubsubsection{\texorpdfstring{GetTestSuiteTypeId()}{GetTestSuiteTypeId()}}
+{\footnotesize\ttfamily template$<$class Test\+Suite $>$ \\
+\mbox{\hyperlink{namespacetesting_1_1internal_a9dc04025a94b7e583402d324e64ba085}{Type\+Id}} \mbox{\hyperlink{classtesting_1_1internal_1_1_parameterized_test_suite_info}{testing\+::internal\+::\+Parameterized\+Test\+Suite\+Info}}$<$ \mbox{\hyperlink{classtesting_1_1_test_suite}{Test\+Suite}} $>$\+::Get\+Test\+Suite\+Type\+Id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classtesting_1_1internal_1_1_parameterized_test_suite_info_base_ac5bcbf8c50a44472d697e0c80b54387d}{testing\+::internal\+::\+Parameterized\+Test\+Suite\+Info\+Base}}.
+
+
+
+Definition at line 515 of file gtest-\/param-\/util.\+h.
+
+\mbox{\Hypertarget{classtesting_1_1internal_1_1_parameterized_test_suite_info_ac6230057c507d74e373233edbf0410c2}\label{classtesting_1_1internal_1_1_parameterized_test_suite_info_ac6230057c507d74e373233edbf0410c2}} 
+\index{testing::internal::ParameterizedTestSuiteInfo$<$ TestSuite $>$@{testing::internal::ParameterizedTestSuiteInfo$<$ TestSuite $>$}!ParamGenerator@{ParamGenerator}}
+\index{ParamGenerator@{ParamGenerator}!testing::internal::ParameterizedTestSuiteInfo$<$ TestSuite $>$@{testing::internal::ParameterizedTestSuiteInfo$<$ TestSuite $>$}}
+\doxysubsubsection{\texorpdfstring{ParamGenerator()}{ParamGenerator()}}
+{\footnotesize\ttfamily template$<$class Test\+Suite $>$ \\
+typedef \mbox{\hyperlink{classtesting_1_1internal_1_1_parameterized_test_suite_info}{testing\+::internal\+::\+Parameterized\+Test\+Suite\+Info}}$<$ \mbox{\hyperlink{classtesting_1_1_test_suite}{Test\+Suite}} $>$\+::\mbox{\hyperlink{classtesting_1_1internal_1_1_param_generator}{Param\+Generator}} (\begin{DoxyParamCaption}\item[{Generator\+Creation\+Func}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classtesting_1_1internal_1_1_parameterized_test_suite_info_a8c0af866d3c291a63d3f4581ccd452d1}\label{classtesting_1_1internal_1_1_parameterized_test_suite_info_a8c0af866d3c291a63d3f4581ccd452d1}} 
+\index{testing::internal::ParameterizedTestSuiteInfo$<$ TestSuite $>$@{testing::internal::ParameterizedTestSuiteInfo$<$ TestSuite $>$}!RegisterTests@{RegisterTests}}
+\index{RegisterTests@{RegisterTests}!testing::internal::ParameterizedTestSuiteInfo$<$ TestSuite $>$@{testing::internal::ParameterizedTestSuiteInfo$<$ TestSuite $>$}}
+\doxysubsubsection{\texorpdfstring{RegisterTests()}{RegisterTests()}}
+{\footnotesize\ttfamily template$<$class Test\+Suite $>$ \\
+void \mbox{\hyperlink{classtesting_1_1internal_1_1_parameterized_test_suite_info}{testing\+::internal\+::\+Parameterized\+Test\+Suite\+Info}}$<$ \mbox{\hyperlink{classtesting_1_1_test_suite}{Test\+Suite}} $>$\+::Register\+Tests (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classtesting_1_1internal_1_1_parameterized_test_suite_info_base_a41d7d663014af0c1e614c5a61293cb5a}{testing\+::internal\+::\+Parameterized\+Test\+Suite\+Info\+Base}}.
+
+
+
+Definition at line 543 of file gtest-\/param-\/util.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{gtest-param-util_8h}{gtest-\/param-\/util.\+h}}\end{DoxyCompactItemize}

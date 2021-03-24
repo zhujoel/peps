@@ -1,0 +1,84 @@
+\hypertarget{classtesting_1_1internal_1_1_xml_unit_test_result_printer}{}\doxysection{testing\+::internal\+::Xml\+Unit\+Test\+Result\+Printer Class Reference}
+\label{classtesting_1_1internal_1_1_xml_unit_test_result_printer}\index{testing::internal::XmlUnitTestResultPrinter@{testing::internal::XmlUnitTestResultPrinter}}
+Inheritance diagram for testing\+::internal\+::Xml\+Unit\+Test\+Result\+Printer\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classtesting_1_1internal_1_1_xml_unit_test_result_printer}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classtesting_1_1internal_1_1_xml_unit_test_result_printer_afdaf88e6764c18ce0dcc3733d7a06e31}{Xml\+Unit\+Test\+Result\+Printer}} (const char $\ast$\mbox{\hyperlink{main_8cpp_a4fd01174bed8de9f3a2862b2d78d660c}{output\+\_\+file}})
+\item 
+void \mbox{\hyperlink{classtesting_1_1internal_1_1_xml_unit_test_result_printer_abf972ca903d66d5ea52d9b1bc0a27f21}{On\+Test\+Iteration\+End}} (const \mbox{\hyperlink{classtesting_1_1_unit_test}{Unit\+Test}} \&unit\+\_\+test, int iteration) override
+\item 
+void \mbox{\hyperlink{classtesting_1_1internal_1_1_xml_unit_test_result_printer_a5bbda9739d45a9e01190b2663dcbc5ac}{List\+Tests\+Matching\+Filter}} (const std\+::vector$<$ \mbox{\hyperlink{classtesting_1_1_test_suite}{Test\+Suite}} $\ast$ $>$ \&test\+\_\+suites)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classtesting_1_1internal_1_1_xml_unit_test_result_printer_a35fba2665c5fb6fa56b8eb5c41fa275e}{Print\+Xml\+Tests\+List}} (std\+::ostream $\ast$stream, const std\+::vector$<$ \mbox{\hyperlink{classtesting_1_1_test_suite}{Test\+Suite}} $\ast$ $>$ \&test\+\_\+suites)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 3879 of file gtest.\+cc.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classtesting_1_1internal_1_1_xml_unit_test_result_printer_afdaf88e6764c18ce0dcc3733d7a06e31}\label{classtesting_1_1internal_1_1_xml_unit_test_result_printer_afdaf88e6764c18ce0dcc3733d7a06e31}} 
+\index{testing::internal::XmlUnitTestResultPrinter@{testing::internal::XmlUnitTestResultPrinter}!XmlUnitTestResultPrinter@{XmlUnitTestResultPrinter}}
+\index{XmlUnitTestResultPrinter@{XmlUnitTestResultPrinter}!testing::internal::XmlUnitTestResultPrinter@{testing::internal::XmlUnitTestResultPrinter}}
+\doxysubsubsection{\texorpdfstring{XmlUnitTestResultPrinter()}{XmlUnitTestResultPrinter()}}
+{\footnotesize\ttfamily testing\+::internal\+::\+Xml\+Unit\+Test\+Result\+Printer\+::\+Xml\+Unit\+Test\+Result\+Printer (\begin{DoxyParamCaption}\item[{const char $\ast$}]{output\+\_\+file }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Definition at line 3972 of file gtest.\+cc.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classtesting_1_1internal_1_1_xml_unit_test_result_printer_a5bbda9739d45a9e01190b2663dcbc5ac}\label{classtesting_1_1internal_1_1_xml_unit_test_result_printer_a5bbda9739d45a9e01190b2663dcbc5ac}} 
+\index{testing::internal::XmlUnitTestResultPrinter@{testing::internal::XmlUnitTestResultPrinter}!ListTestsMatchingFilter@{ListTestsMatchingFilter}}
+\index{ListTestsMatchingFilter@{ListTestsMatchingFilter}!testing::internal::XmlUnitTestResultPrinter@{testing::internal::XmlUnitTestResultPrinter}}
+\doxysubsubsection{\texorpdfstring{ListTestsMatchingFilter()}{ListTestsMatchingFilter()}}
+{\footnotesize\ttfamily void testing\+::internal\+::\+Xml\+Unit\+Test\+Result\+Printer\+::\+List\+Tests\+Matching\+Filter (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{classtesting_1_1_test_suite}{Test\+Suite}} $\ast$ $>$ \&}]{test\+\_\+suites }\end{DoxyParamCaption})}
+
+
+
+Definition at line 3989 of file gtest.\+cc.
+
+\mbox{\Hypertarget{classtesting_1_1internal_1_1_xml_unit_test_result_printer_abf972ca903d66d5ea52d9b1bc0a27f21}\label{classtesting_1_1internal_1_1_xml_unit_test_result_printer_abf972ca903d66d5ea52d9b1bc0a27f21}} 
+\index{testing::internal::XmlUnitTestResultPrinter@{testing::internal::XmlUnitTestResultPrinter}!OnTestIterationEnd@{OnTestIterationEnd}}
+\index{OnTestIterationEnd@{OnTestIterationEnd}!testing::internal::XmlUnitTestResultPrinter@{testing::internal::XmlUnitTestResultPrinter}}
+\doxysubsubsection{\texorpdfstring{OnTestIterationEnd()}{OnTestIterationEnd()}}
+{\footnotesize\ttfamily void testing\+::internal\+::\+Xml\+Unit\+Test\+Result\+Printer\+::\+On\+Test\+Iteration\+End (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classtesting_1_1_unit_test}{Unit\+Test}} \&}]{unit\+\_\+test,  }\item[{int}]{iteration }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{classtesting_1_1_empty_test_event_listener_aae9c5c61e476f0c421402fb1dde434d2}{testing\+::\+Empty\+Test\+Event\+Listener}}.
+
+
+
+Definition at line 3980 of file gtest.\+cc.
+
+\mbox{\Hypertarget{classtesting_1_1internal_1_1_xml_unit_test_result_printer_a35fba2665c5fb6fa56b8eb5c41fa275e}\label{classtesting_1_1internal_1_1_xml_unit_test_result_printer_a35fba2665c5fb6fa56b8eb5c41fa275e}} 
+\index{testing::internal::XmlUnitTestResultPrinter@{testing::internal::XmlUnitTestResultPrinter}!PrintXmlTestsList@{PrintXmlTestsList}}
+\index{PrintXmlTestsList@{PrintXmlTestsList}!testing::internal::XmlUnitTestResultPrinter@{testing::internal::XmlUnitTestResultPrinter}}
+\doxysubsubsection{\texorpdfstring{PrintXmlTestsList()}{PrintXmlTestsList()}}
+{\footnotesize\ttfamily void testing\+::internal\+::\+Xml\+Unit\+Test\+Result\+Printer\+::\+Print\+Xml\+Tests\+List (\begin{DoxyParamCaption}\item[{std\+::ostream $\ast$}]{stream,  }\item[{const std\+::vector$<$ \mbox{\hyperlink{classtesting_1_1_test_suite}{Test\+Suite}} $\ast$ $>$ \&}]{test\+\_\+suites }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 4365 of file gtest.\+cc.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{gtest_8cc}{gtest.\+cc}}\end{DoxyCompactItemize}

@@ -1,0 +1,87 @@
+\hypertarget{classtesting_1_1internal_1_1_failure_reporter_interface}{}\doxysection{testing\+::internal\+::Failure\+Reporter\+Interface Class Reference}
+\label{classtesting_1_1internal_1_1_failure_reporter_interface}\index{testing::internal::FailureReporterInterface@{testing::internal::FailureReporterInterface}}
+
+
+{\ttfamily \#include $<$gmock-\/internal-\/utils.\+h$>$}
+
+Inheritance diagram for testing\+::internal\+::Failure\+Reporter\+Interface\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classtesting_1_1internal_1_1_failure_reporter_interface}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{classtesting_1_1internal_1_1_failure_reporter_interface_aba34db997df0aefbfdc9d199d7d2ab5e}{Failure\+Type}} \{ \mbox{\hyperlink{classtesting_1_1internal_1_1_failure_reporter_interface_aba34db997df0aefbfdc9d199d7d2ab5ea3b78f131b8ed15245f44e48ba297838d}{k\+Nonfatal}}, 
+\mbox{\hyperlink{classtesting_1_1internal_1_1_failure_reporter_interface_aba34db997df0aefbfdc9d199d7d2ab5ea39560d6222d07508d8ef9f0ea6b030dd}{k\+Fatal}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classtesting_1_1internal_1_1_failure_reporter_interface_a860ca547b5b8c801b9b41b2f7ecb9a8f}{$\sim$\+Failure\+Reporter\+Interface}} ()
+\item 
+virtual void \mbox{\hyperlink{classtesting_1_1internal_1_1_failure_reporter_interface_a0c43ec1946cb4ab51279c96ce1ad941d}{Report\+Failure}} (\mbox{\hyperlink{classtesting_1_1internal_1_1_failure_reporter_interface_aba34db997df0aefbfdc9d199d7d2ab5e}{Failure\+Type}} type, const char $\ast$file, int line, const std\+::string \&message)=0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 193 of file gmock-\/internal-\/utils.\+h.
+
+
+
+\doxysubsection{Member Enumeration Documentation}
+\mbox{\Hypertarget{classtesting_1_1internal_1_1_failure_reporter_interface_aba34db997df0aefbfdc9d199d7d2ab5e}\label{classtesting_1_1internal_1_1_failure_reporter_interface_aba34db997df0aefbfdc9d199d7d2ab5e}} 
+\index{testing::internal::FailureReporterInterface@{testing::internal::FailureReporterInterface}!FailureType@{FailureType}}
+\index{FailureType@{FailureType}!testing::internal::FailureReporterInterface@{testing::internal::FailureReporterInterface}}
+\doxysubsubsection{\texorpdfstring{FailureType}{FailureType}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{classtesting_1_1internal_1_1_failure_reporter_interface_aba34db997df0aefbfdc9d199d7d2ab5e}{testing\+::internal\+::\+Failure\+Reporter\+Interface\+::\+Failure\+Type}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kNonfatal@{kNonfatal}!testing::internal::FailureReporterInterface@{testing::internal::FailureReporterInterface}}\index{testing::internal::FailureReporterInterface@{testing::internal::FailureReporterInterface}!kNonfatal@{kNonfatal}}}\mbox{\Hypertarget{classtesting_1_1internal_1_1_failure_reporter_interface_aba34db997df0aefbfdc9d199d7d2ab5ea3b78f131b8ed15245f44e48ba297838d}\label{classtesting_1_1internal_1_1_failure_reporter_interface_aba34db997df0aefbfdc9d199d7d2ab5ea3b78f131b8ed15245f44e48ba297838d}} 
+k\+Nonfatal&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kFatal@{kFatal}!testing::internal::FailureReporterInterface@{testing::internal::FailureReporterInterface}}\index{testing::internal::FailureReporterInterface@{testing::internal::FailureReporterInterface}!kFatal@{kFatal}}}\mbox{\Hypertarget{classtesting_1_1internal_1_1_failure_reporter_interface_aba34db997df0aefbfdc9d199d7d2ab5ea39560d6222d07508d8ef9f0ea6b030dd}\label{classtesting_1_1internal_1_1_failure_reporter_interface_aba34db997df0aefbfdc9d199d7d2ab5ea39560d6222d07508d8ef9f0ea6b030dd}} 
+k\+Fatal&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line 196 of file gmock-\/internal-\/utils.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classtesting_1_1internal_1_1_failure_reporter_interface_a860ca547b5b8c801b9b41b2f7ecb9a8f}\label{classtesting_1_1internal_1_1_failure_reporter_interface_a860ca547b5b8c801b9b41b2f7ecb9a8f}} 
+\index{testing::internal::FailureReporterInterface@{testing::internal::FailureReporterInterface}!````~FailureReporterInterface@{$\sim$FailureReporterInterface}}
+\index{````~FailureReporterInterface@{$\sim$FailureReporterInterface}!testing::internal::FailureReporterInterface@{testing::internal::FailureReporterInterface}}
+\doxysubsubsection{\texorpdfstring{$\sim$FailureReporterInterface()}{~FailureReporterInterface()}}
+{\footnotesize\ttfamily virtual testing\+::internal\+::\+Failure\+Reporter\+Interface\+::$\sim$\+Failure\+Reporter\+Interface (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Definition at line 200 of file gmock-\/internal-\/utils.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classtesting_1_1internal_1_1_failure_reporter_interface_a0c43ec1946cb4ab51279c96ce1ad941d}\label{classtesting_1_1internal_1_1_failure_reporter_interface_a0c43ec1946cb4ab51279c96ce1ad941d}} 
+\index{testing::internal::FailureReporterInterface@{testing::internal::FailureReporterInterface}!ReportFailure@{ReportFailure}}
+\index{ReportFailure@{ReportFailure}!testing::internal::FailureReporterInterface@{testing::internal::FailureReporterInterface}}
+\doxysubsubsection{\texorpdfstring{ReportFailure()}{ReportFailure()}}
+{\footnotesize\ttfamily virtual void testing\+::internal\+::\+Failure\+Reporter\+Interface\+::\+Report\+Failure (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classtesting_1_1internal_1_1_failure_reporter_interface_aba34db997df0aefbfdc9d199d7d2ab5e}{Failure\+Type}}}]{type,  }\item[{const char $\ast$}]{file,  }\item[{int}]{line,  }\item[{const std\+::string \&}]{message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{classtesting_1_1internal_1_1_google_test_failure_reporter_aff7bfa8521e770d718172c99c807ec39}{testing\+::internal\+::\+Google\+Test\+Failure\+Reporter}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{gmock-internal-utils_8h}{gmock-\/internal-\/utils.\+h}}\end{DoxyCompactItemize}

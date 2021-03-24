@@ -111,7 +111,7 @@ HedgingPortfolio *portfolio;
 int horizon_estimation = 500;
 int nbSamples = 100;
 int rebalancement_horizon = 30;
-int nb_dates_a_simuler = 200;
+int nb_dates_a_simuler = 2000;
 
 void simulate_all()
 {
@@ -269,7 +269,7 @@ int main(int argc, char* argv[])
     parse_dates_file(all_relevant_dates, "../data/dates/all_dates_constatation.csv", 49, '-');
     parse_dates_file(dates_semestrielles, "../data/dates/dates_semest.csv", 16, '-');
     parse_dates_file(dates_valeurs_n_ans, "../data/dates/dates_valeurs_n.csv", 35, '-');
-    get_subset_path_from_dates(ocelia_path, historical->dates_, all_relevant_dates, historical->path_);
+    get_prices_from_date(ocelia_path, historical->dates_, all_relevant_dates, historical->path_);
     // GET INDEXES
     past_index = get_indice_from_date(historical->dates_, new DateTime(15, 5, 2008));
     estimation_end = get_indice_from_date(historical->dates_, new DateTime(15, 5, 2008));

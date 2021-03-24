@@ -1,0 +1,312 @@
+\hypertarget{gtest-typed-test_8h}{}\doxysection{gtest-\/typed-\/test.h File Reference}
+\label{gtest-typed-test_8h}\index{gtest-\/typed-\/test.h@{gtest-\/typed-\/test.h}}
+{\ttfamily \#include \char`\"{}gtest/internal/gtest-\/internal.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}gtest/internal/gtest-\/port.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}gtest/internal/gtest-\/type-\/util.\+h\char`\"{}}\newline
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{gtest-typed-test_8h_aafb49fb7eb25dc1e895c0abfd86c05ce}{G\+T\+E\+S\+T\+\_\+\+T\+Y\+P\+E\+\_\+\+P\+A\+R\+A\+M\+S\+\_\+}}(Test\+Suite\+Name)~gtest\+\_\+type\+\_\+params\+\_\+\#\#Test\+Suite\+Name\#\#\+\_\+
+\item 
+\#define \mbox{\hyperlink{gtest-typed-test_8h_aca203e78b5b088ca8ccaa83c15273004}{G\+T\+E\+S\+T\+\_\+\+N\+A\+M\+E\+\_\+\+G\+E\+N\+E\+R\+A\+T\+O\+R\+\_\+}}(Test\+Suite\+Name)~gtest\+\_\+type\+\_\+params\+\_\+\#\#Test\+Suite\+Name\#\#\+\_\+\+Name\+Generator
+\item 
+\#define \mbox{\hyperlink{gtest-typed-test_8h_af84bf8ca7d774f32797e526bec88d12f}{T\+Y\+P\+E\+D\+\_\+\+T\+E\+S\+T\+\_\+\+S\+U\+I\+TE}}(Case\+Name,  Types, ...)
+\item 
+\#define \mbox{\hyperlink{gtest-typed-test_8h_ae6f575265873190de41b1329d16df0f0}{T\+Y\+P\+E\+D\+\_\+\+T\+E\+ST}}(Case\+Name,  Test\+Name)
+\item 
+\#define \mbox{\hyperlink{gtest-typed-test_8h_a3e14454891deeb5cf8bd318b70f269dc}{T\+Y\+P\+E\+D\+\_\+\+T\+E\+S\+T\+\_\+\+C\+A\+SE}}
+\item 
+\#define \mbox{\hyperlink{gtest-typed-test_8h_ad335257ff1e556a70cd6d7ee3556cfb0}{G\+T\+E\+S\+T\+\_\+\+S\+U\+I\+T\+E\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+\_\+}}(Test\+Suite\+Name)~gtest\+\_\+suite\+\_\+\#\#Test\+Suite\+Name\#\#\+\_\+
+\item 
+\#define \mbox{\hyperlink{gtest-typed-test_8h_a5000e7fb258683486c20c746440e6118}{G\+T\+E\+S\+T\+\_\+\+T\+Y\+P\+E\+D\+\_\+\+T\+E\+S\+T\+\_\+\+S\+U\+I\+T\+E\+\_\+\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+}}(Test\+Suite\+Name)~gtest\+\_\+typed\+\_\+test\+\_\+suite\+\_\+p\+\_\+state\+\_\+\#\#Test\+Suite\+Name\#\#\+\_\+
+\item 
+\#define \mbox{\hyperlink{gtest-typed-test_8h_a437dfd0367cb179c964e8117ae5bcb29}{G\+T\+E\+S\+T\+\_\+\+R\+E\+G\+I\+S\+T\+E\+R\+E\+D\+\_\+\+T\+E\+S\+T\+\_\+\+N\+A\+M\+E\+S\+\_\+}}(Test\+Suite\+Name)~gtest\+\_\+registered\+\_\+test\+\_\+names\+\_\+\#\#Test\+Suite\+Name\#\#\+\_\+
+\item 
+\#define \mbox{\hyperlink{gtest-typed-test_8h_a3d74325e27e02ed1d1c7b30a24f7af13}{T\+Y\+P\+E\+D\+\_\+\+T\+E\+S\+T\+\_\+\+S\+U\+I\+T\+E\+\_\+P}}(Suite\+Name)
+\item 
+\#define \mbox{\hyperlink{gtest-typed-test_8h_a0b219bba2153cac2251852f3554a12a7}{T\+Y\+P\+E\+D\+\_\+\+T\+E\+S\+T\+\_\+\+C\+A\+S\+E\+\_\+P}}
+\item 
+\#define \mbox{\hyperlink{gtest-typed-test_8h_a6e9d1cd9b97da0076ae699775d3222d0}{T\+Y\+P\+E\+D\+\_\+\+T\+E\+S\+T\+\_\+P}}(Suite\+Name,  Test\+Name)
+\item 
+\#define \mbox{\hyperlink{gtest-typed-test_8h_a03990bffa8f0f58c37d4938107722f99}{R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+T\+Y\+P\+E\+D\+\_\+\+T\+E\+S\+T\+\_\+\+S\+U\+I\+T\+E\+\_\+P}}(Suite\+Name, ...)
+\item 
+\#define \mbox{\hyperlink{gtest-typed-test_8h_a8b29fcb79e33236eb334f5275d8b348f}{R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+T\+Y\+P\+E\+D\+\_\+\+T\+E\+S\+T\+\_\+\+C\+A\+S\+E\+\_\+P}}
+\item 
+\#define \mbox{\hyperlink{gtest-typed-test_8h_ae1f8548fa07ec0a138362654b7bc3194}{I\+N\+S\+T\+A\+N\+T\+I\+A\+T\+E\+\_\+\+T\+Y\+P\+E\+D\+\_\+\+T\+E\+S\+T\+\_\+\+S\+U\+I\+T\+E\+\_\+P}}(Prefix,  Suite\+Name,  Types, ...)
+\item 
+\#define \mbox{\hyperlink{gtest-typed-test_8h_af56d28e59bcf6324199a9f72303eba84}{I\+N\+S\+T\+A\+N\+T\+I\+A\+T\+E\+\_\+\+T\+Y\+P\+E\+D\+\_\+\+T\+E\+S\+T\+\_\+\+C\+A\+S\+E\+\_\+P}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{gtest-typed-test_8h_aca203e78b5b088ca8ccaa83c15273004}\label{gtest-typed-test_8h_aca203e78b5b088ca8ccaa83c15273004}} 
+\index{gtest-\/typed-\/test.h@{gtest-\/typed-\/test.h}!GTEST\_NAME\_GENERATOR\_@{GTEST\_NAME\_GENERATOR\_}}
+\index{GTEST\_NAME\_GENERATOR\_@{GTEST\_NAME\_GENERATOR\_}!gtest-\/typed-\/test.h@{gtest-\/typed-\/test.h}}
+\doxysubsubsection{\texorpdfstring{GTEST\_NAME\_GENERATOR\_}{GTEST\_NAME\_GENERATOR\_}}
+{\footnotesize\ttfamily \#define G\+T\+E\+S\+T\+\_\+\+N\+A\+M\+E\+\_\+\+G\+E\+N\+E\+R\+A\+T\+O\+R\+\_\+(\begin{DoxyParamCaption}\item[{}]{Test\+Suite\+Name }\end{DoxyParamCaption})~gtest\+\_\+type\+\_\+params\+\_\+\#\#Test\+Suite\+Name\#\#\+\_\+\+Name\+Generator}
+
+
+
+Definition at line 186 of file gtest-\/typed-\/test.\+h.
+
+\mbox{\Hypertarget{gtest-typed-test_8h_a437dfd0367cb179c964e8117ae5bcb29}\label{gtest-typed-test_8h_a437dfd0367cb179c964e8117ae5bcb29}} 
+\index{gtest-\/typed-\/test.h@{gtest-\/typed-\/test.h}!GTEST\_REGISTERED\_TEST\_NAMES\_@{GTEST\_REGISTERED\_TEST\_NAMES\_}}
+\index{GTEST\_REGISTERED\_TEST\_NAMES\_@{GTEST\_REGISTERED\_TEST\_NAMES\_}!gtest-\/typed-\/test.h@{gtest-\/typed-\/test.h}}
+\doxysubsubsection{\texorpdfstring{GTEST\_REGISTERED\_TEST\_NAMES\_}{GTEST\_REGISTERED\_TEST\_NAMES\_}}
+{\footnotesize\ttfamily \#define G\+T\+E\+S\+T\+\_\+\+R\+E\+G\+I\+S\+T\+E\+R\+E\+D\+\_\+\+T\+E\+S\+T\+\_\+\+N\+A\+M\+E\+S\+\_\+(\begin{DoxyParamCaption}\item[{}]{Test\+Suite\+Name }\end{DoxyParamCaption})~gtest\+\_\+registered\+\_\+test\+\_\+names\+\_\+\#\#Test\+Suite\+Name\#\#\+\_\+}
+
+
+
+Definition at line 251 of file gtest-\/typed-\/test.\+h.
+
+\mbox{\Hypertarget{gtest-typed-test_8h_ad335257ff1e556a70cd6d7ee3556cfb0}\label{gtest-typed-test_8h_ad335257ff1e556a70cd6d7ee3556cfb0}} 
+\index{gtest-\/typed-\/test.h@{gtest-\/typed-\/test.h}!GTEST\_SUITE\_NAMESPACE\_@{GTEST\_SUITE\_NAMESPACE\_}}
+\index{GTEST\_SUITE\_NAMESPACE\_@{GTEST\_SUITE\_NAMESPACE\_}!gtest-\/typed-\/test.h@{gtest-\/typed-\/test.h}}
+\doxysubsubsection{\texorpdfstring{GTEST\_SUITE\_NAMESPACE\_}{GTEST\_SUITE\_NAMESPACE\_}}
+{\footnotesize\ttfamily \#define G\+T\+E\+S\+T\+\_\+\+S\+U\+I\+T\+E\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+\_\+(\begin{DoxyParamCaption}\item[{}]{Test\+Suite\+Name }\end{DoxyParamCaption})~gtest\+\_\+suite\+\_\+\#\#Test\+Suite\+Name\#\#\+\_\+}
+
+
+
+Definition at line 238 of file gtest-\/typed-\/test.\+h.
+
+\mbox{\Hypertarget{gtest-typed-test_8h_aafb49fb7eb25dc1e895c0abfd86c05ce}\label{gtest-typed-test_8h_aafb49fb7eb25dc1e895c0abfd86c05ce}} 
+\index{gtest-\/typed-\/test.h@{gtest-\/typed-\/test.h}!GTEST\_TYPE\_PARAMS\_@{GTEST\_TYPE\_PARAMS\_}}
+\index{GTEST\_TYPE\_PARAMS\_@{GTEST\_TYPE\_PARAMS\_}!gtest-\/typed-\/test.h@{gtest-\/typed-\/test.h}}
+\doxysubsubsection{\texorpdfstring{GTEST\_TYPE\_PARAMS\_}{GTEST\_TYPE\_PARAMS\_}}
+{\footnotesize\ttfamily \#define G\+T\+E\+S\+T\+\_\+\+T\+Y\+P\+E\+\_\+\+P\+A\+R\+A\+M\+S\+\_\+(\begin{DoxyParamCaption}\item[{}]{Test\+Suite\+Name }\end{DoxyParamCaption})~gtest\+\_\+type\+\_\+params\+\_\+\#\#Test\+Suite\+Name\#\#\+\_\+}
+
+
+
+Definition at line 182 of file gtest-\/typed-\/test.\+h.
+
+\mbox{\Hypertarget{gtest-typed-test_8h_a5000e7fb258683486c20c746440e6118}\label{gtest-typed-test_8h_a5000e7fb258683486c20c746440e6118}} 
+\index{gtest-\/typed-\/test.h@{gtest-\/typed-\/test.h}!GTEST\_TYPED\_TEST\_SUITE\_P\_STATE\_@{GTEST\_TYPED\_TEST\_SUITE\_P\_STATE\_}}
+\index{GTEST\_TYPED\_TEST\_SUITE\_P\_STATE\_@{GTEST\_TYPED\_TEST\_SUITE\_P\_STATE\_}!gtest-\/typed-\/test.h@{gtest-\/typed-\/test.h}}
+\doxysubsubsection{\texorpdfstring{GTEST\_TYPED\_TEST\_SUITE\_P\_STATE\_}{GTEST\_TYPED\_TEST\_SUITE\_P\_STATE\_}}
+{\footnotesize\ttfamily \#define G\+T\+E\+S\+T\+\_\+\+T\+Y\+P\+E\+D\+\_\+\+T\+E\+S\+T\+\_\+\+S\+U\+I\+T\+E\+\_\+\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+(\begin{DoxyParamCaption}\item[{}]{Test\+Suite\+Name }\end{DoxyParamCaption})~gtest\+\_\+typed\+\_\+test\+\_\+suite\+\_\+p\+\_\+state\+\_\+\#\#Test\+Suite\+Name\#\#\+\_\+}
+
+
+
+Definition at line 244 of file gtest-\/typed-\/test.\+h.
+
+\mbox{\Hypertarget{gtest-typed-test_8h_af56d28e59bcf6324199a9f72303eba84}\label{gtest-typed-test_8h_af56d28e59bcf6324199a9f72303eba84}} 
+\index{gtest-\/typed-\/test.h@{gtest-\/typed-\/test.h}!INSTANTIATE\_TYPED\_TEST\_CASE\_P@{INSTANTIATE\_TYPED\_TEST\_CASE\_P}}
+\index{INSTANTIATE\_TYPED\_TEST\_CASE\_P@{INSTANTIATE\_TYPED\_TEST\_CASE\_P}!gtest-\/typed-\/test.h@{gtest-\/typed-\/test.h}}
+\doxysubsubsection{\texorpdfstring{INSTANTIATE\_TYPED\_TEST\_CASE\_P}{INSTANTIATE\_TYPED\_TEST\_CASE\_P}}
+{\footnotesize\ttfamily \#define I\+N\+S\+T\+A\+N\+T\+I\+A\+T\+E\+\_\+\+T\+Y\+P\+E\+D\+\_\+\+T\+E\+S\+T\+\_\+\+C\+A\+S\+E\+\_\+P}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{  static\_assert(                                                           \(\backslash\)}
+\DoxyCodeLine{      ::testing::internal::InstantiateTypedTestCase\_P\_IsDeprecated(), \textcolor{stringliteral}{""}); \(\backslash\)}
+\DoxyCodeLine{  INSTANTIATE\_TYPED\_TEST\_SUITE\_P}
+
+\end{DoxyCode}
+
+
+Definition at line 323 of file gtest-\/typed-\/test.\+h.
+
+\mbox{\Hypertarget{gtest-typed-test_8h_ae1f8548fa07ec0a138362654b7bc3194}\label{gtest-typed-test_8h_ae1f8548fa07ec0a138362654b7bc3194}} 
+\index{gtest-\/typed-\/test.h@{gtest-\/typed-\/test.h}!INSTANTIATE\_TYPED\_TEST\_SUITE\_P@{INSTANTIATE\_TYPED\_TEST\_SUITE\_P}}
+\index{INSTANTIATE\_TYPED\_TEST\_SUITE\_P@{INSTANTIATE\_TYPED\_TEST\_SUITE\_P}!gtest-\/typed-\/test.h@{gtest-\/typed-\/test.h}}
+\doxysubsubsection{\texorpdfstring{INSTANTIATE\_TYPED\_TEST\_SUITE\_P}{INSTANTIATE\_TYPED\_TEST\_SUITE\_P}}
+{\footnotesize\ttfamily \#define I\+N\+S\+T\+A\+N\+T\+I\+A\+T\+E\+\_\+\+T\+Y\+P\+E\+D\+\_\+\+T\+E\+S\+T\+\_\+\+S\+U\+I\+T\+E\+\_\+P(\begin{DoxyParamCaption}\item[{}]{Prefix,  }\item[{}]{Suite\+Name,  }\item[{}]{Types,  }\item[{}]{... }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{  static\_assert(\textcolor{keyword}{sizeof}(\mbox{\hyperlink{gtest-internal_8h_aa007c0351c2bbe7618989e40cc146769}{GTEST\_STRINGIFY\_}}(Prefix)) > 1,                       \(\backslash\)}
+\DoxyCodeLine{                \textcolor{stringliteral}{"test-\/suit-\/prefix must not be empty"});                      \(\backslash\)}
+\DoxyCodeLine{  static \textcolor{keywordtype}{bool} gtest\_\#\#Prefix\#\#\_\#\#SuiteName \mbox{\hyperlink{gtest-port_8h_a01f3b31960fc7c4c7ee4b398a914f89a}{GTEST\_ATTRIBUTE\_UNUSED\_}} =        \(\backslash\)}
+\DoxyCodeLine{      \mbox{\hyperlink{classtesting_1_1internal_1_1_type_parameterized_test_suite}{::testing::internal::TypeParameterizedTestSuite}}<                      \(\backslash\)}
+\DoxyCodeLine{          SuiteName, \mbox{\hyperlink{gtest-typed-test_8h_ad335257ff1e556a70cd6d7ee3556cfb0}{GTEST\_SUITE\_NAMESPACE\_}}(SuiteName)::gtest\_AllTests\_,    \(\backslash\)}
+\DoxyCodeLine{          ::\mbox{\hyperlink{namespacetesting}{testing}}::internal::GenerateTypeList<\mbox{\hyperlink{namespacetesting_a29eec4c1aba59e52881d8eb38cece83c}{Types}}>::\mbox{\hyperlink{namespaceupload_a4fc56f0dd6613be15c3c4dc3af3619ce}{type}}>::             \(\backslash\)}
+\DoxyCodeLine{          Register(\mbox{\hyperlink{gtest-internal_8h_aa007c0351c2bbe7618989e40cc146769}{GTEST\_STRINGIFY\_}}(Prefix),                                \(\backslash\)}
+\DoxyCodeLine{                   ::\mbox{\hyperlink{namespacetesting}{testing}}::internal::CodeLocation(\_\_FILE\_\_, \_\_LINE\_\_),   \(\backslash\)}
+\DoxyCodeLine{                   \&\mbox{\hyperlink{gtest-typed-test_8h_a5000e7fb258683486c20c746440e6118}{GTEST\_TYPED\_TEST\_SUITE\_P\_STATE\_}}(SuiteName),             \(\backslash\)}
+\DoxyCodeLine{                   \mbox{\hyperlink{gtest-internal_8h_aa007c0351c2bbe7618989e40cc146769}{GTEST\_STRINGIFY\_}}(SuiteName),                             \(\backslash\)}
+\DoxyCodeLine{                   \mbox{\hyperlink{gtest-typed-test_8h_a437dfd0367cb179c964e8117ae5bcb29}{GTEST\_REGISTERED\_TEST\_NAMES\_}}(SuiteName),                 \(\backslash\)}
+\DoxyCodeLine{                   ::\mbox{\hyperlink{namespacetesting}{testing}}::internal::\mbox{\hyperlink{namespacetesting_1_1internal_a864ef450d21a02d66f9854b9a1c8c37c}{GenerateNames}}<                      \(\backslash\)}
+\DoxyCodeLine{                       ::\mbox{\hyperlink{namespacetesting}{testing}}::internal::NameGeneratorSelector<          \(\backslash\)}
+\DoxyCodeLine{                           \_\_VA\_ARGS\_\_>::\mbox{\hyperlink{namespaceupload_a4fc56f0dd6613be15c3c4dc3af3619ce}{type}},                              \(\backslash\)}
+\DoxyCodeLine{                       ::\mbox{\hyperlink{namespacetesting}{testing}}::internal::GenerateTypeList<\mbox{\hyperlink{namespacetesting_a29eec4c1aba59e52881d8eb38cece83c}{Types}}>::\mbox{\hyperlink{namespaceupload_a4fc56f0dd6613be15c3c4dc3af3619ce}{type}}>())}
+
+\end{DoxyCode}
+
+
+Definition at line 304 of file gtest-\/typed-\/test.\+h.
+
+\mbox{\Hypertarget{gtest-typed-test_8h_a8b29fcb79e33236eb334f5275d8b348f}\label{gtest-typed-test_8h_a8b29fcb79e33236eb334f5275d8b348f}} 
+\index{gtest-\/typed-\/test.h@{gtest-\/typed-\/test.h}!REGISTER\_TYPED\_TEST\_CASE\_P@{REGISTER\_TYPED\_TEST\_CASE\_P}}
+\index{REGISTER\_TYPED\_TEST\_CASE\_P@{REGISTER\_TYPED\_TEST\_CASE\_P}!gtest-\/typed-\/test.h@{gtest-\/typed-\/test.h}}
+\doxysubsubsection{\texorpdfstring{REGISTER\_TYPED\_TEST\_CASE\_P}{REGISTER\_TYPED\_TEST\_CASE\_P}}
+{\footnotesize\ttfamily \#define R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+T\+Y\+P\+E\+D\+\_\+\+T\+E\+S\+T\+\_\+\+C\+A\+S\+E\+\_\+P}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{  static\_assert(::testing::internal::RegisterTypedTestCase\_P\_IsDeprecated(), \(\backslash\)}
+\DoxyCodeLine{                \textcolor{stringliteral}{""});                                                         \(\backslash\)}
+\DoxyCodeLine{  REGISTER\_TYPED\_TEST\_SUITE\_P}
+
+\end{DoxyCode}
+
+
+Definition at line 298 of file gtest-\/typed-\/test.\+h.
+
+\mbox{\Hypertarget{gtest-typed-test_8h_a03990bffa8f0f58c37d4938107722f99}\label{gtest-typed-test_8h_a03990bffa8f0f58c37d4938107722f99}} 
+\index{gtest-\/typed-\/test.h@{gtest-\/typed-\/test.h}!REGISTER\_TYPED\_TEST\_SUITE\_P@{REGISTER\_TYPED\_TEST\_SUITE\_P}}
+\index{REGISTER\_TYPED\_TEST\_SUITE\_P@{REGISTER\_TYPED\_TEST\_SUITE\_P}!gtest-\/typed-\/test.h@{gtest-\/typed-\/test.h}}
+\doxysubsubsection{\texorpdfstring{REGISTER\_TYPED\_TEST\_SUITE\_P}{REGISTER\_TYPED\_TEST\_SUITE\_P}}
+{\footnotesize\ttfamily \#define R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+T\+Y\+P\+E\+D\+\_\+\+T\+E\+S\+T\+\_\+\+S\+U\+I\+T\+E\+\_\+P(\begin{DoxyParamCaption}\item[{}]{Suite\+Name,  }\item[{}]{... }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{  \textcolor{keyword}{namespace }GTEST\_SUITE\_NAMESPACE\_(SuiteName) \{                             \(\backslash\)}
+\DoxyCodeLine{    typedef ::testing::internal::Templates<\_\_VA\_ARGS\_\_> gtest\_AllTests\_;    \(\backslash\)}
+\DoxyCodeLine{  \}                                                                         \(\backslash\)}
+\DoxyCodeLine{  static \textcolor{keyword}{const} \textcolor{keywordtype}{char}* \textcolor{keyword}{const} \mbox{\hyperlink{gtest-typed-test_8h_a437dfd0367cb179c964e8117ae5bcb29}{GTEST\_REGISTERED\_TEST\_NAMES\_}}(                    \(\backslash\)}
+\DoxyCodeLine{      SuiteName) \mbox{\hyperlink{gtest-port_8h_a01f3b31960fc7c4c7ee4b398a914f89a}{GTEST\_ATTRIBUTE\_UNUSED\_}} =                                  \(\backslash\)}
+\DoxyCodeLine{      GTEST\_TYPED\_TEST\_SUITE\_P\_STATE\_(SuiteName).VerifyRegisteredTestNames( \(\backslash\)}
+\DoxyCodeLine{          \mbox{\hyperlink{gtest-internal_8h_aa007c0351c2bbe7618989e40cc146769}{GTEST\_STRINGIFY\_}}(SuiteName), \_\_FILE\_\_, \_\_LINE\_\_, \#\_\_VA\_ARGS\_\_)}
+
+\end{DoxyCode}
+
+
+Definition at line 287 of file gtest-\/typed-\/test.\+h.
+
+\mbox{\Hypertarget{gtest-typed-test_8h_ae6f575265873190de41b1329d16df0f0}\label{gtest-typed-test_8h_ae6f575265873190de41b1329d16df0f0}} 
+\index{gtest-\/typed-\/test.h@{gtest-\/typed-\/test.h}!TYPED\_TEST@{TYPED\_TEST}}
+\index{TYPED\_TEST@{TYPED\_TEST}!gtest-\/typed-\/test.h@{gtest-\/typed-\/test.h}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST}{TYPED\_TEST}}
+{\footnotesize\ttfamily \#define T\+Y\+P\+E\+D\+\_\+\+T\+E\+ST(\begin{DoxyParamCaption}\item[{}]{Case\+Name,  }\item[{}]{Test\+Name }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{  static\_assert(\textcolor{keyword}{sizeof}(\mbox{\hyperlink{gtest-internal_8h_aa007c0351c2bbe7618989e40cc146769}{GTEST\_STRINGIFY\_}}(TestName)) > 1,                       \(\backslash\)}
+\DoxyCodeLine{                \textcolor{stringliteral}{"test-\/name must not be empty"});                               \(\backslash\)}
+\DoxyCodeLine{  template <typename gtest\_TypeParam\_>                                        \(\backslash\)}
+\DoxyCodeLine{  class \mbox{\hyperlink{gtest-internal_8h_ad4bc4ec847a06e7de981e81c9bb116cf}{GTEST\_TEST\_CLASS\_NAME\_}}(CaseName, TestName)                            \(\backslash\)}
+\DoxyCodeLine{      : \textcolor{keyword}{public} CaseName<gtest\_TypeParam\_> \{                                   \(\backslash\)}
+\DoxyCodeLine{   private:                                                                   \(\backslash\)}
+\DoxyCodeLine{    typedef CaseName<gtest\_TypeParam\_> TestFixture;                           \(\backslash\)}
+\DoxyCodeLine{    typedef gtest\_TypeParam\_ TypeParam;                                       \(\backslash\)}
+\DoxyCodeLine{    void TestBody() \textcolor{keyword}{override};                                                 \(\backslash\)}
+\DoxyCodeLine{  \};                                                                          \(\backslash\)}
+\DoxyCodeLine{  static \textcolor{keywordtype}{bool} gtest\_\#\#CaseName\#\#\_\#\#TestName\#\#\_registered\_                     \(\backslash\)}
+\DoxyCodeLine{      GTEST\_ATTRIBUTE\_UNUSED\_ = \mbox{\hyperlink{classtesting_1_1internal_1_1_type_parameterized_test}{::testing::internal::TypeParameterizedTest}}<   \(\backslash\)}
+\DoxyCodeLine{          CaseName,                                                           \(\backslash\)}
+\DoxyCodeLine{          \mbox{\hyperlink{structtesting_1_1internal_1_1_template_sel}{::testing::internal::TemplateSel}}<\mbox{\hyperlink{gtest-internal_8h_ad4bc4ec847a06e7de981e81c9bb116cf}{GTEST\_TEST\_CLASS\_NAME\_}}(CaseName,   \(\backslash\)}
+\DoxyCodeLine{                                                                  TestName)>, \(\backslash\)}
+\DoxyCodeLine{          GTEST\_TYPE\_PARAMS\_(                                                 \(\backslash\)}
+\DoxyCodeLine{              CaseName)>::Register(\textcolor{stringliteral}{""},                                        \(\backslash\)}
+\DoxyCodeLine{                                   ::\mbox{\hyperlink{structtesting_1_1internal_1_1_code_location}{testing::internal::CodeLocation}}(         \(\backslash\)}
+\DoxyCodeLine{                                       \_\_FILE\_\_, \_\_LINE\_\_),                   \(\backslash\)}
+\DoxyCodeLine{                                   \mbox{\hyperlink{gtest-internal_8h_aa007c0351c2bbe7618989e40cc146769}{GTEST\_STRINGIFY\_}}(CaseName),                \(\backslash\)}
+\DoxyCodeLine{                                   \mbox{\hyperlink{gtest-internal_8h_aa007c0351c2bbe7618989e40cc146769}{GTEST\_STRINGIFY\_}}(TestName), 0,             \(\backslash\)}
+\DoxyCodeLine{                                   ::\mbox{\hyperlink{namespacetesting_1_1internal_a864ef450d21a02d66f9854b9a1c8c37c}{testing::internal::GenerateNames}}<        \(\backslash\)}
+\DoxyCodeLine{                                       \mbox{\hyperlink{gtest-typed-test_8h_aca203e78b5b088ca8ccaa83c15273004}{GTEST\_NAME\_GENERATOR\_}}(CaseName),       \(\backslash\)}
+\DoxyCodeLine{                                       \mbox{\hyperlink{gtest-typed-test_8h_aafb49fb7eb25dc1e895c0abfd86c05ce}{GTEST\_TYPE\_PARAMS\_}}(CaseName)>());      \(\backslash\)}
+\DoxyCodeLine{  template <typename gtest\_TypeParam\_>                                        \(\backslash\)}
+\DoxyCodeLine{  void \mbox{\hyperlink{gtest-internal_8h_ad4bc4ec847a06e7de981e81c9bb116cf}{GTEST\_TEST\_CLASS\_NAME\_}}(CaseName,                                       \(\backslash\)}
+\DoxyCodeLine{                              TestName)<gtest\_TypeParam\_>::TestBody()}
+
+\end{DoxyCode}
+
+
+Definition at line 195 of file gtest-\/typed-\/test.\+h.
+
+\mbox{\Hypertarget{gtest-typed-test_8h_a3e14454891deeb5cf8bd318b70f269dc}\label{gtest-typed-test_8h_a3e14454891deeb5cf8bd318b70f269dc}} 
+\index{gtest-\/typed-\/test.h@{gtest-\/typed-\/test.h}!TYPED\_TEST\_CASE@{TYPED\_TEST\_CASE}}
+\index{TYPED\_TEST\_CASE@{TYPED\_TEST\_CASE}!gtest-\/typed-\/test.h@{gtest-\/typed-\/test.h}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST\_CASE}{TYPED\_TEST\_CASE}}
+{\footnotesize\ttfamily \#define T\+Y\+P\+E\+D\+\_\+\+T\+E\+S\+T\+\_\+\+C\+A\+SE}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{  static\_assert(::testing::internal::TypedTestCaseIsDeprecated(), \textcolor{stringliteral}{""}); \(\backslash\)}
+\DoxyCodeLine{  TYPED\_TEST\_SUITE}
+
+\end{DoxyCode}
+
+
+Definition at line 226 of file gtest-\/typed-\/test.\+h.
+
+\mbox{\Hypertarget{gtest-typed-test_8h_a0b219bba2153cac2251852f3554a12a7}\label{gtest-typed-test_8h_a0b219bba2153cac2251852f3554a12a7}} 
+\index{gtest-\/typed-\/test.h@{gtest-\/typed-\/test.h}!TYPED\_TEST\_CASE\_P@{TYPED\_TEST\_CASE\_P}}
+\index{TYPED\_TEST\_CASE\_P@{TYPED\_TEST\_CASE\_P}!gtest-\/typed-\/test.h@{gtest-\/typed-\/test.h}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST\_CASE\_P}{TYPED\_TEST\_CASE\_P}}
+{\footnotesize\ttfamily \#define T\+Y\+P\+E\+D\+\_\+\+T\+E\+S\+T\+\_\+\+C\+A\+S\+E\+\_\+P}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{  static\_assert(::testing::internal::TypedTestCase\_P\_IsDeprecated(), \textcolor{stringliteral}{""}); \(\backslash\)}
+\DoxyCodeLine{  TYPED\_TEST\_SUITE\_P}
+
+\end{DoxyCode}
+
+
+Definition at line 263 of file gtest-\/typed-\/test.\+h.
+
+\mbox{\Hypertarget{gtest-typed-test_8h_a6e9d1cd9b97da0076ae699775d3222d0}\label{gtest-typed-test_8h_a6e9d1cd9b97da0076ae699775d3222d0}} 
+\index{gtest-\/typed-\/test.h@{gtest-\/typed-\/test.h}!TYPED\_TEST\_P@{TYPED\_TEST\_P}}
+\index{TYPED\_TEST\_P@{TYPED\_TEST\_P}!gtest-\/typed-\/test.h@{gtest-\/typed-\/test.h}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST\_P}{TYPED\_TEST\_P}}
+{\footnotesize\ttfamily \#define T\+Y\+P\+E\+D\+\_\+\+T\+E\+S\+T\+\_\+P(\begin{DoxyParamCaption}\item[{}]{Suite\+Name,  }\item[{}]{Test\+Name }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{  \textcolor{keyword}{namespace }GTEST\_SUITE\_NAMESPACE\_(SuiteName) \{                       \(\backslash\)}
+\DoxyCodeLine{    template <typename gtest\_TypeParam\_>                              \(\backslash\)}
+\DoxyCodeLine{    class TestName : \textcolor{keyword}{public} SuiteName<gtest\_TypeParam\_> \{             \(\backslash\)}
+\DoxyCodeLine{     private:                                                         \(\backslash\)}
+\DoxyCodeLine{      typedef SuiteName<gtest\_TypeParam\_> TestFixture;                \(\backslash\)}
+\DoxyCodeLine{      typedef gtest\_TypeParam\_ TypeParam;                             \(\backslash\)}
+\DoxyCodeLine{      void TestBody() \textcolor{keyword}{override};                                       \(\backslash\)}
+\DoxyCodeLine{    \};                                                                \(\backslash\)}
+\DoxyCodeLine{    static \textcolor{keywordtype}{bool} gtest\_\#\#TestName\#\#\_defined\_ \mbox{\hyperlink{gtest-port_8h_a01f3b31960fc7c4c7ee4b398a914f89a}{GTEST\_ATTRIBUTE\_UNUSED\_}} = \(\backslash\)}
+\DoxyCodeLine{        GTEST\_TYPED\_TEST\_SUITE\_P\_STATE\_(SuiteName).AddTestName(       \(\backslash\)}
+\DoxyCodeLine{            \_\_FILE\_\_, \_\_LINE\_\_, \mbox{\hyperlink{gtest-internal_8h_aa007c0351c2bbe7618989e40cc146769}{GTEST\_STRINGIFY\_}}(SuiteName),          \(\backslash\)}
+\DoxyCodeLine{            \mbox{\hyperlink{gtest-internal_8h_aa007c0351c2bbe7618989e40cc146769}{GTEST\_STRINGIFY\_}}(TestName));                              \(\backslash\)}
+\DoxyCodeLine{  \}                                                                   \(\backslash\)}
+\DoxyCodeLine{  template <typename gtest\_TypeParam\_>                                \(\backslash\)}
+\DoxyCodeLine{  void \mbox{\hyperlink{gtest-typed-test_8h_ad335257ff1e556a70cd6d7ee3556cfb0}{GTEST\_SUITE\_NAMESPACE\_}}(                                        \(\backslash\)}
+\DoxyCodeLine{      SuiteName)::TestName<gtest\_TypeParam\_>::TestBody()}
+
+\end{DoxyCode}
+
+
+Definition at line 268 of file gtest-\/typed-\/test.\+h.
+
+\mbox{\Hypertarget{gtest-typed-test_8h_af84bf8ca7d774f32797e526bec88d12f}\label{gtest-typed-test_8h_af84bf8ca7d774f32797e526bec88d12f}} 
+\index{gtest-\/typed-\/test.h@{gtest-\/typed-\/test.h}!TYPED\_TEST\_SUITE@{TYPED\_TEST\_SUITE}}
+\index{TYPED\_TEST\_SUITE@{TYPED\_TEST\_SUITE}!gtest-\/typed-\/test.h@{gtest-\/typed-\/test.h}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST\_SUITE}{TYPED\_TEST\_SUITE}}
+{\footnotesize\ttfamily \#define T\+Y\+P\+E\+D\+\_\+\+T\+E\+S\+T\+\_\+\+S\+U\+I\+TE(\begin{DoxyParamCaption}\item[{}]{Case\+Name,  }\item[{}]{Types,  }\item[{}]{... }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{  typedef ::testing::internal::GenerateTypeList<Types>::type            \(\backslash\)}
+\DoxyCodeLine{      GTEST\_TYPE\_PARAMS\_(CaseName);                                     \(\backslash\)}
+\DoxyCodeLine{  typedef ::testing::internal::NameGeneratorSelector<\_\_VA\_ARGS\_\_>::type \(\backslash\)}
+\DoxyCodeLine{      GTEST\_NAME\_GENERATOR\_(CaseName)}
+
+\end{DoxyCode}
+
+
+Definition at line 189 of file gtest-\/typed-\/test.\+h.
+
+\mbox{\Hypertarget{gtest-typed-test_8h_a3d74325e27e02ed1d1c7b30a24f7af13}\label{gtest-typed-test_8h_a3d74325e27e02ed1d1c7b30a24f7af13}} 
+\index{gtest-\/typed-\/test.h@{gtest-\/typed-\/test.h}!TYPED\_TEST\_SUITE\_P@{TYPED\_TEST\_SUITE\_P}}
+\index{TYPED\_TEST\_SUITE\_P@{TYPED\_TEST\_SUITE\_P}!gtest-\/typed-\/test.h@{gtest-\/typed-\/test.h}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST\_SUITE\_P}{TYPED\_TEST\_SUITE\_P}}
+{\footnotesize\ttfamily \#define T\+Y\+P\+E\+D\+\_\+\+T\+E\+S\+T\+\_\+\+S\+U\+I\+T\+E\+\_\+P(\begin{DoxyParamCaption}\item[{}]{Suite\+Name }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{  static ::testing::internal::TypedTestSuitePState \(\backslash\)}
+\DoxyCodeLine{      GTEST\_TYPED\_TEST\_SUITE\_P\_STATE\_(SuiteName)}
+
+\end{DoxyCode}
+
+
+Definition at line 257 of file gtest-\/typed-\/test.\+h.
+

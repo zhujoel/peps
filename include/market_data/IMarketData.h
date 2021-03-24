@@ -2,17 +2,52 @@
 #include "libs/DateTimeVector.h"
 #include "pnl/pnl_matrix.h"
 
+/**
+ * @brief Gère des données de marché.
+ */
 class IMarketData{
     public:
-        std::string name_; // name of the data
-        DateTime *startDate_; // date de début où récupérer les données
-        DateTime *endDate_; // date de fin
-        std::vector<DateTime*> dates_; // toutes les dates entre start_date_ et end_date_ ayant un prix
-        PnlMat *path_; // tous les prix entre start_date_ et end_date_
-        PnlMat *interest_path_; // taux d'intérets des devises utilisées
+        /**
+         * @brief Nom des données de marché.
+         */
+        std::string name_;
+        /**
+         * @brief Date de début où récupérer les données.
+         */
+        DateTime *startDate_; 
+        /**
+         * @brief Date de fin où arrêter de récupérer les données.
+         * 
+         */
+        DateTime *endDate_;
+        /**
+         * @brief Toutes les dates entre startDate_ et endDate_ ayant un prix.
+         */
+        std::vector<DateTime*> dates_;
+        /**
+         * @brief Tous les prix de tous les produits des données de marché pour name_ entre startDate_ et endDate_.
+         */
+        PnlMat *path_;
+        /**
+         * @brief Taux d'intérêts des devises utilisées (si étrangers) entre startDate_ et endDate_.
+         */
+        PnlMat *interest_path_; 
         
+        /**
+         * @brief Construct a new IMarketData object
+         * 
+         * @param name Nom des données de marché (e.g. Océlia)
+         * @param startDate Date de début des données.
+         * @param endDate Date de fin des données.
+         */
         IMarketData(const std::string &name, const DateTime * const startDate, const DateTime * const endDate);
+        /**
+         * @brief Destroy the IMarketData object
+         */
         virtual ~IMarketData();
 
+        /**
+         * @brief Récupère les données de marché correspondant à name_.
+         */
         virtual void set_data() = 0;
 };

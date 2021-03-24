@@ -1,0 +1,246 @@
+\hypertarget{gtest-printers_8h}{}\doxysection{gtest-\/printers.h File Reference}
+\label{gtest-printers_8h}\index{gtest-\/printers.h@{gtest-\/printers.h}}
+{\ttfamily \#include $<$functional$>$}\newline
+{\ttfamily \#include $<$memory$>$}\newline
+{\ttfamily \#include $<$ostream$>$}\newline
+{\ttfamily \#include $<$sstream$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$tuple$>$}\newline
+{\ttfamily \#include $<$type\+\_\+traits$>$}\newline
+{\ttfamily \#include $<$utility$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include \char`\"{}gtest/internal/gtest-\/internal.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}gtest/internal/gtest-\/port.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}gtest/internal/custom/gtest-\/printers.\+h\char`\"{}}\newline
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structtesting_1_1internal_1_1_container_printer}{testing\+::internal\+::\+Container\+Printer}}
+\item 
+struct \mbox{\hyperlink{structtesting_1_1internal_1_1_function_pointer_printer}{testing\+::internal\+::\+Function\+Pointer\+Printer}}
+\item 
+struct \mbox{\hyperlink{structtesting_1_1internal_1_1_pointer_printer}{testing\+::internal\+::\+Pointer\+Printer}}
+\item 
+struct \mbox{\hyperlink{structtesting_1_1internal_1_1internal__stream__operator__without__lexical__name__lookup_1_1_lookup_blocker}{testing\+::internal\+::internal\+\_\+stream\+\_\+operator\+\_\+without\+\_\+lexical\+\_\+name\+\_\+lookup\+::\+Lookup\+Blocker}}
+\item 
+struct \mbox{\hyperlink{structtesting_1_1internal_1_1internal__stream__operator__without__lexical__name__lookup_1_1_stream_printer}{testing\+::internal\+::internal\+\_\+stream\+\_\+operator\+\_\+without\+\_\+lexical\+\_\+name\+\_\+lookup\+::\+Stream\+Printer}}
+\item 
+struct \mbox{\hyperlink{structtesting_1_1internal_1_1_protobuf_printer}{testing\+::internal\+::\+Protobuf\+Printer}}
+\item 
+struct \mbox{\hyperlink{structtesting_1_1internal_1_1_convertible_to_integer_printer}{testing\+::internal\+::\+Convertible\+To\+Integer\+Printer}}
+\item 
+struct \mbox{\hyperlink{structtesting_1_1internal_1_1_convertible_to_string_view_printer}{testing\+::internal\+::\+Convertible\+To\+String\+View\+Printer}}
+\item 
+struct \mbox{\hyperlink{structtesting_1_1internal_1_1_raw_bytes_printer}{testing\+::internal\+::\+Raw\+Bytes\+Printer}}
+\item 
+struct \mbox{\hyperlink{structtesting_1_1internal_1_1_fallback_printer}{testing\+::internal\+::\+Fallback\+Printer}}
+\item 
+struct \mbox{\hyperlink{structtesting_1_1internal_1_1_find_first_printer}{testing\+::internal\+::\+Find\+First\+Printer$<$ T, E, Printer, Printers $>$}}
+\item 
+struct \mbox{\hyperlink{structtesting_1_1internal_1_1_find_first_printer_3_01_t_00_01decltype_07_printer_1_1_print_value8934dd9c57bcc59428a3d87a80ca030e}{testing\+::internal\+::\+Find\+First\+Printer$<$ T, decltype(\+Printer\+::\+Print\+Value(std\+::declval$<$ const T \& $>$(), nullptr)), Printer, Printers... $>$}}
+\item 
+class \mbox{\hyperlink{classtesting_1_1internal_1_1_format_for_comparison}{testing\+::internal\+::\+Format\+For\+Comparison$<$ To\+Print, Other\+Operand $>$}}
+\item 
+class \mbox{\hyperlink{classtesting_1_1internal_1_1_format_for_comparison_3_01_to_print_0f_n_0e_00_01_other_operand_01_4}{testing\+::internal\+::\+Format\+For\+Comparison$<$ To\+Print\mbox{[}\+N\mbox{]}, Other\+Operand $>$}}
+\item 
+class \mbox{\hyperlink{classtesting_1_1internal_1_1_universal_printer}{testing\+::internal\+::\+Universal\+Printer$<$ T $>$}}
+\item 
+class \mbox{\hyperlink{classtesting_1_1internal_1_1_universal_printer}{testing\+::internal\+::\+Universal\+Printer$<$ T $>$}}
+\item 
+class \mbox{\hyperlink{classtesting_1_1internal_1_1_universal_printer_3_01const_01_t_01_4}{testing\+::internal\+::\+Universal\+Printer$<$ const T $>$}}
+\item 
+class \mbox{\hyperlink{classtesting_1_1internal_1_1_universal_printer_3_01_t_0f_n_0e_4}{testing\+::internal\+::\+Universal\+Printer$<$ T\mbox{[}\+N\mbox{]}$>$}}
+\item 
+class \mbox{\hyperlink{classtesting_1_1internal_1_1_universal_printer_3_01_t_01_6_01_4}{testing\+::internal\+::\+Universal\+Printer$<$ T \& $>$}}
+\item 
+class \mbox{\hyperlink{classtesting_1_1internal_1_1_universal_terse_printer}{testing\+::internal\+::\+Universal\+Terse\+Printer$<$ T $>$}}
+\item 
+class \mbox{\hyperlink{classtesting_1_1internal_1_1_universal_terse_printer_3_01_t_01_6_01_4}{testing\+::internal\+::\+Universal\+Terse\+Printer$<$ T \& $>$}}
+\item 
+class \mbox{\hyperlink{classtesting_1_1internal_1_1_universal_terse_printer_3_01_t_0f_n_0e_4}{testing\+::internal\+::\+Universal\+Terse\+Printer$<$ T\mbox{[}\+N\mbox{]}$>$}}
+\item 
+class \mbox{\hyperlink{classtesting_1_1internal_1_1_universal_terse_printer_3_01const_01char_01_5_01_4}{testing\+::internal\+::\+Universal\+Terse\+Printer$<$ const char $\ast$ $>$}}
+\item 
+class \mbox{\hyperlink{classtesting_1_1internal_1_1_universal_terse_printer_3_01char_01_5_01_4}{testing\+::internal\+::\+Universal\+Terse\+Printer$<$ char $\ast$ $>$}}
+\item 
+class \mbox{\hyperlink{classtesting_1_1internal_1_1_universal_terse_printer_3_01wchar__t_01_5_01_4}{testing\+::internal\+::\+Universal\+Terse\+Printer$<$ wchar\+\_\+t $\ast$ $>$}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespacetesting}{testing}}
+\item 
+ \mbox{\hyperlink{namespacetesting_1_1internal}{testing\+::internal}}
+\item 
+ \mbox{\hyperlink{namespacetesting_1_1internal_1_1internal__stream__operator__without__lexical__name__lookup}{testing\+::internal\+::internal\+\_\+stream\+\_\+operator\+\_\+without\+\_\+lexical\+\_\+name\+\_\+lookup}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{gtest-printers_8h_a79d4724b4bc2a1dd8493c366b5ca626a}{G\+T\+E\+S\+T\+\_\+\+I\+M\+P\+L\+\_\+\+F\+O\+R\+M\+A\+T\+\_\+\+C\+\_\+\+S\+T\+R\+I\+N\+G\+\_\+\+A\+S\+\_\+\+P\+O\+I\+N\+T\+E\+R\+\_\+}}(Char\+Type)
+\item 
+\#define \mbox{\hyperlink{gtest-printers_8h_ad6102ed2a0571d5196e606a061c16a10}{G\+T\+E\+S\+T\+\_\+\+I\+M\+P\+L\+\_\+\+F\+O\+R\+M\+A\+T\+\_\+\+C\+\_\+\+S\+T\+R\+I\+N\+G\+\_\+\+A\+S\+\_\+\+S\+T\+R\+I\+N\+G\+\_\+}}(Char\+Type,  Other\+String\+Type)
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef \+::std\+::vector$<$ \+::std\+::string $>$ \mbox{\hyperlink{namespacetesting_1_1internal_a50003bb76ec2934be1062be11efba8bf}{testing\+::internal\+::\+Strings}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{namespacetesting_1_1internal_a30708fa2bacf11895b03bdb21eb72309}{testing\+::internal\+::\+Universal\+Print}} (const \mbox{\hyperlink{main_8cpp_ac94a6e5794c2d7b59588b14025cfba20}{T}} \&\mbox{\hyperlink{gmock-matchers__test_8cc_a337b8a670efc0b086ad3af163f3121b6}{value}}, \+::std\+::ostream $\ast$os)
+\item 
+void \mbox{\hyperlink{namespacetesting_1_1internal_1_1internal__stream__operator__without__lexical__name__lookup_afce910f383b33abf71f911fd224503a2}{testing\+::internal\+::internal\+\_\+stream\+\_\+operator\+\_\+without\+\_\+lexical\+\_\+name\+\_\+lookup\+::operator$<$$<$}} (Lookup\+Blocker, Lookup\+Blocker)
+\item 
+\mbox{\hyperlink{gtest-port_8h_aa73be6f0ba4a7456180a94904ce17790}{G\+T\+E\+S\+T\+\_\+\+A\+P\+I\+\_\+}} void \mbox{\hyperlink{namespacetesting_1_1internal_aa287a88fcd0b97a13f7e243bbafe34f8}{testing\+::internal\+::\+Print\+Bytes\+In\+Object\+To}} (const unsigned char $\ast$obj\+\_\+bytes, size\+\_\+t \mbox{\hyperlink{gmock__stress__test_8cc_afd9db40e3361ae09188795e8cbe19752}{count}}, \+::std\+::ostream $\ast$os)
+\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{namespacetesting_1_1internal_a5e9f744566e02ba3f811cd51d3b8c4fb}{testing\+::internal\+::\+Print\+With\+Fallback}} (const \mbox{\hyperlink{main_8cpp_ac94a6e5794c2d7b59588b14025cfba20}{T}} \&\mbox{\hyperlink{gmock-matchers__test_8cc_a337b8a670efc0b086ad3af163f3121b6}{value}}, \+::std\+::ostream $\ast$os)
+\item 
+\mbox{\hyperlink{namespacetesting_1_1internal_a3682f962ae0ec1c0eca6444ca0a09e91}{testing\+::internal\+::\+G\+T\+E\+S\+T\+\_\+\+I\+M\+P\+L\+\_\+\+F\+O\+R\+M\+A\+T\+\_\+\+C\+\_\+\+S\+T\+R\+I\+N\+G\+\_\+\+A\+S\+\_\+\+P\+O\+I\+N\+T\+E\+R\+\_\+}} (char)
+\item 
+\mbox{\hyperlink{namespacetesting_1_1internal_a85e08f00d443221e529a0a85a90fbaeb}{testing\+::internal\+::\+G\+T\+E\+S\+T\+\_\+\+I\+M\+P\+L\+\_\+\+F\+O\+R\+M\+A\+T\+\_\+\+C\+\_\+\+S\+T\+R\+I\+N\+G\+\_\+\+A\+S\+\_\+\+P\+O\+I\+N\+T\+E\+R\+\_\+}} (wchar\+\_\+t)
+\item 
+\mbox{\hyperlink{namespacetesting_1_1internal_ad33ad5ec1d4705104387c526ea7d59f1}{testing\+::internal\+::\+G\+T\+E\+S\+T\+\_\+\+I\+M\+P\+L\+\_\+\+F\+O\+R\+M\+A\+T\+\_\+\+C\+\_\+\+S\+T\+R\+I\+N\+G\+\_\+\+A\+S\+\_\+\+P\+O\+I\+N\+T\+E\+R\+\_\+}} (char16\+\_\+t)
+\item 
+\mbox{\hyperlink{namespacetesting_1_1internal_a67ea647ee3d547e58db86a9ee2bb797a}{testing\+::internal\+::\+G\+T\+E\+S\+T\+\_\+\+I\+M\+P\+L\+\_\+\+F\+O\+R\+M\+A\+T\+\_\+\+C\+\_\+\+S\+T\+R\+I\+N\+G\+\_\+\+A\+S\+\_\+\+P\+O\+I\+N\+T\+E\+R\+\_\+}} (char32\+\_\+t)
+\item 
+\mbox{\hyperlink{namespacetesting_1_1internal_aeac30230dcc362221bdd07d61eaa4ec1}{testing\+::internal\+::\+G\+T\+E\+S\+T\+\_\+\+I\+M\+P\+L\+\_\+\+F\+O\+R\+M\+A\+T\+\_\+\+C\+\_\+\+S\+T\+R\+I\+N\+G\+\_\+\+A\+S\+\_\+\+S\+T\+R\+I\+N\+G\+\_\+}} (char, \+::std\+::string)
+\item 
+\mbox{\hyperlink{namespacetesting_1_1internal_acff745e750898f27701cc96a7238754c}{testing\+::internal\+::\+G\+T\+E\+S\+T\+\_\+\+I\+M\+P\+L\+\_\+\+F\+O\+R\+M\+A\+T\+\_\+\+C\+\_\+\+S\+T\+R\+I\+N\+G\+\_\+\+A\+S\+\_\+\+S\+T\+R\+I\+N\+G\+\_\+}} (char16\+\_\+t, \+::std\+::u16string)
+\item 
+\mbox{\hyperlink{namespacetesting_1_1internal_a347584b3f2adc08d5e6b45c9004f2c16}{testing\+::internal\+::\+G\+T\+E\+S\+T\+\_\+\+I\+M\+P\+L\+\_\+\+F\+O\+R\+M\+A\+T\+\_\+\+C\+\_\+\+S\+T\+R\+I\+N\+G\+\_\+\+A\+S\+\_\+\+S\+T\+R\+I\+N\+G\+\_\+}} (char32\+\_\+t, \+::std\+::u32string)
+\item 
+{\footnotesize template$<$typename T1 , typename T2 $>$ }\\std\+::string \mbox{\hyperlink{namespacetesting_1_1internal_a91ab078f10adc669f09b7f604975c518}{testing\+::internal\+::\+Format\+For\+Comparison\+Failure\+Message}} (const T1 \&\mbox{\hyperlink{gmock-matchers__test_8cc_a337b8a670efc0b086ad3af163f3121b6}{value}}, const T2 \&)
+\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{namespacetesting_1_1internal_adb3c27150dbe661db0e0c4be27533460}{testing\+::internal\+::\+Print\+To}} (const \mbox{\hyperlink{main_8cpp_ac94a6e5794c2d7b59588b14025cfba20}{T}} \&\mbox{\hyperlink{gmock-matchers__test_8cc_a337b8a670efc0b086ad3af163f3121b6}{value}}, \+::std\+::ostream $\ast$os)
+\item 
+\mbox{\hyperlink{gtest-port_8h_aa73be6f0ba4a7456180a94904ce17790}{G\+T\+E\+S\+T\+\_\+\+A\+P\+I\+\_\+}} void \mbox{\hyperlink{namespacetesting_1_1internal_ab7524d6d3ab8c31b1deea88bf61783bb}{testing\+::internal\+::\+Print\+To}} (unsigned char c, \+::std\+::ostream $\ast$os)
+\item 
+\mbox{\hyperlink{gtest-port_8h_aa73be6f0ba4a7456180a94904ce17790}{G\+T\+E\+S\+T\+\_\+\+A\+P\+I\+\_\+}} void \mbox{\hyperlink{namespacetesting_1_1internal_ad453af399370e394881079c243abacb4}{testing\+::internal\+::\+Print\+To}} (signed char c, \+::std\+::ostream $\ast$os)
+\item 
+void \mbox{\hyperlink{namespacetesting_1_1internal_a476bd3d411d4f129620aaf8999c257c0}{testing\+::internal\+::\+Print\+To}} (char c, \+::std\+::ostream $\ast$os)
+\item 
+void \mbox{\hyperlink{namespacetesting_1_1internal_a2979ac1ad3e05c51dcd7dca2eb34e6ce}{testing\+::internal\+::\+Print\+To}} (bool \mbox{\hyperlink{gmock-matchers__test_8cc_a6150e0515f7202e2fb518f7206ed97dc}{x}}, \+::std\+::ostream $\ast$os)
+\item 
+\mbox{\hyperlink{gtest-port_8h_aa73be6f0ba4a7456180a94904ce17790}{G\+T\+E\+S\+T\+\_\+\+A\+P\+I\+\_\+}} void \mbox{\hyperlink{namespacetesting_1_1internal_a6c50fd437a2ae2ff6f182ccd6c2744dd}{testing\+::internal\+::\+Print\+To}} (wchar\+\_\+t wc, \+::std\+::ostream $\ast$os)
+\item 
+\mbox{\hyperlink{gtest-port_8h_aa73be6f0ba4a7456180a94904ce17790}{G\+T\+E\+S\+T\+\_\+\+A\+P\+I\+\_\+}} void \mbox{\hyperlink{namespacetesting_1_1internal_a724b53b854fd9b16e6604a422e8dea46}{testing\+::internal\+::\+Print\+To}} (char32\+\_\+t c, \+::std\+::ostream $\ast$os)
+\item 
+void \mbox{\hyperlink{namespacetesting_1_1internal_a652e048970086752066fc943bb676668}{testing\+::internal\+::\+Print\+To}} (char16\+\_\+t c, \+::std\+::ostream $\ast$os)
+\item 
+\mbox{\hyperlink{gtest-port_8h_aa73be6f0ba4a7456180a94904ce17790}{G\+T\+E\+S\+T\+\_\+\+A\+P\+I\+\_\+}} void \mbox{\hyperlink{namespacetesting_1_1internal_ac226053b96d7d61f9407e3b75bab07d9}{testing\+::internal\+::\+Print\+To}} (const char $\ast$s, \+::std\+::ostream $\ast$os)
+\item 
+void \mbox{\hyperlink{namespacetesting_1_1internal_a553eec7bb50de01c9e91cac4accc606f}{testing\+::internal\+::\+Print\+To}} (char $\ast$s, \+::std\+::ostream $\ast$os)
+\item 
+void \mbox{\hyperlink{namespacetesting_1_1internal_a792cc5665a34619ed7a6d54711433456}{testing\+::internal\+::\+Print\+To}} (const signed char $\ast$s, \+::std\+::ostream $\ast$os)
+\item 
+void \mbox{\hyperlink{namespacetesting_1_1internal_a1320096b116f8cc4b688acbd5b783051}{testing\+::internal\+::\+Print\+To}} (signed char $\ast$s, \+::std\+::ostream $\ast$os)
+\item 
+void \mbox{\hyperlink{namespacetesting_1_1internal_a42c591f2164ad105b502a9262333aed2}{testing\+::internal\+::\+Print\+To}} (const unsigned char $\ast$s, \+::std\+::ostream $\ast$os)
+\item 
+void \mbox{\hyperlink{namespacetesting_1_1internal_a7fae797c500d66d0f5a9db4f205e3416}{testing\+::internal\+::\+Print\+To}} (unsigned char $\ast$s, \+::std\+::ostream $\ast$os)
+\item 
+void \mbox{\hyperlink{namespacetesting_1_1internal_a3e356e93ecf86f25c27f9fa2c323a9f3}{testing\+::internal\+::\+Print\+To}} (const char16\+\_\+t $\ast$s, \+::std\+::ostream $\ast$os)
+\item 
+void \mbox{\hyperlink{namespacetesting_1_1internal_a3d7b09c7d5688f94db5554f0d9f16f35}{testing\+::internal\+::\+Print\+To}} (char16\+\_\+t $\ast$s, \+::std\+::ostream $\ast$os)
+\item 
+void \mbox{\hyperlink{namespacetesting_1_1internal_a7e053a935231faba1a69a5210635f645}{testing\+::internal\+::\+Print\+To}} (const char32\+\_\+t $\ast$s, \+::std\+::ostream $\ast$os)
+\item 
+void \mbox{\hyperlink{namespacetesting_1_1internal_a9bc1e33e81d7eec4fd38a162712c9416}{testing\+::internal\+::\+Print\+To}} (char32\+\_\+t $\ast$s, \+::std\+::ostream $\ast$os)
+\item 
+\mbox{\hyperlink{gtest-port_8h_aa73be6f0ba4a7456180a94904ce17790}{G\+T\+E\+S\+T\+\_\+\+A\+P\+I\+\_\+}} void \mbox{\hyperlink{namespacetesting_1_1internal_afb038075e9e2166d1d9158a19e0eed23}{testing\+::internal\+::\+Print\+To}} (const wchar\+\_\+t $\ast$s, \+::std\+::ostream $\ast$os)
+\item 
+void \mbox{\hyperlink{namespacetesting_1_1internal_a8d41baa371fad3eb5a3dbe1bbc02c290}{testing\+::internal\+::\+Print\+To}} (wchar\+\_\+t $\ast$s, \+::std\+::ostream $\ast$os)
+\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{namespacetesting_1_1internal_ad3013b6b4c825edee9fe18ff1d982faa}{testing\+::internal\+::\+Print\+Raw\+Array\+To}} (const \mbox{\hyperlink{main_8cpp_ac94a6e5794c2d7b59588b14025cfba20}{T}} a\mbox{[}$\,$\mbox{]}, size\+\_\+t \mbox{\hyperlink{gmock__stress__test_8cc_afd9db40e3361ae09188795e8cbe19752}{count}}, \+::std\+::ostream $\ast$os)
+\item 
+\mbox{\hyperlink{gtest-port_8h_aa73be6f0ba4a7456180a94904ce17790}{G\+T\+E\+S\+T\+\_\+\+A\+P\+I\+\_\+}} void \mbox{\hyperlink{namespacetesting_1_1internal_a8b53e46cea3f8bdfc9342057c4f6ba62}{testing\+::internal\+::\+Print\+String\+To}} (const \+::std\+::string \&s, \+::std\+::ostream $\ast$os)
+\item 
+void \mbox{\hyperlink{namespacetesting_1_1internal_af59b4f5d83276cd807c45063b14bad44}{testing\+::internal\+::\+Print\+To}} (const \+::std\+::string \&s, \+::std\+::ostream $\ast$os)
+\item 
+void \mbox{\hyperlink{namespacetesting_1_1internal_a76f564cf23190dbd5c9e088defdd092b}{testing\+::internal\+::\+Print\+To}} (std\+::nullptr\+\_\+t, \+::std\+::ostream $\ast$os)
+\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{namespacetesting_1_1internal_a5587d09db034bc597870ae86bd8c01f8}{testing\+::internal\+::\+Print\+To}} (std\+::reference\+\_\+wrapper$<$ \mbox{\hyperlink{main_8cpp_ac94a6e5794c2d7b59588b14025cfba20}{T}} $>$ ref, \+::std\+::ostream $\ast$os)
+\item 
+const void $\ast$ \mbox{\hyperlink{namespacetesting_1_1internal_a35e0a60218e5493f06816d1738e71d2e}{testing\+::internal\+::\+Voidify\+Pointer}} (const void $\ast$\mbox{\hyperlink{gmock-matchers__test_8cc_a6bc6b007533335efe02bafff799ec64c}{p}})
+\item 
+const void $\ast$ \mbox{\hyperlink{namespacetesting_1_1internal_a886046c45bd2b87f0ea85f41d2ef9731}{testing\+::internal\+::\+Voidify\+Pointer}} (volatile const void $\ast$\mbox{\hyperlink{gmock-matchers__test_8cc_a6bc6b007533335efe02bafff799ec64c}{p}})
+\item 
+{\footnotesize template$<$typename T , typename Ptr $>$ }\\void \mbox{\hyperlink{namespacetesting_1_1internal_a525d401614692eb59ffa82e90c7263a9}{testing\+::internal\+::\+Print\+Smart\+Pointer}} (const Ptr \&ptr, std\+::ostream $\ast$os, char)
+\item 
+{\footnotesize template$<$typename T , typename Ptr , typename  = typename std\+::enable\+\_\+if$<$!std\+::is\+\_\+void$<$\+T$>$\+::value \&\&                                             !std\+::is\+\_\+array$<$\+T$>$\+::value$>$\+::type$>$ }\\void \mbox{\hyperlink{namespacetesting_1_1internal_a06c16d9c3986b3e28d762a56691d7324}{testing\+::internal\+::\+Print\+Smart\+Pointer}} (const Ptr \&ptr, std\+::ostream $\ast$os, int)
+\item 
+{\footnotesize template$<$typename T , typename D $>$ }\\void \mbox{\hyperlink{namespacetesting_1_1internal_a4052225063f1c55dd11e929147727038}{testing\+::internal\+::\+Print\+To}} (const std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{main_8cpp_ac94a6e5794c2d7b59588b14025cfba20}{T}}, D $>$ \&ptr, std\+::ostream $\ast$os)
+\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{namespacetesting_1_1internal_a536d2062728e1d7b9337c1ba2c283365}{testing\+::internal\+::\+Print\+To}} (const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{main_8cpp_ac94a6e5794c2d7b59588b14025cfba20}{T}} $>$ \&ptr, std\+::ostream $\ast$os)
+\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{namespacetesting_1_1internal_a7174fbf5d6ba458afae675022c9aae1e}{testing\+::internal\+::\+Print\+Tuple\+To}} (const \mbox{\hyperlink{main_8cpp_ac94a6e5794c2d7b59588b14025cfba20}{T}} \&, std\+::integral\+\_\+constant$<$ size\+\_\+t, 0 $>$, \+::std\+::ostream $\ast$)
+\item 
+{\footnotesize template$<$typename T , size\+\_\+t I$>$ }\\void \mbox{\hyperlink{namespacetesting_1_1internal_a3580971ab4571dc9a00f4ed0e17fd777}{testing\+::internal\+::\+Print\+Tuple\+To}} (const \mbox{\hyperlink{main_8cpp_ac94a6e5794c2d7b59588b14025cfba20}{T}} \&t, std\+::integral\+\_\+constant$<$ size\+\_\+t, I $>$, \+::std\+::ostream $\ast$os)
+\item 
+{\footnotesize template$<$typename... Types$>$ }\\void \mbox{\hyperlink{namespacetesting_1_1internal_a5628347cba9a345f56087fdb70930fc8}{testing\+::internal\+::\+Print\+To}} (const \+::std\+::tuple$<$ Types... $>$ \&t, \+::std\+::ostream $\ast$os)
+\item 
+{\footnotesize template$<$typename T1 , typename T2 $>$ }\\void \mbox{\hyperlink{namespacetesting_1_1internal_af2c33928facbf2edf7af564278724d98}{testing\+::internal\+::\+Print\+To}} (const \+::std\+::pair$<$ T1, T2 $>$ \&\mbox{\hyperlink{gmock-matchers__test_8cc_a337b8a670efc0b086ad3af163f3121b6}{value}}, \+::std\+::ostream $\ast$os)
+\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{namespacetesting_1_1internal_ad79d71c3110f8eb24ab352d68f29436a}{testing\+::internal\+::\+Universal\+Print\+Array}} (const \mbox{\hyperlink{main_8cpp_ac94a6e5794c2d7b59588b14025cfba20}{T}} $\ast$begin, size\+\_\+t len, \+::std\+::ostream $\ast$os)
+\item 
+\mbox{\hyperlink{gtest-port_8h_aa73be6f0ba4a7456180a94904ce17790}{G\+T\+E\+S\+T\+\_\+\+A\+P\+I\+\_\+}} void \mbox{\hyperlink{namespacetesting_1_1internal_a72c997dbd2c562110b2cb56c359decfa}{testing\+::internal\+::\+Universal\+Print\+Array}} (const char $\ast$begin, size\+\_\+t len, \+::std\+::ostream $\ast$os)
+\item 
+\mbox{\hyperlink{gtest-port_8h_aa73be6f0ba4a7456180a94904ce17790}{G\+T\+E\+S\+T\+\_\+\+A\+P\+I\+\_\+}} void \mbox{\hyperlink{namespacetesting_1_1internal_ae31e146c35fd75afc6a9cc73ae2692d1}{testing\+::internal\+::\+Universal\+Print\+Array}} (const wchar\+\_\+t $\ast$begin, size\+\_\+t len, \+::std\+::ostream $\ast$os)
+\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{namespacetesting_1_1internal_afa92f5a284929dc3723e654a25feb7b9}{testing\+::internal\+::\+Universal\+Terse\+Print}} (const \mbox{\hyperlink{main_8cpp_ac94a6e5794c2d7b59588b14025cfba20}{T}} \&\mbox{\hyperlink{gmock-matchers__test_8cc_a337b8a670efc0b086ad3af163f3121b6}{value}}, \+::std\+::ostream $\ast$os)
+\item 
+{\footnotesize template$<$typename Tuple $>$ }\\void \mbox{\hyperlink{namespacetesting_1_1internal_a6300aa1440d0019cf08d9a1f6efd4382}{testing\+::internal\+::\+Terse\+Print\+Prefix\+To\+Strings}} (const Tuple \&, std\+::integral\+\_\+constant$<$ size\+\_\+t, 0 $>$, Strings $\ast$)
+\item 
+{\footnotesize template$<$typename Tuple , size\+\_\+t I$>$ }\\void \mbox{\hyperlink{namespacetesting_1_1internal_ab244273c02742a3fac45cc241befc536}{testing\+::internal\+::\+Terse\+Print\+Prefix\+To\+Strings}} (const Tuple \&t, std\+::integral\+\_\+constant$<$ size\+\_\+t, I $>$, Strings $\ast$strings)
+\item 
+{\footnotesize template$<$typename Tuple $>$ }\\Strings \mbox{\hyperlink{namespacetesting_1_1internal_a7e60d1478b074801c766eeee9be6c772}{testing\+::internal\+::\+Universal\+Terse\+Print\+Tuple\+Fields\+To\+Strings}} (const Tuple \&\mbox{\hyperlink{gmock-matchers__test_8cc_a337b8a670efc0b086ad3af163f3121b6}{value}})
+\item 
+{\footnotesize template$<$typename T $>$ }\\\+::std\+::string \mbox{\hyperlink{namespacetesting_aa5717bb1144edd1d262d310ba70c82ed}{testing\+::\+Print\+To\+String}} (const \mbox{\hyperlink{main_8cpp_ac94a6e5794c2d7b59588b14025cfba20}{T}} \&\mbox{\hyperlink{gmock-matchers__test_8cc_a337b8a670efc0b086ad3af163f3121b6}{value}})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{gtest-printers_8h_a79d4724b4bc2a1dd8493c366b5ca626a}\label{gtest-printers_8h_a79d4724b4bc2a1dd8493c366b5ca626a}} 
+\index{gtest-\/printers.h@{gtest-\/printers.h}!GTEST\_IMPL\_FORMAT\_C\_STRING\_AS\_POINTER\_@{GTEST\_IMPL\_FORMAT\_C\_STRING\_AS\_POINTER\_}}
+\index{GTEST\_IMPL\_FORMAT\_C\_STRING\_AS\_POINTER\_@{GTEST\_IMPL\_FORMAT\_C\_STRING\_AS\_POINTER\_}!gtest-\/printers.h@{gtest-\/printers.h}}
+\doxysubsubsection{\texorpdfstring{GTEST\_IMPL\_FORMAT\_C\_STRING\_AS\_POINTER\_}{GTEST\_IMPL\_FORMAT\_C\_STRING\_AS\_POINTER\_}}
+{\footnotesize\ttfamily \#define G\+T\+E\+S\+T\+\_\+\+I\+M\+P\+L\+\_\+\+F\+O\+R\+M\+A\+T\+\_\+\+C\+\_\+\+S\+T\+R\+I\+N\+G\+\_\+\+A\+S\+\_\+\+P\+O\+I\+N\+T\+E\+R\+\_\+(\begin{DoxyParamCaption}\item[{}]{Char\+Type }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{  \textcolor{keyword}{template} <\textcolor{keyword}{typename} OtherOperand>                                      \(\backslash\)}
+\DoxyCodeLine{  class FormatForComparison<CharType*, OtherOperand> \{                  \(\backslash\)}
+\DoxyCodeLine{   public:                                                              \(\backslash\)}
+\DoxyCodeLine{    static ::std::string Format(CharType* \mbox{\hyperlink{gmock-matchers__test_8cc_a337b8a670efc0b086ad3af163f3121b6}{value}}) \{                      \mbox{\hyperlink{namespacetesting_aa5717bb1144edd1d262d310ba70c82ed}{\(\backslash\)}}}
+\DoxyCodeLine{\mbox{\hyperlink{namespacetesting_aa5717bb1144edd1d262d310ba70c82ed}{      return ::testing::PrintToString}}(\textcolor{keyword}{static\_cast<}\textcolor{keyword}{const }\textcolor{keywordtype}{void}*\textcolor{keyword}{>}(\mbox{\hyperlink{gmock-matchers__test_8cc_a337b8a670efc0b086ad3af163f3121b6}{value}})); \(\backslash\)}
+\DoxyCodeLine{    \}                                                                   \(\backslash\)}
+\DoxyCodeLine{  \}}
+
+\end{DoxyCode}
+
+
+Definition at line 355 of file gtest-\/printers.\+h.
+
+\mbox{\Hypertarget{gtest-printers_8h_ad6102ed2a0571d5196e606a061c16a10}\label{gtest-printers_8h_ad6102ed2a0571d5196e606a061c16a10}} 
+\index{gtest-\/printers.h@{gtest-\/printers.h}!GTEST\_IMPL\_FORMAT\_C\_STRING\_AS\_STRING\_@{GTEST\_IMPL\_FORMAT\_C\_STRING\_AS\_STRING\_}}
+\index{GTEST\_IMPL\_FORMAT\_C\_STRING\_AS\_STRING\_@{GTEST\_IMPL\_FORMAT\_C\_STRING\_AS\_STRING\_}!gtest-\/printers.h@{gtest-\/printers.h}}
+\doxysubsubsection{\texorpdfstring{GTEST\_IMPL\_FORMAT\_C\_STRING\_AS\_STRING\_}{GTEST\_IMPL\_FORMAT\_C\_STRING\_AS\_STRING\_}}
+{\footnotesize\ttfamily \#define G\+T\+E\+S\+T\+\_\+\+I\+M\+P\+L\+\_\+\+F\+O\+R\+M\+A\+T\+\_\+\+C\+\_\+\+S\+T\+R\+I\+N\+G\+\_\+\+A\+S\+\_\+\+S\+T\+R\+I\+N\+G\+\_\+(\begin{DoxyParamCaption}\item[{}]{Char\+Type,  }\item[{}]{Other\+String\+Type }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{  \textcolor{keyword}{template} <>                                                           \(\backslash\)}
+\DoxyCodeLine{  class FormatForComparison<CharType*, OtherStringType> \{               \(\backslash\)}
+\DoxyCodeLine{   public:                                                              \(\backslash\)}
+\DoxyCodeLine{    static ::std::string Format(CharType* \mbox{\hyperlink{gmock-matchers__test_8cc_a337b8a670efc0b086ad3af163f3121b6}{value}}) \{                      \mbox{\hyperlink{namespacetesting_aa5717bb1144edd1d262d310ba70c82ed}{\(\backslash\)}}}
+\DoxyCodeLine{\mbox{\hyperlink{namespacetesting_aa5717bb1144edd1d262d310ba70c82ed}{      return ::testing::PrintToString}}(\mbox{\hyperlink{gmock-matchers__test_8cc_a337b8a670efc0b086ad3af163f3121b6}{value}});                           \(\backslash\)}
+\DoxyCodeLine{    \}                                                                   \(\backslash\)}
+\DoxyCodeLine{  \}}
+
+\end{DoxyCode}
+
+
+Definition at line 382 of file gtest-\/printers.\+h.
+

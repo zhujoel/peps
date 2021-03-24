@@ -1,0 +1,133 @@
+\hypertarget{_date_time_vector_8cpp}{}\doxysection{Date\+Time\+Vector.\+cpp File Reference}
+\label{_date_time_vector_8cpp}\index{DateTimeVector.cpp@{DateTimeVector.cpp}}
+{\ttfamily \#include \char`\"{}libs/\+Date\+Time\+Vector.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$sstream$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$stdexcept$>$}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_date_time_vector_8cpp_a6773cfe20bebbde18597bbef3e2589df}{parse\+\_\+dates\+\_\+file}} (std\+::vector$<$ \mbox{\hyperlink{class_date_time}{Date\+Time}} $\ast$ $>$ \&dates, const std\+::string \&file\+Name, int nb\+Dates, char delimiter)
+\item 
+void \mbox{\hyperlink{_date_time_vector_8cpp_a58a7f4dc7f426bc313c81cbb7ad59747}{calcul\+\_\+indices\+\_\+dates}} (Pnl\+Vect\+Int $\ast$const indices, const std\+::vector$<$ \mbox{\hyperlink{class_date_time}{Date\+Time}} $\ast$ $>$ \&all\+\_\+dates, const std\+::vector$<$ \mbox{\hyperlink{class_date_time}{Date\+Time}} $\ast$ $>$ \&dates\+\_\+subset)
+\item 
+int \mbox{\hyperlink{_date_time_vector_8cpp_afef6259c67046c34c112bd89b093832e}{get\+\_\+indice\+\_\+from\+\_\+date}} (const std\+::vector$<$ \mbox{\hyperlink{class_date_time}{Date\+Time}} $\ast$ $>$ \&all\+\_\+dates, const \mbox{\hyperlink{class_date_time}{Date\+Time}} $\ast$const date)
+\item 
+int \mbox{\hyperlink{_date_time_vector_8cpp_a894fbd2e20346fa5e373b54769f09b73}{get\+\_\+indices\+\_\+from\+\_\+date\+\_\+dichotomic}} (const std\+::vector$<$ \mbox{\hyperlink{class_date_time}{Date\+Time}} $\ast$ $>$ \&all\+\_\+dates, const \mbox{\hyperlink{class_date_time}{Date\+Time}} $\ast$const date, int start, int end)
+\item 
+std\+::vector$<$ \mbox{\hyperlink{class_date_time}{Date\+Time}} $\ast$ $>$ \mbox{\hyperlink{_date_time_vector_8cpp_a61c72e2955b360918350fd9b0e134716}{same\+\_\+dates}} (const std\+::vector$<$ \mbox{\hyperlink{class_date_time}{Date\+Time}} $\ast$ $>$ \&v1, const std\+::vector$<$ \mbox{\hyperlink{class_date_time}{Date\+Time}} $\ast$ $>$ \&v2)
+\item 
+void \mbox{\hyperlink{_date_time_vector_8cpp_a2064ad4717c0c92decd7b480eaf42b90}{get\+\_\+prices\+\_\+from\+\_\+date}} (Pnl\+Vect $\ast$const prices, const std\+::vector$<$ \mbox{\hyperlink{class_date_time}{Date\+Time}} $\ast$ $>$ \&all\+Dates, const std\+::vector$<$ \mbox{\hyperlink{class_date_time}{Date\+Time}} $\ast$ $>$ \&subset, const Pnl\+Vect $\ast$const all\+Prices)
+\item 
+void \mbox{\hyperlink{_date_time_vector_8cpp_a1e5fab181a56b0159da53e3698f9ca9a}{get\+\_\+prices\+\_\+from\+\_\+date}} (Pnl\+Mat $\ast$const prices, const std\+::vector$<$ \mbox{\hyperlink{class_date_time}{Date\+Time}} $\ast$ $>$ \&all\+Dates, const std\+::vector$<$ \mbox{\hyperlink{class_date_time}{Date\+Time}} $\ast$ $>$ \&subset, const Pnl\+Mat $\ast$const all\+Prices)
+\item 
+void \mbox{\hyperlink{_date_time_vector_8cpp_a6f549db29a1fa6a1f94d4393804d3aa5}{get\+\_\+subset\+\_\+path\+\_\+from\+\_\+dates}} (Pnl\+Mat $\ast$const subset\+\_\+path, const std\+::vector$<$ \mbox{\hyperlink{class_date_time}{Date\+Time}} $\ast$ $>$ \&all\+Dates, const std\+::vector$<$ \mbox{\hyperlink{class_date_time}{Date\+Time}} $\ast$ $>$ \&subset, const Pnl\+Mat $\ast$const path)
+\item 
+void \mbox{\hyperlink{_date_time_vector_8cpp_ab184678f25e75f25b64a535284512e8c}{from\+\_\+date\+\_\+to\+\_\+date}} (std\+::vector$<$ \mbox{\hyperlink{class_date_time}{Date\+Time}} $\ast$ $>$ \&from\+\_\+to, const std\+::vector$<$ \mbox{\hyperlink{class_date_time}{Date\+Time}} $\ast$ $>$ \&all\+Dates, const \mbox{\hyperlink{class_date_time}{Date\+Time}} $\ast$const from, const \mbox{\hyperlink{class_date_time}{Date\+Time}} $\ast$const to)
+\item 
+void \mbox{\hyperlink{_date_time_vector_8cpp_aa5b118f5a3bab98222911607ffb00273}{delete\+\_\+date\+\_\+vector}} (std\+::vector$<$ \mbox{\hyperlink{class_date_time}{Date\+Time}} $\ast$ $>$ \&list)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{_date_time_vector_8cpp_a58a7f4dc7f426bc313c81cbb7ad59747}\label{_date_time_vector_8cpp_a58a7f4dc7f426bc313c81cbb7ad59747}} 
+\index{DateTimeVector.cpp@{DateTimeVector.cpp}!calcul\_indices\_dates@{calcul\_indices\_dates}}
+\index{calcul\_indices\_dates@{calcul\_indices\_dates}!DateTimeVector.cpp@{DateTimeVector.cpp}}
+\doxysubsubsection{\texorpdfstring{calcul\_indices\_dates()}{calcul\_indices\_dates()}}
+{\footnotesize\ttfamily void calcul\+\_\+indices\+\_\+dates (\begin{DoxyParamCaption}\item[{Pnl\+Vect\+Int $\ast$const}]{indices,  }\item[{const std\+::vector$<$ \mbox{\hyperlink{class_date_time}{Date\+Time}} $\ast$ $>$ \&}]{all\+\_\+dates,  }\item[{const std\+::vector$<$ \mbox{\hyperlink{class_date_time}{Date\+Time}} $\ast$ $>$ \&}]{dates\+\_\+subset }\end{DoxyParamCaption})}
+
+
+
+Definition at line 18 of file Date\+Time\+Vector.\+cpp.
+
+\mbox{\Hypertarget{_date_time_vector_8cpp_aa5b118f5a3bab98222911607ffb00273}\label{_date_time_vector_8cpp_aa5b118f5a3bab98222911607ffb00273}} 
+\index{DateTimeVector.cpp@{DateTimeVector.cpp}!delete\_date\_vector@{delete\_date\_vector}}
+\index{delete\_date\_vector@{delete\_date\_vector}!DateTimeVector.cpp@{DateTimeVector.cpp}}
+\doxysubsubsection{\texorpdfstring{delete\_date\_vector()}{delete\_date\_vector()}}
+{\footnotesize\ttfamily void delete\+\_\+date\+\_\+vector (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{class_date_time}{Date\+Time}} $\ast$ $>$ \&}]{list }\end{DoxyParamCaption})}
+
+
+
+Definition at line 131 of file Date\+Time\+Vector.\+cpp.
+
+\mbox{\Hypertarget{_date_time_vector_8cpp_ab184678f25e75f25b64a535284512e8c}\label{_date_time_vector_8cpp_ab184678f25e75f25b64a535284512e8c}} 
+\index{DateTimeVector.cpp@{DateTimeVector.cpp}!from\_date\_to\_date@{from\_date\_to\_date}}
+\index{from\_date\_to\_date@{from\_date\_to\_date}!DateTimeVector.cpp@{DateTimeVector.cpp}}
+\doxysubsubsection{\texorpdfstring{from\_date\_to\_date()}{from\_date\_to\_date()}}
+{\footnotesize\ttfamily void from\+\_\+date\+\_\+to\+\_\+date (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{class_date_time}{Date\+Time}} $\ast$ $>$ \&}]{from\+\_\+to,  }\item[{const std\+::vector$<$ \mbox{\hyperlink{class_date_time}{Date\+Time}} $\ast$ $>$ \&}]{all\+Dates,  }\item[{const \mbox{\hyperlink{class_date_time}{Date\+Time}} $\ast$const}]{from,  }\item[{const \mbox{\hyperlink{class_date_time}{Date\+Time}} $\ast$const}]{to }\end{DoxyParamCaption})}
+
+
+
+Definition at line 112 of file Date\+Time\+Vector.\+cpp.
+
+\mbox{\Hypertarget{_date_time_vector_8cpp_afef6259c67046c34c112bd89b093832e}\label{_date_time_vector_8cpp_afef6259c67046c34c112bd89b093832e}} 
+\index{DateTimeVector.cpp@{DateTimeVector.cpp}!get\_indice\_from\_date@{get\_indice\_from\_date}}
+\index{get\_indice\_from\_date@{get\_indice\_from\_date}!DateTimeVector.cpp@{DateTimeVector.cpp}}
+\doxysubsubsection{\texorpdfstring{get\_indice\_from\_date()}{get\_indice\_from\_date()}}
+{\footnotesize\ttfamily int get\+\_\+indice\+\_\+from\+\_\+date (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{class_date_time}{Date\+Time}} $\ast$ $>$ \&}]{all\+\_\+dates,  }\item[{const \mbox{\hyperlink{class_date_time}{Date\+Time}} $\ast$const}]{date }\end{DoxyParamCaption})}
+
+
+
+Definition at line 35 of file Date\+Time\+Vector.\+cpp.
+
+\mbox{\Hypertarget{_date_time_vector_8cpp_a894fbd2e20346fa5e373b54769f09b73}\label{_date_time_vector_8cpp_a894fbd2e20346fa5e373b54769f09b73}} 
+\index{DateTimeVector.cpp@{DateTimeVector.cpp}!get\_indices\_from\_date\_dichotomic@{get\_indices\_from\_date\_dichotomic}}
+\index{get\_indices\_from\_date\_dichotomic@{get\_indices\_from\_date\_dichotomic}!DateTimeVector.cpp@{DateTimeVector.cpp}}
+\doxysubsubsection{\texorpdfstring{get\_indices\_from\_date\_dichotomic()}{get\_indices\_from\_date\_dichotomic()}}
+{\footnotesize\ttfamily int get\+\_\+indices\+\_\+from\+\_\+date\+\_\+dichotomic (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{class_date_time}{Date\+Time}} $\ast$ $>$ \&}]{all\+\_\+dates,  }\item[{const \mbox{\hyperlink{class_date_time}{Date\+Time}} $\ast$const}]{date,  }\item[{int}]{start,  }\item[{int}]{end }\end{DoxyParamCaption})}
+
+
+
+Definition at line 40 of file Date\+Time\+Vector.\+cpp.
+
+\mbox{\Hypertarget{_date_time_vector_8cpp_a1e5fab181a56b0159da53e3698f9ca9a}\label{_date_time_vector_8cpp_a1e5fab181a56b0159da53e3698f9ca9a}} 
+\index{DateTimeVector.cpp@{DateTimeVector.cpp}!get\_prices\_from\_date@{get\_prices\_from\_date}}
+\index{get\_prices\_from\_date@{get\_prices\_from\_date}!DateTimeVector.cpp@{DateTimeVector.cpp}}
+\doxysubsubsection{\texorpdfstring{get\_prices\_from\_date()}{get\_prices\_from\_date()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void get\+\_\+prices\+\_\+from\+\_\+date (\begin{DoxyParamCaption}\item[{Pnl\+Mat $\ast$const}]{prices,  }\item[{const std\+::vector$<$ \mbox{\hyperlink{class_date_time}{Date\+Time}} $\ast$ $>$ \&}]{all\+Dates,  }\item[{const std\+::vector$<$ \mbox{\hyperlink{class_date_time}{Date\+Time}} $\ast$ $>$ \&}]{subset,  }\item[{const Pnl\+Mat $\ast$const}]{all\+Prices }\end{DoxyParamCaption})}
+
+
+
+Definition at line 85 of file Date\+Time\+Vector.\+cpp.
+
+\mbox{\Hypertarget{_date_time_vector_8cpp_a2064ad4717c0c92decd7b480eaf42b90}\label{_date_time_vector_8cpp_a2064ad4717c0c92decd7b480eaf42b90}} 
+\index{DateTimeVector.cpp@{DateTimeVector.cpp}!get\_prices\_from\_date@{get\_prices\_from\_date}}
+\index{get\_prices\_from\_date@{get\_prices\_from\_date}!DateTimeVector.cpp@{DateTimeVector.cpp}}
+\doxysubsubsection{\texorpdfstring{get\_prices\_from\_date()}{get\_prices\_from\_date()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void get\+\_\+prices\+\_\+from\+\_\+date (\begin{DoxyParamCaption}\item[{Pnl\+Vect $\ast$const}]{prices,  }\item[{const std\+::vector$<$ \mbox{\hyperlink{class_date_time}{Date\+Time}} $\ast$ $>$ \&}]{all\+Dates,  }\item[{const std\+::vector$<$ \mbox{\hyperlink{class_date_time}{Date\+Time}} $\ast$ $>$ \&}]{subset,  }\item[{const Pnl\+Vect $\ast$const}]{all\+Prices }\end{DoxyParamCaption})}
+
+
+
+Definition at line 73 of file Date\+Time\+Vector.\+cpp.
+
+\mbox{\Hypertarget{_date_time_vector_8cpp_a6f549db29a1fa6a1f94d4393804d3aa5}\label{_date_time_vector_8cpp_a6f549db29a1fa6a1f94d4393804d3aa5}} 
+\index{DateTimeVector.cpp@{DateTimeVector.cpp}!get\_subset\_path\_from\_dates@{get\_subset\_path\_from\_dates}}
+\index{get\_subset\_path\_from\_dates@{get\_subset\_path\_from\_dates}!DateTimeVector.cpp@{DateTimeVector.cpp}}
+\doxysubsubsection{\texorpdfstring{get\_subset\_path\_from\_dates()}{get\_subset\_path\_from\_dates()}}
+{\footnotesize\ttfamily void get\+\_\+subset\+\_\+path\+\_\+from\+\_\+dates (\begin{DoxyParamCaption}\item[{Pnl\+Mat $\ast$const}]{subset\+\_\+path,  }\item[{const std\+::vector$<$ \mbox{\hyperlink{class_date_time}{Date\+Time}} $\ast$ $>$ \&}]{all\+Dates,  }\item[{const std\+::vector$<$ \mbox{\hyperlink{class_date_time}{Date\+Time}} $\ast$ $>$ \&}]{subset,  }\item[{const Pnl\+Mat $\ast$const}]{path }\end{DoxyParamCaption})}
+
+
+
+Definition at line 99 of file Date\+Time\+Vector.\+cpp.
+
+\mbox{\Hypertarget{_date_time_vector_8cpp_a6773cfe20bebbde18597bbef3e2589df}\label{_date_time_vector_8cpp_a6773cfe20bebbde18597bbef3e2589df}} 
+\index{DateTimeVector.cpp@{DateTimeVector.cpp}!parse\_dates\_file@{parse\_dates\_file}}
+\index{parse\_dates\_file@{parse\_dates\_file}!DateTimeVector.cpp@{DateTimeVector.cpp}}
+\doxysubsubsection{\texorpdfstring{parse\_dates\_file()}{parse\_dates\_file()}}
+{\footnotesize\ttfamily void parse\+\_\+dates\+\_\+file (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{class_date_time}{Date\+Time}} $\ast$ $>$ \&}]{dates,  }\item[{const std\+::string \&}]{file\+Name,  }\item[{int}]{nb\+Dates,  }\item[{char}]{delimiter }\end{DoxyParamCaption})}
+
+
+
+Definition at line 7 of file Date\+Time\+Vector.\+cpp.
+
+\mbox{\Hypertarget{_date_time_vector_8cpp_a61c72e2955b360918350fd9b0e134716}\label{_date_time_vector_8cpp_a61c72e2955b360918350fd9b0e134716}} 
+\index{DateTimeVector.cpp@{DateTimeVector.cpp}!same\_dates@{same\_dates}}
+\index{same\_dates@{same\_dates}!DateTimeVector.cpp@{DateTimeVector.cpp}}
+\doxysubsubsection{\texorpdfstring{same\_dates()}{same\_dates()}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{class_date_time}{Date\+Time}}$\ast$$>$ same\+\_\+dates (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{class_date_time}{Date\+Time}} $\ast$ $>$ \&}]{v1,  }\item[{const std\+::vector$<$ \mbox{\hyperlink{class_date_time}{Date\+Time}} $\ast$ $>$ \&}]{v2 }\end{DoxyParamCaption})}
+
+
+
+Definition at line 51 of file Date\+Time\+Vector.\+cpp.
+

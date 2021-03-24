@@ -1,0 +1,241 @@
+\hypertarget{classtesting_1_1_test_event_listener}{}\doxysection{testing\+::Test\+Event\+Listener Class Reference}
+\label{classtesting_1_1_test_event_listener}\index{testing::TestEventListener@{testing::TestEventListener}}
+
+
+{\ttfamily \#include $<$gtest.\+h$>$}
+
+Inheritance diagram for testing\+::Test\+Event\+Listener\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=0.810811cm]{classtesting_1_1_test_event_listener}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classtesting_1_1_test_event_listener_a4512d19e7a108ec4926239ec1ea85d63}{$\sim$\+Test\+Event\+Listener}} ()
+\item 
+virtual void \mbox{\hyperlink{classtesting_1_1_test_event_listener_a5f6c84f39851e8a603a2d2e10063816b}{On\+Test\+Program\+Start}} (const \mbox{\hyperlink{classtesting_1_1_unit_test}{Unit\+Test}} \&unit\+\_\+test)=0
+\item 
+virtual void \mbox{\hyperlink{classtesting_1_1_test_event_listener_a60cc09b7907cb329d152eb5e7133bdeb}{On\+Test\+Iteration\+Start}} (const \mbox{\hyperlink{classtesting_1_1_unit_test}{Unit\+Test}} \&unit\+\_\+test, int iteration)=0
+\item 
+virtual void \mbox{\hyperlink{classtesting_1_1_test_event_listener_aa6502e534919605be45f26a6daf9a40c}{On\+Environments\+Set\+Up\+Start}} (const \mbox{\hyperlink{classtesting_1_1_unit_test}{Unit\+Test}} \&unit\+\_\+test)=0
+\item 
+virtual void \mbox{\hyperlink{classtesting_1_1_test_event_listener_aaa1021d75f5dbf3f05c829c1cc520341}{On\+Environments\+Set\+Up\+End}} (const \mbox{\hyperlink{classtesting_1_1_unit_test}{Unit\+Test}} \&unit\+\_\+test)=0
+\item 
+virtual void \mbox{\hyperlink{classtesting_1_1_test_event_listener_a2726cc70dfda861f109355f1d9f09dfe}{On\+Test\+Suite\+Start}} (const \mbox{\hyperlink{classtesting_1_1_test_suite}{Test\+Suite}} \&)
+\item 
+virtual void \mbox{\hyperlink{classtesting_1_1_test_event_listener_ac48628c9f78d3e10bff77c7366e9e780}{On\+Test\+Case\+Start}} (const Test\+Case \&)
+\item 
+virtual void \mbox{\hyperlink{classtesting_1_1_test_event_listener_ab4f6a0ca16ae75daf385b3b5914e1048}{On\+Test\+Start}} (const \mbox{\hyperlink{classtesting_1_1_test_info}{Test\+Info}} \&test\+\_\+info)=0
+\item 
+virtual void \mbox{\hyperlink{classtesting_1_1_test_event_listener_a054f8705c883fa120b91473aff38f2ee}{On\+Test\+Part\+Result}} (const Test\+Part\+Result \&test\+\_\+part\+\_\+result)=0
+\item 
+virtual void \mbox{\hyperlink{classtesting_1_1_test_event_listener_abb1c44525ef038500608b5dc2f17099b}{On\+Test\+End}} (const \mbox{\hyperlink{classtesting_1_1_test_info}{Test\+Info}} \&test\+\_\+info)=0
+\item 
+virtual void \mbox{\hyperlink{classtesting_1_1_test_event_listener_a8962caad5d2522c9160c794074a662ee}{On\+Test\+Suite\+End}} (const \mbox{\hyperlink{classtesting_1_1_test_suite}{Test\+Suite}} \&)
+\item 
+virtual void \mbox{\hyperlink{classtesting_1_1_test_event_listener_a6cada1572dde8010b94f6dd237ce52f4}{On\+Test\+Case\+End}} (const Test\+Case \&)
+\item 
+virtual void \mbox{\hyperlink{classtesting_1_1_test_event_listener_a468b5e6701bcb86cb2c956caadbba5e4}{On\+Environments\+Tear\+Down\+Start}} (const \mbox{\hyperlink{classtesting_1_1_unit_test}{Unit\+Test}} \&unit\+\_\+test)=0
+\item 
+virtual void \mbox{\hyperlink{classtesting_1_1_test_event_listener_a9ea04fa7f447865ba76df35e12ba2092}{On\+Environments\+Tear\+Down\+End}} (const \mbox{\hyperlink{classtesting_1_1_unit_test}{Unit\+Test}} \&unit\+\_\+test)=0
+\item 
+virtual void \mbox{\hyperlink{classtesting_1_1_test_event_listener_a550fdb3e55726e4cefa09f5697941425}{On\+Test\+Iteration\+End}} (const \mbox{\hyperlink{classtesting_1_1_unit_test}{Unit\+Test}} \&unit\+\_\+test, int iteration)=0
+\item 
+virtual void \mbox{\hyperlink{classtesting_1_1_test_event_listener_ad15b6246d94c268e233487a86463ef3d}{On\+Test\+Program\+End}} (const \mbox{\hyperlink{classtesting_1_1_unit_test}{Unit\+Test}} \&unit\+\_\+test)=0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 1093 of file gtest.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classtesting_1_1_test_event_listener_a4512d19e7a108ec4926239ec1ea85d63}\label{classtesting_1_1_test_event_listener_a4512d19e7a108ec4926239ec1ea85d63}} 
+\index{testing::TestEventListener@{testing::TestEventListener}!````~TestEventListener@{$\sim$TestEventListener}}
+\index{````~TestEventListener@{$\sim$TestEventListener}!testing::TestEventListener@{testing::TestEventListener}}
+\doxysubsubsection{\texorpdfstring{$\sim$TestEventListener()}{~TestEventListener()}}
+{\footnotesize\ttfamily virtual testing\+::\+Test\+Event\+Listener\+::$\sim$\+Test\+Event\+Listener (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Definition at line 1095 of file gtest.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classtesting_1_1_test_event_listener_aaa1021d75f5dbf3f05c829c1cc520341}\label{classtesting_1_1_test_event_listener_aaa1021d75f5dbf3f05c829c1cc520341}} 
+\index{testing::TestEventListener@{testing::TestEventListener}!OnEnvironmentsSetUpEnd@{OnEnvironmentsSetUpEnd}}
+\index{OnEnvironmentsSetUpEnd@{OnEnvironmentsSetUpEnd}!testing::TestEventListener@{testing::TestEventListener}}
+\doxysubsubsection{\texorpdfstring{OnEnvironmentsSetUpEnd()}{OnEnvironmentsSetUpEnd()}}
+{\footnotesize\ttfamily virtual void testing\+::\+Test\+Event\+Listener\+::\+On\+Environments\+Set\+Up\+End (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classtesting_1_1_unit_test}{Unit\+Test}} \&}]{unit\+\_\+test }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{classtesting_1_1internal_1_1_test_event_repeater_a744eeb6ddfcba78b34515fac7f1ab704}{testing\+::internal\+::\+Test\+Event\+Repeater}}, \mbox{\hyperlink{classtesting_1_1internal_1_1_brief_unit_test_result_printer_af4c25c2190db6c39784329ad932f12ae}{testing\+::internal\+::\+Brief\+Unit\+Test\+Result\+Printer}}, \mbox{\hyperlink{classtesting_1_1internal_1_1_pretty_unit_test_result_printer_a9853207ad1aedfe89c72f8047ac3541a}{testing\+::internal\+::\+Pretty\+Unit\+Test\+Result\+Printer}}, \mbox{\hyperlink{classtesting_1_1_empty_test_event_listener_a9b4e781c0b38065a55c2fd163724ba69}{testing\+::\+Empty\+Test\+Event\+Listener}}, \mbox{\hyperlink{classtesting_1_1internal_1_1_event_recording_listener2_ae6a3c429dd5df55c869377186411a90a}{testing\+::internal\+::\+Event\+Recording\+Listener2}}, and \mbox{\hyperlink{classtesting_1_1internal_1_1_event_recording_listener_ada752f5c75723828ed8661c513edbd10}{testing\+::internal\+::\+Event\+Recording\+Listener}}.
+
+\mbox{\Hypertarget{classtesting_1_1_test_event_listener_aa6502e534919605be45f26a6daf9a40c}\label{classtesting_1_1_test_event_listener_aa6502e534919605be45f26a6daf9a40c}} 
+\index{testing::TestEventListener@{testing::TestEventListener}!OnEnvironmentsSetUpStart@{OnEnvironmentsSetUpStart}}
+\index{OnEnvironmentsSetUpStart@{OnEnvironmentsSetUpStart}!testing::TestEventListener@{testing::TestEventListener}}
+\doxysubsubsection{\texorpdfstring{OnEnvironmentsSetUpStart()}{OnEnvironmentsSetUpStart()}}
+{\footnotesize\ttfamily virtual void testing\+::\+Test\+Event\+Listener\+::\+On\+Environments\+Set\+Up\+Start (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classtesting_1_1_unit_test}{Unit\+Test}} \&}]{unit\+\_\+test }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{classtesting_1_1internal_1_1_test_event_repeater_a739b5fd1f5bcb96b42089ff06281b3ea}{testing\+::internal\+::\+Test\+Event\+Repeater}}, \mbox{\hyperlink{classtesting_1_1internal_1_1_pretty_unit_test_result_printer_ac17a4a708aca7df5876e48868408a2be}{testing\+::internal\+::\+Pretty\+Unit\+Test\+Result\+Printer}}, \mbox{\hyperlink{classtesting_1_1internal_1_1_brief_unit_test_result_printer_a2b8445b82d9aba7d1247b6f8d3d3abf3}{testing\+::internal\+::\+Brief\+Unit\+Test\+Result\+Printer}}, \mbox{\hyperlink{classtesting_1_1_empty_test_event_listener_a6e498ae763ac8c1a46bd861e0b7ff3f5}{testing\+::\+Empty\+Test\+Event\+Listener}}, \mbox{\hyperlink{classtesting_1_1internal_1_1_event_recording_listener2_a555f80451b123922a7f21930e45a256f}{testing\+::internal\+::\+Event\+Recording\+Listener2}}, and \mbox{\hyperlink{classtesting_1_1internal_1_1_event_recording_listener_ae192e9289f576fc770b549a575d8e786}{testing\+::internal\+::\+Event\+Recording\+Listener}}.
+
+\mbox{\Hypertarget{classtesting_1_1_test_event_listener_a9ea04fa7f447865ba76df35e12ba2092}\label{classtesting_1_1_test_event_listener_a9ea04fa7f447865ba76df35e12ba2092}} 
+\index{testing::TestEventListener@{testing::TestEventListener}!OnEnvironmentsTearDownEnd@{OnEnvironmentsTearDownEnd}}
+\index{OnEnvironmentsTearDownEnd@{OnEnvironmentsTearDownEnd}!testing::TestEventListener@{testing::TestEventListener}}
+\doxysubsubsection{\texorpdfstring{OnEnvironmentsTearDownEnd()}{OnEnvironmentsTearDownEnd()}}
+{\footnotesize\ttfamily virtual void testing\+::\+Test\+Event\+Listener\+::\+On\+Environments\+Tear\+Down\+End (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classtesting_1_1_unit_test}{Unit\+Test}} \&}]{unit\+\_\+test }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{classtesting_1_1internal_1_1_test_event_repeater_a0bc5fc45653d32b5e1bcad059ee7616b}{testing\+::internal\+::\+Test\+Event\+Repeater}}, \mbox{\hyperlink{classtesting_1_1internal_1_1_brief_unit_test_result_printer_a2c962765dfaa484ab9dc21699ce636c9}{testing\+::internal\+::\+Brief\+Unit\+Test\+Result\+Printer}}, \mbox{\hyperlink{classtesting_1_1internal_1_1_pretty_unit_test_result_printer_a6700b0664749940a93917c5dcc3b90ed}{testing\+::internal\+::\+Pretty\+Unit\+Test\+Result\+Printer}}, \mbox{\hyperlink{classtesting_1_1_empty_test_event_listener_ad9984052e82c3ae26395a2d9480326d2}{testing\+::\+Empty\+Test\+Event\+Listener}}, \mbox{\hyperlink{classtesting_1_1internal_1_1_event_recording_listener2_ac0c920b1264e59dfa7e8c9d159a77e8b}{testing\+::internal\+::\+Event\+Recording\+Listener2}}, and \mbox{\hyperlink{classtesting_1_1internal_1_1_event_recording_listener_ab96b8b58a318ebe79df4295e2da6a289}{testing\+::internal\+::\+Event\+Recording\+Listener}}.
+
+\mbox{\Hypertarget{classtesting_1_1_test_event_listener_a468b5e6701bcb86cb2c956caadbba5e4}\label{classtesting_1_1_test_event_listener_a468b5e6701bcb86cb2c956caadbba5e4}} 
+\index{testing::TestEventListener@{testing::TestEventListener}!OnEnvironmentsTearDownStart@{OnEnvironmentsTearDownStart}}
+\index{OnEnvironmentsTearDownStart@{OnEnvironmentsTearDownStart}!testing::TestEventListener@{testing::TestEventListener}}
+\doxysubsubsection{\texorpdfstring{OnEnvironmentsTearDownStart()}{OnEnvironmentsTearDownStart()}}
+{\footnotesize\ttfamily virtual void testing\+::\+Test\+Event\+Listener\+::\+On\+Environments\+Tear\+Down\+Start (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classtesting_1_1_unit_test}{Unit\+Test}} \&}]{unit\+\_\+test }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{classtesting_1_1internal_1_1_test_event_repeater_aa2bf25212c9b1c09ed80b2bbcf55dbba}{testing\+::internal\+::\+Test\+Event\+Repeater}}, \mbox{\hyperlink{classtesting_1_1internal_1_1_pretty_unit_test_result_printer_a97efe483cbb1c55d32bdc7a997a99f13}{testing\+::internal\+::\+Pretty\+Unit\+Test\+Result\+Printer}}, \mbox{\hyperlink{classtesting_1_1internal_1_1_brief_unit_test_result_printer_a009cd64ff8c09e710f0ed30ac8a4dbd0}{testing\+::internal\+::\+Brief\+Unit\+Test\+Result\+Printer}}, \mbox{\hyperlink{classtesting_1_1_empty_test_event_listener_a320780451eac9178434b7c77d948ecbd}{testing\+::\+Empty\+Test\+Event\+Listener}}, \mbox{\hyperlink{classtesting_1_1internal_1_1_event_recording_listener2_a9b29ac6408f671e6b0fcafba75238573}{testing\+::internal\+::\+Event\+Recording\+Listener2}}, and \mbox{\hyperlink{classtesting_1_1internal_1_1_event_recording_listener_aab8379a206927984cdb7b84399a122a5}{testing\+::internal\+::\+Event\+Recording\+Listener}}.
+
+\mbox{\Hypertarget{classtesting_1_1_test_event_listener_a6cada1572dde8010b94f6dd237ce52f4}\label{classtesting_1_1_test_event_listener_a6cada1572dde8010b94f6dd237ce52f4}} 
+\index{testing::TestEventListener@{testing::TestEventListener}!OnTestCaseEnd@{OnTestCaseEnd}}
+\index{OnTestCaseEnd@{OnTestCaseEnd}!testing::TestEventListener@{testing::TestEventListener}}
+\doxysubsubsection{\texorpdfstring{OnTestCaseEnd()}{OnTestCaseEnd()}}
+{\footnotesize\ttfamily virtual void testing\+::\+Test\+Event\+Listener\+::\+On\+Test\+Case\+End (\begin{DoxyParamCaption}\item[{const Test\+Case \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented in \mbox{\hyperlink{classtesting_1_1internal_1_1_pretty_unit_test_result_printer_acc7a17a23b314933e450f549de88b9a5}{testing\+::internal\+::\+Pretty\+Unit\+Test\+Result\+Printer}}, \mbox{\hyperlink{classtesting_1_1internal_1_1_test_event_repeater_a93a1095b37efd7315a804a6c18c78c1c}{testing\+::internal\+::\+Test\+Event\+Repeater}}, \mbox{\hyperlink{classtesting_1_1internal_1_1_brief_unit_test_result_printer_aaaa19bdfc9d9981e554cf40a4e4d6f42}{testing\+::internal\+::\+Brief\+Unit\+Test\+Result\+Printer}}, \mbox{\hyperlink{classtesting_1_1_empty_test_event_listener_abe05cc74c1081ed51e2c84b73013299e}{testing\+::\+Empty\+Test\+Event\+Listener}}, and \mbox{\hyperlink{classtesting_1_1internal_1_1_event_recording_listener_a52788314427f5c7a4585ea0bf5f3c251}{testing\+::internal\+::\+Event\+Recording\+Listener}}.
+
+
+
+Definition at line 1136 of file gtest.\+h.
+
+\mbox{\Hypertarget{classtesting_1_1_test_event_listener_ac48628c9f78d3e10bff77c7366e9e780}\label{classtesting_1_1_test_event_listener_ac48628c9f78d3e10bff77c7366e9e780}} 
+\index{testing::TestEventListener@{testing::TestEventListener}!OnTestCaseStart@{OnTestCaseStart}}
+\index{OnTestCaseStart@{OnTestCaseStart}!testing::TestEventListener@{testing::TestEventListener}}
+\doxysubsubsection{\texorpdfstring{OnTestCaseStart()}{OnTestCaseStart()}}
+{\footnotesize\ttfamily virtual void testing\+::\+Test\+Event\+Listener\+::\+On\+Test\+Case\+Start (\begin{DoxyParamCaption}\item[{const Test\+Case \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented in \mbox{\hyperlink{classtesting_1_1internal_1_1_pretty_unit_test_result_printer_a6f57a94ab15116425b5b1882b4794b56}{testing\+::internal\+::\+Pretty\+Unit\+Test\+Result\+Printer}}, \mbox{\hyperlink{classtesting_1_1internal_1_1_brief_unit_test_result_printer_a2b36045c4179edcb54f82f1d51d38795}{testing\+::internal\+::\+Brief\+Unit\+Test\+Result\+Printer}}, \mbox{\hyperlink{classtesting_1_1_empty_test_event_listener_a7f9a84967fde01000b7a56e9e84b6052}{testing\+::\+Empty\+Test\+Event\+Listener}}, and \mbox{\hyperlink{classtesting_1_1internal_1_1_event_recording_listener_a3ce90fda790857eb64444038a5b3258f}{testing\+::internal\+::\+Event\+Recording\+Listener}}.
+
+
+
+Definition at line 1117 of file gtest.\+h.
+
+\mbox{\Hypertarget{classtesting_1_1_test_event_listener_abb1c44525ef038500608b5dc2f17099b}\label{classtesting_1_1_test_event_listener_abb1c44525ef038500608b5dc2f17099b}} 
+\index{testing::TestEventListener@{testing::TestEventListener}!OnTestEnd@{OnTestEnd}}
+\index{OnTestEnd@{OnTestEnd}!testing::TestEventListener@{testing::TestEventListener}}
+\doxysubsubsection{\texorpdfstring{OnTestEnd()}{OnTestEnd()}}
+{\footnotesize\ttfamily virtual void testing\+::\+Test\+Event\+Listener\+::\+On\+Test\+End (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classtesting_1_1_test_info}{Test\+Info}} \&}]{test\+\_\+info }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{classtesting_1_1internal_1_1_test_event_repeater_a0f524b2773bf2cbf6df1269975c5a79f}{testing\+::internal\+::\+Test\+Event\+Repeater}}, \mbox{\hyperlink{classtesting_1_1internal_1_1_brief_unit_test_result_printer_a75d77451c674519eed649c52f73c61c0}{testing\+::internal\+::\+Brief\+Unit\+Test\+Result\+Printer}}, \mbox{\hyperlink{classtesting_1_1internal_1_1_pretty_unit_test_result_printer_a085f90bb9f3128d8d8864c19e1e188ef}{testing\+::internal\+::\+Pretty\+Unit\+Test\+Result\+Printer}}, \mbox{\hyperlink{classtesting_1_1_empty_test_event_listener_a709d7077c086c877d214231bc520ef90}{testing\+::\+Empty\+Test\+Event\+Listener}}, \mbox{\hyperlink{classtesting_1_1internal_1_1_event_recording_listener2_a8651cee935f60407bd65d0162a6d9629}{testing\+::internal\+::\+Event\+Recording\+Listener2}}, and \mbox{\hyperlink{classtesting_1_1internal_1_1_event_recording_listener_ab374bf69a73cd7dd8fcef5aea1209728}{testing\+::internal\+::\+Event\+Recording\+Listener}}.
+
+\mbox{\Hypertarget{classtesting_1_1_test_event_listener_a550fdb3e55726e4cefa09f5697941425}\label{classtesting_1_1_test_event_listener_a550fdb3e55726e4cefa09f5697941425}} 
+\index{testing::TestEventListener@{testing::TestEventListener}!OnTestIterationEnd@{OnTestIterationEnd}}
+\index{OnTestIterationEnd@{OnTestIterationEnd}!testing::TestEventListener@{testing::TestEventListener}}
+\doxysubsubsection{\texorpdfstring{OnTestIterationEnd()}{OnTestIterationEnd()}}
+{\footnotesize\ttfamily virtual void testing\+::\+Test\+Event\+Listener\+::\+On\+Test\+Iteration\+End (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classtesting_1_1_unit_test}{Unit\+Test}} \&}]{unit\+\_\+test,  }\item[{int}]{iteration }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{classtesting_1_1internal_1_1_json_unit_test_result_printer_a9716a1dd5a3608181748c1b6f039c365}{testing\+::internal\+::\+Json\+Unit\+Test\+Result\+Printer}}, \mbox{\hyperlink{classtesting_1_1internal_1_1_xml_unit_test_result_printer_abf972ca903d66d5ea52d9b1bc0a27f21}{testing\+::internal\+::\+Xml\+Unit\+Test\+Result\+Printer}}, \mbox{\hyperlink{classtesting_1_1internal_1_1_test_event_repeater_aa4a52e544380946ff86fc57915aa7152}{testing\+::internal\+::\+Test\+Event\+Repeater}}, \mbox{\hyperlink{classtesting_1_1internal_1_1_brief_unit_test_result_printer_a8533d95c71833e1f8d0d63f519ec2e6f}{testing\+::internal\+::\+Brief\+Unit\+Test\+Result\+Printer}}, \mbox{\hyperlink{classtesting_1_1internal_1_1_pretty_unit_test_result_printer_a447fc02d3e3af17cef6f0727bab7414a}{testing\+::internal\+::\+Pretty\+Unit\+Test\+Result\+Printer}}, \mbox{\hyperlink{class_sequence_testing_listener_ae3a4e15e6c811a7b70992669d659e11e}{Sequence\+Testing\+Listener}}, \mbox{\hyperlink{classtesting_1_1_empty_test_event_listener_aae9c5c61e476f0c421402fb1dde434d2}{testing\+::\+Empty\+Test\+Event\+Listener}}, \mbox{\hyperlink{classtesting_1_1internal_1_1_event_recording_listener2_ae93c576efaf6f6d3afc455d05aa9eda8}{testing\+::internal\+::\+Event\+Recording\+Listener2}}, and \mbox{\hyperlink{classtesting_1_1internal_1_1_event_recording_listener_a48f6f53c044e8cb6425f9bc7319ddecc}{testing\+::internal\+::\+Event\+Recording\+Listener}}.
+
+\mbox{\Hypertarget{classtesting_1_1_test_event_listener_a60cc09b7907cb329d152eb5e7133bdeb}\label{classtesting_1_1_test_event_listener_a60cc09b7907cb329d152eb5e7133bdeb}} 
+\index{testing::TestEventListener@{testing::TestEventListener}!OnTestIterationStart@{OnTestIterationStart}}
+\index{OnTestIterationStart@{OnTestIterationStart}!testing::TestEventListener@{testing::TestEventListener}}
+\doxysubsubsection{\texorpdfstring{OnTestIterationStart()}{OnTestIterationStart()}}
+{\footnotesize\ttfamily virtual void testing\+::\+Test\+Event\+Listener\+::\+On\+Test\+Iteration\+Start (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classtesting_1_1_unit_test}{Unit\+Test}} \&}]{unit\+\_\+test,  }\item[{int}]{iteration }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{classtesting_1_1internal_1_1_test_event_repeater_a98fea6c94833db424e083eff337ef370}{testing\+::internal\+::\+Test\+Event\+Repeater}}, \mbox{\hyperlink{classtesting_1_1internal_1_1_pretty_unit_test_result_printer_a0e7e8909452ef92aaf02f4cffde5ee28}{testing\+::internal\+::\+Pretty\+Unit\+Test\+Result\+Printer}}, \mbox{\hyperlink{class_sequence_testing_listener_a31ffb1bb77e88fff266511b1d8427e20}{Sequence\+Testing\+Listener}}, \mbox{\hyperlink{classtesting_1_1internal_1_1_brief_unit_test_result_printer_a017614b56c6d30cded4e7a9e2cd674a6}{testing\+::internal\+::\+Brief\+Unit\+Test\+Result\+Printer}}, \mbox{\hyperlink{classtesting_1_1_empty_test_event_listener_a31edf103561e8b4d747656bc2d927661}{testing\+::\+Empty\+Test\+Event\+Listener}}, \mbox{\hyperlink{classtesting_1_1internal_1_1_event_recording_listener2_ab208d8583e6593b4c7d89db6f8f2600b}{testing\+::internal\+::\+Event\+Recording\+Listener2}}, and \mbox{\hyperlink{classtesting_1_1internal_1_1_event_recording_listener_aeed7e9302e3fc2c182a2f20c174d62b8}{testing\+::internal\+::\+Event\+Recording\+Listener}}.
+
+\mbox{\Hypertarget{classtesting_1_1_test_event_listener_a054f8705c883fa120b91473aff38f2ee}\label{classtesting_1_1_test_event_listener_a054f8705c883fa120b91473aff38f2ee}} 
+\index{testing::TestEventListener@{testing::TestEventListener}!OnTestPartResult@{OnTestPartResult}}
+\index{OnTestPartResult@{OnTestPartResult}!testing::TestEventListener@{testing::TestEventListener}}
+\doxysubsubsection{\texorpdfstring{OnTestPartResult()}{OnTestPartResult()}}
+{\footnotesize\ttfamily virtual void testing\+::\+Test\+Event\+Listener\+::\+On\+Test\+Part\+Result (\begin{DoxyParamCaption}\item[{const Test\+Part\+Result \&}]{test\+\_\+part\+\_\+result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{classtesting_1_1internal_1_1_test_event_repeater_aaf15a326277f2b2900f8b3624fb27562}{testing\+::internal\+::\+Test\+Event\+Repeater}}, \mbox{\hyperlink{classtesting_1_1internal_1_1_brief_unit_test_result_printer_aca32da1e631ce44e64804078844f94b8}{testing\+::internal\+::\+Brief\+Unit\+Test\+Result\+Printer}}, \mbox{\hyperlink{classtesting_1_1internal_1_1_pretty_unit_test_result_printer_a89caba1698d6999082e938f814dd8ece}{testing\+::internal\+::\+Pretty\+Unit\+Test\+Result\+Printer}}, \mbox{\hyperlink{classtesting_1_1_empty_test_event_listener_ab95992f0a0b3741d59a24c3a7115fa60}{testing\+::\+Empty\+Test\+Event\+Listener}}, \mbox{\hyperlink{classtesting_1_1internal_1_1_event_recording_listener2_a0c7bd2ef9f0e467b408dcb4c984cb3fc}{testing\+::internal\+::\+Event\+Recording\+Listener2}}, and \mbox{\hyperlink{classtesting_1_1internal_1_1_event_recording_listener_a9122b67d43420a41d1cfe9307809e078}{testing\+::internal\+::\+Event\+Recording\+Listener}}.
+
+\mbox{\Hypertarget{classtesting_1_1_test_event_listener_ad15b6246d94c268e233487a86463ef3d}\label{classtesting_1_1_test_event_listener_ad15b6246d94c268e233487a86463ef3d}} 
+\index{testing::TestEventListener@{testing::TestEventListener}!OnTestProgramEnd@{OnTestProgramEnd}}
+\index{OnTestProgramEnd@{OnTestProgramEnd}!testing::TestEventListener@{testing::TestEventListener}}
+\doxysubsubsection{\texorpdfstring{OnTestProgramEnd()}{OnTestProgramEnd()}}
+{\footnotesize\ttfamily virtual void testing\+::\+Test\+Event\+Listener\+::\+On\+Test\+Program\+End (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classtesting_1_1_unit_test}{Unit\+Test}} \&}]{unit\+\_\+test }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{classtesting_1_1internal_1_1_test_event_repeater_a255378258ea0d14688303d4a6421746f}{testing\+::internal\+::\+Test\+Event\+Repeater}}, \mbox{\hyperlink{class_sequence_testing_listener_a506077b57a6789daf900e61285a58d8a}{Sequence\+Testing\+Listener}}, \mbox{\hyperlink{classtesting_1_1internal_1_1_brief_unit_test_result_printer_a7429a7423562e4dd6cabce8ea6c661c8}{testing\+::internal\+::\+Brief\+Unit\+Test\+Result\+Printer}}, \mbox{\hyperlink{classtesting_1_1internal_1_1_pretty_unit_test_result_printer_a26c7e1a921099dd50fbadd2b0ce3692a}{testing\+::internal\+::\+Pretty\+Unit\+Test\+Result\+Printer}}, \mbox{\hyperlink{classtesting_1_1_empty_test_event_listener_aaa9d683e8e0c850af67a0b92d785ddb9}{testing\+::\+Empty\+Test\+Event\+Listener}}, \mbox{\hyperlink{classtesting_1_1internal_1_1_event_recording_listener2_a95aeef757bba790c159b5a422030a86b}{testing\+::internal\+::\+Event\+Recording\+Listener2}}, and \mbox{\hyperlink{classtesting_1_1internal_1_1_event_recording_listener_a22952f706a15c028d4b43256602035bb}{testing\+::internal\+::\+Event\+Recording\+Listener}}.
+
+\mbox{\Hypertarget{classtesting_1_1_test_event_listener_a5f6c84f39851e8a603a2d2e10063816b}\label{classtesting_1_1_test_event_listener_a5f6c84f39851e8a603a2d2e10063816b}} 
+\index{testing::TestEventListener@{testing::TestEventListener}!OnTestProgramStart@{OnTestProgramStart}}
+\index{OnTestProgramStart@{OnTestProgramStart}!testing::TestEventListener@{testing::TestEventListener}}
+\doxysubsubsection{\texorpdfstring{OnTestProgramStart()}{OnTestProgramStart()}}
+{\footnotesize\ttfamily virtual void testing\+::\+Test\+Event\+Listener\+::\+On\+Test\+Program\+Start (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classtesting_1_1_unit_test}{Unit\+Test}} \&}]{unit\+\_\+test }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{classtesting_1_1internal_1_1_test_event_repeater_abe19a6eed2548e9c768ae2d156f1f593}{testing\+::internal\+::\+Test\+Event\+Repeater}}, \mbox{\hyperlink{class_sequence_testing_listener_a2dcf940322a480b210d8e5e934dd0a79}{Sequence\+Testing\+Listener}}, \mbox{\hyperlink{class_test_listener_ab1edf894efc1104f7ce35563bc24de23}{Test\+Listener}}, \mbox{\hyperlink{classtesting_1_1internal_1_1_brief_unit_test_result_printer_a627950fb96d7d4cfd1f851d9bae1ecc7}{testing\+::internal\+::\+Brief\+Unit\+Test\+Result\+Printer}}, \mbox{\hyperlink{classtesting_1_1internal_1_1_pretty_unit_test_result_printer_a248840fde373e65a25eaaa1d2a0f3065}{testing\+::internal\+::\+Pretty\+Unit\+Test\+Result\+Printer}}, \mbox{\hyperlink{classtesting_1_1_empty_test_event_listener_ac3f5033fcd82080edb45f546ce9854fe}{testing\+::\+Empty\+Test\+Event\+Listener}}, \mbox{\hyperlink{classtesting_1_1internal_1_1_event_recording_listener2_a461f961badc2be6e633df136bc8e3d29}{testing\+::internal\+::\+Event\+Recording\+Listener2}}, and \mbox{\hyperlink{classtesting_1_1internal_1_1_event_recording_listener_a9cec5ac263fe161de360615422370eec}{testing\+::internal\+::\+Event\+Recording\+Listener}}.
+
+\mbox{\Hypertarget{classtesting_1_1_test_event_listener_ab4f6a0ca16ae75daf385b3b5914e1048}\label{classtesting_1_1_test_event_listener_ab4f6a0ca16ae75daf385b3b5914e1048}} 
+\index{testing::TestEventListener@{testing::TestEventListener}!OnTestStart@{OnTestStart}}
+\index{OnTestStart@{OnTestStart}!testing::TestEventListener@{testing::TestEventListener}}
+\doxysubsubsection{\texorpdfstring{OnTestStart()}{OnTestStart()}}
+{\footnotesize\ttfamily virtual void testing\+::\+Test\+Event\+Listener\+::\+On\+Test\+Start (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classtesting_1_1_test_info}{Test\+Info}} \&}]{test\+\_\+info }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{classtesting_1_1internal_1_1_test_event_repeater_a4522c01f10f98d9e5bd97c7e94f3d2bf}{testing\+::internal\+::\+Test\+Event\+Repeater}}, \mbox{\hyperlink{classtesting_1_1internal_1_1_pretty_unit_test_result_printer_a079ac0eb5f8cdd2511cfd33ef931338b}{testing\+::internal\+::\+Pretty\+Unit\+Test\+Result\+Printer}}, \mbox{\hyperlink{classtesting_1_1internal_1_1_brief_unit_test_result_printer_aa83a33065f68e117bd7d840fe191be6a}{testing\+::internal\+::\+Brief\+Unit\+Test\+Result\+Printer}}, \mbox{\hyperlink{classtesting_1_1_empty_test_event_listener_a1d8c7f3f1f92826f668edae1bc5aadf4}{testing\+::\+Empty\+Test\+Event\+Listener}}, \mbox{\hyperlink{classtesting_1_1internal_1_1_event_recording_listener2_ac3231fff64b23bbd05e3a2cc57e20df9}{testing\+::internal\+::\+Event\+Recording\+Listener2}}, and \mbox{\hyperlink{classtesting_1_1internal_1_1_event_recording_listener_ad850af9e4276b9bfba61435b97a02094}{testing\+::internal\+::\+Event\+Recording\+Listener}}.
+
+\mbox{\Hypertarget{classtesting_1_1_test_event_listener_a8962caad5d2522c9160c794074a662ee}\label{classtesting_1_1_test_event_listener_a8962caad5d2522c9160c794074a662ee}} 
+\index{testing::TestEventListener@{testing::TestEventListener}!OnTestSuiteEnd@{OnTestSuiteEnd}}
+\index{OnTestSuiteEnd@{OnTestSuiteEnd}!testing::TestEventListener@{testing::TestEventListener}}
+\doxysubsubsection{\texorpdfstring{OnTestSuiteEnd()}{OnTestSuiteEnd()}}
+{\footnotesize\ttfamily virtual void testing\+::\+Test\+Event\+Listener\+::\+On\+Test\+Suite\+End (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classtesting_1_1_test_suite}{Test\+Suite}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented in \mbox{\hyperlink{classtesting_1_1internal_1_1_test_event_repeater_a59e442d1f79ea186499ef99284a60d4c}{testing\+::internal\+::\+Test\+Event\+Repeater}}, \mbox{\hyperlink{classtesting_1_1_empty_test_event_listener_aefdb73682d290791461e186d864db718}{testing\+::\+Empty\+Test\+Event\+Listener}}, and \mbox{\hyperlink{classtesting_1_1internal_1_1_event_recording_listener2_aefd67a80de94cdd8e2e43c0fad812bd2}{testing\+::internal\+::\+Event\+Recording\+Listener2}}.
+
+
+
+Definition at line 1132 of file gtest.\+h.
+
+\mbox{\Hypertarget{classtesting_1_1_test_event_listener_a2726cc70dfda861f109355f1d9f09dfe}\label{classtesting_1_1_test_event_listener_a2726cc70dfda861f109355f1d9f09dfe}} 
+\index{testing::TestEventListener@{testing::TestEventListener}!OnTestSuiteStart@{OnTestSuiteStart}}
+\index{OnTestSuiteStart@{OnTestSuiteStart}!testing::TestEventListener@{testing::TestEventListener}}
+\doxysubsubsection{\texorpdfstring{OnTestSuiteStart()}{OnTestSuiteStart()}}
+{\footnotesize\ttfamily virtual void testing\+::\+Test\+Event\+Listener\+::\+On\+Test\+Suite\+Start (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classtesting_1_1_test_suite}{Test\+Suite}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented in \mbox{\hyperlink{classtesting_1_1internal_1_1_test_event_repeater_aa54fdafe6dfdd46dbac108c17016a5f9}{testing\+::internal\+::\+Test\+Event\+Repeater}}, \mbox{\hyperlink{classtesting_1_1_empty_test_event_listener_a1e32e4bd4857822b6b50e6900aa5c651}{testing\+::\+Empty\+Test\+Event\+Listener}}, and \mbox{\hyperlink{classtesting_1_1internal_1_1_event_recording_listener2_a6bc3ac71f7f96e9c62b0c7dffd5f66b0}{testing\+::internal\+::\+Event\+Recording\+Listener2}}.
+
+
+
+Definition at line 1113 of file gtest.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{gtest_8h}{gtest.\+h}}\end{DoxyCompactItemize}

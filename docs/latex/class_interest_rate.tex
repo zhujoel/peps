@@ -1,0 +1,154 @@
+\hypertarget{class_interest_rate}{}\doxysection{Interest\+Rate Class Reference}
+\label{class_interest_rate}\index{InterestRate@{InterestRate}}
+
+
+{\ttfamily \#include $<$Interest\+Rate.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_interest_rate_a8b7bd87af139bacc1b8275e636e02b62}{Interest\+Rate}} (\mbox{\hyperlink{class_date_time}{Date\+Time}} $\ast$const current\+\_\+date, const std\+::vector$<$ \mbox{\hyperlink{class_date_time}{Date\+Time}} $\ast$ $>$ \&all\+\_\+dates, Pnl\+Mat $\ast$const interest\+\_\+path)
+\item 
+\mbox{\hyperlink{class_interest_rate_a484181142990589408e9615e5425c306}{$\sim$\+Interest\+Rate}} ()
+\item 
+double \mbox{\hyperlink{class_interest_rate_abe89bcc4df30257492ab69b73dbc2ab6}{get\+\_\+domestic\+\_\+rate}} ()
+\item 
+double \mbox{\hyperlink{class_interest_rate_a89cdcf2c7095ab722c11df802ce9955d}{get\+\_\+foreign\+\_\+rate}} (int index)
+\item 
+double \mbox{\hyperlink{class_interest_rate_a5dd72ed1c23151a6de426124d3862ca0}{compute\+\_\+domestic\+\_\+risk\+\_\+free\+\_\+asset}} (double t0, double t1)
+\item 
+double \mbox{\hyperlink{class_interest_rate_a3b87e02e6ef0ebf47adc2d5db0a3a1ef}{compute\+\_\+foreign\+\_\+risk\+\_\+free\+\_\+asset}} (double t0, double t1, int index)
+\end{DoxyCompactItemize}
+\doxysubsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_date_time}{Date\+Time}} $\ast$ \mbox{\hyperlink{class_interest_rate_aa0677c9e9a481ece393d82f754cae052}{current\+\_\+date\+\_\+}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{class_date_time}{Date\+Time}} $\ast$ $>$ \mbox{\hyperlink{class_interest_rate_a17c1b0aa4206ad51c9df42d1c4d4252e}{all\+\_\+dates\+\_\+}}
+\item 
+Pnl\+Mat $\ast$ \mbox{\hyperlink{class_interest_rate_abb9a83fc29704b4ffe4806184aaf3050}{interest\+\_\+path\+\_\+}}
+\item 
+Pnl\+Vect $\ast$ \mbox{\hyperlink{class_interest_rate_a79fe1f4cff33f8ef6110fc91d6c0105c}{rates\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 7 of file Interest\+Rate.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_interest_rate_a8b7bd87af139bacc1b8275e636e02b62}\label{class_interest_rate_a8b7bd87af139bacc1b8275e636e02b62}} 
+\index{InterestRate@{InterestRate}!InterestRate@{InterestRate}}
+\index{InterestRate@{InterestRate}!InterestRate@{InterestRate}}
+\doxysubsubsection{\texorpdfstring{InterestRate()}{InterestRate()}}
+{\footnotesize\ttfamily Interest\+Rate\+::\+Interest\+Rate (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_date_time}{Date\+Time}} $\ast$const}]{current\+\_\+date,  }\item[{const std\+::vector$<$ \mbox{\hyperlink{class_date_time}{Date\+Time}} $\ast$ $>$ \&}]{all\+\_\+dates,  }\item[{Pnl\+Mat $\ast$const}]{interest\+\_\+path }\end{DoxyParamCaption})}
+
+
+
+Definition at line 5 of file Interest\+Rate.\+cpp.
+
+\mbox{\Hypertarget{class_interest_rate_a484181142990589408e9615e5425c306}\label{class_interest_rate_a484181142990589408e9615e5425c306}} 
+\index{InterestRate@{InterestRate}!````~InterestRate@{$\sim$InterestRate}}
+\index{````~InterestRate@{$\sim$InterestRate}!InterestRate@{InterestRate}}
+\doxysubsubsection{\texorpdfstring{$\sim$InterestRate()}{~InterestRate()}}
+{\footnotesize\ttfamily Interest\+Rate\+::$\sim$\+Interest\+Rate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 14 of file Interest\+Rate.\+cpp.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_interest_rate_a5dd72ed1c23151a6de426124d3862ca0}\label{class_interest_rate_a5dd72ed1c23151a6de426124d3862ca0}} 
+\index{InterestRate@{InterestRate}!compute\_domestic\_risk\_free\_asset@{compute\_domestic\_risk\_free\_asset}}
+\index{compute\_domestic\_risk\_free\_asset@{compute\_domestic\_risk\_free\_asset}!InterestRate@{InterestRate}}
+\doxysubsubsection{\texorpdfstring{compute\_domestic\_risk\_free\_asset()}{compute\_domestic\_risk\_free\_asset()}}
+{\footnotesize\ttfamily double Interest\+Rate\+::compute\+\_\+domestic\+\_\+risk\+\_\+free\+\_\+asset (\begin{DoxyParamCaption}\item[{double}]{t0,  }\item[{double}]{t1 }\end{DoxyParamCaption})}
+
+
+
+Definition at line 26 of file Interest\+Rate.\+cpp.
+
+\mbox{\Hypertarget{class_interest_rate_a3b87e02e6ef0ebf47adc2d5db0a3a1ef}\label{class_interest_rate_a3b87e02e6ef0ebf47adc2d5db0a3a1ef}} 
+\index{InterestRate@{InterestRate}!compute\_foreign\_risk\_free\_asset@{compute\_foreign\_risk\_free\_asset}}
+\index{compute\_foreign\_risk\_free\_asset@{compute\_foreign\_risk\_free\_asset}!InterestRate@{InterestRate}}
+\doxysubsubsection{\texorpdfstring{compute\_foreign\_risk\_free\_asset()}{compute\_foreign\_risk\_free\_asset()}}
+{\footnotesize\ttfamily double Interest\+Rate\+::compute\+\_\+foreign\+\_\+risk\+\_\+free\+\_\+asset (\begin{DoxyParamCaption}\item[{double}]{t0,  }\item[{double}]{t1,  }\item[{int}]{index }\end{DoxyParamCaption})}
+
+
+
+Definition at line 30 of file Interest\+Rate.\+cpp.
+
+\mbox{\Hypertarget{class_interest_rate_abe89bcc4df30257492ab69b73dbc2ab6}\label{class_interest_rate_abe89bcc4df30257492ab69b73dbc2ab6}} 
+\index{InterestRate@{InterestRate}!get\_domestic\_rate@{get\_domestic\_rate}}
+\index{get\_domestic\_rate@{get\_domestic\_rate}!InterestRate@{InterestRate}}
+\doxysubsubsection{\texorpdfstring{get\_domestic\_rate()}{get\_domestic\_rate()}}
+{\footnotesize\ttfamily double Interest\+Rate\+::get\+\_\+domestic\+\_\+rate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 18 of file Interest\+Rate.\+cpp.
+
+\mbox{\Hypertarget{class_interest_rate_a89cdcf2c7095ab722c11df802ce9955d}\label{class_interest_rate_a89cdcf2c7095ab722c11df802ce9955d}} 
+\index{InterestRate@{InterestRate}!get\_foreign\_rate@{get\_foreign\_rate}}
+\index{get\_foreign\_rate@{get\_foreign\_rate}!InterestRate@{InterestRate}}
+\doxysubsubsection{\texorpdfstring{get\_foreign\_rate()}{get\_foreign\_rate()}}
+{\footnotesize\ttfamily double Interest\+Rate\+::get\+\_\+foreign\+\_\+rate (\begin{DoxyParamCaption}\item[{int}]{index }\end{DoxyParamCaption})}
+
+
+
+Definition at line 22 of file Interest\+Rate.\+cpp.
+
+
+
+\doxysubsection{Field Documentation}
+\mbox{\Hypertarget{class_interest_rate_a17c1b0aa4206ad51c9df42d1c4d4252e}\label{class_interest_rate_a17c1b0aa4206ad51c9df42d1c4d4252e}} 
+\index{InterestRate@{InterestRate}!all\_dates\_@{all\_dates\_}}
+\index{all\_dates\_@{all\_dates\_}!InterestRate@{InterestRate}}
+\doxysubsubsection{\texorpdfstring{all\_dates\_}{all\_dates\_}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{class_date_time}{Date\+Time}}$\ast$$>$ Interest\+Rate\+::all\+\_\+dates\+\_\+}
+
+
+
+Definition at line 10 of file Interest\+Rate.\+h.
+
+\mbox{\Hypertarget{class_interest_rate_aa0677c9e9a481ece393d82f754cae052}\label{class_interest_rate_aa0677c9e9a481ece393d82f754cae052}} 
+\index{InterestRate@{InterestRate}!current\_date\_@{current\_date\_}}
+\index{current\_date\_@{current\_date\_}!InterestRate@{InterestRate}}
+\doxysubsubsection{\texorpdfstring{current\_date\_}{current\_date\_}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_date_time}{Date\+Time}}$\ast$ Interest\+Rate\+::current\+\_\+date\+\_\+}
+
+
+
+Definition at line 9 of file Interest\+Rate.\+h.
+
+\mbox{\Hypertarget{class_interest_rate_abb9a83fc29704b4ffe4806184aaf3050}\label{class_interest_rate_abb9a83fc29704b4ffe4806184aaf3050}} 
+\index{InterestRate@{InterestRate}!interest\_path\_@{interest\_path\_}}
+\index{interest\_path\_@{interest\_path\_}!InterestRate@{InterestRate}}
+\doxysubsubsection{\texorpdfstring{interest\_path\_}{interest\_path\_}}
+{\footnotesize\ttfamily Pnl\+Mat$\ast$ Interest\+Rate\+::interest\+\_\+path\+\_\+}
+
+
+
+Definition at line 11 of file Interest\+Rate.\+h.
+
+\mbox{\Hypertarget{class_interest_rate_a79fe1f4cff33f8ef6110fc91d6c0105c}\label{class_interest_rate_a79fe1f4cff33f8ef6110fc91d6c0105c}} 
+\index{InterestRate@{InterestRate}!rates\_@{rates\_}}
+\index{rates\_@{rates\_}!InterestRate@{InterestRate}}
+\doxysubsubsection{\texorpdfstring{rates\_}{rates\_}}
+{\footnotesize\ttfamily Pnl\+Vect$\ast$ Interest\+Rate\+::rates\+\_\+}
+
+
+
+Definition at line 12 of file Interest\+Rate.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_interest_rate_8h}{Interest\+Rate.\+h}}\item 
+\mbox{\hyperlink{_interest_rate_8cpp}{Interest\+Rate.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,168 @@
+\hypertarget{class_quanto_option}{}\doxysection{Quanto\+Option Class Reference}
+\label{class_quanto_option}\index{QuantoOption@{QuantoOption}}
+
+
+{\ttfamily \#include $<$Quanto\+Option.\+h$>$}
+
+Inheritance diagram for Quanto\+Option\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_quanto_option}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_quanto_option_a3261d54ef415e8e80c9b40099eefa70a}{Quanto\+Option}} (double \mbox{\hyperlink{main_8cpp_ac94a6e5794c2d7b59588b14025cfba20}{T}}, int \mbox{\hyperlink{main_8cpp_a439227feff9d7f55384e8780cfc2eb82}{size}}, double rf, double K)
+\item 
+\mbox{\hyperlink{class_quanto_option_ac7b8fff6108c0ea9842af115fa479c5b}{$\sim$\+Quanto\+Option}} ()
+\item 
+void \mbox{\hyperlink{class_quanto_option_a28b95abc407b929861d885ff84b7ee1e}{adjust\+\_\+sigma}} (Pnl\+Mat $\ast$const sigma) const
+\item 
+void \mbox{\hyperlink{class_quanto_option_ac833369f8a9b7cbcf9a370152b3cd961}{adjust\+\_\+past}} (Pnl\+Mat $\ast$const past) const
+\item 
+void \mbox{\hyperlink{class_quanto_option_a9410b391d6d45727ddccff39ee7f571a}{adjust\+\_\+spot}} (Pnl\+Vect $\ast$const \mbox{\hyperlink{main_8cpp_aa2ef9b27c75403a8bfca1743f02f4687}{spot}}, double t) const
+\item 
+double \mbox{\hyperlink{class_quanto_option_a64dce833ded58c9dd1cb027e33cceccf}{get\+\_\+annee\+\_\+payoff}} () const
+\item 
+double \mbox{\hyperlink{class_quanto_option_af3dd394b4136caa58285a3172d2bef93}{payoff}} (const Pnl\+Mat $\ast$path)
+\end{DoxyCompactItemize}
+\doxysubsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{class_quanto_option_afc94b900b182501fae99efd9bbe0eee3}{K\+\_\+}}
+\item 
+double \mbox{\hyperlink{class_quanto_option_afea2cd29cd2e746cb6504d2aaa637987}{rf\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 7 of file Quanto\+Option.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_quanto_option_a3261d54ef415e8e80c9b40099eefa70a}\label{class_quanto_option_a3261d54ef415e8e80c9b40099eefa70a}} 
+\index{QuantoOption@{QuantoOption}!QuantoOption@{QuantoOption}}
+\index{QuantoOption@{QuantoOption}!QuantoOption@{QuantoOption}}
+\doxysubsubsection{\texorpdfstring{QuantoOption()}{QuantoOption()}}
+{\footnotesize\ttfamily Quanto\+Option\+::\+Quanto\+Option (\begin{DoxyParamCaption}\item[{double}]{T,  }\item[{int}]{size,  }\item[{double}]{rf,  }\item[{double}]{K }\end{DoxyParamCaption})}
+
+
+
+Definition at line 4 of file Quanto\+Option.\+cpp.
+
+\mbox{\Hypertarget{class_quanto_option_ac7b8fff6108c0ea9842af115fa479c5b}\label{class_quanto_option_ac7b8fff6108c0ea9842af115fa479c5b}} 
+\index{QuantoOption@{QuantoOption}!````~QuantoOption@{$\sim$QuantoOption}}
+\index{````~QuantoOption@{$\sim$QuantoOption}!QuantoOption@{QuantoOption}}
+\doxysubsubsection{\texorpdfstring{$\sim$QuantoOption()}{~QuantoOption()}}
+{\footnotesize\ttfamily Quanto\+Option\+::$\sim$\+Quanto\+Option (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 9 of file Quanto\+Option.\+cpp.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_quanto_option_ac833369f8a9b7cbcf9a370152b3cd961}\label{class_quanto_option_ac833369f8a9b7cbcf9a370152b3cd961}} 
+\index{QuantoOption@{QuantoOption}!adjust\_past@{adjust\_past}}
+\index{adjust\_past@{adjust\_past}!QuantoOption@{QuantoOption}}
+\doxysubsubsection{\texorpdfstring{adjust\_past()}{adjust\_past()}}
+{\footnotesize\ttfamily void Quanto\+Option\+::adjust\+\_\+past (\begin{DoxyParamCaption}\item[{Pnl\+Mat $\ast$const}]{past }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_i_derivative_aa10c97e9dc7760e6ae1a1616e89ed2c8}{I\+Derivative}}.
+
+
+
+Definition at line 15 of file Quanto\+Option.\+cpp.
+
+\mbox{\Hypertarget{class_quanto_option_a28b95abc407b929861d885ff84b7ee1e}\label{class_quanto_option_a28b95abc407b929861d885ff84b7ee1e}} 
+\index{QuantoOption@{QuantoOption}!adjust\_sigma@{adjust\_sigma}}
+\index{adjust\_sigma@{adjust\_sigma}!QuantoOption@{QuantoOption}}
+\doxysubsubsection{\texorpdfstring{adjust\_sigma()}{adjust\_sigma()}}
+{\footnotesize\ttfamily void Quanto\+Option\+::adjust\+\_\+sigma (\begin{DoxyParamCaption}\item[{Pnl\+Mat $\ast$const}]{sigma }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_i_derivative_a9b796dc5098ebc24eed8d11e4f016b0f}{I\+Derivative}}.
+
+
+
+Definition at line 14 of file Quanto\+Option.\+cpp.
+
+\mbox{\Hypertarget{class_quanto_option_a9410b391d6d45727ddccff39ee7f571a}\label{class_quanto_option_a9410b391d6d45727ddccff39ee7f571a}} 
+\index{QuantoOption@{QuantoOption}!adjust\_spot@{adjust\_spot}}
+\index{adjust\_spot@{adjust\_spot}!QuantoOption@{QuantoOption}}
+\doxysubsubsection{\texorpdfstring{adjust\_spot()}{adjust\_spot()}}
+{\footnotesize\ttfamily void Quanto\+Option\+::adjust\+\_\+spot (\begin{DoxyParamCaption}\item[{Pnl\+Vect $\ast$const}]{spot,  }\item[{double}]{t }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_i_derivative_a3b853352f6393b8d9b2449f844a5858a}{I\+Derivative}}.
+
+
+
+Definition at line 16 of file Quanto\+Option.\+cpp.
+
+\mbox{\Hypertarget{class_quanto_option_a64dce833ded58c9dd1cb027e33cceccf}\label{class_quanto_option_a64dce833ded58c9dd1cb027e33cceccf}} 
+\index{QuantoOption@{QuantoOption}!get\_annee\_payoff@{get\_annee\_payoff}}
+\index{get\_annee\_payoff@{get\_annee\_payoff}!QuantoOption@{QuantoOption}}
+\doxysubsubsection{\texorpdfstring{get\_annee\_payoff()}{get\_annee\_payoff()}}
+{\footnotesize\ttfamily double Quanto\+Option\+::get\+\_\+annee\+\_\+payoff (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_i_derivative_aebbf52d824a998af1146fee0893826e5}{I\+Derivative}}.
+
+
+
+Definition at line 18 of file Quanto\+Option.\+cpp.
+
+\mbox{\Hypertarget{class_quanto_option_af3dd394b4136caa58285a3172d2bef93}\label{class_quanto_option_af3dd394b4136caa58285a3172d2bef93}} 
+\index{QuantoOption@{QuantoOption}!payoff@{payoff}}
+\index{payoff@{payoff}!QuantoOption@{QuantoOption}}
+\doxysubsubsection{\texorpdfstring{payoff()}{payoff()}}
+{\footnotesize\ttfamily double Quanto\+Option\+::payoff (\begin{DoxyParamCaption}\item[{const Pnl\+Mat $\ast$}]{path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_i_derivative_a4cd6216d1efe455a26f66dcddd674343}{I\+Derivative}}.
+
+
+
+Definition at line 22 of file Quanto\+Option.\+cpp.
+
+
+
+\doxysubsection{Field Documentation}
+\mbox{\Hypertarget{class_quanto_option_afc94b900b182501fae99efd9bbe0eee3}\label{class_quanto_option_afc94b900b182501fae99efd9bbe0eee3}} 
+\index{QuantoOption@{QuantoOption}!K\_@{K\_}}
+\index{K\_@{K\_}!QuantoOption@{QuantoOption}}
+\doxysubsubsection{\texorpdfstring{K\_}{K\_}}
+{\footnotesize\ttfamily double Quanto\+Option\+::\+K\+\_\+}
+
+
+
+Definition at line 10 of file Quanto\+Option.\+h.
+
+\mbox{\Hypertarget{class_quanto_option_afea2cd29cd2e746cb6504d2aaa637987}\label{class_quanto_option_afea2cd29cd2e746cb6504d2aaa637987}} 
+\index{QuantoOption@{QuantoOption}!rf\_@{rf\_}}
+\index{rf\_@{rf\_}!QuantoOption@{QuantoOption}}
+\doxysubsubsection{\texorpdfstring{rf\_}{rf\_}}
+{\footnotesize\ttfamily double Quanto\+Option\+::rf\+\_\+}
+
+
+
+Definition at line 11 of file Quanto\+Option.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_quanto_option_8h}{Quanto\+Option.\+h}}\item 
+\mbox{\hyperlink{_quanto_option_8cpp}{Quanto\+Option.\+cpp}}\end{DoxyCompactItemize}

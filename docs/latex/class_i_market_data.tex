@@ -1,0 +1,148 @@
+\hypertarget{class_i_market_data}{}\doxysection{I\+Market\+Data Class Reference}
+\label{class_i_market_data}\index{IMarketData@{IMarketData}}
+
+
+{\ttfamily \#include $<$I\+Market\+Data.\+h$>$}
+
+Inheritance diagram for I\+Market\+Data\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_i_market_data}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_i_market_data_a6105dfc61940ce559b6c68b864d510f0}{I\+Market\+Data}} (const std\+::string \&name, const \mbox{\hyperlink{class_date_time}{Date\+Time}} $\ast$const start\+Date, const \mbox{\hyperlink{class_date_time}{Date\+Time}} $\ast$const end\+Date)
+\item 
+virtual \mbox{\hyperlink{class_i_market_data_add1e22032a9f0c28ccad69d1bba49db3}{$\sim$\+I\+Market\+Data}} ()
+\item 
+virtual void \mbox{\hyperlink{class_i_market_data_aa612002fd8491c496372405f08227f34}{set\+\_\+data}} ()=0
+\end{DoxyCompactItemize}
+\doxysubsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{class_i_market_data_a0211f1f049829b69bcd44b7f47c57af7}{name\+\_\+}}
+\item 
+\mbox{\hyperlink{class_date_time}{Date\+Time}} $\ast$ \mbox{\hyperlink{class_i_market_data_a9353a25c33ff48854c67cddf86245687}{start\+Date\+\_\+}}
+\item 
+\mbox{\hyperlink{class_date_time}{Date\+Time}} $\ast$ \mbox{\hyperlink{class_i_market_data_a374e6e25521589a10041306ef4895ccd}{end\+Date\+\_\+}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{class_date_time}{Date\+Time}} $\ast$ $>$ \mbox{\hyperlink{class_i_market_data_a3ad23163b73a4063009fe5875d0b4566}{dates\+\_\+}}
+\item 
+Pnl\+Mat $\ast$ \mbox{\hyperlink{class_i_market_data_a3721d949c0ab4500427de7c5e4c72bed}{path\+\_\+}}
+\item 
+Pnl\+Mat $\ast$ \mbox{\hyperlink{class_i_market_data_a1c28f02d5080bb94c672c2d671ec61cd}{interest\+\_\+path\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 5 of file I\+Market\+Data.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_i_market_data_a6105dfc61940ce559b6c68b864d510f0}\label{class_i_market_data_a6105dfc61940ce559b6c68b864d510f0}} 
+\index{IMarketData@{IMarketData}!IMarketData@{IMarketData}}
+\index{IMarketData@{IMarketData}!IMarketData@{IMarketData}}
+\doxysubsubsection{\texorpdfstring{IMarketData()}{IMarketData()}}
+{\footnotesize\ttfamily I\+Market\+Data\+::\+I\+Market\+Data (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name,  }\item[{const \mbox{\hyperlink{class_date_time}{Date\+Time}} $\ast$const}]{start\+Date,  }\item[{const \mbox{\hyperlink{class_date_time}{Date\+Time}} $\ast$const}]{end\+Date }\end{DoxyParamCaption})}
+
+
+
+Definition at line 3 of file I\+Market\+Data.\+cpp.
+
+\mbox{\Hypertarget{class_i_market_data_add1e22032a9f0c28ccad69d1bba49db3}\label{class_i_market_data_add1e22032a9f0c28ccad69d1bba49db3}} 
+\index{IMarketData@{IMarketData}!````~IMarketData@{$\sim$IMarketData}}
+\index{````~IMarketData@{$\sim$IMarketData}!IMarketData@{IMarketData}}
+\doxysubsubsection{\texorpdfstring{$\sim$IMarketData()}{~IMarketData()}}
+{\footnotesize\ttfamily I\+Market\+Data\+::$\sim$\+I\+Market\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Definition at line 11 of file I\+Market\+Data.\+cpp.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_i_market_data_aa612002fd8491c496372405f08227f34}\label{class_i_market_data_aa612002fd8491c496372405f08227f34}} 
+\index{IMarketData@{IMarketData}!set\_data@{set\_data}}
+\index{set\_data@{set\_data}!IMarketData@{IMarketData}}
+\doxysubsubsection{\texorpdfstring{set\_data()}{set\_data()}}
+{\footnotesize\ttfamily virtual void I\+Market\+Data\+::set\+\_\+data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_historical_market_data_a3adea231b83fdbea98ea9ddb59417ebd}{Historical\+Market\+Data}}.
+
+
+
+\doxysubsection{Field Documentation}
+\mbox{\Hypertarget{class_i_market_data_a3ad23163b73a4063009fe5875d0b4566}\label{class_i_market_data_a3ad23163b73a4063009fe5875d0b4566}} 
+\index{IMarketData@{IMarketData}!dates\_@{dates\_}}
+\index{dates\_@{dates\_}!IMarketData@{IMarketData}}
+\doxysubsubsection{\texorpdfstring{dates\_}{dates\_}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{class_date_time}{Date\+Time}}$\ast$$>$ I\+Market\+Data\+::dates\+\_\+}
+
+
+
+Definition at line 10 of file I\+Market\+Data.\+h.
+
+\mbox{\Hypertarget{class_i_market_data_a374e6e25521589a10041306ef4895ccd}\label{class_i_market_data_a374e6e25521589a10041306ef4895ccd}} 
+\index{IMarketData@{IMarketData}!endDate\_@{endDate\_}}
+\index{endDate\_@{endDate\_}!IMarketData@{IMarketData}}
+\doxysubsubsection{\texorpdfstring{endDate\_}{endDate\_}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_date_time}{Date\+Time}}$\ast$ I\+Market\+Data\+::end\+Date\+\_\+}
+
+
+
+Definition at line 9 of file I\+Market\+Data.\+h.
+
+\mbox{\Hypertarget{class_i_market_data_a1c28f02d5080bb94c672c2d671ec61cd}\label{class_i_market_data_a1c28f02d5080bb94c672c2d671ec61cd}} 
+\index{IMarketData@{IMarketData}!interest\_path\_@{interest\_path\_}}
+\index{interest\_path\_@{interest\_path\_}!IMarketData@{IMarketData}}
+\doxysubsubsection{\texorpdfstring{interest\_path\_}{interest\_path\_}}
+{\footnotesize\ttfamily Pnl\+Mat$\ast$ I\+Market\+Data\+::interest\+\_\+path\+\_\+}
+
+
+
+Definition at line 12 of file I\+Market\+Data.\+h.
+
+\mbox{\Hypertarget{class_i_market_data_a0211f1f049829b69bcd44b7f47c57af7}\label{class_i_market_data_a0211f1f049829b69bcd44b7f47c57af7}} 
+\index{IMarketData@{IMarketData}!name\_@{name\_}}
+\index{name\_@{name\_}!IMarketData@{IMarketData}}
+\doxysubsubsection{\texorpdfstring{name\_}{name\_}}
+{\footnotesize\ttfamily std\+::string I\+Market\+Data\+::name\+\_\+}
+
+
+
+Definition at line 7 of file I\+Market\+Data.\+h.
+
+\mbox{\Hypertarget{class_i_market_data_a3721d949c0ab4500427de7c5e4c72bed}\label{class_i_market_data_a3721d949c0ab4500427de7c5e4c72bed}} 
+\index{IMarketData@{IMarketData}!path\_@{path\_}}
+\index{path\_@{path\_}!IMarketData@{IMarketData}}
+\doxysubsubsection{\texorpdfstring{path\_}{path\_}}
+{\footnotesize\ttfamily Pnl\+Mat$\ast$ I\+Market\+Data\+::path\+\_\+}
+
+
+
+Definition at line 11 of file I\+Market\+Data.\+h.
+
+\mbox{\Hypertarget{class_i_market_data_a9353a25c33ff48854c67cddf86245687}\label{class_i_market_data_a9353a25c33ff48854c67cddf86245687}} 
+\index{IMarketData@{IMarketData}!startDate\_@{startDate\_}}
+\index{startDate\_@{startDate\_}!IMarketData@{IMarketData}}
+\doxysubsubsection{\texorpdfstring{startDate\_}{startDate\_}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_date_time}{Date\+Time}}$\ast$ I\+Market\+Data\+::start\+Date\+\_\+}
+
+
+
+Definition at line 8 of file I\+Market\+Data.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_i_market_data_8h}{I\+Market\+Data.\+h}}\item 
+\mbox{\hyperlink{_i_market_data_8cpp}{I\+Market\+Data.\+cpp}}\end{DoxyCompactItemize}

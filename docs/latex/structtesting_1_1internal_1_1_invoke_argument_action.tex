@@ -1,0 +1,62 @@
+\hypertarget{structtesting_1_1internal_1_1_invoke_argument_action}{}\doxysection{testing\+::internal\+::Invoke\+Argument\+Action$<$ index, Params $>$ Struct Template Reference}
+\label{structtesting_1_1internal_1_1_invoke_argument_action}\index{testing::internal::InvokeArgumentAction$<$ index, Params $>$@{testing::internal::InvokeArgumentAction$<$ index, Params $>$}}
+
+
+{\ttfamily \#include $<$gmock-\/more-\/actions.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename... Args$>$ }\\auto \mbox{\hyperlink{structtesting_1_1internal_1_1_invoke_argument_action_ab7650af9e9588be25a899dcb56dd344c}{operator()}} (Args \&\&... args) const -\/$>$ decltype(\mbox{\hyperlink{namespacetesting_1_1internal_a4c6f0469015303fe29a4f08ba036e6d6}{internal\+::\+Invoke\+Argument}}(std\+::get$<$ index $>$(std\+::forward\+\_\+as\+\_\+tuple(std\+::forward$<$ Args $>$(args)...)), std\+::declval$<$ const Params \& $>$()...))
+\end{DoxyCompactItemize}
+\doxysubsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classtesting_1_1internal_1_1_flat_tuple}{internal\+::\+Flat\+Tuple}}$<$ Params... $>$ \mbox{\hyperlink{structtesting_1_1internal_1_1_invoke_argument_action_a7f5d847630b6bfc6474da4d174b30bd3}{params}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$std\+::size\+\_\+t index, typename... Params$>$\newline
+struct testing\+::internal\+::\+Invoke\+Argument\+Action$<$ index, Params $>$}
+
+
+
+Definition at line 514 of file gmock-\/more-\/actions.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{structtesting_1_1internal_1_1_invoke_argument_action_ab7650af9e9588be25a899dcb56dd344c}\label{structtesting_1_1internal_1_1_invoke_argument_action_ab7650af9e9588be25a899dcb56dd344c}} 
+\index{testing::internal::InvokeArgumentAction$<$ index, Params $>$@{testing::internal::InvokeArgumentAction$<$ index, Params $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!testing::internal::InvokeArgumentAction$<$ index, Params $>$@{testing::internal::InvokeArgumentAction$<$ index, Params $>$}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}}
+{\footnotesize\ttfamily template$<$std\+::size\+\_\+t index, typename... Params$>$ \\
+template$<$typename... Args$>$ \\
+auto \mbox{\hyperlink{structtesting_1_1internal_1_1_invoke_argument_action}{testing\+::internal\+::\+Invoke\+Argument\+Action}}$<$ index, Params $>$\+::operator() (\begin{DoxyParamCaption}\item[{Args \&\&...}]{args }\end{DoxyParamCaption}) const -\/$>$ decltype(\mbox{\hyperlink{namespacetesting_1_1internal_a4c6f0469015303fe29a4f08ba036e6d6}{internal\+::\+Invoke\+Argument}}(
+      std\+::get$<$index$>$(std\+::forward\+\_\+as\+\_\+tuple(std\+::forward$<$Args$>$(args)...)),
+      std\+::declval$<$const Params\&$>$()...)) \hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 516 of file gmock-\/more-\/actions.\+h.
+
+
+
+\doxysubsection{Field Documentation}
+\mbox{\Hypertarget{structtesting_1_1internal_1_1_invoke_argument_action_a7f5d847630b6bfc6474da4d174b30bd3}\label{structtesting_1_1internal_1_1_invoke_argument_action_a7f5d847630b6bfc6474da4d174b30bd3}} 
+\index{testing::internal::InvokeArgumentAction$<$ index, Params $>$@{testing::internal::InvokeArgumentAction$<$ index, Params $>$}!params@{params}}
+\index{params@{params}!testing::internal::InvokeArgumentAction$<$ index, Params $>$@{testing::internal::InvokeArgumentAction$<$ index, Params $>$}}
+\doxysubsubsection{\texorpdfstring{params}{params}}
+{\footnotesize\ttfamily template$<$std\+::size\+\_\+t index, typename... Params$>$ \\
+\mbox{\hyperlink{classtesting_1_1internal_1_1_flat_tuple}{internal\+::\+Flat\+Tuple}}$<$Params...$>$ \mbox{\hyperlink{structtesting_1_1internal_1_1_invoke_argument_action}{testing\+::internal\+::\+Invoke\+Argument\+Action}}$<$ index, Params $>$\+::params}
+
+
+
+Definition at line 528 of file gmock-\/more-\/actions.\+h.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{gmock-more-actions_8h}{gmock-\/more-\/actions.\+h}}\end{DoxyCompactItemize}

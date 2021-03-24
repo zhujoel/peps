@@ -1,0 +1,123 @@
+\hypertarget{class_standard_monte_carlo_pricer}{}\doxysection{Standard\+Monte\+Carlo\+Pricer Class Reference}
+\label{class_standard_monte_carlo_pricer}\index{StandardMonteCarloPricer@{StandardMonteCarloPricer}}
+
+
+{\ttfamily \#include $<$Standard\+Monte\+Carlo\+Pricer.\+h$>$}
+
+Inheritance diagram for Standard\+Monte\+Carlo\+Pricer\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_standard_monte_carlo_pricer}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_standard_monte_carlo_pricer_afdcda5041cb665261872e88715009756}{Standard\+Monte\+Carlo\+Pricer}} (\mbox{\hyperlink{class_i_model}{I\+Model}} $\ast$const \mbox{\hyperlink{main_8cpp_acc30d8139efec3a4355aad7ab4174aa3}{model}}, \mbox{\hyperlink{class_i_derivative}{I\+Derivative}} $\ast$const derivative, Pnl\+Rng $\ast$const \mbox{\hyperlink{main_8cpp_aca3390d34375a96cda44d0eb710f0356}{rng}}, double \mbox{\hyperlink{main_8cpp_a65b08c6498fd74e5147cda8c86f7afe5}{fd\+Step}}, int \mbox{\hyperlink{main_8cpp_a35845aded68901e65d46063fbaef59f3}{nb\+Samples}})
+\item 
+\mbox{\hyperlink{class_standard_monte_carlo_pricer_a78105c248cffb4ed6bda3330ab92ab07}{$\sim$\+Standard\+Monte\+Carlo\+Pricer}} ()
+\item 
+void \mbox{\hyperlink{class_standard_monte_carlo_pricer_aa061467b8cadd860113ea0d0ea185b30}{price\+\_\+and\+\_\+delta}} (const Pnl\+Vect $\ast$const \mbox{\hyperlink{main_8cpp_aa2ef9b27c75403a8bfca1743f02f4687}{spot}}, double t, double \&\mbox{\hyperlink{main_8cpp_aa63dfbc85d8ebe8c89057bd41e5a1da7}{prix}}, double \&price\+\_\+std\+\_\+dev, Pnl\+Vect $\ast$const \mbox{\hyperlink{main_8cpp_a974f69d79f529d6ce32c6fde0d3661fc}{delta}}, Pnl\+Vect $\ast$const \mbox{\hyperlink{main_8cpp_a25e2050b264bee237ab52babed9702ca}{delta\+\_\+std\+\_\+dev}})
+\item 
+void \mbox{\hyperlink{class_standard_monte_carlo_pricer_a79fbb4c8a521c52a2a11d70724d85e78}{price}} (const Pnl\+Vect $\ast$const \mbox{\hyperlink{main_8cpp_aa2ef9b27c75403a8bfca1743f02f4687}{spot}}, double t, double \&\mbox{\hyperlink{main_8cpp_aa63dfbc85d8ebe8c89057bd41e5a1da7}{prix}}, double \&price\+\_\+std\+\_\+dev)
+\item 
+void \mbox{\hyperlink{class_standard_monte_carlo_pricer_a4744066f45905774b99aee4142adbf77}{add\+\_\+price}} (double t, double \&\mbox{\hyperlink{main_8cpp_aa63dfbc85d8ebe8c89057bd41e5a1da7}{prix}}, double \&std\+\_\+dev)
+\item 
+void \mbox{\hyperlink{class_standard_monte_carlo_pricer_ad4cf30b7ad99f1cc9aa1274d23e5da26}{add\+\_\+delta}} (double t, Pnl\+Vect $\ast$const \mbox{\hyperlink{main_8cpp_a974f69d79f529d6ce32c6fde0d3661fc}{delta}}, Pnl\+Vect $\ast$const std\+\_\+dev)
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 5 of file Standard\+Monte\+Carlo\+Pricer.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_standard_monte_carlo_pricer_afdcda5041cb665261872e88715009756}\label{class_standard_monte_carlo_pricer_afdcda5041cb665261872e88715009756}} 
+\index{StandardMonteCarloPricer@{StandardMonteCarloPricer}!StandardMonteCarloPricer@{StandardMonteCarloPricer}}
+\index{StandardMonteCarloPricer@{StandardMonteCarloPricer}!StandardMonteCarloPricer@{StandardMonteCarloPricer}}
+\doxysubsubsection{\texorpdfstring{StandardMonteCarloPricer()}{StandardMonteCarloPricer()}}
+{\footnotesize\ttfamily Standard\+Monte\+Carlo\+Pricer\+::\+Standard\+Monte\+Carlo\+Pricer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_i_model}{I\+Model}} $\ast$const}]{model,  }\item[{\mbox{\hyperlink{class_i_derivative}{I\+Derivative}} $\ast$const}]{derivative,  }\item[{Pnl\+Rng $\ast$const}]{rng,  }\item[{double}]{fd\+Step,  }\item[{int}]{nb\+Samples }\end{DoxyParamCaption})}
+
+
+
+Definition at line 4 of file Standard\+Monte\+Carlo\+Pricer.\+cpp.
+
+\mbox{\Hypertarget{class_standard_monte_carlo_pricer_a78105c248cffb4ed6bda3330ab92ab07}\label{class_standard_monte_carlo_pricer_a78105c248cffb4ed6bda3330ab92ab07}} 
+\index{StandardMonteCarloPricer@{StandardMonteCarloPricer}!````~StandardMonteCarloPricer@{$\sim$StandardMonteCarloPricer}}
+\index{````~StandardMonteCarloPricer@{$\sim$StandardMonteCarloPricer}!StandardMonteCarloPricer@{StandardMonteCarloPricer}}
+\doxysubsubsection{\texorpdfstring{$\sim$StandardMonteCarloPricer()}{~StandardMonteCarloPricer()}}
+{\footnotesize\ttfamily Standard\+Monte\+Carlo\+Pricer\+::$\sim$\+Standard\+Monte\+Carlo\+Pricer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 9 of file Standard\+Monte\+Carlo\+Pricer.\+cpp.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_standard_monte_carlo_pricer_ad4cf30b7ad99f1cc9aa1274d23e5da26}\label{class_standard_monte_carlo_pricer_ad4cf30b7ad99f1cc9aa1274d23e5da26}} 
+\index{StandardMonteCarloPricer@{StandardMonteCarloPricer}!add\_delta@{add\_delta}}
+\index{add\_delta@{add\_delta}!StandardMonteCarloPricer@{StandardMonteCarloPricer}}
+\doxysubsubsection{\texorpdfstring{add\_delta()}{add\_delta()}}
+{\footnotesize\ttfamily void Standard\+Monte\+Carlo\+Pricer\+::add\+\_\+delta (\begin{DoxyParamCaption}\item[{double}]{t,  }\item[{Pnl\+Vect $\ast$const}]{delta,  }\item[{Pnl\+Vect $\ast$const}]{std\+\_\+dev }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_i_pricer_aa964346e5ba2682296b2ddfeaba3c6a0}{I\+Pricer}}.
+
+
+
+Definition at line 73 of file Standard\+Monte\+Carlo\+Pricer.\+cpp.
+
+\mbox{\Hypertarget{class_standard_monte_carlo_pricer_a4744066f45905774b99aee4142adbf77}\label{class_standard_monte_carlo_pricer_a4744066f45905774b99aee4142adbf77}} 
+\index{StandardMonteCarloPricer@{StandardMonteCarloPricer}!add\_price@{add\_price}}
+\index{add\_price@{add\_price}!StandardMonteCarloPricer@{StandardMonteCarloPricer}}
+\doxysubsubsection{\texorpdfstring{add\_price()}{add\_price()}}
+{\footnotesize\ttfamily void Standard\+Monte\+Carlo\+Pricer\+::add\+\_\+price (\begin{DoxyParamCaption}\item[{double}]{t,  }\item[{double \&}]{prix,  }\item[{double \&}]{std\+\_\+dev }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_i_pricer_a1e2f1e65f82eeb8e95aff4e8a6d11524}{I\+Pricer}}.
+
+
+
+Definition at line 62 of file Standard\+Monte\+Carlo\+Pricer.\+cpp.
+
+\mbox{\Hypertarget{class_standard_monte_carlo_pricer_a79fbb4c8a521c52a2a11d70724d85e78}\label{class_standard_monte_carlo_pricer_a79fbb4c8a521c52a2a11d70724d85e78}} 
+\index{StandardMonteCarloPricer@{StandardMonteCarloPricer}!price@{price}}
+\index{price@{price}!StandardMonteCarloPricer@{StandardMonteCarloPricer}}
+\doxysubsubsection{\texorpdfstring{price()}{price()}}
+{\footnotesize\ttfamily void Standard\+Monte\+Carlo\+Pricer\+::price (\begin{DoxyParamCaption}\item[{const Pnl\+Vect $\ast$const}]{spot,  }\item[{double}]{t,  }\item[{double \&}]{prix,  }\item[{double \&}]{price\+\_\+std\+\_\+dev }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_i_pricer_a5c77dfcb7ed440be513bca4e67a9ee99}{I\+Pricer}}.
+
+
+
+Definition at line 44 of file Standard\+Monte\+Carlo\+Pricer.\+cpp.
+
+\mbox{\Hypertarget{class_standard_monte_carlo_pricer_aa061467b8cadd860113ea0d0ea185b30}\label{class_standard_monte_carlo_pricer_aa061467b8cadd860113ea0d0ea185b30}} 
+\index{StandardMonteCarloPricer@{StandardMonteCarloPricer}!price\_and\_delta@{price\_and\_delta}}
+\index{price\_and\_delta@{price\_and\_delta}!StandardMonteCarloPricer@{StandardMonteCarloPricer}}
+\doxysubsubsection{\texorpdfstring{price\_and\_delta()}{price\_and\_delta()}}
+{\footnotesize\ttfamily void Standard\+Monte\+Carlo\+Pricer\+::price\+\_\+and\+\_\+delta (\begin{DoxyParamCaption}\item[{const Pnl\+Vect $\ast$const}]{spot,  }\item[{double}]{t,  }\item[{double \&}]{prix,  }\item[{double \&}]{price\+\_\+std\+\_\+dev,  }\item[{Pnl\+Vect $\ast$const}]{delta,  }\item[{Pnl\+Vect $\ast$const}]{delta\+\_\+std\+\_\+dev }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_i_pricer_ae8679cb23c5490116a7f4fe14b5b04b6}{I\+Pricer}}.
+
+
+
+Definition at line 13 of file Standard\+Monte\+Carlo\+Pricer.\+cpp.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_standard_monte_carlo_pricer_8h}{Standard\+Monte\+Carlo\+Pricer.\+h}}\item 
+\mbox{\hyperlink{_standard_monte_carlo_pricer_8cpp}{Standard\+Monte\+Carlo\+Pricer.\+cpp}}\end{DoxyCompactItemize}

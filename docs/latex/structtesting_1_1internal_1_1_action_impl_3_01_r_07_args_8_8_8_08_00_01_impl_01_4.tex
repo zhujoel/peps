@@ -1,0 +1,130 @@
+\hypertarget{structtesting_1_1internal_1_1_action_impl_3_01_r_07_args_8_8_8_08_00_01_impl_01_4}{}\doxysection{testing\+::internal\+::Action\+Impl$<$ R(Args...), Impl $>$ Struct Template Reference}
+\label{structtesting_1_1internal_1_1_action_impl_3_01_r_07_args_8_8_8_08_00_01_impl_01_4}\index{testing::internal::ActionImpl$<$ R(Args...), Impl $>$@{testing::internal::ActionImpl$<$ R(Args...), Impl $>$}}
+
+
+{\ttfamily \#include $<$gmock-\/actions.\+h$>$}
+
+Inheritance diagram for testing\+::internal\+::Action\+Impl$<$ R(Args...), Impl $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{structtesting_1_1internal_1_1_action_impl_3_01_r_07_args_8_8_8_08_00_01_impl_01_4}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{structtesting_1_1internal_1_1_action_impl_3_01_r_07_args_8_8_8_08_00_01_impl_01_4_a4dededa4ec14ef85f71ca3978e83057e}{Base}} = typename \mbox{\hyperlink{structtesting_1_1internal_1_1_impl_base}{Impl\+Base}}$<$ Impl $>$\+::type
+\item 
+using \mbox{\hyperlink{structtesting_1_1internal_1_1_action_impl_3_01_r_07_args_8_8_8_08_00_01_impl_01_4_adcf7b7f64c8f966f5cc101176b6a35f9}{function\+\_\+type}} = R(Args...)
+\item 
+using \mbox{\hyperlink{structtesting_1_1internal_1_1_action_impl_3_01_r_07_args_8_8_8_08_00_01_impl_01_4_a056940cbe95b0ef5c0a10e2a4c654b69}{args\+\_\+type}} = std\+::tuple$<$ Args... $>$
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structtesting_1_1internal_1_1_action_impl_3_01_r_07_args_8_8_8_08_00_01_impl_01_4_ad0fed32bba64bb87cde837d5f5b59dd6}{Action\+Impl}} ()=default
+\item 
+\mbox{\hyperlink{structtesting_1_1internal_1_1_action_impl_3_01_r_07_args_8_8_8_08_00_01_impl_01_4_afc5fe33da4094b1be005bc182d1d2d31}{Action\+Impl}} (std\+::shared\+\_\+ptr$<$ Impl $>$ impl)
+\item 
+R \mbox{\hyperlink{structtesting_1_1internal_1_1_action_impl_3_01_r_07_args_8_8_8_08_00_01_impl_01_4_a97a9ef032b3804ba69ca675a0edb2843}{operator()}} (Args \&\&... arg) const
+\item 
+{\footnotesize template$<$std\+::size\+\_\+t... arg\+\_\+id, std\+::size\+\_\+t... excess\+\_\+id$>$ }\\R \mbox{\hyperlink{structtesting_1_1internal_1_1_action_impl_3_01_r_07_args_8_8_8_08_00_01_impl_01_4_add15fbdb69e763e8e2902e090fb77110}{Apply}} (\mbox{\hyperlink{structtesting_1_1internal_1_1_index_sequence}{Index\+Sequence}}$<$ arg\+\_\+id... $>$, \mbox{\hyperlink{structtesting_1_1internal_1_1_index_sequence}{Index\+Sequence}}$<$ excess\+\_\+id... $>$, const \mbox{\hyperlink{structtesting_1_1internal_1_1_action_impl_3_01_r_07_args_8_8_8_08_00_01_impl_01_4_a056940cbe95b0ef5c0a10e2a4c654b69}{args\+\_\+type}} \&args) const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename R, typename... Args, typename Impl$>$\newline
+struct testing\+::internal\+::\+Action\+Impl$<$ R(\+Args...), Impl $>$}
+
+
+
+Definition at line 1499 of file gmock-\/actions.\+h.
+
+
+
+\doxysubsection{Member Typedef Documentation}
+\mbox{\Hypertarget{structtesting_1_1internal_1_1_action_impl_3_01_r_07_args_8_8_8_08_00_01_impl_01_4_a056940cbe95b0ef5c0a10e2a4c654b69}\label{structtesting_1_1internal_1_1_action_impl_3_01_r_07_args_8_8_8_08_00_01_impl_01_4_a056940cbe95b0ef5c0a10e2a4c654b69}} 
+\index{testing::internal::ActionImpl$<$ R(Args...), Impl $>$@{testing::internal::ActionImpl$<$ R(Args...), Impl $>$}!args\_type@{args\_type}}
+\index{args\_type@{args\_type}!testing::internal::ActionImpl$<$ R(Args...), Impl $>$@{testing::internal::ActionImpl$<$ R(Args...), Impl $>$}}
+\doxysubsubsection{\texorpdfstring{args\_type}{args\_type}}
+{\footnotesize\ttfamily template$<$typename R , typename... Args, typename Impl $>$ \\
+using \mbox{\hyperlink{structtesting_1_1internal_1_1_action_impl}{testing\+::internal\+::\+Action\+Impl}}$<$ R(Args...), Impl $>$\+::\mbox{\hyperlink{structtesting_1_1internal_1_1_action_impl_3_01_r_07_args_8_8_8_08_00_01_impl_01_4_a056940cbe95b0ef5c0a10e2a4c654b69}{args\+\_\+type}} =  std\+::tuple$<$Args...$>$}
+
+
+
+Definition at line 1502 of file gmock-\/actions.\+h.
+
+\mbox{\Hypertarget{structtesting_1_1internal_1_1_action_impl_3_01_r_07_args_8_8_8_08_00_01_impl_01_4_a4dededa4ec14ef85f71ca3978e83057e}\label{structtesting_1_1internal_1_1_action_impl_3_01_r_07_args_8_8_8_08_00_01_impl_01_4_a4dededa4ec14ef85f71ca3978e83057e}} 
+\index{testing::internal::ActionImpl$<$ R(Args...), Impl $>$@{testing::internal::ActionImpl$<$ R(Args...), Impl $>$}!Base@{Base}}
+\index{Base@{Base}!testing::internal::ActionImpl$<$ R(Args...), Impl $>$@{testing::internal::ActionImpl$<$ R(Args...), Impl $>$}}
+\doxysubsubsection{\texorpdfstring{Base}{Base}}
+{\footnotesize\ttfamily template$<$typename R , typename... Args, typename Impl $>$ \\
+using \mbox{\hyperlink{structtesting_1_1internal_1_1_action_impl}{testing\+::internal\+::\+Action\+Impl}}$<$ R(Args...), Impl $>$\+::\mbox{\hyperlink{structtesting_1_1internal_1_1_action_impl_3_01_r_07_args_8_8_8_08_00_01_impl_01_4_a4dededa4ec14ef85f71ca3978e83057e}{Base}} =  typename \mbox{\hyperlink{structtesting_1_1internal_1_1_impl_base}{Impl\+Base}}$<$Impl$>$\+::type}
+
+
+
+Definition at line 1500 of file gmock-\/actions.\+h.
+
+\mbox{\Hypertarget{structtesting_1_1internal_1_1_action_impl_3_01_r_07_args_8_8_8_08_00_01_impl_01_4_adcf7b7f64c8f966f5cc101176b6a35f9}\label{structtesting_1_1internal_1_1_action_impl_3_01_r_07_args_8_8_8_08_00_01_impl_01_4_adcf7b7f64c8f966f5cc101176b6a35f9}} 
+\index{testing::internal::ActionImpl$<$ R(Args...), Impl $>$@{testing::internal::ActionImpl$<$ R(Args...), Impl $>$}!function\_type@{function\_type}}
+\index{function\_type@{function\_type}!testing::internal::ActionImpl$<$ R(Args...), Impl $>$@{testing::internal::ActionImpl$<$ R(Args...), Impl $>$}}
+\doxysubsubsection{\texorpdfstring{function\_type}{function\_type}}
+{\footnotesize\ttfamily template$<$typename R , typename... Args, typename Impl $>$ \\
+using \mbox{\hyperlink{structtesting_1_1internal_1_1_action_impl}{testing\+::internal\+::\+Action\+Impl}}$<$ R(Args...), Impl $>$\+::\mbox{\hyperlink{structtesting_1_1internal_1_1_action_impl_3_01_r_07_args_8_8_8_08_00_01_impl_01_4_adcf7b7f64c8f966f5cc101176b6a35f9}{function\+\_\+type}} =  R(Args...)}
+
+
+
+Definition at line 1501 of file gmock-\/actions.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structtesting_1_1internal_1_1_action_impl_3_01_r_07_args_8_8_8_08_00_01_impl_01_4_ad0fed32bba64bb87cde837d5f5b59dd6}\label{structtesting_1_1internal_1_1_action_impl_3_01_r_07_args_8_8_8_08_00_01_impl_01_4_ad0fed32bba64bb87cde837d5f5b59dd6}} 
+\index{testing::internal::ActionImpl$<$ R(Args...), Impl $>$@{testing::internal::ActionImpl$<$ R(Args...), Impl $>$}!ActionImpl@{ActionImpl}}
+\index{ActionImpl@{ActionImpl}!testing::internal::ActionImpl$<$ R(Args...), Impl $>$@{testing::internal::ActionImpl$<$ R(Args...), Impl $>$}}
+\doxysubsubsection{\texorpdfstring{ActionImpl()}{ActionImpl()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename R , typename... Args, typename Impl $>$ \\
+\mbox{\hyperlink{structtesting_1_1internal_1_1_action_impl}{testing\+::internal\+::\+Action\+Impl}}$<$ R(Args...), Impl $>$\+::\mbox{\hyperlink{structtesting_1_1internal_1_1_action_impl}{Action\+Impl}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\mbox{\Hypertarget{structtesting_1_1internal_1_1_action_impl_3_01_r_07_args_8_8_8_08_00_01_impl_01_4_afc5fe33da4094b1be005bc182d1d2d31}\label{structtesting_1_1internal_1_1_action_impl_3_01_r_07_args_8_8_8_08_00_01_impl_01_4_afc5fe33da4094b1be005bc182d1d2d31}} 
+\index{testing::internal::ActionImpl$<$ R(Args...), Impl $>$@{testing::internal::ActionImpl$<$ R(Args...), Impl $>$}!ActionImpl@{ActionImpl}}
+\index{ActionImpl@{ActionImpl}!testing::internal::ActionImpl$<$ R(Args...), Impl $>$@{testing::internal::ActionImpl$<$ R(Args...), Impl $>$}}
+\doxysubsubsection{\texorpdfstring{ActionImpl()}{ActionImpl()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename R , typename... Args, typename Impl $>$ \\
+\mbox{\hyperlink{structtesting_1_1internal_1_1_action_impl}{testing\+::internal\+::\+Action\+Impl}}$<$ R(Args...), Impl $>$\+::\mbox{\hyperlink{structtesting_1_1internal_1_1_action_impl}{Action\+Impl}} (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ Impl $>$}]{impl }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Definition at line 1505 of file gmock-\/actions.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{structtesting_1_1internal_1_1_action_impl_3_01_r_07_args_8_8_8_08_00_01_impl_01_4_add15fbdb69e763e8e2902e090fb77110}\label{structtesting_1_1internal_1_1_action_impl_3_01_r_07_args_8_8_8_08_00_01_impl_01_4_add15fbdb69e763e8e2902e090fb77110}} 
+\index{testing::internal::ActionImpl$<$ R(Args...), Impl $>$@{testing::internal::ActionImpl$<$ R(Args...), Impl $>$}!Apply@{Apply}}
+\index{Apply@{Apply}!testing::internal::ActionImpl$<$ R(Args...), Impl $>$@{testing::internal::ActionImpl$<$ R(Args...), Impl $>$}}
+\doxysubsubsection{\texorpdfstring{Apply()}{Apply()}}
+{\footnotesize\ttfamily template$<$typename R , typename... Args, typename Impl $>$ \\
+template$<$std\+::size\+\_\+t... arg\+\_\+id, std\+::size\+\_\+t... excess\+\_\+id$>$ \\
+R \mbox{\hyperlink{structtesting_1_1internal_1_1_action_impl}{testing\+::internal\+::\+Action\+Impl}}$<$ R(Args...), Impl $>$\+::Apply (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structtesting_1_1internal_1_1_index_sequence}{Index\+Sequence}}$<$ arg\+\_\+id... $>$}]{,  }\item[{\mbox{\hyperlink{structtesting_1_1internal_1_1_index_sequence}{Index\+Sequence}}$<$ excess\+\_\+id... $>$}]{,  }\item[{const \mbox{\hyperlink{structtesting_1_1internal_1_1_action_impl_3_01_r_07_args_8_8_8_08_00_01_impl_01_4_a056940cbe95b0ef5c0a10e2a4c654b69}{args\+\_\+type}} \&}]{args }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 1516 of file gmock-\/actions.\+h.
+
+\mbox{\Hypertarget{structtesting_1_1internal_1_1_action_impl_3_01_r_07_args_8_8_8_08_00_01_impl_01_4_a97a9ef032b3804ba69ca675a0edb2843}\label{structtesting_1_1internal_1_1_action_impl_3_01_r_07_args_8_8_8_08_00_01_impl_01_4_a97a9ef032b3804ba69ca675a0edb2843}} 
+\index{testing::internal::ActionImpl$<$ R(Args...), Impl $>$@{testing::internal::ActionImpl$<$ R(Args...), Impl $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!testing::internal::ActionImpl$<$ R(Args...), Impl $>$@{testing::internal::ActionImpl$<$ R(Args...), Impl $>$}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}}
+{\footnotesize\ttfamily template$<$typename R , typename... Args, typename Impl $>$ \\
+R \mbox{\hyperlink{structtesting_1_1internal_1_1_action_impl}{testing\+::internal\+::\+Action\+Impl}}$<$ R(Args...), Impl $>$\+::operator() (\begin{DoxyParamCaption}\item[{Args \&\&...}]{arg }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 1507 of file gmock-\/actions.\+h.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{gmock-actions_8h}{gmock-\/actions.\+h}}\end{DoxyCompactItemize}

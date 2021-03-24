@@ -1,0 +1,164 @@
+\hypertarget{class_i_model}{}\doxysection{I\+Model Class Reference}
+\label{class_i_model}\index{IModel@{IModel}}
+
+
+{\ttfamily \#include $<$I\+Model.\+h$>$}
+
+Inheritance diagram for I\+Model\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_i_model}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_i_model_a13050d7143242cc2aaec8f97d0a3aa65}{I\+Model}} (int \mbox{\hyperlink{main_8cpp_a439227feff9d7f55384e8780cfc2eb82}{size}}, int \mbox{\hyperlink{main_8cpp_a57256a995d26e1dc591f4190c51bd108}{nb\+Time\+Steps}}, \mbox{\hyperlink{class_interest_rate}{Interest\+Rate}} $\ast$const \mbox{\hyperlink{main_8cpp_a0e484519900f76cf59aadeacc612be5f}{rates}}, Pnl\+Vect $\ast$const computed\+\_\+ti)
+\item 
+virtual \mbox{\hyperlink{class_i_model_a540e5fd5982d7f46efc98f34cc851b16}{$\sim$\+I\+Model}} ()
+\item 
+virtual void \mbox{\hyperlink{class_i_model_a0ac1e1f6bc647fea0ecb7402dcdffe46}{asset}} (Pnl\+Mat $\ast$const path, double t, Pnl\+Rng $\ast$const \mbox{\hyperlink{main_8cpp_aca3390d34375a96cda44d0eb710f0356}{rng}}, const Pnl\+Vect $\ast$const \mbox{\hyperlink{main_8cpp_aa2ef9b27c75403a8bfca1743f02f4687}{spot}})=0
+\item 
+virtual void \mbox{\hyperlink{class_i_model_a6c2fb691dd3ca3e33e9df6539c2409ad}{shift\+\_\+asset}} (Pnl\+Mat $\ast$const shift\+\_\+path, double t, const Pnl\+Mat $\ast$const path, int d, double h) const =0
+\end{DoxyCompactItemize}
+\doxysubsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{class_i_model_ae74670441849086534918aee213db5ce}{size\+\_\+}}
+\item 
+int \mbox{\hyperlink{class_i_model_a3960ad6a06b3598ae06f7bd13f0c7b3e}{nb\+Time\+Steps\+\_\+}}
+\begin{DoxyCompactList}\small\item\em nombre d\textquotesingle{}actifs du modèle \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_interest_rate}{Interest\+Rate}} $\ast$ \mbox{\hyperlink{class_i_model_a20305ea7715a87bfa6af139747681b80}{rates\+\_\+}}
+\item 
+Pnl\+Vect $\ast$ \mbox{\hyperlink{class_i_model_a1d0decb3c2c82a5b788cb111b52227a5}{computed\+\_\+ti\+\_\+}}
+\item 
+Pnl\+Vect $\ast$ \mbox{\hyperlink{class_i_model_a5ffaf14f6b875b7ced6f4a0cef49ea4d}{volatility\+\_\+}}
+\item 
+Pnl\+Mat $\ast$ \mbox{\hyperlink{class_i_model_ac50d97798ce6ffe0a6234dbf3f3d745b}{sigma\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 7 of file I\+Model.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_i_model_a13050d7143242cc2aaec8f97d0a3aa65}\label{class_i_model_a13050d7143242cc2aaec8f97d0a3aa65}} 
+\index{IModel@{IModel}!IModel@{IModel}}
+\index{IModel@{IModel}!IModel@{IModel}}
+\doxysubsubsection{\texorpdfstring{IModel()}{IModel()}}
+{\footnotesize\ttfamily I\+Model\+::\+I\+Model (\begin{DoxyParamCaption}\item[{int}]{size,  }\item[{int}]{nb\+Time\+Steps,  }\item[{\mbox{\hyperlink{class_interest_rate}{Interest\+Rate}} $\ast$const}]{rates,  }\item[{Pnl\+Vect $\ast$const}]{computed\+\_\+ti }\end{DoxyParamCaption})}
+
+
+
+Definition at line 3 of file I\+Model.\+cpp.
+
+\mbox{\Hypertarget{class_i_model_a540e5fd5982d7f46efc98f34cc851b16}\label{class_i_model_a540e5fd5982d7f46efc98f34cc851b16}} 
+\index{IModel@{IModel}!````~IModel@{$\sim$IModel}}
+\index{````~IModel@{$\sim$IModel}!IModel@{IModel}}
+\doxysubsubsection{\texorpdfstring{$\sim$IModel()}{~IModel()}}
+{\footnotesize\ttfamily I\+Model\+::$\sim$\+I\+Model (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Definition at line 12 of file I\+Model.\+cpp.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_i_model_a0ac1e1f6bc647fea0ecb7402dcdffe46}\label{class_i_model_a0ac1e1f6bc647fea0ecb7402dcdffe46}} 
+\index{IModel@{IModel}!asset@{asset}}
+\index{asset@{asset}!IModel@{IModel}}
+\doxysubsubsection{\texorpdfstring{asset()}{asset()}}
+{\footnotesize\ttfamily virtual void I\+Model\+::asset (\begin{DoxyParamCaption}\item[{Pnl\+Mat $\ast$const}]{path,  }\item[{double}]{t,  }\item[{Pnl\+Rng $\ast$const}]{rng,  }\item[{const Pnl\+Vect $\ast$const}]{spot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_black_scholes_model_a802ba8a8512bc963482a02d5e4fabd12}{Black\+Scholes\+Model}}.
+
+\mbox{\Hypertarget{class_i_model_a6c2fb691dd3ca3e33e9df6539c2409ad}\label{class_i_model_a6c2fb691dd3ca3e33e9df6539c2409ad}} 
+\index{IModel@{IModel}!shift\_asset@{shift\_asset}}
+\index{shift\_asset@{shift\_asset}!IModel@{IModel}}
+\doxysubsubsection{\texorpdfstring{shift\_asset()}{shift\_asset()}}
+{\footnotesize\ttfamily virtual void I\+Model\+::shift\+\_\+asset (\begin{DoxyParamCaption}\item[{Pnl\+Mat $\ast$const}]{shift\+\_\+path,  }\item[{double}]{t,  }\item[{const Pnl\+Mat $\ast$const}]{path,  }\item[{int}]{d,  }\item[{double}]{h }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_black_scholes_model_a23ce3f899f00a3b46564049a8499e0dd}{Black\+Scholes\+Model}}.
+
+
+
+\doxysubsection{Field Documentation}
+\mbox{\Hypertarget{class_i_model_a1d0decb3c2c82a5b788cb111b52227a5}\label{class_i_model_a1d0decb3c2c82a5b788cb111b52227a5}} 
+\index{IModel@{IModel}!computed\_ti\_@{computed\_ti\_}}
+\index{computed\_ti\_@{computed\_ti\_}!IModel@{IModel}}
+\doxysubsubsection{\texorpdfstring{computed\_ti\_}{computed\_ti\_}}
+{\footnotesize\ttfamily Pnl\+Vect$\ast$ I\+Model\+::computed\+\_\+ti\+\_\+}
+
+
+
+Definition at line 12 of file I\+Model.\+h.
+
+\mbox{\Hypertarget{class_i_model_a3960ad6a06b3598ae06f7bd13f0c7b3e}\label{class_i_model_a3960ad6a06b3598ae06f7bd13f0c7b3e}} 
+\index{IModel@{IModel}!nbTimeSteps\_@{nbTimeSteps\_}}
+\index{nbTimeSteps\_@{nbTimeSteps\_}!IModel@{IModel}}
+\doxysubsubsection{\texorpdfstring{nbTimeSteps\_}{nbTimeSteps\_}}
+{\footnotesize\ttfamily int I\+Model\+::nb\+Time\+Steps\+\_\+}
+
+
+
+nombre d\textquotesingle{}actifs du modèle 
+
+
+
+Definition at line 10 of file I\+Model.\+h.
+
+\mbox{\Hypertarget{class_i_model_a20305ea7715a87bfa6af139747681b80}\label{class_i_model_a20305ea7715a87bfa6af139747681b80}} 
+\index{IModel@{IModel}!rates\_@{rates\_}}
+\index{rates\_@{rates\_}!IModel@{IModel}}
+\doxysubsubsection{\texorpdfstring{rates\_}{rates\_}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_interest_rate}{Interest\+Rate}}$\ast$ I\+Model\+::rates\+\_\+}
+
+
+
+Definition at line 11 of file I\+Model.\+h.
+
+\mbox{\Hypertarget{class_i_model_ac50d97798ce6ffe0a6234dbf3f3d745b}\label{class_i_model_ac50d97798ce6ffe0a6234dbf3f3d745b}} 
+\index{IModel@{IModel}!sigma\_@{sigma\_}}
+\index{sigma\_@{sigma\_}!IModel@{IModel}}
+\doxysubsubsection{\texorpdfstring{sigma\_}{sigma\_}}
+{\footnotesize\ttfamily Pnl\+Mat$\ast$ I\+Model\+::sigma\+\_\+}
+
+
+
+Definition at line 14 of file I\+Model.\+h.
+
+\mbox{\Hypertarget{class_i_model_ae74670441849086534918aee213db5ce}\label{class_i_model_ae74670441849086534918aee213db5ce}} 
+\index{IModel@{IModel}!size\_@{size\_}}
+\index{size\_@{size\_}!IModel@{IModel}}
+\doxysubsubsection{\texorpdfstring{size\_}{size\_}}
+{\footnotesize\ttfamily int I\+Model\+::size\+\_\+}
+
+
+
+Definition at line 9 of file I\+Model.\+h.
+
+\mbox{\Hypertarget{class_i_model_a5ffaf14f6b875b7ced6f4a0cef49ea4d}\label{class_i_model_a5ffaf14f6b875b7ced6f4a0cef49ea4d}} 
+\index{IModel@{IModel}!volatility\_@{volatility\_}}
+\index{volatility\_@{volatility\_}!IModel@{IModel}}
+\doxysubsubsection{\texorpdfstring{volatility\_}{volatility\_}}
+{\footnotesize\ttfamily Pnl\+Vect$\ast$ I\+Model\+::volatility\+\_\+}
+
+
+
+Definition at line 13 of file I\+Model.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_i_model_8h}{I\+Model.\+h}}\item 
+\mbox{\hyperlink{_i_model_8cpp}{I\+Model.\+cpp}}\end{DoxyCompactItemize}

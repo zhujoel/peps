@@ -1,0 +1,1044 @@
+\hypertarget{googletest-output-test___8cc}{}\doxysection{googletest-\/output-\/test\+\_\+.cc File Reference}
+\label{googletest-output-test___8cc}\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+{\ttfamily \#include \char`\"{}gtest/gtest-\/spi.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}gtest/gtest.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}src/gtest-\/internal-\/inl.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_failing_param_test}{Failing\+Param\+Test}}
+\item 
+class \mbox{\hyperlink{class_empty_basename_param_inst}{Empty\+Basename\+Param\+Inst}}
+\item 
+class \mbox{\hyperlink{class_non_fatal_failure_in_fixture_constructor_test}{Non\+Fatal\+Failure\+In\+Fixture\+Constructor\+Test}}
+\item 
+class \mbox{\hyperlink{class_fatal_failure_in_fixture_constructor_test}{Fatal\+Failure\+In\+Fixture\+Constructor\+Test}}
+\item 
+class \mbox{\hyperlink{class_non_fatal_failure_in_set_up_test}{Non\+Fatal\+Failure\+In\+Set\+Up\+Test}}
+\item 
+class \mbox{\hyperlink{class_fatal_failure_in_set_up_test}{Fatal\+Failure\+In\+Set\+Up\+Test}}
+\item 
+class \mbox{\hyperlink{classfoo_1_1_mixed_up_test_suite_test}{foo\+::\+Mixed\+Up\+Test\+Suite\+Test}}
+\item 
+class \mbox{\hyperlink{classfoo_1_1_mixed_up_test_suite_with_same_test_name_test}{foo\+::\+Mixed\+Up\+Test\+Suite\+With\+Same\+Test\+Name\+Test}}
+\item 
+class \mbox{\hyperlink{classbar_1_1_mixed_up_test_suite_test}{bar\+::\+Mixed\+Up\+Test\+Suite\+Test}}
+\item 
+class \mbox{\hyperlink{classbar_1_1_mixed_up_test_suite_with_same_test_name_test}{bar\+::\+Mixed\+Up\+Test\+Suite\+With\+Same\+Test\+Name\+Test}}
+\item 
+class \mbox{\hyperlink{class_t_e_s_t___f__before___t_e_s_t__in__same__test__case}{T\+E\+S\+T\+\_\+\+F\+\_\+before\+\_\+\+T\+E\+S\+T\+\_\+in\+\_\+same\+\_\+test\+\_\+case}}
+\item 
+class \mbox{\hyperlink{class_t_e_s_t__before___t_e_s_t___f__in__same__test__case}{T\+E\+S\+T\+\_\+before\+\_\+\+T\+E\+S\+T\+\_\+\+F\+\_\+in\+\_\+same\+\_\+test\+\_\+case}}
+\item 
+class \mbox{\hyperlink{class_param_test}{Param\+Test}}
+\item 
+class \mbox{\hyperlink{class_detect_not_instantiated_test}{Detect\+Not\+Instantiated\+Test}}
+\item 
+class \mbox{\hyperlink{class_typed_test}{Typed\+Test$<$ T $>$}}
+\item 
+class \mbox{\hyperlink{class_typed_test_with_names}{Typed\+Test\+With\+Names$<$ T $>$}}
+\item 
+class \mbox{\hyperlink{class_typed_test_names}{Typed\+Test\+Names}}
+\item 
+class \mbox{\hyperlink{class_typed_test_p}{Typed\+Test\+P$<$ T $>$}}
+\item 
+class \mbox{\hyperlink{class_typed_test_p_names}{Typed\+Test\+P\+Names}}
+\item 
+class \mbox{\hyperlink{class_detect_not_instantiated_types_test}{Detect\+Not\+Instantiated\+Types\+Test$<$ T $>$}}
+\item 
+class \mbox{\hyperlink{class_expect_failure_test}{Expect\+Failure\+Test}}
+\item 
+class \mbox{\hyperlink{class_dynamic_fixture}{Dynamic\+Fixture}}
+\item 
+class \mbox{\hyperlink{class_dynamic_test}{Dynamic\+Test$<$ Pass $>$}}
+\item 
+class \mbox{\hyperlink{class_foo_environment}{Foo\+Environment}}
+\item 
+class \mbox{\hyperlink{class_bar_environment}{Bar\+Environment}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespacefoo}{foo}}
+\item 
+ \mbox{\hyperlink{namespacebar}{bar}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{googletest-output-test___8cc_a7d0214993b29b66c5052c62d5f4824ec}{No\+Tests}} = \mbox{\hyperlink{class_param_test}{Param\+Test}}
+\item 
+typedef \mbox{\hyperlink{namespacetesting_a29eec4c1aba59e52881d8eb38cece83c}{testing\+::\+Types}}$<$ char, int $>$ \mbox{\hyperlink{googletest-output-test___8cc_a54f4cdb662871468646c6b33c7921bf5}{Types\+For\+Test\+With\+Names}}
+\item 
+typedef \mbox{\hyperlink{namespacetesting_a29eec4c1aba59e52881d8eb38cece83c}{testing\+::\+Types}}$<$ unsigned char, unsigned int $>$ \mbox{\hyperlink{googletest-output-test___8cc_a5887507e47123cf1395ce631001c6ce9}{Unsigned\+Types}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{googletest-output-test___8cc_a8f28d985b030c6dd2714d1e884c62c41}{Test\+Eq1}} (int \mbox{\hyperlink{gmock-matchers__test_8cc_a6150e0515f7202e2fb518f7206ed97dc}{x}})
+\item 
+void \mbox{\hyperlink{googletest-output-test___8cc_a14e796981ca8d3c71dbd2b839c1ce784}{Try\+Test\+Subroutine}} ()
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_a62f1870b5f6ce5c731fe0606a944da39}{T\+E\+ST}} (Passing\+Test, Passing\+Test1)
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_aaf792b2d65c4aeb1e2f1804e2319afd2}{T\+E\+ST}} (Passing\+Test, Passing\+Test2)
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_a680b45844b58c5367da52c5383aea03a}{T\+E\+S\+T\+\_\+P}} (\mbox{\hyperlink{class_failing_param_test}{Failing\+Param\+Test}}, Fails)
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_a7917783e750c5d42b4d0b6907c340c7e}{I\+N\+S\+T\+A\+N\+T\+I\+A\+T\+E\+\_\+\+T\+E\+S\+T\+\_\+\+S\+U\+I\+T\+E\+\_\+P}} (Printing\+Failing\+Params, \mbox{\hyperlink{class_failing_param_test}{Failing\+Param\+Test}}, \mbox{\hyperlink{namespacetesting_a374d4e5fbb4c938058fbe81d4c7ff6a6}{testing\+::\+Values}}(2))
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_a26922df227a0c471b923929491e2b149}{T\+E\+S\+T\+\_\+P}} (\mbox{\hyperlink{class_empty_basename_param_inst}{Empty\+Basename\+Param\+Inst}}, Passes)
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_adc8de4f4bb8b20d3163b2feca1de457d}{I\+N\+S\+T\+A\+N\+T\+I\+A\+T\+E\+\_\+\+T\+E\+S\+T\+\_\+\+S\+U\+I\+T\+E\+\_\+P}} (, \mbox{\hyperlink{class_empty_basename_param_inst}{Empty\+Basename\+Param\+Inst}}, \mbox{\hyperlink{namespacetesting_a374d4e5fbb4c938058fbe81d4c7ff6a6}{testing\+::\+Values}}(1))
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_a1ae5db2b27aea7d9f321f52002d4a501}{T\+E\+ST}} (Nonfatal\+Failure\+Test, Escapes\+String\+Operands)
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_aaa6c1704a62b7412fd5e053614f47650}{T\+E\+ST}} (Nonfatal\+Failure\+Test, Diff\+For\+Long\+Strings)
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_a6076f79ee5f9e8982bba181cbbebb0ed}{T\+E\+ST}} (Fatal\+Failure\+Test, Fatal\+Failure\+In\+Subroutine)
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_a8763e3844bd21de9bd7126658a4279c5}{T\+E\+ST}} (Fatal\+Failure\+Test, Fatal\+Failure\+In\+Nested\+Subroutine)
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_afe609aef34a68a2ab9809eb48112c5cc}{T\+E\+ST}} (Fatal\+Failure\+Test, Nonfatal\+Failure\+In\+Subroutine)
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_ad9bbf46060935b29c42d3116ddbc3566}{T\+E\+ST}} (Logging\+Test, Interleaving\+Logging\+And\+Assertions)
+\item 
+void \mbox{\hyperlink{googletest-output-test___8cc_a7e222b468bbde7215ce826f10993e746}{Sub\+Without\+Trace}} (int n)
+\item 
+void \mbox{\hyperlink{googletest-output-test___8cc_a543ee38e0824e47113bb12c3277e09ae}{Sub\+With\+Trace}} (int n)
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_a81f7d012241339866fccb3c3750b553b}{T\+E\+ST}} (S\+C\+O\+P\+E\+D\+\_\+\+T\+R\+A\+C\+E\+Test, Accepted\+Values)
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_a82f82f6a7caa426cccf8d20113f897c0}{T\+E\+ST}} (S\+C\+O\+P\+E\+D\+\_\+\+T\+R\+A\+C\+E\+Test, Obeys\+Scopes)
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_a46dcedbe67765adaebc7740ee17a88de}{T\+E\+ST}} (S\+C\+O\+P\+E\+D\+\_\+\+T\+R\+A\+C\+E\+Test, Works\+In\+Loop)
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_a492695898501cea9f99ccd690c2b3991}{T\+E\+ST}} (S\+C\+O\+P\+E\+D\+\_\+\+T\+R\+A\+C\+E\+Test, Works\+In\+Subroutine)
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_ae402e91f305e54f5f14a172a0fb0831b}{T\+E\+ST}} (S\+C\+O\+P\+E\+D\+\_\+\+T\+R\+A\+C\+E\+Test, Can\+Be\+Nested)
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_a49c4610eeb41adaa369f9dce003d5198}{T\+E\+ST}} (S\+C\+O\+P\+E\+D\+\_\+\+T\+R\+A\+C\+E\+Test, Can\+Be\+Repeated)
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_aff587c2c7d3e81f4d94425987ca07bc1}{T\+E\+ST}} (Scoped\+Trace\+Test, With\+Explicit\+File\+And\+Line)
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_a2bdac0e0076d65fa77a967c0fdb46e2a}{T\+E\+ST}} (Disabled\+Tests\+Warning\+Test, D\+I\+S\+A\+B\+L\+E\+D\+\_\+\+Also\+Run\+Disabled\+Tests\+Flag\+Suppresses\+Warning)
+\item 
+void \mbox{\hyperlink{googletest-output-test___8cc_a36cd4d21174efaa3066237d716028d49}{Ad\+Hoc\+Test}} ()
+\item 
+int \mbox{\hyperlink{googletest-output-test___8cc_ae0ca194f6b730e168850ce3179ad4f63}{Run\+All\+Tests}} ()
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_ad122def39d78da61690433e185611737}{T\+E\+S\+T\+\_\+F}} (\mbox{\hyperlink{class_non_fatal_failure_in_fixture_constructor_test}{Non\+Fatal\+Failure\+In\+Fixture\+Constructor\+Test}}, Failure\+In\+Constructor)
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_a858b341fa0b2298c1534b1325fedf797}{T\+E\+S\+T\+\_\+F}} (\mbox{\hyperlink{class_fatal_failure_in_fixture_constructor_test}{Fatal\+Failure\+In\+Fixture\+Constructor\+Test}}, Failure\+In\+Constructor)
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_aaa9d6fcc5d9910aedb42ff3db3cc313c}{T\+E\+S\+T\+\_\+F}} (\mbox{\hyperlink{class_non_fatal_failure_in_set_up_test}{Non\+Fatal\+Failure\+In\+Set\+Up\+Test}}, Failure\+In\+Set\+Up)
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_a52057afc95d69adbae1fbe0ef92b29d7}{T\+E\+S\+T\+\_\+F}} (\mbox{\hyperlink{class_fatal_failure_in_set_up_test}{Fatal\+Failure\+In\+Set\+Up\+Test}}, Failure\+In\+Set\+Up)
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_a62631ea26f8f98f3f19dc03f950dc197}{T\+E\+ST}} (Add\+Failure\+At\+Test, Message\+Contains\+Specified\+File\+And\+Line\+Number)
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_a55ed27923966fd2997638340ff07caa1}{T\+E\+ST}} (Gtest\+Fail\+At\+Test, Message\+Contains\+Specified\+File\+And\+Line\+Number)
+\item 
+\mbox{\hyperlink{namespacefoo_a849b0cc834d25429f0391db7e0eb9dc1}{foo\+::\+T\+E\+S\+T\+\_\+F}} (Mixed\+Up\+Test\+Suite\+Test, First\+Test\+From\+Namespace\+Foo)
+\item 
+\mbox{\hyperlink{namespacefoo_a5e6f45cc38f6752f717235b183163550}{foo\+::\+T\+E\+S\+T\+\_\+F}} (Mixed\+Up\+Test\+Suite\+Test, Second\+Test\+From\+Namespace\+Foo)
+\item 
+\mbox{\hyperlink{namespacefoo_afced5d7fbc3e96e3309591e09fbae5c4}{foo\+::\+T\+E\+S\+T\+\_\+F}} (Mixed\+Up\+Test\+Suite\+With\+Same\+Test\+Name\+Test, The\+Second\+Test\+With\+This\+Name\+Should\+Fail)
+\item 
+\mbox{\hyperlink{namespacebar_a95397ed83e5072747d6333cbfae5ea0e}{bar\+::\+T\+E\+S\+T\+\_\+F}} (Mixed\+Up\+Test\+Suite\+Test, This\+Should\+Fail)
+\item 
+\mbox{\hyperlink{namespacebar_ae02a29b454cf88337a77336c2bf1f0a4}{bar\+::\+T\+E\+S\+T\+\_\+F}} (Mixed\+Up\+Test\+Suite\+Test, This\+Should\+Fail\+Too)
+\item 
+\mbox{\hyperlink{namespacebar_a23b15d10e91f920a5ed07ae9f27916df}{bar\+::\+T\+E\+S\+T\+\_\+F}} (Mixed\+Up\+Test\+Suite\+With\+Same\+Test\+Name\+Test, The\+Second\+Test\+With\+This\+Name\+Should\+Fail)
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_ae71a8d4934e768af615b9b09418f15c3}{T\+E\+S\+T\+\_\+F}} (\mbox{\hyperlink{class_t_e_s_t___f__before___t_e_s_t__in__same__test__case}{T\+E\+S\+T\+\_\+\+F\+\_\+before\+\_\+\+T\+E\+S\+T\+\_\+in\+\_\+same\+\_\+test\+\_\+case}}, Defined\+Using\+T\+E\+S\+T\+\_\+F)
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_a4b026b84b5a6dcbfa586f406e7c6b79c}{T\+E\+ST}} (\mbox{\hyperlink{class_t_e_s_t___f__before___t_e_s_t__in__same__test__case}{T\+E\+S\+T\+\_\+\+F\+\_\+before\+\_\+\+T\+E\+S\+T\+\_\+in\+\_\+same\+\_\+test\+\_\+case}}, Defined\+Using\+T\+E\+S\+T\+And\+Should\+Fail)
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_a80bcd554d66913b961ad814266a403a8}{T\+E\+ST}} (\mbox{\hyperlink{class_t_e_s_t__before___t_e_s_t___f__in__same__test__case}{T\+E\+S\+T\+\_\+before\+\_\+\+T\+E\+S\+T\+\_\+\+F\+\_\+in\+\_\+same\+\_\+test\+\_\+case}}, Defined\+Using\+T\+E\+ST)
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_aa0ba9be79b1b05ddadfc8d25c099df31}{T\+E\+S\+T\+\_\+F}} (\mbox{\hyperlink{class_t_e_s_t__before___t_e_s_t___f__in__same__test__case}{T\+E\+S\+T\+\_\+before\+\_\+\+T\+E\+S\+T\+\_\+\+F\+\_\+in\+\_\+same\+\_\+test\+\_\+case}}, Defined\+Using\+T\+E\+S\+T\+\_\+\+F\+And\+Should\+Fail)
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_a3dd01f9996bd85dd50bd7632f58cbf8c}{T\+E\+ST}} (Expect\+Nonfatal\+Failure\+Test, Can\+Reference\+Global\+Variables)
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_afe7af77e310ee1a7599e2bc1f0f14354}{T\+E\+ST}} (Expect\+Nonfatal\+Failure\+Test, Can\+Reference\+Local\+Variables)
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_ac144593aa4a95ae47c0bb03def354f66}{T\+E\+ST}} (Expect\+Nonfatal\+Failure\+Test, Succeeds\+When\+There\+Is\+One\+Nonfatal\+Failure)
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_a3984cefae98995e99cc3de7251998c34}{T\+E\+ST}} (Expect\+Nonfatal\+Failure\+Test, Fails\+When\+There\+Is\+No\+Nonfatal\+Failure)
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_a17f835822727dac7b75b74ed70d2fbd2}{T\+E\+ST}} (Expect\+Nonfatal\+Failure\+Test, Fails\+When\+There\+Are\+Two\+Nonfatal\+Failures)
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_ab9c67cf52ef031fdf619d61283da1ca7}{T\+E\+ST}} (Expect\+Nonfatal\+Failure\+Test, Fails\+When\+There\+Is\+One\+Fatal\+Failure)
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_aa5976cbca1620f7fea18689a3cbf5333}{T\+E\+ST}} (Expect\+Nonfatal\+Failure\+Test, Fails\+When\+Statement\+Returns)
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_a4b06191d54fb76270da3d3dd497e62b6}{T\+E\+ST}} (Expect\+Fatal\+Failure\+Test, Can\+Reference\+Global\+Variables)
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_ac6646aa5f6d4ea21c0528259118754a4}{T\+E\+ST}} (Expect\+Fatal\+Failure\+Test, Can\+Reference\+Local\+Static\+Variables)
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_a0d894cc9ae86412b4c156748602a23a7}{T\+E\+ST}} (Expect\+Fatal\+Failure\+Test, Succeeds\+When\+There\+Is\+One\+Fatal\+Failure)
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_af8e8545243605b2ba121e253ec48785e}{T\+E\+ST}} (Expect\+Fatal\+Failure\+Test, Fails\+When\+There\+Is\+No\+Fatal\+Failure)
+\item 
+void \mbox{\hyperlink{googletest-output-test___8cc_acdca9b16622e8a506a39240c8809af38}{Fatal\+Failure}} ()
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_a4fd11a245bf0e8eb46d78c8dc14c730e}{T\+E\+ST}} (Expect\+Fatal\+Failure\+Test, Fails\+When\+There\+Are\+Two\+Fatal\+Failures)
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_a35fafc42558ee14c42320b359c270026}{T\+E\+ST}} (Expect\+Fatal\+Failure\+Test, Fails\+When\+There\+Is\+One\+Nonfatal\+Failure)
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_aca5344af5eed2eefc512c555acbe5511}{T\+E\+ST}} (Expect\+Fatal\+Failure\+Test, Fails\+When\+Statement\+Returns)
+\item 
+std\+::string \mbox{\hyperlink{googletest-output-test___8cc_a61c686cb1c0f8f19c100ff975482ec7a}{Param\+Name\+Func}} (const \mbox{\hyperlink{structtesting_1_1_test_param_info}{testing\+::\+Test\+Param\+Info}}$<$ std\+::string $>$ \&info)
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_a4e7fc7682f9a8a168b78d53b05fab8bf}{T\+E\+S\+T\+\_\+P}} (\mbox{\hyperlink{class_param_test}{Param\+Test}}, Success)
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_a0847a99be23b980115e2dd88a1bd60cc}{T\+E\+S\+T\+\_\+P}} (\mbox{\hyperlink{class_param_test}{Param\+Test}}, Failure)
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_a5c488fe4474fec68c24acfc4fb353ed7}{I\+N\+S\+T\+A\+N\+T\+I\+A\+T\+E\+\_\+\+T\+E\+S\+T\+\_\+\+S\+U\+I\+T\+E\+\_\+P}} (Printing\+Strings, \mbox{\hyperlink{class_param_test}{Param\+Test}}, \mbox{\hyperlink{namespacetesting_a374d4e5fbb4c938058fbe81d4c7ff6a6}{testing\+::\+Values}}(std\+::string(\char`\"{}a\char`\"{})), Param\+Name\+Func)
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_a58a299d11fe0be24b18af95858897c51}{I\+N\+S\+T\+A\+N\+T\+I\+A\+T\+E\+\_\+\+T\+E\+S\+T\+\_\+\+S\+U\+I\+T\+E\+\_\+P}} (This\+Is\+Odd, \mbox{\hyperlink{googletest-output-test___8cc_a7d0214993b29b66c5052c62d5f4824ec}{No\+Tests}}, \+::\mbox{\hyperlink{namespacetesting_a374d4e5fbb4c938058fbe81d4c7ff6a6}{testing\+::\+Values}}(\char`\"{}Hello\char`\"{}))
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_aac3ca1ad9617f345c6db202900f1f74e}{T\+E\+S\+T\+\_\+P}} (\mbox{\hyperlink{class_detect_not_instantiated_test}{Detect\+Not\+Instantiated\+Test}}, Used)
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_aba6f96ff830e50262dbb69eaa210eb4c}{T\+Y\+P\+E\+D\+\_\+\+T\+E\+S\+T\+\_\+\+S\+U\+I\+TE}} (\mbox{\hyperlink{class_typed_test}{Typed\+Test}}, \mbox{\hyperlink{namespacetesting_a29eec4c1aba59e52881d8eb38cece83c}{testing\+::\+Types}}$<$ int $>$)
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_ab72842d4a1d86ecc465501431a9316a9}{T\+Y\+P\+E\+D\+\_\+\+T\+E\+ST}} (\mbox{\hyperlink{class_typed_test}{Typed\+Test}}, Success)
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_adde6a03096986f66d57f1a495c6f5d2f}{T\+Y\+P\+E\+D\+\_\+\+T\+E\+ST}} (\mbox{\hyperlink{class_typed_test}{Typed\+Test}}, Failure)
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_af86f556b60291929fbf63895e0bbf4a1}{T\+Y\+P\+E\+D\+\_\+\+T\+E\+S\+T\+\_\+\+S\+U\+I\+TE}} (\mbox{\hyperlink{class_typed_test_with_names}{Typed\+Test\+With\+Names}}, \mbox{\hyperlink{googletest-output-test___8cc_a54f4cdb662871468646c6b33c7921bf5}{Types\+For\+Test\+With\+Names}}, \mbox{\hyperlink{class_typed_test_names}{Typed\+Test\+Names}})
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_adf6be2d306f1c323e94bb55cda1e4c33}{T\+Y\+P\+E\+D\+\_\+\+T\+E\+ST}} (\mbox{\hyperlink{class_typed_test_with_names}{Typed\+Test\+With\+Names}}, Success)
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_a265bb410f3f6cd39de657d42097d8880}{T\+Y\+P\+E\+D\+\_\+\+T\+E\+ST}} (\mbox{\hyperlink{class_typed_test_with_names}{Typed\+Test\+With\+Names}}, Failure)
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_a327e34ac226454d455e97bb82f312fc9}{T\+Y\+P\+E\+D\+\_\+\+T\+E\+S\+T\+\_\+\+S\+U\+I\+T\+E\+\_\+P}} (\mbox{\hyperlink{class_typed_test_p}{Typed\+TestP}})
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_af87307c4977f2d33c48a819c3a0a752f}{T\+Y\+P\+E\+D\+\_\+\+T\+E\+S\+T\+\_\+P}} (\mbox{\hyperlink{class_typed_test_p}{Typed\+TestP}}, Success)
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_a5cea7e5e2c1e26c8803405b8645e611f}{T\+Y\+P\+E\+D\+\_\+\+T\+E\+S\+T\+\_\+P}} (\mbox{\hyperlink{class_typed_test_p}{Typed\+TestP}}, Failure)
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_a08fd631c8702ffd71139025175f6f277}{R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+T\+Y\+P\+E\+D\+\_\+\+T\+E\+S\+T\+\_\+\+S\+U\+I\+T\+E\+\_\+P}} (\mbox{\hyperlink{class_typed_test_p}{Typed\+TestP}}, Success, Failure)
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_a03e9ca08d4ba8290159392dada23e655}{I\+N\+S\+T\+A\+N\+T\+I\+A\+T\+E\+\_\+\+T\+Y\+P\+E\+D\+\_\+\+T\+E\+S\+T\+\_\+\+S\+U\+I\+T\+E\+\_\+P}} (Unsigned, \mbox{\hyperlink{class_typed_test_p}{Typed\+TestP}}, \mbox{\hyperlink{googletest-output-test___8cc_a5887507e47123cf1395ce631001c6ce9}{Unsigned\+Types}})
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_af0b02481d59373e33a937e0dcacaaeb2}{I\+N\+S\+T\+A\+N\+T\+I\+A\+T\+E\+\_\+\+T\+Y\+P\+E\+D\+\_\+\+T\+E\+S\+T\+\_\+\+S\+U\+I\+T\+E\+\_\+P}} (Unsigned\+Custom\+Name, \mbox{\hyperlink{class_typed_test_p}{Typed\+TestP}}, \mbox{\hyperlink{googletest-output-test___8cc_a5887507e47123cf1395ce631001c6ce9}{Unsigned\+Types}}, \mbox{\hyperlink{class_typed_test_p_names}{Typed\+Test\+P\+Names}})
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_ab9a2fdb6482d0bc5bbd48f6e8aab9940}{T\+Y\+P\+E\+D\+\_\+\+T\+E\+S\+T\+\_\+\+S\+U\+I\+T\+E\+\_\+P}} (\mbox{\hyperlink{class_detect_not_instantiated_types_test}{Detect\+Not\+Instantiated\+Types\+Test}})
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_a5f00094ca238af220c026d737e034100}{T\+Y\+P\+E\+D\+\_\+\+T\+E\+S\+T\+\_\+P}} (\mbox{\hyperlink{class_detect_not_instantiated_types_test}{Detect\+Not\+Instantiated\+Types\+Test}}, Used)
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_a530fc81b4d356d88c475f969687c8596}{R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+T\+Y\+P\+E\+D\+\_\+\+T\+E\+S\+T\+\_\+\+S\+U\+I\+T\+E\+\_\+P}} (\mbox{\hyperlink{class_detect_not_instantiated_types_test}{Detect\+Not\+Instantiated\+Types\+Test}}, Used)
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_ae7459e6b9516821fd0e77eb3aa9b7413}{T\+E\+S\+T\+\_\+F}} (\mbox{\hyperlink{class_expect_failure_test}{Expect\+Failure\+Test}}, Expect\+Fatal\+Failure)
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_abec150ac715359c89fde1102cfc300d2}{T\+E\+S\+T\+\_\+F}} (\mbox{\hyperlink{class_expect_failure_test}{Expect\+Failure\+Test}}, Expect\+Non\+Fatal\+Failure)
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_a1f29562e9248524dda90aa6d641d77ea}{T\+E\+S\+T\+\_\+F}} (\mbox{\hyperlink{class_expect_failure_test}{Expect\+Failure\+Test}}, Expect\+Fatal\+Failure\+On\+All\+Threads)
+\item 
+\mbox{\hyperlink{googletest-output-test___8cc_a7714d1899711a604704737897595e7c3}{T\+E\+S\+T\+\_\+F}} (\mbox{\hyperlink{class_expect_failure_test}{Expect\+Failure\+Test}}, Expect\+Non\+Fatal\+Failure\+On\+All\+Threads)
+\item 
+int \mbox{\hyperlink{googletest-output-test___8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static const char \mbox{\hyperlink{googletest-output-test___8cc_a6db44d0c97a2b93be43ba6c8104b7511}{k\+Golden\+String}} \mbox{[}$\,$\mbox{]} = \char`\"{}\textbackslash{}\char`\"{}Line\textbackslash{}0 1\textbackslash{}\char`\"{}\textbackslash{}n\+Line 2\char`\"{}
+\item 
+int \mbox{\hyperlink{googletest-output-test___8cc_a81be7f35ea2573ecc7ca08b26b56bccf}{global\+\_\+integer}} = 0
+\item 
+auto \mbox{\hyperlink{googletest-output-test___8cc_af938c5e98ea6bb8c43a7bd0d8d3007b5}{dynamic\+\_\+test}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{googletest-output-test___8cc_a7d0214993b29b66c5052c62d5f4824ec}\label{googletest-output-test___8cc_a7d0214993b29b66c5052c62d5f4824ec}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!NoTests@{NoTests}}
+\index{NoTests@{NoTests}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{NoTests}{NoTests}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{googletest-output-test___8cc_a7d0214993b29b66c5052c62d5f4824ec}{No\+Tests}} =  \mbox{\hyperlink{class_param_test}{Param\+Test}}}
+
+
+
+Definition at line 737 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_a54f4cdb662871468646c6b33c7921bf5}\label{googletest-output-test___8cc_a54f4cdb662871468646c6b33c7921bf5}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TypesForTestWithNames@{TypesForTestWithNames}}
+\index{TypesForTestWithNames@{TypesForTestWithNames}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TypesForTestWithNames}{TypesForTestWithNames}}
+{\footnotesize\ttfamily typedef \mbox{\hyperlink{namespacetesting_a29eec4c1aba59e52881d8eb38cece83c}{testing\+::\+Types}}$<$char, int$>$ \mbox{\hyperlink{googletest-output-test___8cc_a54f4cdb662871468646c6b33c7921bf5}{Types\+For\+Test\+With\+Names}}}
+
+
+
+Definition at line 761 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_a5887507e47123cf1395ce631001c6ce9}\label{googletest-output-test___8cc_a5887507e47123cf1395ce631001c6ce9}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!UnsignedTypes@{UnsignedTypes}}
+\index{UnsignedTypes@{UnsignedTypes}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{UnsignedTypes}{UnsignedTypes}}
+{\footnotesize\ttfamily typedef \mbox{\hyperlink{namespacetesting_a29eec4c1aba59e52881d8eb38cece83c}{testing\+::\+Types}}$<$unsigned char, unsigned int$>$ \mbox{\hyperlink{googletest-output-test___8cc_a5887507e47123cf1395ce631001c6ce9}{Unsigned\+Types}}}
+
+
+
+Definition at line 799 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{googletest-output-test___8cc_a36cd4d21174efaa3066237d716028d49}\label{googletest-output-test___8cc_a36cd4d21174efaa3066237d716028d49}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!AdHocTest@{AdHocTest}}
+\index{AdHocTest@{AdHocTest}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{AdHocTest()}{AdHocTest()}}
+{\footnotesize\ttfamily void Ad\+Hoc\+Test (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 355 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_acdca9b16622e8a506a39240c8809af38}\label{googletest-output-test___8cc_acdca9b16622e8a506a39240c8809af38}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!FatalFailure@{FatalFailure}}
+\index{FatalFailure@{FatalFailure}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{FatalFailure()}{FatalFailure()}}
+{\footnotesize\ttfamily void Fatal\+Failure (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 666 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_adc8de4f4bb8b20d3163b2feca1de457d}\label{googletest-output-test___8cc_adc8de4f4bb8b20d3163b2feca1de457d}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!INSTANTIATE\_TEST\_SUITE\_P@{INSTANTIATE\_TEST\_SUITE\_P}}
+\index{INSTANTIATE\_TEST\_SUITE\_P@{INSTANTIATE\_TEST\_SUITE\_P}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{INSTANTIATE\_TEST\_SUITE\_P()}{INSTANTIATE\_TEST\_SUITE\_P()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily I\+N\+S\+T\+A\+N\+T\+I\+A\+T\+E\+\_\+\+T\+E\+S\+T\+\_\+\+S\+U\+I\+T\+E\+\_\+P (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_empty_basename_param_inst}{Empty\+Basename\+Param\+Inst}}}]{,  }\item[{\mbox{\hyperlink{namespacetesting_a374d4e5fbb4c938058fbe81d4c7ff6a6}{testing\+::\+Values}}(1)}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{googletest-output-test___8cc_a7917783e750c5d42b4d0b6907c340c7e}\label{googletest-output-test___8cc_a7917783e750c5d42b4d0b6907c340c7e}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!INSTANTIATE\_TEST\_SUITE\_P@{INSTANTIATE\_TEST\_SUITE\_P}}
+\index{INSTANTIATE\_TEST\_SUITE\_P@{INSTANTIATE\_TEST\_SUITE\_P}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{INSTANTIATE\_TEST\_SUITE\_P()}{INSTANTIATE\_TEST\_SUITE\_P()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily I\+N\+S\+T\+A\+N\+T\+I\+A\+T\+E\+\_\+\+T\+E\+S\+T\+\_\+\+S\+U\+I\+T\+E\+\_\+P (\begin{DoxyParamCaption}\item[{Printing\+Failing\+Params}]{,  }\item[{\mbox{\hyperlink{class_failing_param_test}{Failing\+Param\+Test}}}]{,  }\item[{\mbox{\hyperlink{namespacetesting_a374d4e5fbb4c938058fbe81d4c7ff6a6}{testing\+::\+Values}}(2)}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{googletest-output-test___8cc_a5c488fe4474fec68c24acfc4fb353ed7}\label{googletest-output-test___8cc_a5c488fe4474fec68c24acfc4fb353ed7}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!INSTANTIATE\_TEST\_SUITE\_P@{INSTANTIATE\_TEST\_SUITE\_P}}
+\index{INSTANTIATE\_TEST\_SUITE\_P@{INSTANTIATE\_TEST\_SUITE\_P}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{INSTANTIATE\_TEST\_SUITE\_P()}{INSTANTIATE\_TEST\_SUITE\_P()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily I\+N\+S\+T\+A\+N\+T\+I\+A\+T\+E\+\_\+\+T\+E\+S\+T\+\_\+\+S\+U\+I\+T\+E\+\_\+P (\begin{DoxyParamCaption}\item[{Printing\+Strings}]{,  }\item[{\mbox{\hyperlink{class_param_test}{Param\+Test}}}]{,  }\item[{\mbox{\hyperlink{namespacetesting_a374d4e5fbb4c938058fbe81d4c7ff6a6}{testing\+::\+Values}}(std\+::string(\char`\"{}a\char`\"{}))}]{,  }\item[{\mbox{\hyperlink{googletest-output-test___8cc_a61c686cb1c0f8f19c100ff975482ec7a}{Param\+Name\+Func}}}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{googletest-output-test___8cc_a58a299d11fe0be24b18af95858897c51}\label{googletest-output-test___8cc_a58a299d11fe0be24b18af95858897c51}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!INSTANTIATE\_TEST\_SUITE\_P@{INSTANTIATE\_TEST\_SUITE\_P}}
+\index{INSTANTIATE\_TEST\_SUITE\_P@{INSTANTIATE\_TEST\_SUITE\_P}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{INSTANTIATE\_TEST\_SUITE\_P()}{INSTANTIATE\_TEST\_SUITE\_P()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily I\+N\+S\+T\+A\+N\+T\+I\+A\+T\+E\+\_\+\+T\+E\+S\+T\+\_\+\+S\+U\+I\+T\+E\+\_\+P (\begin{DoxyParamCaption}\item[{This\+Is\+Odd}]{,  }\item[{\mbox{\hyperlink{googletest-output-test___8cc_a7d0214993b29b66c5052c62d5f4824ec}{No\+Tests}}}]{,  }\item[{\+::\mbox{\hyperlink{namespacetesting_a374d4e5fbb4c938058fbe81d4c7ff6a6}{testing\+::\+Values}}(\char`\"{}Hello\char`\"{})}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{googletest-output-test___8cc_a03e9ca08d4ba8290159392dada23e655}\label{googletest-output-test___8cc_a03e9ca08d4ba8290159392dada23e655}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!INSTANTIATE\_TYPED\_TEST\_SUITE\_P@{INSTANTIATE\_TYPED\_TEST\_SUITE\_P}}
+\index{INSTANTIATE\_TYPED\_TEST\_SUITE\_P@{INSTANTIATE\_TYPED\_TEST\_SUITE\_P}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{INSTANTIATE\_TYPED\_TEST\_SUITE\_P()}{INSTANTIATE\_TYPED\_TEST\_SUITE\_P()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily I\+N\+S\+T\+A\+N\+T\+I\+A\+T\+E\+\_\+\+T\+Y\+P\+E\+D\+\_\+\+T\+E\+S\+T\+\_\+\+S\+U\+I\+T\+E\+\_\+P (\begin{DoxyParamCaption}\item[{Unsigned}]{,  }\item[{\mbox{\hyperlink{class_typed_test_p}{Typed\+TestP}}}]{,  }\item[{\mbox{\hyperlink{googletest-output-test___8cc_a5887507e47123cf1395ce631001c6ce9}{Unsigned\+Types}}}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{googletest-output-test___8cc_af0b02481d59373e33a937e0dcacaaeb2}\label{googletest-output-test___8cc_af0b02481d59373e33a937e0dcacaaeb2}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!INSTANTIATE\_TYPED\_TEST\_SUITE\_P@{INSTANTIATE\_TYPED\_TEST\_SUITE\_P}}
+\index{INSTANTIATE\_TYPED\_TEST\_SUITE\_P@{INSTANTIATE\_TYPED\_TEST\_SUITE\_P}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{INSTANTIATE\_TYPED\_TEST\_SUITE\_P()}{INSTANTIATE\_TYPED\_TEST\_SUITE\_P()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily I\+N\+S\+T\+A\+N\+T\+I\+A\+T\+E\+\_\+\+T\+Y\+P\+E\+D\+\_\+\+T\+E\+S\+T\+\_\+\+S\+U\+I\+T\+E\+\_\+P (\begin{DoxyParamCaption}\item[{Unsigned\+Custom\+Name}]{,  }\item[{\mbox{\hyperlink{class_typed_test_p}{Typed\+TestP}}}]{,  }\item[{\mbox{\hyperlink{googletest-output-test___8cc_a5887507e47123cf1395ce631001c6ce9}{Unsigned\+Types}}}]{,  }\item[{\mbox{\hyperlink{class_typed_test_p_names}{Typed\+Test\+P\+Names}}}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{googletest-output-test___8cc_a3c04138a5bfe5d72780bb7e82a18e627}\label{googletest-output-test___8cc_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!main@{main}}
+\index{main@{main}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+
+
+Definition at line 1068 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_a61c686cb1c0f8f19c100ff975482ec7a}\label{googletest-output-test___8cc_a61c686cb1c0f8f19c100ff975482ec7a}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!ParamNameFunc@{ParamNameFunc}}
+\index{ParamNameFunc@{ParamNameFunc}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{ParamNameFunc()}{ParamNameFunc()}}
+{\footnotesize\ttfamily std\+::string Param\+Name\+Func (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structtesting_1_1_test_param_info}{testing\+::\+Test\+Param\+Info}}$<$ std\+::string $>$ \&}]{info }\end{DoxyParamCaption})}
+
+
+
+Definition at line 716 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_a530fc81b4d356d88c475f969687c8596}\label{googletest-output-test___8cc_a530fc81b4d356d88c475f969687c8596}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!REGISTER\_TYPED\_TEST\_SUITE\_P@{REGISTER\_TYPED\_TEST\_SUITE\_P}}
+\index{REGISTER\_TYPED\_TEST\_SUITE\_P@{REGISTER\_TYPED\_TEST\_SUITE\_P}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{REGISTER\_TYPED\_TEST\_SUITE\_P()}{REGISTER\_TYPED\_TEST\_SUITE\_P()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+T\+Y\+P\+E\+D\+\_\+\+T\+E\+S\+T\+\_\+\+S\+U\+I\+T\+E\+\_\+P (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_detect_not_instantiated_types_test}{Detect\+Not\+Instantiated\+Types\+Test}}}]{,  }\item[{Used}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{googletest-output-test___8cc_a08fd631c8702ffd71139025175f6f277}\label{googletest-output-test___8cc_a08fd631c8702ffd71139025175f6f277}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!REGISTER\_TYPED\_TEST\_SUITE\_P@{REGISTER\_TYPED\_TEST\_SUITE\_P}}
+\index{REGISTER\_TYPED\_TEST\_SUITE\_P@{REGISTER\_TYPED\_TEST\_SUITE\_P}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{REGISTER\_TYPED\_TEST\_SUITE\_P()}{REGISTER\_TYPED\_TEST\_SUITE\_P()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+T\+Y\+P\+E\+D\+\_\+\+T\+E\+S\+T\+\_\+\+S\+U\+I\+T\+E\+\_\+P (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_typed_test_p}{Typed\+TestP}}}]{,  }\item[{Success}]{,  }\item[{Failure}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{googletest-output-test___8cc_ae0ca194f6b730e168850ce3179ad4f63}\label{googletest-output-test___8cc_ae0ca194f6b730e168850ce3179ad4f63}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!RunAllTests@{RunAllTests}}
+\index{RunAllTests@{RunAllTests}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{RunAllTests()}{RunAllTests()}}
+{\footnotesize\ttfamily int Run\+All\+Tests (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 362 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_a7e222b468bbde7215ce826f10993e746}\label{googletest-output-test___8cc_a7e222b468bbde7215ce826f10993e746}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!SubWithoutTrace@{SubWithoutTrace}}
+\index{SubWithoutTrace@{SubWithoutTrace}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{SubWithoutTrace()}{SubWithoutTrace()}}
+{\footnotesize\ttfamily void Sub\+Without\+Trace (\begin{DoxyParamCaption}\item[{int}]{n }\end{DoxyParamCaption})}
+
+
+
+Definition at line 169 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_a543ee38e0824e47113bb12c3277e09ae}\label{googletest-output-test___8cc_a543ee38e0824e47113bb12c3277e09ae}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!SubWithTrace@{SubWithTrace}}
+\index{SubWithTrace@{SubWithTrace}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{SubWithTrace()}{SubWithTrace()}}
+{\footnotesize\ttfamily void Sub\+With\+Trace (\begin{DoxyParamCaption}\item[{int}]{n }\end{DoxyParamCaption})}
+
+
+
+Definition at line 175 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_a62631ea26f8f98f3f19dc03f950dc197}\label{googletest-output-test___8cc_a62631ea26f8f98f3f19dc03f950dc197}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TEST@{TEST}}
+\index{TEST@{TEST}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [1/34]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{Add\+Failure\+At\+Test}]{,  }\item[{Message\+Contains\+Specified\+File\+And\+Line\+Number}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 471 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_a2bdac0e0076d65fa77a967c0fdb46e2a}\label{googletest-output-test___8cc_a2bdac0e0076d65fa77a967c0fdb46e2a}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TEST@{TEST}}
+\index{TEST@{TEST}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [2/34]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{Disabled\+Tests\+Warning\+Test}]{,  }\item[{D\+I\+S\+A\+B\+L\+E\+D\+\_\+\+Also\+Run\+Disabled\+Tests\+Flag\+Suppresses\+Warning}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 344 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_a4b06191d54fb76270da3d3dd497e62b6}\label{googletest-output-test___8cc_a4b06191d54fb76270da3d3dd497e62b6}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TEST@{TEST}}
+\index{TEST@{TEST}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [3/34]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{Expect\+Fatal\+Failure\+Test}]{,  }\item[{Can\+Reference\+Global\+Variables}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 632 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_ac6646aa5f6d4ea21c0528259118754a4}\label{googletest-output-test___8cc_ac6646aa5f6d4ea21c0528259118754a4}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TEST@{TEST}}
+\index{TEST@{TEST}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [4/34]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{Expect\+Fatal\+Failure\+Test}]{,  }\item[{Can\+Reference\+Local\+Static\+Variables}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 641 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_aca5344af5eed2eefc512c555acbe5511}\label{googletest-output-test___8cc_aca5344af5eed2eefc512c555acbe5511}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TEST@{TEST}}
+\index{TEST@{TEST}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [5/34]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{Expect\+Fatal\+Failure\+Test}]{,  }\item[{Fails\+When\+Statement\+Returns}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 691 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_a4fd11a245bf0e8eb46d78c8dc14c730e}\label{googletest-output-test___8cc_a4fd11a245bf0e8eb46d78c8dc14c730e}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TEST@{TEST}}
+\index{TEST@{TEST}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [6/34]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{Expect\+Fatal\+Failure\+Test}]{,  }\item[{Fails\+When\+There\+Are\+Two\+Fatal\+Failures}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 672 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_af8e8545243605b2ba121e253ec48785e}\label{googletest-output-test___8cc_af8e8545243605b2ba121e253ec48785e}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TEST@{TEST}}
+\index{TEST@{TEST}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [7/34]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{Expect\+Fatal\+Failure\+Test}]{,  }\item[{Fails\+When\+There\+Is\+No\+Fatal\+Failure}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 659 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_a35fafc42558ee14c42320b359c270026}\label{googletest-output-test___8cc_a35fafc42558ee14c42320b359c270026}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TEST@{TEST}}
+\index{TEST@{TEST}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [8/34]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{Expect\+Fatal\+Failure\+Test}]{,  }\item[{Fails\+When\+There\+Is\+One\+Nonfatal\+Failure}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 682 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_a0d894cc9ae86412b4c156748602a23a7}\label{googletest-output-test___8cc_a0d894cc9ae86412b4c156748602a23a7}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TEST@{TEST}}
+\index{TEST@{TEST}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [9/34]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{Expect\+Fatal\+Failure\+Test}]{,  }\item[{Succeeds\+When\+There\+Is\+One\+Fatal\+Failure}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 651 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_a3dd01f9996bd85dd50bd7632f58cbf8c}\label{googletest-output-test___8cc_a3dd01f9996bd85dd50bd7632f58cbf8c}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TEST@{TEST}}
+\index{TEST@{TEST}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [10/34]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{Expect\+Nonfatal\+Failure\+Test}]{,  }\item[{Can\+Reference\+Global\+Variables}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 553 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_afe7af77e310ee1a7599e2bc1f0f14354}\label{googletest-output-test___8cc_afe7af77e310ee1a7599e2bc1f0f14354}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TEST@{TEST}}
+\index{TEST@{TEST}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [11/34]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{Expect\+Nonfatal\+Failure\+Test}]{,  }\item[{Can\+Reference\+Local\+Variables}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 562 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_aa5976cbca1620f7fea18689a3cbf5333}\label{googletest-output-test___8cc_aa5976cbca1620f7fea18689a3cbf5333}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TEST@{TEST}}
+\index{TEST@{TEST}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [12/34]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{Expect\+Nonfatal\+Failure\+Test}]{,  }\item[{Fails\+When\+Statement\+Returns}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 608 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_a17f835822727dac7b75b74ed70d2fbd2}\label{googletest-output-test___8cc_a17f835822727dac7b75b74ed70d2fbd2}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TEST@{TEST}}
+\index{TEST@{TEST}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [13/34]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{Expect\+Nonfatal\+Failure\+Test}]{,  }\item[{Fails\+When\+There\+Are\+Two\+Nonfatal\+Failures}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 589 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_a3984cefae98995e99cc3de7251998c34}\label{googletest-output-test___8cc_a3984cefae98995e99cc3de7251998c34}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TEST@{TEST}}
+\index{TEST@{TEST}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [14/34]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{Expect\+Nonfatal\+Failure\+Test}]{,  }\item[{Fails\+When\+There\+Is\+No\+Nonfatal\+Failure}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 581 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_ab9c67cf52ef031fdf619d61283da1ca7}\label{googletest-output-test___8cc_ab9c67cf52ef031fdf619d61283da1ca7}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TEST@{TEST}}
+\index{TEST@{TEST}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [15/34]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{Expect\+Nonfatal\+Failure\+Test}]{,  }\item[{Fails\+When\+There\+Is\+One\+Fatal\+Failure}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 599 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_ac144593aa4a95ae47c0bb03def354f66}\label{googletest-output-test___8cc_ac144593aa4a95ae47c0bb03def354f66}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TEST@{TEST}}
+\index{TEST@{TEST}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [16/34]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{Expect\+Nonfatal\+Failure\+Test}]{,  }\item[{Succeeds\+When\+There\+Is\+One\+Nonfatal\+Failure}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 573 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_a8763e3844bd21de9bd7126658a4279c5}\label{googletest-output-test___8cc_a8763e3844bd21de9bd7126658a4279c5}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TEST@{TEST}}
+\index{TEST@{TEST}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [17/34]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{Fatal\+Failure\+Test}]{,  }\item[{Fatal\+Failure\+In\+Nested\+Subroutine}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 130 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_a6076f79ee5f9e8982bba181cbbebb0ed}\label{googletest-output-test___8cc_a6076f79ee5f9e8982bba181cbbebb0ed}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TEST@{TEST}}
+\index{TEST@{TEST}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [18/34]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{Fatal\+Failure\+Test}]{,  }\item[{Fatal\+Failure\+In\+Subroutine}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 123 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_afe609aef34a68a2ab9809eb48112c5cc}\label{googletest-output-test___8cc_afe609aef34a68a2ab9809eb48112c5cc}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TEST@{TEST}}
+\index{TEST@{TEST}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [19/34]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{Fatal\+Failure\+Test}]{,  }\item[{Nonfatal\+Failure\+In\+Subroutine}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 147 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_a55ed27923966fd2997638340ff07caa1}\label{googletest-output-test___8cc_a55ed27923966fd2997638340ff07caa1}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TEST@{TEST}}
+\index{TEST@{TEST}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [20/34]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{Gtest\+Fail\+At\+Test}]{,  }\item[{Message\+Contains\+Specified\+File\+And\+Line\+Number}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 475 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_ad9bbf46060935b29c42d3116ddbc3566}\label{googletest-output-test___8cc_ad9bbf46060935b29c42d3116ddbc3566}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TEST@{TEST}}
+\index{TEST@{TEST}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [21/34]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{Logging\+Test}]{,  }\item[{Interleaving\+Logging\+And\+Assertions}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 154 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_aaa6c1704a62b7412fd5e053614f47650}\label{googletest-output-test___8cc_aaa6c1704a62b7412fd5e053614f47650}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TEST@{TEST}}
+\index{TEST@{TEST}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [22/34]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{Nonfatal\+Failure\+Test}]{,  }\item[{Diff\+For\+Long\+Strings}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 117 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_a1ae5db2b27aea7d9f321f52002d4a501}\label{googletest-output-test___8cc_a1ae5db2b27aea7d9f321f52002d4a501}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TEST@{TEST}}
+\index{TEST@{TEST}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [23/34]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{Nonfatal\+Failure\+Test}]{,  }\item[{Escapes\+String\+Operands}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 109 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_a62f1870b5f6ce5c731fe0606a944da39}\label{googletest-output-test___8cc_a62f1870b5f6ce5c731fe0606a944da39}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TEST@{TEST}}
+\index{TEST@{TEST}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [24/34]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{Passing\+Test}]{,  }\item[{Passing\+Test1}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 79 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_aaf792b2d65c4aeb1e2f1804e2319afd2}\label{googletest-output-test___8cc_aaf792b2d65c4aeb1e2f1804e2319afd2}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TEST@{TEST}}
+\index{TEST@{TEST}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [25/34]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{Passing\+Test}]{,  }\item[{Passing\+Test2}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 82 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_a81f7d012241339866fccb3c3750b553b}\label{googletest-output-test___8cc_a81f7d012241339866fccb3c3750b553b}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TEST@{TEST}}
+\index{TEST@{TEST}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [26/34]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{S\+C\+O\+P\+E\+D\+\_\+\+T\+R\+A\+C\+E\+Test}]{,  }\item[{Accepted\+Values}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 181 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_ae402e91f305e54f5f14a172a0fb0831b}\label{googletest-output-test___8cc_ae402e91f305e54f5f14a172a0fb0831b}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TEST@{TEST}}
+\index{TEST@{TEST}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [27/34]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{S\+C\+O\+P\+E\+D\+\_\+\+T\+R\+A\+C\+E\+Test}]{,  }\item[{Can\+Be\+Nested}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 230 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_a49c4610eeb41adaa369f9dce003d5198}\label{googletest-output-test___8cc_a49c4610eeb41adaa369f9dce003d5198}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TEST@{TEST}}
+\index{TEST@{TEST}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [28/34]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{S\+C\+O\+P\+E\+D\+\_\+\+T\+R\+A\+C\+E\+Test}]{,  }\item[{Can\+Be\+Repeated}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 239 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_a82f82f6a7caa426cccf8d20113f897c0}\label{googletest-output-test___8cc_a82f82f6a7caa426cccf8d20113f897c0}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TEST@{TEST}}
+\index{TEST@{TEST}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [29/34]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{S\+C\+O\+P\+E\+D\+\_\+\+T\+R\+A\+C\+E\+Test}]{,  }\item[{Obeys\+Scopes}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 192 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_a46dcedbe67765adaebc7740ee17a88de}\label{googletest-output-test___8cc_a46dcedbe67765adaebc7740ee17a88de}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TEST@{TEST}}
+\index{TEST@{TEST}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [30/34]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{S\+C\+O\+P\+E\+D\+\_\+\+T\+R\+A\+C\+E\+Test}]{,  }\item[{Works\+In\+Loop}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 211 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_a492695898501cea9f99ccd690c2b3991}\label{googletest-output-test___8cc_a492695898501cea9f99ccd690c2b3991}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TEST@{TEST}}
+\index{TEST@{TEST}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [31/34]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{S\+C\+O\+P\+E\+D\+\_\+\+T\+R\+A\+C\+E\+Test}]{,  }\item[{Works\+In\+Subroutine}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 222 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_aff587c2c7d3e81f4d94425987ca07bc1}\label{googletest-output-test___8cc_aff587c2c7d3e81f4d94425987ca07bc1}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TEST@{TEST}}
+\index{TEST@{TEST}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [32/34]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{Scoped\+Trace\+Test}]{,  }\item[{With\+Explicit\+File\+And\+Line}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 339 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_a80bcd554d66913b961ad814266a403a8}\label{googletest-output-test___8cc_a80bcd554d66913b961ad814266a403a8}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TEST@{TEST}}
+\index{TEST@{TEST}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [33/34]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_t_e_s_t__before___t_e_s_t___f__in__same__test__case}{T\+E\+S\+T\+\_\+before\+\_\+\+T\+E\+S\+T\+\_\+\+F\+\_\+in\+\_\+same\+\_\+test\+\_\+case}}}]{,  }\item[{Defined\+Using\+T\+E\+ST}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 542 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_a4b026b84b5a6dcbfa586f406e7c6b79c}\label{googletest-output-test___8cc_a4b026b84b5a6dcbfa586f406e7c6b79c}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TEST@{TEST}}
+\index{TEST@{TEST}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [34/34]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_t_e_s_t___f__before___t_e_s_t__in__same__test__case}{T\+E\+S\+T\+\_\+\+F\+\_\+before\+\_\+\+T\+E\+S\+T\+\_\+in\+\_\+same\+\_\+test\+\_\+case}}}]{,  }\item[{Defined\+Using\+T\+E\+S\+T\+And\+Should\+Fail}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 537 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_ae7459e6b9516821fd0e77eb3aa9b7413}\label{googletest-output-test___8cc_ae7459e6b9516821fd0e77eb3aa9b7413}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TEST\_F@{TEST\_F}}
+\index{TEST\_F@{TEST\_F}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TEST\_F()}{TEST\_F()}\hspace{0.1cm}{\footnotesize\ttfamily [1/10]}}
+{\footnotesize\ttfamily T\+E\+S\+T\+\_\+F (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_expect_failure_test}{Expect\+Failure\+Test}}}]{,  }\item[{Expect\+Fatal\+Failure}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 890 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_a1f29562e9248524dda90aa6d641d77ea}\label{googletest-output-test___8cc_a1f29562e9248524dda90aa6d641d77ea}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TEST\_F@{TEST\_F}}
+\index{TEST\_F@{TEST\_F}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TEST\_F()}{TEST\_F()}\hspace{0.1cm}{\footnotesize\ttfamily [2/10]}}
+{\footnotesize\ttfamily T\+E\+S\+T\+\_\+F (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_expect_failure_test}{Expect\+Failure\+Test}}}]{,  }\item[{Expect\+Fatal\+Failure\+On\+All\+Threads}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 961 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_abec150ac715359c89fde1102cfc300d2}\label{googletest-output-test___8cc_abec150ac715359c89fde1102cfc300d2}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TEST\_F@{TEST\_F}}
+\index{TEST\_F@{TEST\_F}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TEST\_F()}{TEST\_F()}\hspace{0.1cm}{\footnotesize\ttfamily [3/10]}}
+{\footnotesize\ttfamily T\+E\+S\+T\+\_\+F (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_expect_failure_test}{Expect\+Failure\+Test}}}]{,  }\item[{Expect\+Non\+Fatal\+Failure}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 904 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_a7714d1899711a604704737897595e7c3}\label{googletest-output-test___8cc_a7714d1899711a604704737897595e7c3}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TEST\_F@{TEST\_F}}
+\index{TEST\_F@{TEST\_F}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TEST\_F()}{TEST\_F()}\hspace{0.1cm}{\footnotesize\ttfamily [4/10]}}
+{\footnotesize\ttfamily T\+E\+S\+T\+\_\+F (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_expect_failure_test}{Expect\+Failure\+Test}}}]{,  }\item[{Expect\+Non\+Fatal\+Failure\+On\+All\+Threads}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 975 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_a858b341fa0b2298c1534b1325fedf797}\label{googletest-output-test___8cc_a858b341fa0b2298c1534b1325fedf797}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TEST\_F@{TEST\_F}}
+\index{TEST\_F@{TEST\_F}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TEST\_F()}{TEST\_F()}\hspace{0.1cm}{\footnotesize\ttfamily [5/10]}}
+{\footnotesize\ttfamily T\+E\+S\+T\+\_\+F (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_fatal_failure_in_fixture_constructor_test}{Fatal\+Failure\+In\+Fixture\+Constructor\+Test}}}]{,  }\item[{Failure\+In\+Constructor}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 420 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_a52057afc95d69adbae1fbe0ef92b29d7}\label{googletest-output-test___8cc_a52057afc95d69adbae1fbe0ef92b29d7}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TEST\_F@{TEST\_F}}
+\index{TEST\_F@{TEST\_F}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TEST\_F()}{TEST\_F()}\hspace{0.1cm}{\footnotesize\ttfamily [6/10]}}
+{\footnotesize\ttfamily T\+E\+S\+T\+\_\+F (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_fatal_failure_in_set_up_test}{Fatal\+Failure\+In\+Set\+Up\+Test}}}]{,  }\item[{Failure\+In\+Set\+Up}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 466 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_ad122def39d78da61690433e185611737}\label{googletest-output-test___8cc_ad122def39d78da61690433e185611737}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TEST\_F@{TEST\_F}}
+\index{TEST\_F@{TEST\_F}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TEST\_F()}{TEST\_F()}\hspace{0.1cm}{\footnotesize\ttfamily [7/10]}}
+{\footnotesize\ttfamily T\+E\+S\+T\+\_\+F (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_non_fatal_failure_in_fixture_constructor_test}{Non\+Fatal\+Failure\+In\+Fixture\+Constructor\+Test}}}]{,  }\item[{Failure\+In\+Constructor}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 386 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_aaa9d6fcc5d9910aedb42ff3db3cc313c}\label{googletest-output-test___8cc_aaa9d6fcc5d9910aedb42ff3db3cc313c}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TEST\_F@{TEST\_F}}
+\index{TEST\_F@{TEST\_F}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TEST\_F()}{TEST\_F()}\hspace{0.1cm}{\footnotesize\ttfamily [8/10]}}
+{\footnotesize\ttfamily T\+E\+S\+T\+\_\+F (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_non_fatal_failure_in_set_up_test}{Non\+Fatal\+Failure\+In\+Set\+Up\+Test}}}]{,  }\item[{Failure\+In\+Set\+Up}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 444 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_aa0ba9be79b1b05ddadfc8d25c099df31}\label{googletest-output-test___8cc_aa0ba9be79b1b05ddadfc8d25c099df31}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TEST\_F@{TEST\_F}}
+\index{TEST\_F@{TEST\_F}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TEST\_F()}{TEST\_F()}\hspace{0.1cm}{\footnotesize\ttfamily [9/10]}}
+{\footnotesize\ttfamily T\+E\+S\+T\+\_\+F (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_t_e_s_t__before___t_e_s_t___f__in__same__test__case}{T\+E\+S\+T\+\_\+before\+\_\+\+T\+E\+S\+T\+\_\+\+F\+\_\+in\+\_\+same\+\_\+test\+\_\+case}}}]{,  }\item[{Defined\+Using\+T\+E\+S\+T\+\_\+\+F\+And\+Should\+Fail}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 546 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_ae71a8d4934e768af615b9b09418f15c3}\label{googletest-output-test___8cc_ae71a8d4934e768af615b9b09418f15c3}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TEST\_F@{TEST\_F}}
+\index{TEST\_F@{TEST\_F}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TEST\_F()}{TEST\_F()}\hspace{0.1cm}{\footnotesize\ttfamily [10/10]}}
+{\footnotesize\ttfamily T\+E\+S\+T\+\_\+F (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_t_e_s_t___f__before___t_e_s_t__in__same__test__case}{T\+E\+S\+T\+\_\+\+F\+\_\+before\+\_\+\+T\+E\+S\+T\+\_\+in\+\_\+same\+\_\+test\+\_\+case}}}]{,  }\item[{Defined\+Using\+T\+E\+S\+T\+\_\+F}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 533 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_aac3ca1ad9617f345c6db202900f1f74e}\label{googletest-output-test___8cc_aac3ca1ad9617f345c6db202900f1f74e}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TEST\_P@{TEST\_P}}
+\index{TEST\_P@{TEST\_P}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TEST\_P()}{TEST\_P()}\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
+{\footnotesize\ttfamily T\+E\+S\+T\+\_\+P (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_detect_not_instantiated_test}{Detect\+Not\+Instantiated\+Test}}}]{,  }\item[{Used}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 742 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_a26922df227a0c471b923929491e2b149}\label{googletest-output-test___8cc_a26922df227a0c471b923929491e2b149}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TEST\_P@{TEST\_P}}
+\index{TEST\_P@{TEST\_P}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TEST\_P()}{TEST\_P()}\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
+{\footnotesize\ttfamily T\+E\+S\+T\+\_\+P (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_empty_basename_param_inst}{Empty\+Basename\+Param\+Inst}}}]{,  }\item[{Passes}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 103 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_a680b45844b58c5367da52c5383aea03a}\label{googletest-output-test___8cc_a680b45844b58c5367da52c5383aea03a}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TEST\_P@{TEST\_P}}
+\index{TEST\_P@{TEST\_P}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TEST\_P()}{TEST\_P()}\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
+{\footnotesize\ttfamily T\+E\+S\+T\+\_\+P (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_failing_param_test}{Failing\+Param\+Test}}}]{,  }\item[{Fails}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 89 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_a0847a99be23b980115e2dd88a1bd60cc}\label{googletest-output-test___8cc_a0847a99be23b980115e2dd88a1bd60cc}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TEST\_P@{TEST\_P}}
+\index{TEST\_P@{TEST\_P}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TEST\_P()}{TEST\_P()}\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
+{\footnotesize\ttfamily T\+E\+S\+T\+\_\+P (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_param_test}{Param\+Test}}}]{,  }\item[{Failure}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 727 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_a4e7fc7682f9a8a168b78d53b05fab8bf}\label{googletest-output-test___8cc_a4e7fc7682f9a8a168b78d53b05fab8bf}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TEST\_P@{TEST\_P}}
+\index{TEST\_P@{TEST\_P}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TEST\_P()}{TEST\_P()}\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
+{\footnotesize\ttfamily T\+E\+S\+T\+\_\+P (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_param_test}{Param\+Test}}}]{,  }\item[{Success}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 723 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_a8f28d985b030c6dd2714d1e884c62c41}\label{googletest-output-test___8cc_a8f28d985b030c6dd2714d1e884c62c41}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TestEq1@{TestEq1}}
+\index{TestEq1@{TestEq1}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TestEq1()}{TestEq1()}}
+{\footnotesize\ttfamily void Test\+Eq1 (\begin{DoxyParamCaption}\item[{int}]{x }\end{DoxyParamCaption})}
+
+
+
+Definition at line 59 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_a14e796981ca8d3c71dbd2b839c1ce784}\label{googletest-output-test___8cc_a14e796981ca8d3c71dbd2b839c1ce784}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TryTestSubroutine@{TryTestSubroutine}}
+\index{TryTestSubroutine@{TryTestSubroutine}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TryTestSubroutine()}{TryTestSubroutine()}}
+{\footnotesize\ttfamily void Try\+Test\+Subroutine (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 65 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_adde6a03096986f66d57f1a495c6f5d2f}\label{googletest-output-test___8cc_adde6a03096986f66d57f1a495c6f5d2f}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TYPED\_TEST@{TYPED\_TEST}}
+\index{TYPED\_TEST@{TYPED\_TEST}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST()}{TYPED\_TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily T\+Y\+P\+E\+D\+\_\+\+T\+E\+ST (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_typed_test}{Typed\+Test}}}]{,  }\item[{Failure}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 757 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_ab72842d4a1d86ecc465501431a9316a9}\label{googletest-output-test___8cc_ab72842d4a1d86ecc465501431a9316a9}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TYPED\_TEST@{TYPED\_TEST}}
+\index{TYPED\_TEST@{TYPED\_TEST}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST()}{TYPED\_TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily T\+Y\+P\+E\+D\+\_\+\+T\+E\+ST (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_typed_test}{Typed\+Test}}}]{,  }\item[{Success}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 753 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_a265bb410f3f6cd39de657d42097d8880}\label{googletest-output-test___8cc_a265bb410f3f6cd39de657d42097d8880}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TYPED\_TEST@{TYPED\_TEST}}
+\index{TYPED\_TEST@{TYPED\_TEST}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST()}{TYPED\_TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily T\+Y\+P\+E\+D\+\_\+\+T\+E\+ST (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_typed_test_with_names}{Typed\+Test\+With\+Names}}}]{,  }\item[{Failure}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 781 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_adf6be2d306f1c323e94bb55cda1e4c33}\label{googletest-output-test___8cc_adf6be2d306f1c323e94bb55cda1e4c33}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TYPED\_TEST@{TYPED\_TEST}}
+\index{TYPED\_TEST@{TYPED\_TEST}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST()}{TYPED\_TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily T\+Y\+P\+E\+D\+\_\+\+T\+E\+ST (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_typed_test_with_names}{Typed\+Test\+With\+Names}}}]{,  }\item[{Success}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 779 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_a5f00094ca238af220c026d737e034100}\label{googletest-output-test___8cc_a5f00094ca238af220c026d737e034100}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TYPED\_TEST\_P@{TYPED\_TEST\_P}}
+\index{TYPED\_TEST\_P@{TYPED\_TEST\_P}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST\_P()}{TYPED\_TEST\_P()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily T\+Y\+P\+E\+D\+\_\+\+T\+E\+S\+T\+\_\+P (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_detect_not_instantiated_types_test}{Detect\+Not\+Instantiated\+Types\+Test}}}]{,  }\item[{Used}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 821 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_a5cea7e5e2c1e26c8803405b8645e611f}\label{googletest-output-test___8cc_a5cea7e5e2c1e26c8803405b8645e611f}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TYPED\_TEST\_P@{TYPED\_TEST\_P}}
+\index{TYPED\_TEST\_P@{TYPED\_TEST\_P}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST\_P()}{TYPED\_TEST\_P()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily T\+Y\+P\+E\+D\+\_\+\+T\+E\+S\+T\+\_\+P (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_typed_test_p}{Typed\+TestP}}}]{,  }\item[{Failure}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 793 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_af87307c4977f2d33c48a819c3a0a752f}\label{googletest-output-test___8cc_af87307c4977f2d33c48a819c3a0a752f}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TYPED\_TEST\_P@{TYPED\_TEST\_P}}
+\index{TYPED\_TEST\_P@{TYPED\_TEST\_P}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST\_P()}{TYPED\_TEST\_P()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily T\+Y\+P\+E\+D\+\_\+\+T\+E\+S\+T\+\_\+P (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_typed_test_p}{Typed\+TestP}}}]{,  }\item[{Success}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 789 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_aba6f96ff830e50262dbb69eaa210eb4c}\label{googletest-output-test___8cc_aba6f96ff830e50262dbb69eaa210eb4c}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TYPED\_TEST\_SUITE@{TYPED\_TEST\_SUITE}}
+\index{TYPED\_TEST\_SUITE@{TYPED\_TEST\_SUITE}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST\_SUITE()}{TYPED\_TEST\_SUITE()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily T\+Y\+P\+E\+D\+\_\+\+T\+E\+S\+T\+\_\+\+S\+U\+I\+TE (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_typed_test}{Typed\+Test}}}]{,  }\item[{\mbox{\hyperlink{namespacetesting_a29eec4c1aba59e52881d8eb38cece83c}{testing\+::\+Types}}$<$ int $>$}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{googletest-output-test___8cc_af86f556b60291929fbf63895e0bbf4a1}\label{googletest-output-test___8cc_af86f556b60291929fbf63895e0bbf4a1}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TYPED\_TEST\_SUITE@{TYPED\_TEST\_SUITE}}
+\index{TYPED\_TEST\_SUITE@{TYPED\_TEST\_SUITE}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST\_SUITE()}{TYPED\_TEST\_SUITE()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily T\+Y\+P\+E\+D\+\_\+\+T\+E\+S\+T\+\_\+\+S\+U\+I\+TE (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_typed_test_with_names}{Typed\+Test\+With\+Names}}}]{,  }\item[{\mbox{\hyperlink{googletest-output-test___8cc_a54f4cdb662871468646c6b33c7921bf5}{Types\+For\+Test\+With\+Names}}}]{,  }\item[{\mbox{\hyperlink{class_typed_test_names}{Typed\+Test\+Names}}}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{googletest-output-test___8cc_ab9a2fdb6482d0bc5bbd48f6e8aab9940}\label{googletest-output-test___8cc_ab9a2fdb6482d0bc5bbd48f6e8aab9940}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TYPED\_TEST\_SUITE\_P@{TYPED\_TEST\_SUITE\_P}}
+\index{TYPED\_TEST\_SUITE\_P@{TYPED\_TEST\_SUITE\_P}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST\_SUITE\_P()}{TYPED\_TEST\_SUITE\_P()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily T\+Y\+P\+E\+D\+\_\+\+T\+E\+S\+T\+\_\+\+S\+U\+I\+T\+E\+\_\+P (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_detect_not_instantiated_types_test}{Detect\+Not\+Instantiated\+Types\+Test}}}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{googletest-output-test___8cc_a327e34ac226454d455e97bb82f312fc9}\label{googletest-output-test___8cc_a327e34ac226454d455e97bb82f312fc9}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!TYPED\_TEST\_SUITE\_P@{TYPED\_TEST\_SUITE\_P}}
+\index{TYPED\_TEST\_SUITE\_P@{TYPED\_TEST\_SUITE\_P}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST\_SUITE\_P()}{TYPED\_TEST\_SUITE\_P()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily T\+Y\+P\+E\+D\+\_\+\+T\+E\+S\+T\+\_\+\+S\+U\+I\+T\+E\+\_\+P (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_typed_test_p}{Typed\+TestP}}}]{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{googletest-output-test___8cc_af938c5e98ea6bb8c43a7bd0d8d3007b5}\label{googletest-output-test___8cc_af938c5e98ea6bb8c43a7bd0d8d3007b5}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!dynamic\_test@{dynamic\_test}}
+\index{dynamic\_test@{dynamic\_test}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{dynamic\_test}{dynamic\_test}}
+{\footnotesize\ttfamily auto dynamic\+\_\+test}
+
+
+
+Definition at line 1009 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_a81be7f35ea2573ecc7ca08b26b56bccf}\label{googletest-output-test___8cc_a81be7f35ea2573ecc7ca08b26b56bccf}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!global\_integer@{global\_integer}}
+\index{global\_integer@{global\_integer}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{global\_integer}{global\_integer}}
+{\footnotesize\ttfamily int global\+\_\+integer = 0}
+
+
+
+Definition at line 550 of file googletest-\/output-\/test\+\_\+.\+cc.
+
+\mbox{\Hypertarget{googletest-output-test___8cc_a6db44d0c97a2b93be43ba6c8104b7511}\label{googletest-output-test___8cc_a6db44d0c97a2b93be43ba6c8104b7511}} 
+\index{googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}!kGoldenString@{kGoldenString}}
+\index{kGoldenString@{kGoldenString}!googletest-\/output-\/test\_.cc@{googletest-\/output-\/test\_.cc}}
+\doxysubsubsection{\texorpdfstring{kGoldenString}{kGoldenString}}
+{\footnotesize\ttfamily const char k\+Golden\+String\mbox{[}$\,$\mbox{]} = \char`\"{}\textbackslash{}\char`\"{}Line\textbackslash{}0 1\textbackslash{}\char`\"{}\textbackslash{}n\+Line 2\char`\"{}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 107 of file googletest-\/output-\/test\+\_\+.\+cc.
+

@@ -1,0 +1,85 @@
+\hypertarget{_utilities_8cpp}{}\doxysection{Utilities.\+cpp File Reference}
+\label{_utilities_8cpp}\index{Utilities.cpp@{Utilities.cpp}}
+{\ttfamily \#include \char`\"{}libs/\+Utilities.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$sstream$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_utilities_8cpp_ace07d3e537625c6a69694d8693e4cefe}{split}} (std\+::string $\ast$const output, const std\+::string \&line, char delimiter)
+\item 
+void \mbox{\hyperlink{_utilities_8cpp_a3d59015ee5534c320c91517d7622125e}{trunc}} (Pnl\+Vect $\ast$const vect, int n)
+\item 
+bool \mbox{\hyperlink{_utilities_8cpp_a9b96642a1e8c85e3c8f1bdf6dc37963e}{are\+\_\+all\+\_\+positive}} (const Pnl\+Vect $\ast$const vect)
+\item 
+bool \mbox{\hyperlink{_utilities_8cpp_a434cf81d9a81488a9da70528d2e8ac6b}{has\+\_\+no\+\_\+index\+\_\+value\+\_\+null}} (const std\+::string $\ast$const array, const Pnl\+Vect\+Int $\ast$const indexes)
+\item 
+int \mbox{\hyperlink{_utilities_8cpp_af484a3ec2b6f6eefdf3649f0c827a0ab}{first\+\_\+index\+\_\+gte}} (const Pnl\+Vect $\ast$const vect, double \mbox{\hyperlink{gmock-matchers__test_8cc_a337b8a670efc0b086ad3af163f3121b6}{value}})
+\item 
+std\+::ostream \& \mbox{\hyperlink{_utilities_8cpp_ad8a213c6c12474833279d375f5b91443}{operator$<$$<$}} (std\+::ostream \&stm, const Pnl\+Vect $\ast$const vect)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{_utilities_8cpp_a9b96642a1e8c85e3c8f1bdf6dc37963e}\label{_utilities_8cpp_a9b96642a1e8c85e3c8f1bdf6dc37963e}} 
+\index{Utilities.cpp@{Utilities.cpp}!are\_all\_positive@{are\_all\_positive}}
+\index{are\_all\_positive@{are\_all\_positive}!Utilities.cpp@{Utilities.cpp}}
+\doxysubsubsection{\texorpdfstring{are\_all\_positive()}{are\_all\_positive()}}
+{\footnotesize\ttfamily bool are\+\_\+all\+\_\+positive (\begin{DoxyParamCaption}\item[{const Pnl\+Vect $\ast$const}]{vect }\end{DoxyParamCaption})}
+
+
+
+Definition at line 23 of file Utilities.\+cpp.
+
+\mbox{\Hypertarget{_utilities_8cpp_af484a3ec2b6f6eefdf3649f0c827a0ab}\label{_utilities_8cpp_af484a3ec2b6f6eefdf3649f0c827a0ab}} 
+\index{Utilities.cpp@{Utilities.cpp}!first\_index\_gte@{first\_index\_gte}}
+\index{first\_index\_gte@{first\_index\_gte}!Utilities.cpp@{Utilities.cpp}}
+\doxysubsubsection{\texorpdfstring{first\_index\_gte()}{first\_index\_gte()}}
+{\footnotesize\ttfamily int first\+\_\+index\+\_\+gte (\begin{DoxyParamCaption}\item[{const Pnl\+Vect $\ast$const}]{vect,  }\item[{double}]{value }\end{DoxyParamCaption})}
+
+
+
+Definition at line 36 of file Utilities.\+cpp.
+
+\mbox{\Hypertarget{_utilities_8cpp_a434cf81d9a81488a9da70528d2e8ac6b}\label{_utilities_8cpp_a434cf81d9a81488a9da70528d2e8ac6b}} 
+\index{Utilities.cpp@{Utilities.cpp}!has\_no\_index\_value\_null@{has\_no\_index\_value\_null}}
+\index{has\_no\_index\_value\_null@{has\_no\_index\_value\_null}!Utilities.cpp@{Utilities.cpp}}
+\doxysubsubsection{\texorpdfstring{has\_no\_index\_value\_null()}{has\_no\_index\_value\_null()}}
+{\footnotesize\ttfamily bool has\+\_\+no\+\_\+index\+\_\+value\+\_\+null (\begin{DoxyParamCaption}\item[{const std\+::string $\ast$const}]{array,  }\item[{const Pnl\+Vect\+Int $\ast$const}]{indexes }\end{DoxyParamCaption})}
+
+
+
+Definition at line 27 of file Utilities.\+cpp.
+
+\mbox{\Hypertarget{_utilities_8cpp_ad8a213c6c12474833279d375f5b91443}\label{_utilities_8cpp_ad8a213c6c12474833279d375f5b91443}} 
+\index{Utilities.cpp@{Utilities.cpp}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!Utilities.cpp@{Utilities.cpp}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}}
+{\footnotesize\ttfamily std\+::ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{stm,  }\item[{const Pnl\+Vect $\ast$const}]{vect }\end{DoxyParamCaption})}
+
+
+
+Definition at line 43 of file Utilities.\+cpp.
+
+\mbox{\Hypertarget{_utilities_8cpp_ace07d3e537625c6a69694d8693e4cefe}\label{_utilities_8cpp_ace07d3e537625c6a69694d8693e4cefe}} 
+\index{Utilities.cpp@{Utilities.cpp}!split@{split}}
+\index{split@{split}!Utilities.cpp@{Utilities.cpp}}
+\doxysubsubsection{\texorpdfstring{split()}{split()}}
+{\footnotesize\ttfamily void split (\begin{DoxyParamCaption}\item[{std\+::string $\ast$const}]{output,  }\item[{const std\+::string \&}]{line,  }\item[{char}]{delimiter }\end{DoxyParamCaption})}
+
+
+
+Definition at line 7 of file Utilities.\+cpp.
+
+\mbox{\Hypertarget{_utilities_8cpp_a3d59015ee5534c320c91517d7622125e}\label{_utilities_8cpp_a3d59015ee5534c320c91517d7622125e}} 
+\index{Utilities.cpp@{Utilities.cpp}!trunc@{trunc}}
+\index{trunc@{trunc}!Utilities.cpp@{Utilities.cpp}}
+\doxysubsubsection{\texorpdfstring{trunc()}{trunc()}}
+{\footnotesize\ttfamily void trunc (\begin{DoxyParamCaption}\item[{Pnl\+Vect $\ast$const}]{vect,  }\item[{int}]{n }\end{DoxyParamCaption})}
+
+
+
+Definition at line 16 of file Utilities.\+cpp.
+
