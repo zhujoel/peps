@@ -61,7 +61,7 @@ Exemples :
 * * ``` doxygen docs/Doxyfile ```
 * ``` gitstats/ ``` : Statistiques sur le dépôt git.
 * ``` include/ ``` : Fichiers header.
-* ``` output/ ``` : Simulation fait en avance. Contient un .png du graphe et le profiler.
+* ``` output/ ``` : Simulation fait en avance. Contient un .png du graphe et le résultat du profiler.
 * ``` rendus/ ``` : Documents .pdf de documentation.
 * ``` include/ ``` : Fichiers source.
 * ``` tests/ ``` : Tests unitaires.
