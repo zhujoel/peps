@@ -3,11 +3,10 @@
 #include "pnl/pnl_mathtools.h"
 
 InterestRate::InterestRate(DateTime * const current_date, const std::vector<DateTime*> &all_dates, PnlMat * const interest_path){
-    this->current_date_ = current_date;
     this->all_dates_ = all_dates;
     this->interest_path_ = interest_path;
     this->rates_ = pnl_vect_create_from_zero(this->interest_path_->n);
-    int idx = get_indice_from_date(this->all_dates_, this->current_date_);
+    int idx = get_indice_from_date(this->all_dates_, current_date);
     pnl_mat_get_row(this->rates_, this->interest_path_, idx);
 }
 

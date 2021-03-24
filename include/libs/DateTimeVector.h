@@ -67,5 +67,18 @@ void get_prices_from_date(PnlVect * const prices, const std::vector<DateTime*> &
  * @param allPrices Tous les prix. Il doit y avoir un même nombre de prix que de dates dans allDates.
  */
 void get_prices_from_date(PnlMat * const prices, const std::vector<DateTime*> &allDates, const std::vector<DateTime*> &subset, const PnlMat * const allPrices);
+/**
+ * @brief Récupère les dates entre deux dates.
+ * 
+ * @param from_to[out] Les dates entre les deux dates indiquées.
+ * @param allDates Toutes les dates.
+ * @param from Date de début.
+ * @param to Date de fin.
+ */
 void from_date_to_date(std::vector<DateTime*> &from_to, const std::vector<DateTime*> &allDates, const DateTime * const from, const DateTime * const to);
+/**
+ * @brief Libère la mémoire d'un vecteur de pointeurs de date.
+ * 
+ * @param list Vecteur de pointeur.
+ */
 void delete_date_vector(std::vector<DateTime*> &list);

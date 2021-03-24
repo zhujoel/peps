@@ -3,3 +3,5 @@ build/*
 .vscode/*
 recompile.sh
 test.sh
+docs/html/
+docs/latex/
