@@ -6,6 +6,8 @@ Calcule le prix d'un produit structuré complexe (cf. rendus/ocelia.pdf) en util
 
 Codé en C++.
 
+**VOIR LE DOSSIER rendus/ POUR UNE DOCUMENTATION DÉTAILLÉE**
+
 ## Auteurs
 
 * Kaouthar HRAIM
