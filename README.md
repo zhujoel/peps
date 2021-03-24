@@ -4,6 +4,8 @@ Ensimag 2020-2021 - 5MMPEPS4 Projet évaluation de produits structurés
 
 Calcule le prix d'un produit structuré complexe (cf. rendus/ocelia.pdf) en utilisant les algorithmes de Monte-Carlo et le modèle de Black-Scholes.
 
+Codé en C++.
+
 ## Auteurs
 
 * Kaouthar HRAIM
@@ -50,7 +52,7 @@ Exemples :
 * ``` ./main all ../this_is_my_output_file ../this_is_my_delta_file ```
 * ``` ./main next ../mandatory_output_file ../mandatory_delta_file ```
 
-## Organisation du dépôt
+# Organisation du dépôt
 
 * ``` data/ ``` : Fichiers de données lu par le programme. Données de marché des sous-jacents et les dates utilisées.
 * ``` docs/ ``` : Configuration Doxygen pour générer la documentation.
