@@ -109,7 +109,7 @@ HedgingPortfolio *portfolio;
 
 // SIMULATION PARAMETERS
 int horizon_estimation = 500;
-int nbSamples = 100000;
+int nbSamples = 10000;
 int rebalancement_horizon = 30;
 int nb_dates_a_simuler = 2000;
 
