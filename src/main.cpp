@@ -109,7 +109,7 @@ HedgingPortfolio *portfolio;
 
 // SIMULATION PARAMETERS
 int horizon_estimation = 500;
-int nbSamples = 100;
+int nbSamples = 100000;
 int rebalancement_horizon = 30;
 int nb_dates_a_simuler = 2000;
 
@@ -150,9 +150,9 @@ void simulate_all()
             portfolio->rebalancing(t, delta, spot);
             delta_stream << historical->dates_[past_index+k] << "," << k << "," << delta << "," << delta_std_dev << std::endl;
         }
-
-        // price
-        mc->price(spot, t, prix, prix_std_dev);
+        else {
+            mc->price(spot, t, prix, prix_std_dev);
+        }
         output_stream << historical->dates_[past_index+k] << "," << k << "," << t << "," << prix << "," << prix_std_dev << ",";
         output_stream << portfolio->V1_ << "," << portfolio->V2_ << "," << portfolio->get_portfolio_value(t, spot) << ",";
         output_stream << portfolio->get_FinalPnL(t, prix, spot) << "," << portfolio->get_valeur_liquidative(t, spot) << ",";
