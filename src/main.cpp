@@ -234,9 +234,9 @@ void simulate_next()
             portfolio->rebalancing(t, delta, spot);
             delta_stream << historical->dates_[past_index+k] << "," << k << "," << delta << "," << delta_std_dev << std::endl;
         }
-
-        // price
-        mc->price(spot, t, prix, prix_std_dev);
+	else{
+		mc->price(spot, t, prix, prix_std_dev);
+        }
         output_stream << historical->dates_[past_index+k] << "," << k << "," << t << "," << prix << "," << prix_std_dev << ",";
         output_stream << portfolio->V1_ << "," << portfolio->V2_ << "," << portfolio->get_portfolio_value(t, spot) << ",";
         output_stream << portfolio->get_FinalPnL(t, prix, spot) << "," << portfolio->get_valeur_liquidative(t, spot) << ",";
