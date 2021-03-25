@@ -36,7 +36,7 @@ You need to download and compile the library PNL: https://pnlnum.github.io/pnl/
 mkdir build/
 cd build/
 cmake -DCMAKE_PREFIX_PATH=<location_lib_pnl> ..
-(Example: cmake -DCMAKE_PREFIX_PATH=/home/zhujo/Downloads/pnl/build/lib/cmake/pnl ..)
+(Exemple: cmake -DCMAKE_PREFIX_PATH=/home/zhujo/Downloads/pnl/build/lib/cmake/pnl ..)
 make
 ./main (all | next) [<output_filepath> <delta_filepath>]
 ```
