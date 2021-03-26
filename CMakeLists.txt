@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.0)
 
 project(Demo)
 
-set(CMAKE_CXX_FLAGS "-g -pg -Wall")
+set(CMAKE_CXX_FLAGS "-g -Wall")
 
 include_directories(include)
 

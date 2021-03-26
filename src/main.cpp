@@ -72,7 +72,7 @@ int estimation_start;
 InterestRate *rates;
 
 // OCELIA
-double val_liquidative_initiale = 100.;
+double val_liquidative_initiale = 100.0; // 100.96 observée
 double T = 8.;
 int size = 7;
 int nb_sous_jacents = 4;
@@ -108,8 +108,9 @@ PnlMat estimation_window;
 HedgingPortfolio *portfolio;
 
 // SIMULATION PARAMETERS
+bool recalibrage = false;
 int horizon_estimation = 500;
-int nbSamples = 100000;
+int nbSamples = 10000;
 int rebalancement_horizon = 30;
 int nb_dates_a_simuler = 2000;
 
@@ -135,10 +136,12 @@ void simulate_all()
         double t = k*regular_timestep;
 
         // compute sigma and volatility
-        estimation_window = pnl_mat_wrap_mat_rows(historical->path_, estimation_start+k, estimation_end+k);  
-        compute_sigma(model->sigma_, &estimation_window, 0, estimation_window.m-1);
-        ocelia->adjust_sigma(model->sigma_);
-        compute_volatility(model->volatility_, model->sigma_);
+        if (recalibrage) {
+            estimation_window = pnl_mat_wrap_mat_rows(historical->path_, estimation_start+k, estimation_end+k);  
+            compute_sigma(model->sigma_, &estimation_window, 0, estimation_window.m-1);
+            ocelia->adjust_sigma(model->sigma_);
+            compute_volatility(model->volatility_, model->sigma_);
+        }
 
         // compute spot
         pnl_mat_get_row(spot, historical->path_, past_index+k);
@@ -219,10 +222,12 @@ void simulate_next()
         double t = k*regular_timestep;
 
         // compute sigma and volatility
-        estimation_window = pnl_mat_wrap_mat_rows(historical->path_, estimation_start+k, estimation_end+k);  
-        compute_sigma(model->sigma_, &estimation_window, 0, estimation_window.m-1);
-        ocelia->adjust_sigma(model->sigma_);
-        compute_volatility(model->volatility_, model->sigma_);
+        if (recalibrage) {
+            estimation_window = pnl_mat_wrap_mat_rows(historical->path_, estimation_start+k, estimation_end+k);  
+            compute_sigma(model->sigma_, &estimation_window, 0, estimation_window.m-1);
+            ocelia->adjust_sigma(model->sigma_);
+            compute_volatility(model->volatility_, model->sigma_);
+        }
 
         // compute spot
         pnl_mat_get_row(spot, historical->path_, past_index+k);
@@ -234,8 +239,8 @@ void simulate_next()
             portfolio->rebalancing(t, delta, spot);
             delta_stream << historical->dates_[past_index+k] << "," << k << "," << delta << "," << delta_std_dev << std::endl;
         }
-	else{
-		mc->price(spot, t, prix, prix_std_dev);
+	    else{
+		    mc->price(spot, t, prix, prix_std_dev);
         }
         output_stream << historical->dates_[past_index+k] << "," << k << "," << t << "," << prix << "," << prix_std_dev << ",";
         output_stream << portfolio->V1_ << "," << portfolio->V2_ << "," << portfolio->get_portfolio_value(t, spot) << ",";
