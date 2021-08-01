@@ -2,6 +2,8 @@
 
 Ensimag 2020-2021 - 5MMPEPS4 Projet évaluation de produits structurés
 
+Computes the fair price of a complex structured financial product (Océlia) using Black-Scholes model and Monte-Carlo simulations. C++. 2021.
+
 Calcule le prix d'un produit structuré complexe (cf. rendus/ocelia.pdf) en utilisant les algorithmes de Monte-Carlo et le modèle de Black-Scholes.
 
 Codé en C++.
